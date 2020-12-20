@@ -66,3 +66,6 @@ includeFile("tangible/wearables/armor/ubese/serverobjects.lua")
 includeFile("tangible/wearables/armor/zam/serverobjects.lua")
 
 -- Server Objects
+includeFile("tangible/wearables/armor/mandalorian_rebel/serverobjects.lua")
+includeFile("tangible/wearables/armor/mandalorian_imperial/serverobjects.lua")
+

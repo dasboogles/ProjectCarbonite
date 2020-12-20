@@ -82,12 +82,13 @@ void VehicleControlDeviceImplementation::generateObject(CreatureObject* player) 
 	if(player->getCurrentCamp() == nullptr && player->getCityRegion() == nullptr) {
 
 		Reference<CallMountTask*> callMount = new CallMountTask(_this.getReferenceUnsafeStaticCast(), player, "call_mount");
+		int callTime = 5; // Reduced vehicle call time from 15 seconds to 5.
 
 		StringIdChatParameter message("pet/pet_menu", "call_vehicle_delay");
-		message.setDI(15);
+		message.setDI(callTime);
 		player->sendSystemMessage(message);
 
-		player->addPendingTask("call_mount", callMount, 15 * 1000);
+		player->addPendingTask("call_mount", callMount, callTime * 1000);
 
 		if (vehicleControlObserver == nullptr) {
 			vehicleControlObserver = new VehicleControlObserver(_this.getReferenceUnsafeStaticCast());
@@ -97,11 +98,17 @@ void VehicleControlDeviceImplementation::generateObject(CreatureObject* player) 
 		player->registerObserver(ObserverEventType::STARTCOMBAT, vehicleControlObserver);
 
 	} else {
-
+		
+		if( !player->getCooldownTimerMap()->isPast("vehicleCallOrStoreCooldown") ){
+			player->sendSystemMessage("You cannot call or store your vehicle for 1 second."); //"You cannot CALL for 1 second."
+			return;
+		}
 		Locker clocker(controlledObject, player);
 		spawnObject(player);
 	}
 
+	// Set cooldown
+	player->getCooldownTimerMap()->updateToCurrentAndAddMili("vehicleCallOrStoreCooldown", 1000); // 1 sec
 }
 
 void VehicleControlDeviceImplementation::spawnObject(CreatureObject* player) {
@@ -181,6 +188,12 @@ void VehicleControlDeviceImplementation::storeObject(CreatureObject* player, boo
 	if (!force && (player->isInCombat() || player->isDead()))
 		return;
 
+	// Added a Call/Store cooldown
+	if( !player->getCooldownTimerMap()->isPast("vehicleCallOrStoreCooldown") ){
+		player->sendSystemMessage("You cannot call or store your vehicle for 1 second."); //"You cannot CALL for 1 second."
+		return;
+	}
+
 	if (player->isRidingMount() && player->getParent() == controlledObject) {
 
 		if (!force && !player->checkCooldownRecovery("mount_dismount"))
@@ -207,6 +220,9 @@ void VehicleControlDeviceImplementation::storeObject(CreatureObject* player, boo
 		(cast<CreatureObject*>(controlledObject.get()))->setCreatureLink(nullptr);
 
 	updateStatus(0);
+
+	// Set cooldown to prevent vehicle spam.
+	player->getCooldownTimerMap()->updateToCurrentAndAddMili("vehicleCallOrStoreCooldown", 1000); // 1 sec
 }
 
 void VehicleControlDeviceImplementation::destroyObjectFromDatabase(bool destroyContainedObjects) {

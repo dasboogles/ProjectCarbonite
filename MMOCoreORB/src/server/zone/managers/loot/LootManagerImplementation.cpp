@@ -4,7 +4,7 @@
  *  Created on: Jun 20, 2011
  *      Author: Kyle
  */
-
+#include "server/zone/objects/creature/CreatureObject.h"
 #include "server/zone/managers/loot/LootManager.h"
 #include "server/zone/objects/scene/SceneObject.h"
 #include "server/zone/objects/creature/ai/AiAgent.h"
@@ -256,14 +256,29 @@ int LootManagerImplementation::calculateLootCredits(int level) {
 	return credits;
 }
 
+// This method will allow us to add more types of items to be excluded from rolling lego/exc/yellow
+// Each time a yellow roll occurs it reduces chances of future rolls for economic purposes.
+// Avoiding unwanted rolls for rare items means items people actually want will be used for yellow rolls.
+bool LootManagerImplementation::isExcludedPrototype(TangibleObject* proto) {
+	
+	// If it's not armor, clothing, weapons, or components then we never want it to roll Yellow++!
+	if (!proto->isWearableObject() && !proto->isWeaponObject() && !proto->isComponent()){
+		//warning("Is Attachment, it cannot be a Yellow/Lego/Exceptional!");
+		return true;
+	}
+	return false;
+}
+
 TangibleObject* LootManagerImplementation::createLootObject(const LootItemTemplate* templateObject, int level, bool maxCondition) {
 	int uncappedLevel = level;
 
-	if(level < 1)
+	if(level < 1){
 		level = 1;
+	}
 
-	if(level > 300)
-		level = 300;
+	if(level > 999){
+		level = 999;
+	}
 
 	const String& directTemplateObject = templateObject->getDirectObjectTemplate();
 
@@ -301,10 +316,38 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 	setCustomObjectName(prototype, templateObject);
 
 	float excMod = 1.0;
+	bool legendary = false;
+	bool exceptional = false;
+	float adjustment = 5.f; // lowest value of 5
+	// float adjustment = floor((float)(((level > 50) ? level : 50) - 50) / 10.f + 0.5);
 
-	float adjustment = floor((float)(((level > 50) ? level : 50) - 50) / 10.f + 0.5);
+	// Exploded this out from a ternary as it's too complicated, logically, to be a ternary
+	// Refactored to allow for lesser combat level mobs to be taken into roll chances.
+	if (level > 25) {
+		adjustment = floor((float)((level - 25) / 10.f) + 5.5); // buffed by min-roll of 5
 
-	if (System::random(legendaryChance) >= legendaryChance - adjustment) {
+		// Make sure it can't go below 1
+		if (adjustment < 5) {
+			adjustment = 5.0f;
+		}
+	}
+
+	// warning("///////////////////////////////////////////////////////////");
+	// warning("Adjustment for level of mob: " + String::valueOf(adjustment));
+	// warning("///////////////////////////////////////////////////////////");
+
+	// warning("=======================================");
+	// warning("+++++++++++++++++");
+	// warning(String::valueOf("TemplateName: " + prototype->getObjectTemplate()->getTemplateFileName()));
+	// warning("+++++++++++++++++");
+	// if (!prototype->isWearableObject() && !prototype->isWeaponObject() && !prototype->isComponent()){
+	// 	warning("+++++++++++++++++");
+	// 	warning(String::valueOf(prototype->getObjectName()->getFullPath()) + " is NOT an item that should be Yellow!");
+	// 	warning("+++++++++++++++++");
+	// }
+	// warning("=======================================");
+
+	if ((System::random(legendaryChance) >= (legendaryChance - adjustment)) && !isExcludedPrototype(prototype)) {
 		UnicodeString newName = prototype->getDisplayedName() + " (Legendary)";
 		prototype->setCustomObjectName(newName, false);
 
@@ -313,7 +356,8 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 		prototype->addMagicBit(false);
 
 		legendaryLooted.increment();
-	} else if (System::random(exceptionalChance) >= exceptionalChance - adjustment) {
+		legendary = true;
+	} else if ((System::random(exceptionalChance) >= (exceptionalChance - adjustment)) && !isExcludedPrototype(prototype)) {
 		UnicodeString newName = prototype->getDisplayedName() + " (Exceptional)";
 		prototype->setCustomObjectName(newName, false);
 
@@ -322,13 +366,23 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 		prototype->addMagicBit(false);
 
 		exceptionalLooted.increment();
+		exceptional = true;
 	}
 
 	if (prototype->isLightsaberCrystalObject()) {
 		LightsaberCrystalComponent* crystal = cast<LightsaberCrystalComponent*> (prototype.get());
 
-		if (crystal != nullptr)
+		if (crystal != nullptr) {
 			crystal->setItemLevel(uncappedLevel);
+			// yellowChance = lua->getGlobalFloat("yellowChance");
+			// yellowModifier = lua->getGlobalFloat("yellowModifier");
+			// exceptionalChance = lua->getGlobalFloat("exceptionalChance");
+			// exceptionalModifier = lua->getGlobalFloat("exceptionalModifier");
+			// legendaryChance = lua->getGlobalFloat("legendaryChance");
+			// legendaryModifier = lua->getGlobalFloat("legendaryModifier");
+			// if ()
+			// crystal->setRareMod()
+		}
 	}
 
 	String subtitle;
@@ -373,45 +427,47 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 			continue;
 		}
 
-		if (subtitle == "useCount" || subtitle == "quantity" || subtitle == "charges" || subtitle == "uses" || subtitle == "charge") {
-			continue;
+		if (subtitle != "useCount" && subtitle != "quantity" && subtitle != "charges" && subtitle != "uses" && subtitle != "charge") {
+			float minMod = (max > min) ? 2000.f : -2000.f;
+			float maxMod = (max > min) ? 500.f : -500.f;
+
+			if (max > min && min >= 0) { // Both max and min non-negative, max is higher
+				min = ((min * level / minMod) + min) * excMod;
+				max = ((max * level / maxMod) + max) * excMod;
+
+			} else if (max > min && max <= 0) { // Both max and min are non-positive, max is higher
+				minMod *= -1;
+				maxMod *= -1;
+				min = ((min * level / minMod) + min) / excMod;
+				max = ((max * level / maxMod) + max) / excMod;
+
+			} else if (max > min) { // max is positive, min is negative
+				minMod *= -1;
+				min = ((min * level / minMod) + min) / excMod;
+				max = ((max * level / maxMod) + max) * excMod;
+
+			} else if (max < min && max >= 0) { // Both max and min are non-negative, min is higher
+				min = ((min * level / minMod) + min) / excMod;
+				max = ((max * level / maxMod) + max) / excMod;
+
+			} else if (max < min && min <= 0) { // Both max and min are non-positive, min is higher
+				minMod *= -1;
+				maxMod *= -1;
+				min = ((min * level / minMod) + min) * excMod;
+				max = ((max * level / maxMod) + max) * excMod;
+
+			} else { // max is negative, min is positive
+				maxMod *= -1;
+				min = ((min * level / minMod) + min) / excMod;
+				max = ((max * level / maxMod) + max) * excMod;
+			}
+
+		} else if (excMod != 1.0) {
+			min *= yellowModifier;
+			max *= yellowModifier;
 		}
 
-		float minMod = (max > min) ? 2000.f : -2000.f;
-		float maxMod = (max > min) ? 500.f : -500.f;
-
-		if (max > min && min >= 0) { // Both max and min non-negative, max is higher
-			min = ((min * level / minMod) + min) * excMod;
-			max = ((max * level / maxMod) + max) * excMod;
-
-		} else if (max > min && max <= 0) { // Both max and min are non-positive, max is higher
-			minMod *= -1;
-			maxMod *= -1;
-			min = ((min * level / minMod) + min) / excMod;
-			max = ((max * level / maxMod) + max) / excMod;
-
-		} else if (max > min) { // max is positive, min is negative
-			minMod *= -1;
-			min = ((min * level / minMod) + min) / excMod;
-			max = ((max * level / maxMod) + max) * excMod;
-
-		} else if (max < min && max >= 0) { // Both max and min are non-negative, min is higher
-			min = ((min * level / minMod) + min) / excMod;
-			max = ((max * level / maxMod) + max) / excMod;
-
-		} else if (max < min && min <= 0) { // Both max and min are non-positive, min is higher
-			minMod *= -1;
-			maxMod *= -1;
-			min = ((min * level / minMod) + min) * excMod;
-			max = ((max * level / maxMod) + max) * excMod;
-
-		} else { // max is negative, min is positive
-			maxMod *= -1;
-			min = ((min * level / minMod) + min) / excMod;
-			max = ((max * level / maxMod) + max) * excMod;
-		}
-
-		if (excMod == 1.0 && (yellowChance == 0 || System::random(yellowChance) == 0)) {
+		if ((excMod == 1.0 && (yellowChance == 0 || System::random(yellowChance) == 0)) && !isExcludedPrototype(prototype)) {
 			if (max > min && min >= 0) {
 				min *= yellowModifier;
 				max *= yellowModifier;
@@ -431,9 +487,11 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 				min /= yellowModifier;
 				max *= yellowModifier;
 			}
-
+			// New 'Rare' tag to be explicit for normal Yellows
+			UnicodeString newName = prototype->getDisplayedName() + " (Rare)";
+			prototype->setCustomObjectName(newName, false);
 			yellow = true;
-
+			excMod = yellowModifier;
 			yellowLooted.increment();
 		}
 
@@ -441,14 +499,30 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 		craftingValues->setMaxValue(subtitle, max);
 	}
 
-	if (yellow) {
+	// Making normal yellows more worthwhile by including them in excMod rolls
+	// Come back and refactor this bandaid~
+	if (yellow || excMod == yellowModifier) { 
 		prototype->addMagicBit(false);
-		prototype->setJunkValue((int)(fJunkValue * 1.25));
+		prototype->setJunkValue((int)(fJunkValue * yellowModifier));
 	} else {
 		if (excMod == 1.0) {
 			prototype->setJunkValue((int)(fJunkValue));
 		} else {
-			prototype->setJunkValue((int)(fJunkValue * (excMod/2)));
+			prototype->setJunkValue((int)(fJunkValue * excMod));
+		}
+	}
+
+	if (prototype->isLightsaberCrystalObject()) {
+		LightsaberCrystalComponent* crystal = cast<LightsaberCrystalComponent*> (prototype.get());
+
+		if (crystal != nullptr) {
+			if (yellow) {
+				crystal->setRareMod(1);
+			} else if (exceptional) {
+				crystal->setRareMod(2);
+			} else if (legendary) {
+				crystal->setRareMod(3);
+			}
 		}
 	}
 
@@ -475,9 +549,17 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 	addStaticDots(prototype, templateObject, level);
 	addRandomDots(prototype, templateObject, level, excMod);
 
-	setSkillMods(prototype, templateObject, level, excMod);
+	// Shouldn't even be running this code if there's no yellow chance
+	if (excMod > 1) {
+		setSkillMods(prototype, templateObject, level, excMod);
+	}
 
 	setSockets(prototype, craftingValues);
+
+	// Remove capping of creature level on Attachments
+	if (prototype->isAttachment()) {
+		craftingValues->setMaxValue("creatureLevel", uncappedLevel);
+	}
 
 	// Update the Tano with new values
 	prototype->updateCraftingValues(craftingValues, true);
@@ -488,7 +570,118 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 
 	delete craftingValues;
 
+	// Boink
+	// --CREDIT--: TCW Source (Heavily modified by Boogles)
+	// Update object name with mod stat if is attachment
+	if(prototype->isAttachment()){
+		Attachment* attachment = cast<Attachment*>( prototype.get());
+		HashTable<String, int>* mods = attachment->getSkillMods();
+		HashTableIterator<String, int> iterator = mods->iterator();
+		StringId attachmentName;
+		String key = "";
+		int value = 0;
+		int last = 0;
+		String attachmentType = "AA ";
+		String attachmentCustomName = "";
+
+		if(attachment->isClothingAttachment()){
+			attachmentType = "CA ";
+		}
+
+		for(int i = 0; i < mods->size(); ++i) {
+			iterator.getNextKeyAndValue(key, value);
+
+			if(value > last){
+				last = value;
+				attachmentName.setStringId("stat_n", key);
+				prototype->setObjectName(attachmentName,false);
+				attachmentCustomName = prototype->getDisplayedName() + " [+" + String::valueOf(value) + "] " + attachmentType;
+
+				// () are hidden characters in a player's inventory that will auto-sort to the beginning of a player's inventory
+				attachmentCustomName = "(" + attachmentCustomName + ")";
+			}
+		}
+		prototype->setCustomObjectName(attachmentCustomName,false);
+	}
+
 	return prototype;
+}
+
+TangibleObject* LootManagerImplementation::createLootAttachment(const LootItemTemplate* templateObject, const String& modName, int value) {
+	
+	const String& directTemplateObject = templateObject->getDirectObjectTemplate();
+	
+	ManagedReference<TangibleObject*> prototype = zoneServer->createObject(directTemplateObject.hashCode(), 2).castTo<TangibleObject*>();
+	
+	if (prototype == nullptr) {
+		error("could not create loot object: " + directTemplateObject);
+		return NULL;
+	}
+
+	Locker objLocker(prototype);
+
+	prototype->createChildObjects();
+
+	String serial = craftingManager->generateSerial();
+	prototype->setSerialNumber(serial);
+
+	ValuesMap valuesMap = templateObject->getValuesMapCopy();
+	CraftingValues* craftingValues = new CraftingValues(valuesMap);
+
+	setInitialObjectStats(templateObject, craftingValues, prototype);
+
+	setCustomObjectName(prototype, templateObject);
+
+	String subtitle;
+
+	for (int i = 0; i < craftingValues->getExperimentalPropertySubtitleSize(); ++i) {
+		subtitle = craftingValues->getExperimentalPropertySubtitle(i);
+
+		if (subtitle == "hitpoints" && !prototype->isComponent()) {
+			continue;
+		}
+
+		float min = craftingValues->getMinValue(subtitle);
+		float max = craftingValues->getMaxValue(subtitle);
+	}
+
+	// Heavily modified attachments name schema by: Boogles
+	if(prototype->isAttachment()){
+		Attachment* attachment = cast<Attachment*>( prototype.get());
+		attachment->updateAttachmentValues(modName, value);
+		delete craftingValues;
+	
+		HashTable<String, int>* mods = attachment->getSkillMods();
+		HashTableIterator<String, int> iterator = mods->iterator();
+		StringId attachmentName;
+		String key = "";
+		int value = 0;
+		int last = 0;
+		String attachmentType = "AA ";
+		String attachmentCustomName = "";
+
+		if(attachment->isClothingAttachment()){
+			attachmentType = "CA ";
+		}
+
+		for(int i = 0; i < mods->size(); ++i) {
+			iterator.getNextKeyAndValue(key, value);
+
+			if(value > last){
+				last = value;
+				attachmentName.setStringId("stat_n", key);
+				prototype->setObjectName(attachmentName,false);
+				// attachmentCustomName = attachmentType + prototype->getDisplayedName() + " " + String::valueOf(value);
+				attachmentCustomName = prototype->getDisplayedName() + " [+" + String::valueOf(value) + "] " + attachmentType;
+
+				// () are hidden characters in a player's inventory that will auto-sort to the beginning of a player's inventory
+				attachmentCustomName = "(" + attachmentCustomName + ")";
+			}
+		}
+		prototype->setCustomObjectName(attachmentCustomName,false);
+	}
+	return prototype;
+
 }
 
 void LootManagerImplementation::addConditionDamage(TangibleObject* loot, CraftingValues* craftingValues) {
@@ -509,8 +702,12 @@ void LootManagerImplementation::addConditionDamage(TangibleObject* loot, Craftin
 }
 
 void LootManagerImplementation::setSkillMods(TangibleObject* object, const LootItemTemplate* templateObject, int level, float excMod) {
-	if (!object->isWeaponObject() && !object->isWearableObject())
+	if (!object->isWeaponObject() && !object->isWearableObject()){
 		return;
+	}
+
+	// warning("///////////////////////////////////////////////////////////");
+	// warning("Trying to roll mods for this item: " + String::valueOf(templateObject->getTemplateName()));
 
 	const VectorMap<String, int>* skillMods = templateObject->getSkillMods();
 	VectorMap<String, int> additionalMods;
@@ -518,17 +715,53 @@ void LootManagerImplementation::setSkillMods(TangibleObject* object, const LootI
 	bool yellow = false;
 	float modSqr = excMod * excMod;
 
-	if (System::random(skillModChance / modSqr) == 0) {
+	// if (System::random(skillModChance / modSqr) == 0) { // OLD
+	if ((skillModChance > 0) && (modSqr > 0)) {	// NEW, drastically increases mods on dropped gear
 		// if it has a skillmod the name will be yellow
 		yellow = true;
 		int modCount = 1;
 		int roll = System::random(100);
+		float levelModifier = 0.f;
+		int modifierBase = 100; // if none of our modifiers work, then no mods for you!
 
-		if(roll > (100 - modSqr))
-			modCount += 2;
+		if (level > 10) {
+			levelModifier = level / 10.f;
+		}
 
-		if(roll < (5 + modSqr))
-			modCount += 1;
+		roll += levelModifier;
+		if (roll > 100) {
+			roll = 100;
+		}
+
+		// Massively refactored chances of double, triple, and quard mods on clothing/gear
+		// We take into account the rarity of the item for mod rolls
+		if (excMod == yellowModifier) {
+			if(roll > (modifierBase - modSqr * 9)) { // From 100 -> 90 to increase mod chances
+				modCount += 1; // 2 total mods for Yellow
+			}
+		} 
+		else { // Else, we want exceptionals and legendaries to have a max of +3 tacked on based on rarity
+			if (excMod == legendaryModifier) {
+				modCount = 3; // Minimum for Legendaries is 3, max is 6!
+			}
+
+			// Rolls for additional mods based on rarity
+			if(roll > (modifierBase - modSqr * 3)){ // From 100 -> 90 to increase mod chances
+				modCount += 3; // 4 total mods
+			} else if(roll > (modifierBase - (modSqr * 6))){ // equals (80 - 9.1875) if Exceptional that you then roll against
+				modCount += 2; // 3 total mods
+			} else if(roll > (modifierBase - (modSqr * 9))){
+				modCount += 1; // 2 total mods
+			}
+		}
+
+		// warning("--------------------");
+		// warning("ItemName: " + String::valueOf(templateObject->getTemplateName()));
+		// warning("Rarity: " + String::valueOf(excMod));
+		// warning("StatMod Roll: " + String::valueOf(roll));
+		// warning("ModSqr: " + String::valueOf(modSqr));
+		// warning("ModCount: " + String::valueOf(modCount));
+		// warning("--------------------");
 
 		for(int i = 0; i < modCount; ++i) {
 			//Mods can't be lower than -1 or greater than 25
@@ -537,12 +770,14 @@ void LootManagerImplementation::setSkillMods(TangibleObject* object, const LootI
 
 			int mod = System::random(max - min) + min;
 
-			if(mod == 0)
+			if(mod == 0){
 				mod = 1;
+			}
 
 			String modName = getRandomLootableMod( object->getGameObjectType() );
-			if( !modName.isEmpty() )
+			if( !modName.isEmpty() ){
 				additionalMods.put(modName, mod);
+			}
 		}
 	}
 
@@ -640,6 +875,56 @@ bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* con
 	return createLootFromCollection(trx, container, lootCollection, creature->getLevel());
 }
 
+//testing
+bool LootManagerImplementation::createNamedLoot(TransactionLog& trx, SceneObject* container, const String& lootGroup, const String& name, int level, bool maxCondition) {
+	Reference<const LootGroupTemplate*> group = lootGroupMap->getLootGroupTemplate(lootGroup);
+
+	if (group == nullptr) {
+		warning("Loot group template requested does not exist: " + lootGroup);
+		return false;
+	}
+
+	//Now we do the third roll for the item out of the group.
+	int roll = System::random(10000000);
+
+	String selection = group->getLootGroupEntryForRoll(roll);
+
+	//Check to see if the group entry is another group
+	if (lootGroupMap->lootGroupExists(selection)) {
+		return createLoot(trx, container, selection, level, maxCondition);
+	}
+
+	//Entry wasn't another group, it should be a loot item
+	Reference<const LootItemTemplate*> itemTemplate = lootGroupMap->getLootItemTemplate(selection);
+
+	if (itemTemplate == nullptr) {
+		warning("Loot item template requested does not exist: " + group->getLootGroupEntryForRoll(roll) + " for templateName: " + group->getTemplateName());
+		return false;
+	}
+
+	TangibleObject* obj = createLootObject(itemTemplate, level, maxCondition);
+	obj->setCustomObjectName(name,false);
+
+	if (obj == nullptr)
+		return false;
+
+	trx.setSubject(obj);
+	trx.addState("lootGroup", lootGroup);
+	trx.addState("lootLevel", level);
+	trx.addState("lootMaxCondition", maxCondition);
+
+	if (container->transferObject(obj, -1, false, true)) {
+		container->broadcastObject(obj, true);
+	} else {
+		obj->destroyObjectFromDatabase(true);
+		trx.errorMessage() << "failed to transferObject to container.";
+		return false;
+	}
+
+
+	return true;
+}
+
 bool LootManagerImplementation::createLootFromCollection(TransactionLog& trx, SceneObject* container, const LootGroupCollection* lootCollection, int level) {
 	for (int i = 0; i < lootCollection->count(); ++i) {
 		const LootGroupCollectionEntry* entry = lootCollection->get(i);
@@ -693,8 +978,9 @@ bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* con
 	String selection = group->getLootGroupEntryForRoll(roll);
 
 	//Check to see if the group entry is another group
-	if (lootGroupMap->lootGroupExists(selection))
+	if (lootGroupMap->lootGroupExists(selection)) {
 		return createLoot(trx, container, selection, level, maxCondition);
+	}
 
 	//Entry wasn't another group, it should be a loot item
 	Reference<const LootItemTemplate*> itemTemplate = lootGroupMap->getLootItemTemplate(selection);
@@ -721,6 +1007,7 @@ bool LootManagerImplementation::createLoot(TransactionLog& trx, SceneObject* con
 		trx.errorMessage() << "failed to transferObject to container.";
 		return false;
 	}
+
 
 	return true;
 }
@@ -760,6 +1047,7 @@ bool LootManagerImplementation::createLootSet(TransactionLog& trx, SceneObject* 
 			obj->destroyObjectFromDatabase(true);
 			return false;
 		}
+
 	}
 
 	return true;

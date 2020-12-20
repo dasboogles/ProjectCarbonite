@@ -45,19 +45,19 @@ object_tangible_food_crafted_dish_exo_protein_wafers = object_tangible_food_craf
 
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 95,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 20,	-- 20% Dmg reduction for 95 hits max
 
 	effectType = 3, -- Event Based Buff
 	eventTypes = {DAMAGERECEIVED},
 
-	fillingMin = 5,
-	fillingMax = 4,
-	flavorMin = 10,
-	flavorMax = 25,
+	fillingMin = 15,
+	fillingMax = 10,
+	flavorMin = 30,
+	flavorMax = 95,
 	nutritionMin = 10,
-	nutritionMax = 18,
+	nutritionMax = 20,
 	quantityMin = 6,
 	quantityMax = 10,
 

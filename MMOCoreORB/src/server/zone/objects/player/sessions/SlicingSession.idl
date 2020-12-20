@@ -38,6 +38,9 @@ class SlicingSession extends Facade {
 	protected boolean baseSlice;
 	protected boolean keypadSlice;
 
+	protected string selectedSliceType;
+	protected boolean isSelectingType;
+
 	public SlicingSession(CreatureObject parent) {
 		Logger.setLoggingName("SlicingSession");
 		Logger.setLogging(true);

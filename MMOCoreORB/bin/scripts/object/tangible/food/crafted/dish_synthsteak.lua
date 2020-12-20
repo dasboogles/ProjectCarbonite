@@ -44,19 +44,19 @@
 object_tangible_food_crafted_dish_synthsteak = object_tangible_food_crafted_shared_dish_synthsteak:new {
 	templateType = CONSUMABLE,
 
-	duration = 22,
-	filling = 10,
-	nutrition = 10,
+	duration = 50,
+	filling = 20,
+	nutrition = 35,
 
 	effectType = 3, -- Event Based Buff
 	eventTypes = {DAMAGERECEIVED},
 
-	fillingMin = 29,
+	fillingMin = 30,
 	fillingMax = 20,
 	flavorMin = 22,
 	flavorMax = 50,
-	nutritionMin = 17,
-	nutritionMax = 31,
+	nutritionMin = 22,
+	nutritionMax = 50,
 	quantityMin = 4,
 	quantityMax = 7,-- 8 on http://swgemu.wikia.com/wiki/Category:Chef
 

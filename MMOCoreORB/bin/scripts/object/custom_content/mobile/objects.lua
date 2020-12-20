@@ -5638,11 +5638,11 @@ ObjectTemplates:addClientTemplate(object_mobile_shared_coa_aclo_tech_rod_f, "obj
 ------------------------------------------------------------------------------------------------------------------------------------
 
 
-object_mobile_shared_coa_aclo_wookie_f = SharedCreatureObjectTemplate:new {
-	clientTemplateFileName = "object/mobile/shared_coa_aclo_wookie_f.iff"
+object_mobile_shared_coa_aclo_wookiee_f = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/mobile/shared_coa_aclo_wookiee_f.iff"
 }
 
-ObjectTemplates:addClientTemplate(object_mobile_shared_coa_aclo_wookie_f, "object/mobile/shared_coa_aclo_wookie_f.iff")
+ObjectTemplates:addClientTemplate(object_mobile_shared_coa_aclo_wookiee_f, "object/mobile/shared_coa_aclo_wookiee_f.iff")
 ------------------------------------------------------------------------------------------------------------------------------------
 
 

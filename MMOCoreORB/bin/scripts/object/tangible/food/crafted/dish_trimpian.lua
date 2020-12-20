@@ -44,18 +44,18 @@
 object_tangible_food_crafted_dish_trimpian = object_tangible_food_crafted_shared_dish_trimpian:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 30,
 
 	effectType = 2,
 
-	fillingMin = 17,
+	fillingMin = 25,
 	fillingMax = 10,
-	flavorMin = 1200,
-	flavorMax = 2400,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
 	nutritionMin = 14,
-	nutritionMax = 26,
+	nutritionMax = 30,
 	quantityMin = 6,
 	quantityMax = 10,
 

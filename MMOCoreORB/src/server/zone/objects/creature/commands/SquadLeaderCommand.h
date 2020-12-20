@@ -53,7 +53,10 @@ public:
 			return false;
 		}
 
-		if (player->hasAttackDelay() || !player->checkPostureChangeDelay())
+		// if (player->hasAttackDelay() || !player->checkPostureChangeDelay())
+
+		// Remove AttackDelay as a possible bottleneck for SL
+		if (!player->checkPostureChangeDelay())
 			return false;
 
 		return true;
@@ -73,6 +76,11 @@ public:
 
 		if (leader->getZone() != target->getZone())
 			return false;
+
+		// Restrict all range of group buffs to 128m from leader
+		if (!leader->isInRange(target, 128)){
+			return false;
+		}
 
 		CreatureObject* targetCreo = target;
 

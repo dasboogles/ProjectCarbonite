@@ -44,18 +44,18 @@
 object_tangible_food_crafted_dish_blood_chowder = object_tangible_food_crafted_shared_dish_blood_chowder:new {
 	templateType = CONSUMABLE,
 
-	duration = 45,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 25,
 
 	effectType = 2,
 
-	fillingMin = 17,
+	fillingMin = 25,
 	fillingMax = 10,
-	flavorMin = 1200,
-	flavorMax = 2400,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
 	nutritionMin = 10,
-	nutritionMax = 20,
+	nutritionMax = 25,
 	quantityMin = 6,
 	quantityMax = 10,
 

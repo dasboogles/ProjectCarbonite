@@ -44,25 +44,27 @@
 object_tangible_food_crafted_dish_ahrisa = object_tangible_food_crafted_shared_dish_ahrisa:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
-	filling = 60,
+	duration = 3600,
+	filling = 10,
 	nutrition = 10,
 
-	effectType = 1,
+	effectType = 6,
 
-	fillingMin = 35,
-	fillingMax = 25,
-	flavorMin = 1800,
-	flavorMax = 3600,
-	nutritionMin = 150,
-	nutritionMax = 240,
-	quantityMin = 3,
-	quantityMax = 4,
+	fillingMin = 18,
+	fillingMax = 11,
+
+	flavorMin = 6600,
+	flavorMax = 10800,
+
+	nutritionMin = 110,
+	nutritionMax = 180,
+	quantityMin = 4,
+	quantityMax = 7,
 
 	modifiers = { "focus", 2 },
 
 	buffName = "food.dish_ahrisa",
-	buffCRC = 0,
+	buffCRC = 0xFB554185, -- Same buffCRC as Canape
 	speciesRestriction = "",
 
 	numberExperimentalProperties = {1, 1, 1, 2, 2, 2, 2},

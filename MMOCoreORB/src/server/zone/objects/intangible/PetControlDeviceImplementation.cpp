@@ -171,6 +171,13 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 		maxPets = 3;
 	}
 
+	// Refactored what is considered a super strong factional pet
+	// This allows us to add more in the future
+	SortedVector<String> restrictedFactionPets = {
+		"at_st",
+		"rebel_droideka"
+	};
+
 	for (int i = 0; i < ghost->getActivePetsSize(); ++i) {
 		ManagedReference<AiAgent*> object = ghost->getActivePet(i);
 
@@ -178,8 +185,10 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 			if (object->isCreature() && petType == PetManager::CREATUREPET) {
 				const CreatureTemplate* activePetTemplate = object->getCreatureTemplate();
 
-				if (activePetTemplate == nullptr || activePetTemplate->getTemplateName() == "at_st")
+				// if (activePetTemplate == nullptr || activePetTemplate->getTemplateName() == "at_st")
+				if (activePetTemplate == nullptr || restrictedFactionPets.contains(activePetTemplate->getTemplateName())){
 					continue;
+				}
 
 				if (++currentlySpawned >= maxPets) {
 					player->sendSystemMessage("@pet/pet_menu:at_max"); // You already have the maximum number of pets of this type that you can call.
@@ -201,10 +210,13 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 				const CreatureTemplate* activePetTemplate = object->getCreatureTemplate();
 				const CreatureTemplate* callingPetTemplate = pet->getCreatureTemplate();
 
-				if (activePetTemplate == nullptr || callingPetTemplate == nullptr || activePetTemplate->getTemplateName() != "at_st")
+				// if (activePetTemplate == nullptr || callingPetTemplate == nullptr || activePetTemplate->getTemplateName() != "at_st")
+				if (activePetTemplate == nullptr || callingPetTemplate == nullptr || !restrictedFactionPets.contains(activePetTemplate->getTemplateName())){
 					continue;
+				}
 
-				if (++currentlySpawned >= maxPets || (activePetTemplate->getTemplateName() == "at_st" && callingPetTemplate->getTemplateName() == "at_st")) {
+				// if (++currentlySpawned >= maxPets || (activePetTemplate->getTemplateName() == "at_st" && callingPetTemplate->getTemplateName() == "at_st")) {
+				if (++currentlySpawned >= maxPets || (restrictedFactionPets.contains(activePetTemplate->getTemplateName()) && restrictedFactionPets.contains(callingPetTemplate->getTemplateName()))) {
 					player->sendSystemMessage("@pet/pet_menu:at_max"); // You already have the maximum number of pets of this type that you can call.
 					return;
 				}
@@ -224,39 +236,41 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 		server->getZoneServer()->getPlayerManager()->handleAbortTradeMessage(player);
 	}
 
-	if (player->getCurrentCamp() == nullptr && player->getCityRegion() == nullptr) {
+	// if (player->getCurrentCamp() == nullptr && player->getCityRegion() == nullptr) {
 
-		Reference<CallPetTask*> callPet = new CallPetTask(_this.getReferenceUnsafeStaticCast(), player, "call_pet");
+	// Reference<CallPetTask*> callPet = new CallPetTask(_this.getReferenceUnsafeStaticCast(), player, "call_pet");
+	// int petCallDelay = 1;
 
-		StringIdChatParameter message("pet/pet_menu", "call_pet_delay"); // Calling pet in %DI seconds. Combat will terminate pet call.
-		message.setDI(15);
-		player->sendSystemMessage(message);
+	// StringIdChatParameter message("pet/pet_menu", "call_pet_delay"); // Calling pet in %DI seconds. Combat will terminate pet call.
+	// message.setDI(petCallDelay);
+	// player->sendSystemMessage(message);
 
-		player->addPendingTask("call_pet", callPet, 15 * 1000);
+	// player->addPendingTask("call_pet", callPet, petCallDelay * 1000);
 
-		if (petControlObserver == nullptr) {
-			petControlObserver = new PetControlObserver(_this.getReferenceUnsafeStaticCast());
-			petControlObserver->deploy();
-		}
+	// if (petControlObserver == nullptr) {
+	// 	petControlObserver = new PetControlObserver(_this.getReferenceUnsafeStaticCast());
+	// 	petControlObserver->deploy();
+	// }
 
-		player->registerObserver(ObserverEventType::STARTCOMBAT, petControlObserver);
+	// player->registerObserver(ObserverEventType::STARTCOMBAT, petControlObserver);
 
-	} else { // Player is in a city or camp, spawn pet immediately
+	// } else { // Player is in a city or camp, spawn pet immediately
 
-		if( player->getCooldownTimerMap() == nullptr )
-			return;
+	// Removed call timer checks for pets. This is a CH buff.
+	if( player->getCooldownTimerMap() == nullptr )
+		return;
 
-		// Check cooldown
-		if( !player->getCooldownTimerMap()->isPast("petCallOrStoreCooldown") ){
-			player->sendSystemMessage("@pet/pet_menu:cant_call_1sec"); //"You cannot CALL for 1 second."
-			return;
-		}
-
-		spawnObject(player);
-
-		// Set cooldown
-		player->getCooldownTimerMap()->updateToCurrentAndAddMili("petCallOrStoreCooldown", 1000); // 1 sec
+	// Check cooldown
+	if( !player->getCooldownTimerMap()->isPast("petCallOrStoreCooldown") ){
+		player->sendSystemMessage("@pet/pet_menu:cant_call_1sec"); //"You cannot CALL for 1 second."
+		return;
 	}
+
+	spawnObject(player);
+
+	// Set cooldown
+	player->getCooldownTimerMap()->updateToCurrentAndAddMili("petCallOrStoreCooldown", 1000); // 1 sec
+	//}
 
 	EnqueuePetCommand* enqueueCommand = new EnqueuePetCommand(pet, String("petFollow").toLowerCase().hashCode(), String::valueOf(player->getObjectID()), player->getObjectID(), 1);
 	enqueueCommand->execute();
@@ -544,7 +558,7 @@ bool PetControlDeviceImplementation::growPet(CreatureObject* player, bool force,
 
 	Time currentTime;
 	uint32 timeDelta = currentTime.getTime() - lastGrowth.getTime();
-	int stagesToGrow = timeDelta / 43200; // 12 hour
+	int stagesToGrow = timeDelta / 360; // From 12 hours to 6 minutes per stage. Should mean 1 hour to Adult!
 
 	if (adult)
 		stagesToGrow = 10;

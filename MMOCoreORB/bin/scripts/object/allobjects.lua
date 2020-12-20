@@ -1220,3 +1220,7 @@ includeFile("weapon/ranged/vehicle/objects.lua")
 includeFile("weapon/ranged/objects.lua")
 includeFile("weapon/trap/objects.lua")
 includeFile("weapon/objects.lua")
+-- Carbonite Armor
+includeFile("tangible/wearables/armor/mandalorian_rebel/objects.lua")
+includeFile("tangible/wearables/armor/mandalorian_imperial/objects.lua")
+

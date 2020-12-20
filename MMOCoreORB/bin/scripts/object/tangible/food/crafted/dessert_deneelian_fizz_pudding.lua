@@ -44,16 +44,16 @@
 object_tangible_food_crafted_dessert_deneelian_fizz_pudding = object_tangible_food_crafted_shared_dessert_deneelian_fizz_pudding:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,
+	filling = 50,
+	nutrition = 45,
 
 	effectType = 2,
 
 	fillingMin = 75,
 	fillingMax = 50,
-	flavorMin = 60,
-	flavorMax = 120,
+	flavorMin = 300,
+	flavorMax = 600,
 	nutritionMin = 30,
 	nutritionMax = 45,
 	quantityMin = 1,

@@ -24736,3 +24736,166 @@ object_draft_schematic_clothing_shared_clothing_wke_skirt_s04 = SharedDraftSchem
 }
 
 ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_clothing_wke_skirt_s04, "object/draft_schematic/clothing/shared_clothing_wke_skirt_s04.iff")
+--Carbonite custom
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_belt = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_belt.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_belt, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_belt.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_bicep_l = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_bicep_l.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_bicep_l, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_bicep_l.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_bicep_r = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_bicep_r.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_bicep_r, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_bicep_r.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_boots = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_boots.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_boots, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_boots.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_bracer_l = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_bracer_l.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_bracer_l, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_bracer_l.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_bracer_r = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_bracer_r.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_bracer_r, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_bracer_r.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_chest_plate = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_chest_plate.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_chest_plate, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_chest_plate.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_gloves = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_gloves.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_gloves, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_gloves.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_helmet = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_helmet.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_helmet, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_helmet.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_imperial_leggings = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_leggings.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_imperial_leggings, "object/draft_schematic/clothing/shared_armor_mandalorian_imperial_leggings.iff")
+
+
+
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_belt = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_belt.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_belt, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_belt.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_bicep_l = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_bicep_l.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_bicep_l, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_bicep_l.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_bicep_r = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_bicep_r.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_bicep_r, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_bicep_r.iff")
+
+--
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_boots = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_boots.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_boots, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_boots.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_bracer_l = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_bracer_l.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_bracer_l, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_bracer_l.iff")
+
+--
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_bracer_r = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_bracer_r.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_bracer_r, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_bracer_r.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_chest_plate = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_chest_plate.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_chest_plate, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_chest_plate.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_gloves = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_gloves.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_gloves, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_gloves.iff")
+
+-- 
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_helmet = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_helmet.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_helmet, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_helmet.iff")
+
+--
+
+object_draft_schematic_clothing_shared_armor_mandalorian_rebel_leggings = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_leggings.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_armor_mandalorian_rebel_leggings, "object/draft_schematic/clothing/shared_armor_mandalorian_rebel_leggings.iff")
+
+
+object_draft_schematic_clothing_shared_clothing_gloves_invis = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_clothing_gloves_invis.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_clothing_gloves_invis, "object/draft_schematic/clothing/shared_clothing_gloves_invis.iff")
+
+
+
+object_draft_schematic_clothing_shared_clothing_hat_invis = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_clothing_hat_invis.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_clothing_hat_invis, "object/draft_schematic/clothing/shared_clothing_hat_invis.iff")
+
+
+
+object_draft_schematic_clothing_shared_clothing_shirt_invis = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/clothing/shared_clothing_shirt_invis.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_clothing_shared_clothing_shirt_invis, "object/draft_schematic/clothing/shared_clothing_shirt_invis.iff")
+

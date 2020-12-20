@@ -1869,3 +1869,9 @@ object_tangible_wearables_shirt_shared_singing_mountain_clan_shirt_s03 = SharedT
 }
 
 ObjectTemplates:addClientTemplate(object_tangible_wearables_shirt_shared_singing_mountain_clan_shirt_s03, "object/tangible/wearables/shirt/shared_singing_mountain_clan_shirt_s03.iff")
+
+object_tangible_wearables_shirt_shared_shirt_invis = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/wearables/shirt/shared_shirt_invis.iff"
+}
+
+ObjectTemplates:addClientTemplate(object_tangible_wearables_shirt_shared_shirt_dera, "object/tangible/wearables/shirt/shared_shirt_invis.iff")

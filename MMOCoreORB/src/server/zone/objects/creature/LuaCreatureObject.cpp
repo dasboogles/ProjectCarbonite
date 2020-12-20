@@ -18,6 +18,7 @@
 #include "server/zone/managers/skill/SkillManager.h"
 #include "server/zone/objects/tangible/threat/ThreatMap.h"
 #include "server/zone/objects/transaction/TransactionLog.h"
+#include "server/chat/ChatManager.h"
 
 const char LuaCreatureObject::className[] = "LuaCreatureObject";
 
@@ -143,6 +144,7 @@ Luna<LuaCreatureObject>::RegType LuaCreatureObject::Register[] = {
 		{ "getGender", &LuaCreatureObject::getGender },
 		{ "isRidingMount", &LuaCreatureObject::isRidingMount },
 		{ "dismount", &LuaCreatureObject::dismount },
+		{ "broadcastToServer", &LuaCreatureObject::broadcastToServer },
 		{ 0, 0 }
 };
 
@@ -1127,4 +1129,11 @@ int LuaCreatureObject::isRidingMount(lua_State* L) {
 int LuaCreatureObject::dismount(lua_State* L) {
 	realObject->dismount();
 	return 0;
+}
+
+int LuaCreatureObject::broadcastToServer(lua_State* L) {
+	String message = lua_tostring(L, -1);
+	ZoneServer* zServ = realObject->getZoneServer();
+	zServ->getChatManager()->broadcastGalaxy(nullptr, message);
+	return 1;
 }

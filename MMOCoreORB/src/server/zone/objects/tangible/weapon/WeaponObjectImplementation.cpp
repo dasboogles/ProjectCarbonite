@@ -348,8 +348,12 @@ void WeaponObjectImplementation::fillAttributeList(AttributeListMessage* alm, Cr
 	}
 
 	// Force Cost
-	if (getForceCost() > 0)
-		alm->insertAttribute("forcecost", (int)getForceCost());
+
+	if (isJediWeapon()) {
+	float roundedForceCost = floor((float)getForceCost()*100 + 0.5)/100;
+	if (roundedForceCost < 5) roundedForceCost = 5;   // 5 Minimum force cost on sabers
+	alm->insertAttribute("forcecost", roundedForceCost);
+	}
 
 	for (int i = 0; i < getNumberOfDots(); i++) {
 

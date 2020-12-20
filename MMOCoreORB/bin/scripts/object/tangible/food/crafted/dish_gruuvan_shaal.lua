@@ -44,18 +44,18 @@
 object_tangible_food_crafted_dish_gruuvan_shaal = object_tangible_food_crafted_shared_dish_gruuvan_shaal:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,
+	filling = 15,
+	nutrition = 240,
 
 	effectType = 1,
 
-	fillingMin = 35,
-	fillingMax = 25,
+	fillingMin = 30,
+	fillingMax = 15,
 	flavorMin = 1800,
-	flavorMax = 3600,
+	flavorMax = 5400,
 	nutritionMin = 150,
-	nutritionMax = 240,
+	nutritionMax = 500,
 	quantityMin = 3,
 	quantityMax = 4,
 

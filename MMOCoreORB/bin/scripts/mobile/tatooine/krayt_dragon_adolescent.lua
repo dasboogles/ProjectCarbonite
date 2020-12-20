@@ -2,15 +2,15 @@ krayt_dragon_adolescent = Creature:new {
 	objectName = "@mob/creature_names:krayt_dragon_adolescent",
 	socialGroup = "krayt",
 	faction = "",
-	level = 336,
-	chanceHit = 30,
-	damageMin = 2270,
-	damageMax = 4250,
-	baseXp = 28549,
-	baseHAM = 410000,
-	baseHAMmax = 501000,
+	level = 275,
+	chanceHit = 27.25,
+	damageMin = 1520,
+	damageMax = 2750,
+	baseXp = 26356,
+	baseHAM = 321000,
+	baseHAMmax = 392000,
 	armor = 3,
-	resists = {195,195,195,195,165,195,195,195,-1},
+	resists = {150,150,150,150,130,160,160,160,-1},
 	meatType = "meat_carnivore",
 	meatAmount = 1000,
 	hideType = "hide_bristley",
@@ -24,20 +24,94 @@ krayt_dragon_adolescent = Creature:new {
 	creatureBitmask = PACK + KILLER + STALKER,
 	optionsBitmask = AIENABLED,
 	diet = CARNIVORE,
-
 	templates = {"object/mobile/krayt_dragon_hue.iff"},
 	hues = { 16, 17, 18, 19, 20, 21, 22, 23 },
-	scale = 0.7;
+	scale = 0.7,
+
 	lootGroups = {
 		{
-	        groups = {
-				{group = "krayt_tissue_rare", chance = 2000000},
-				{group = "krayt_dragon_common", chance = 2500000},
-				{group = "krayt_pearls", chance = 1500000},
-				{group = "armor_all", chance = 2000000},
-				{group = "weapons_all", chance = 2000000},
+			groups = {
+				{group = "krayt_tissue_rare", chance = 10000000}
 			},
-			lootChance = 7720000
+			lootChance = 500000
+		},
+		{
+			groups = {
+				{group = "krayt_tissue_uncommon", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "krayt_tissue_common", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "krayt_dragon_common", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "krayt_dragon_common", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "krayt_pearls", chance = 10000000}
+			},
+			lootChance = 500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 3500000
 		}
 	},
 	weapons = {},

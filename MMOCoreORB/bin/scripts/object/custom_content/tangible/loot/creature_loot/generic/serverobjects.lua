@@ -61,6 +61,7 @@ includeFile("custom_content/tangible/loot/creature_loot/generic/heroic_tusken_sh
 includeFile("custom_content/tangible/loot/creature_loot/generic/heroic_tusken_slave_collar.lua")
 includeFile("custom_content/tangible/loot/creature_loot/generic/humanoid_arm_bone.lua")
 includeFile("custom_content/tangible/loot/creature_loot/generic/humanoid_skull.lua")
+includeFile("custom_content/tangible/loot/creature_loot/generic/bh_skull.lua")
 includeFile("custom_content/tangible/loot/creature_loot/generic/jaw_bone.lua")
 includeFile("custom_content/tangible/loot/creature_loot/generic/liver_s02.lua")
 includeFile("custom_content/tangible/loot/creature_loot/generic/lizard_scale_generic.lua")

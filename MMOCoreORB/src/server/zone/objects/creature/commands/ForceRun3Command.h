@@ -26,12 +26,16 @@ public:
 	}
 
 	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {
-		int res = creature->hasBuff(buffCRC) ? NOSTACKJEDIBUFF : doJediSelfBuffCommand(creature);
 
-		if (res == NOSTACKJEDIBUFF) {
-			creature->sendSystemMessage("@jedi_spam:already_force_running"); // You are already force running.
-			return GENERALERROR;
-		}
+		// Make ForceRun toggle-able
+		int res = creature->hasBuff(buffCRC) ? creature->removeBuff(buffCRC) : doJediSelfBuffCommand(creature);
+
+		//int res = creature->hasBuff(buffCRC) ? NOSTACKJEDIBUFF : doJediSelfBuffCommand(creature);
+
+		// if (res == NOSTACKJEDIBUFF) {
+		// 	creature->sendSystemMessage("@jedi_spam:already_force_running"); // You are already force running.
+		// 	return GENERALERROR;
+		// }
 
 		if (res != SUCCESS) {
 			return res;

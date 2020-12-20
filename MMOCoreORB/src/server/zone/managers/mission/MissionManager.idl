@@ -59,7 +59,7 @@ class MissionManager extends Observer implements Logger {
 
 	unsigned long playerBountyKillBuffer;
 	unsigned long playerBountyDebuffLength;
-
+	unsigned int missionGenerationLimit;
 	unsigned long destroyMissionBaseDistance;
 	unsigned long destroyMissionDifficultyDistanceFactor;
 	unsigned long destroyMissionRandomDistance;
@@ -80,6 +80,7 @@ class MissionManager extends Observer implements Logger {
 		enableFactionalEntertainerMissions = false;
 		enableSameAccountBountyMissions = false;
 		playerBountyKillBuffer = 0;
+		missionGenerationLimit = 10; // Setting a global hard limit on all mission generation
 
 		Logger.setLoggingName("MissionManager");
 

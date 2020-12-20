@@ -167,6 +167,10 @@ includeFile("groups/npc/tutorial_pirate.lua")
 includeFile("groups/npc/valarian_common.lua")
 includeFile("groups/npc/weequay_common.lua")
 
+-- Custom Stuff Below here
+includeFile("groups/npc/custom_test/janta_TEST.lua")
+-- Custom Stuff Above here
+
 -- task_loot sub-folder
 includeFile("groups/task_loot/hedon_istee_treasure.lua")
 includeFile("groups/task_loot/task_loot_ancient_lightsaber.lua")
@@ -368,3 +372,17 @@ includeFile("groups/wearables/wearables_common.lua")
 includeFile("groups/wearables/wearables_rare.lua")
 includeFile("groups/wearables/wearables_scarce.lua")
 includeFile("groups/wearables/wearables_uncommon.lua")
+
+-- custom for carbonite
+-- BH Stuff
+includeFile("groups/custom/bh_trophy.lua")
+includeFile("groups/custom/rancor_boss.lua")
+
+-- Epic Loot Groups (look into SRC changes needed to make this work)
+includeFile("groups/weapon/epic_weapons_all.lua")
+includeFile("groups/armor/epic_armor_all.lua")
+includeFile("groups/custom/world_boss.lua")
+
+-- Generic Stuff
+includeFile("groups/containers.lua")
+includeFile("groups/custom/rare_spider.lua")

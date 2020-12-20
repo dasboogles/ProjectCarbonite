@@ -44,20 +44,20 @@
 object_tangible_food_crafted_dish_vegeparsine = object_tangible_food_crafted_shared_dish_vegeparsine:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 15,
 
 	effectType = 4,
 
-	fillingMin = 29,
-	fillingMax = 19,
-	flavorMin = 780,
-	flavorMax = 1200,
-	nutritionMin = 7,
-	nutritionMax = 12,
-	quantityMin = 2,
-	quantityMax = 4,
+	fillingMin = 25,
+	fillingMax = 10,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 5,
+	nutritionMax = 15,
+	quantityMin = 6,
+	quantityMax = 12,
 
 	modifiers = { "melee_defense", 0 },
 

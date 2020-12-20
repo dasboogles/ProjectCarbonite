@@ -4,15 +4,15 @@ singing_mountain_clan_slave = Creature:new {
 	randomNameTag = true,
 	socialGroup = "mtn_clan",
 	faction = "mtn_clan",
-	level = 10,
-	chanceHit = 0.28,
-	damageMin = 130,
-	damageMax = 140,
+	level = 50,
+	chanceHit = 1.25,
+	damageMin = 430,
+	damageMax = 540,
 	baseXp = 292,
-	baseHAM = 405,
-	baseHAMmax = 495,
+	baseHAM = 5405,
+	baseHAMmax = 10495,
 	armor = 0,
-	resists = {0,0,0,0,0,0,0,-1,-1},
+	resists = {25,25,25,25,25,25,25,25,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -31,12 +31,16 @@ singing_mountain_clan_slave = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 4000000},
-				{group = "wearables_common", chance = 3000000},
-				{group = "loot_kit_parts", chance = 2000000},
-				{group = "tailor_components", chance = 1000000},
-			}
-		}
+				{group = "wearables_common", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
 	},
 	weapons = {},
 	conversationTemplate = "",

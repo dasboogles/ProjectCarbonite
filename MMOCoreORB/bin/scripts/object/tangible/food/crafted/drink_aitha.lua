@@ -44,22 +44,22 @@
 object_tangible_food_crafted_drink_aitha = object_tangible_food_crafted_shared_drink_aitha:new {
 	templateType = CONSUMABLE,
 
-	duration = 45,
-	filling = 10,
-	nutrition = 10,
+	duration = 0,
+	filling = 11,
+	nutrition = 215,
 
 	effectType = 6,
 
 	fillingMin = 18,
-	fillingMax = 11,
+	fillingMax = 8,
 
-	flavorMin = 6600,
-	flavorMax = 10800,
+	flavorMin = 0,
+	flavorMax = 0,
 
 	nutritionMin = 110,
-	nutritionMax = 180,
-	quantityMin = 4,
-	quantityMax = 7,
+	nutritionMax = 215,
+	quantityMin = 5,
+	quantityMax = 25,
 
 	modifiers = { "mind", 0 },
 

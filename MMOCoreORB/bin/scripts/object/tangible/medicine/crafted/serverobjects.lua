@@ -217,3 +217,7 @@ includeFile("tangible/medicine/crafted/medpack_wound_strength_b.lua")
 includeFile("tangible/medicine/crafted/medpack_wound_strength_c.lua")
 includeFile("tangible/medicine/crafted/medpack_wound_strength_d.lua")
 includeFile("tangible/medicine/crafted/medpack_wound_strength_e.lua")
+
+-- Custom Below Here --
+includeFile("tangible/medicine/crafted/medpack_enhance_omni.lua")
+

@@ -44,12 +44,12 @@
 FullAutoSingle2Command = {
         name = "fullautosingle2",
 
-	damageMultiplier = 3.5,
+	damageMultiplier = 4.0,
 	speedMultiplier = 1.5,
 	healthCostMultiplier = 2.0,
 	actionCostMultiplier = 2.5,
 	mindCostMultiplier = 0.5,
-	accuracyBonus = 25,
+	accuracyBonus = 30,
 
 	animation = "fire_7_single", 
 	animType = GENERATE_RANGED,

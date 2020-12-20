@@ -16,7 +16,8 @@ public:
 
 	bool checkRetreat(CreatureObject* creature) const {
 		if (creature->isRidingMount()) {
-			creature->sendSystemMessage("@cbt_spam:no_burst"); // You cannot burst-run while mounted on a creature or vehicle.
+			// creature->sendSystemMessage("@cbt_spam:no_burst"); // You cannot burst-run while mounted on a creature or vehicle.
+			creature->sendSystemMessage("You cannot Retreat while mounted!");
 			return false;
 		}
 
@@ -26,10 +27,11 @@ public:
 			return false;
 		}
 
-		if (zone->getZoneName() == "dungeon1") {
-			creature->sendSystemMessage("@combat_effects:burst_run_space_dungeon"); //The artificial gravity makes burst running impossible here.
-			return false;
-		}
+		// SL's can now Retreat in Dungeons!
+		// if (zone->getZoneName() == "dungeon1") {
+		// 	creature->sendSystemMessage("@combat_effects:burst_run_space_dungeon"); //The artificial gravity makes burst running impossible here.
+		// 	return false;
+		// }
 
 		uint32 burstCRC = STRING_HASHCODE("burstrun");
 		uint32 forceRun1CRC = BuffCRC::JEDI_FORCE_RUN_1;
@@ -100,6 +102,10 @@ public:
 
 			checkForTef(player, member);
 		}
+
+		// Player is now affected by Retreat
+		sendCombatSpam(player);
+		doRetreat(player);
 
 		if (!ghost->getCommandMessageString(STRING_HASHCODE("retreat")).isEmpty() && creature->checkCooldownRecovery("command_message")) {
 			UnicodeString shout(ghost->getCommandMessageString(STRING_HASHCODE("retreat")));

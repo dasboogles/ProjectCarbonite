@@ -69,6 +69,9 @@ class WearableObject extends TangibleObject {
 	@dirty
 	public native boolean isEquipped();
 
+	@dirty
+	public native boolean hasSeaRemovalTool(CreatureObject player, boolean removeItem);
+
 	@read
 	public int getMaxSockets() {
 		return socketCount;

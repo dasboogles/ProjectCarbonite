@@ -44,20 +44,20 @@
 object_tangible_food_crafted_drink_jawa_beer = object_tangible_food_crafted_shared_drink_jawa_beer:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 25,
 
 	effectType = 4,
 
-	fillingMin = 24,
-	fillingMax = 14,
-	flavorMin = 720,
-	flavorMax = 1440,
-	nutritionMin = 7,
-	nutritionMax = 12,
+	fillingMin = 15,
+	fillingMax = 10,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 5,
+	nutritionMax = 25,
 	quantityMin = 4,
-	quantityMax = 9,
+	quantityMax = 14,
 
 	modifiers = { "mask_scent", 0 },
 

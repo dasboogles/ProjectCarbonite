@@ -29,7 +29,12 @@ uint32 EnhancePackImplementation::calculatePower(CreatureObject* healer, Creatur
 		}
 
 		float modEnvironment = ((float) mod / 100);
-		float modSkill = (float) healer->getSkillMod("healing_wound_treatment");
 
-		return power * modEnvironment * (100 + modSkill) / 100;
+		// If a Doctor is self buffing, then allow their wound treatment to help themselves.
+		if (healer == patient && healer->hasSkill("science_doctor_novice")) {
+			float modSkill = (float) healer->getSkillMod("healing_wound_treatment");
+			return power * modEnvironment * (100 + modSkill) / 100;
+		}
+
+		return power * modEnvironment * (100) / 100;
 }

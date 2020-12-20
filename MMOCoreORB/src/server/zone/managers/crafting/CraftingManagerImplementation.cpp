@@ -63,7 +63,10 @@ int CraftingManagerImplementation::getCreationCount(ManufactureSchematic* manufa
 int CraftingManagerImplementation::calculateExperimentationSuccess(CreatureObject* player,
 		DraftSchematic* draftSchematic, float effectiveness) {
 
+	float entExpBonus = player->getSkillMod("music_exp_buff");
 	float cityBonus = player->getSkillMod("private_spec_experimentation");
+
+	cityBonus += entExpBonus; // Entertainer Bonus
 
 	int experimentationSkill = player->getSkillMod(draftSchematic->getExperimentationSkill());
 	int forceSkill = player->getSkillMod("force_experimentation");
@@ -71,13 +74,14 @@ int CraftingManagerImplementation::calculateExperimentationSuccess(CreatureObjec
 
 	float experimentingPoints = ((float)experimentationSkill) / 10.0f;
 
+	// EntBonus also affects how Experimentation Failure works
 	int failMitigate = (player->getSkillMod(draftSchematic->getAssemblySkill()) - 100 + cityBonus) / 7;
 	failMitigate += player->getSkillMod("force_failure_reduction");
 
 	if(failMitigate < 0)
 		failMitigate = 0;
-	if(failMitigate > 5)
-		failMitigate = 5;
+	if(failMitigate > 7) // Raise Fail Mitigation by 2
+		failMitigate = 7;
 
 	// 0.85-1.15
 	float toolModifier = 1.0f + (effectiveness / 100.0f);
@@ -104,7 +108,9 @@ int CraftingManagerImplementation::calculateExperimentationSuccess(CreatureObjec
 
 	//if(luckRoll < 5)
 	//	return CRITICALFAILURE;
-
+	
+	// Technically Ent bonus is applied twice, but the end results aren't as drastic as it first appears.
+	// Force_Luck only helps to reduce failures and lesser successes.
 	luckRoll += System::random(player->getSkillMod("luck") + player->getSkillMod("force_luck"));
 
 	///
@@ -179,10 +185,10 @@ void CraftingManagerImplementation::configureLabratories() {
 	labs.put(static_cast<int>(DraftSchematicObjectTemplate::DROID_LAB), droidLab); //DROID_LAB
 
 }
-void CraftingManagerImplementation::setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess) {
+void CraftingManagerImplementation::setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess, float qualityBuffVal) {
 	if(manufactureSchematic == nullptr || manufactureSchematic->getDraftSchematic() == nullptr)
 		return;
 	int labratory = manufactureSchematic->getLabratory();
 	SharedLabratory* lab = labs.get(labratory);
-	lab->setInitialCraftingValues(prototype,manufactureSchematic,assemblySuccess);
+	lab->setInitialCraftingValues(prototype, manufactureSchematic, assemblySuccess, qualityBuffVal); // Buffs to crafting values added
 }

@@ -80,8 +80,8 @@ object_weapon_ranged_carbine_carbine_bothan_bola_generic = object_weapon_ranged_
 			"object/creature/player/twilek_female.iff",
 			"object/creature/player/twilek_male.iff",
 			"object/creature/player/weequay_male.iff",
-			"object/creature/player/wookie_male.iff",
-			"object/creature/player/wookie_female.iff",
+			"object/creature/player/wookiee_male.iff",
+			"object/creature/player/wookiee_female.iff",
 			"object/creature/player/zabrak_female.iff",
 			"object/creature/player/zabrak_male.iff",
 			"object/mobile/vendor/aqualish_female.iff",
@@ -108,8 +108,8 @@ object_weapon_ranged_carbine_carbine_bothan_bola_generic = object_weapon_ranged_
 			"object/mobile/vendor/twilek_female.iff",
 			"object/mobile/vendor/twilek_male.iff",
 			"object/mobile/vendor/weequay_male.iff",
-			"object/mobile/vendor/wookie_male.iff",
-			"object/mobile/vendor/wookie_female.iff",
+			"object/mobile/vendor/wookiee_male.iff",
+			"object/mobile/vendor/wookiee_female.iff",
 			"object/mobile/vendor/zabrak_female.iff",
 			"object/mobile/vendor/zabrak_male.iff"
 			},
@@ -146,7 +146,7 @@ object_weapon_ranged_carbine_carbine_bothan_bola_generic = object_weapon_ranged_
 	speedModifiers = { "carbine_speed" },
 
 	-- Leave blank for now
-	damageModifiers = { },
+	damageModifiers = { "carbine_damage" },
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily

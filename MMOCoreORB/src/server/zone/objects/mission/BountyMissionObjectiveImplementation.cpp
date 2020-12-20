@@ -22,6 +22,8 @@
 #include "server/zone/objects/mission/bountyhunter/BountyHunterDroid.h"
 #include "server/zone/objects/mission/bountyhunter/events/BountyHunterTargetTask.h"
 #include "server/zone/managers/visibility/VisibilityManager.h"
+#include "server/zone/packets/player/PlayMusicMessage.h"
+#include "server/zone/managers/loot/LootManager.h"
 
 void BountyMissionObjectiveImplementation::setNpcTemplateToSpawn(SharedObjectTemplate* sp) {
 	npcTemplateToSpawn = sp;
@@ -114,8 +116,8 @@ void BountyMissionObjectiveImplementation::complete() {
 		return;
 
 	ManagedReference<CreatureObject*> owner = getPlayerOwner();
-	//Award bountyhunter xp.
-	owner->getZoneServer()->getPlayerManager()->awardExperience(owner, "bountyhunter", mission->getRewardCredits() / 50, true, 1);
+	//Award bountyhunter xp. Buffed from 50 -> 25
+	owner->getZoneServer()->getPlayerManager()->awardExperience(owner, "bountyhunter", mission->getRewardCredits() / 25, true, 1);
 
 	owner->getZoneServer()->getMissionManager()->completePlayerBounty(mission->getTargetObjectId(), owner->getObjectID());
 
@@ -574,6 +576,8 @@ void BountyMissionObjectiveImplementation::handlePlayerKilled(ManagedObject* arg
 
 	ManagedReference<MissionObject* > mission = this->mission.get();
 	ManagedReference<CreatureObject*> owner = getPlayerOwner();
+	ManagedReference<SceneObject*> inventory = killer->getSlottedObject("inventory");
+	ManagedReference<LootManager*> lootManager = killer->getZoneServer()->getLootManager();
 
 	if(mission == nullptr)
 		return;
@@ -585,6 +589,20 @@ void BountyMissionObjectiveImplementation::handlePlayerKilled(ManagedObject* arg
 			if (zoneServer != nullptr) {
 				ManagedReference<CreatureObject*> target = zoneServer->getObject(mission->getTargetObjectId()).castTo<CreatureObject*>();
 				if (target != nullptr) {
+					String targetName = mission->getTargetName();
+					String hunterName = owner->getFirstName();
+					StringBuffer zBroadcast;
+
+					// Kill Broadcast message
+					zBroadcast << "\\#66b3ff" << "Bounty Hunter Guild Broadcast: \\#ffffff Guild member \\#ff0000"<< hunterName <<"\\#ffffff has claimed the Bounty on \\#ffd700"<< targetName << "\\#ffffff.";
+					owner->getZoneServer()->getChatManager()->broadcastGalaxy(NULL, zBroadcast.toString());
+
+					// Play music for the player only!!
+					PlayMusicMessage* pmm = new PlayMusicMessage("sound/music_themequest_victory_imperial.snd");
+					owner->sendMessage(pmm);
+
+					// Handle Jedi XP stuff here
+					if (target->hasSkill("force_title_jedi_rank_01")){
 					int minXpLoss = -50000;
 					int maxXpLoss = -500000;
 
@@ -601,15 +619,36 @@ void BountyMissionObjectiveImplementation::handlePlayerKilled(ManagedObject* arg
 					message.setDI(xpLoss * -1);
 					message.setTO("exp_n", "jedi_general");
 					target->sendSystemMessage(message);
+					String victimName = "Skull of " + target->getFirstName();
+
+					// TransactionLog trx(TrxCode::NPCLOOT, destructedObject);
+					// TransactionLog trx(TrxCode::FORAGED, owner);
+					TransactionLog trx(TrxCode::BOUNTYSYSTEM, owner);
+					lootManager->createNamedLoot(trx, inventory, "bh_trophy", victimName, 300);//, victimName);
 				}
 			}
 
 			complete();
+			}
 		} else if (mission->getTargetObjectId() == killer->getObjectID() ||
 				(npcTarget != nullptr && npcTarget->getObjectID() == killer->getObjectID())) {
 
+			// Get Bounty Hunter's Name
+			String hunterName = owner->getFirstName();
+			String huntedName = killer->getFirstName();
+
 			owner->sendSystemMessage("@mission/mission_generic:failed"); // Mission failed
-			killer->sendSystemMessage("You have defeated a bounty hunter, ruining his mission against you!");
+			//killer->sendSystemMessage("You have defeated a bounty hunter, ruining his mission against you!");
+			killer->sendSystemMessage("\\#ff005d An Unknown Transmission: \\#e66300 Well done putting that Bounty Hunter in their place! Don't let your guard down!");
+
+			// Death Broadcast
+			StringBuffer zBroadcast;
+			zBroadcast << "\\#ff005d Intercepted Spynet Transmission: \\#ffffff A marked target by the name of < \\#ffd700" << huntedName << "\\#ffffff > has defeated a Bounty Hunter named < \\#ff0000" << hunterName << "\\#ffffff >!";
+			killer->getZoneServer()->getChatManager()->broadcastGalaxy(NULL, zBroadcast.toString());
+
+			// Setup music to play for the player upon victory!
+			PlayMusicMessage* pmm = new PlayMusicMessage("sound/music_themequest_victory_imperial.snd");
+ 			killer->sendMessage(pmm);
 			fail();
 		}
 	}

@@ -105,8 +105,8 @@ object_tangible_fishing_fishing_pole = object_tangible_fishing_shared_fishing_po
 			"object/mobile/vendor/twilek_female.iff",
 			"object/mobile/vendor/twilek_male.iff",
 			"object/mobile/vendor/weequay_male.iff",
-			"object/mobile/vendor/wookie_male.iff",
-			"object/mobile/vendor/wookie_female.iff",
+			"object/mobile/vendor/wookiee_male.iff",
+			"object/mobile/vendor/wookiee_female.iff",
 			"object/mobile/vendor/zabrak_female.iff",
 			"object/mobile/vendor/zabrak_male.iff"
 			},

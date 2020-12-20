@@ -44,18 +44,18 @@
 object_tangible_food_crafted_drink_garrmorl = object_tangible_food_crafted_shared_drink_garrmorl:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,
+	filling = 60,
+	nutrition = 725,
 
 	effectType = 1,
 
-	fillingMin = 55,
-	fillingMax = 33,
-	flavorMin = 1800,
-	flavorMax = 3600,
-	nutritionMin = 150,
-	nutritionMax = 240,
+	fillingMin = 60,
+	fillingMax = 30,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 200,
+	nutritionMax = 725,
 	quantityMin = 6,
 	quantityMax = 10,
 
@@ -66,8 +66,8 @@ object_tangible_food_crafted_drink_garrmorl = object_tangible_food_crafted_share
 	speciesRestriction = "",
 
 	numberExperimentalProperties = {1, 1, 1, 1, 2, 2, 2, 2, 1},
-	experimentalProperties = {"XX", "XX", "XX", "XX", "OQ", "PE", "FL", "OQ", "DR", "PE", "DR", "OQ", "XX"},
-	experimentalWeights = {1, 1, 1, 1, 1, 2, 2, 1, 1, 3, 3, 1, 1},
+	experimentalProperties = {"XX", "XX", "XX", "XX", "OQ", "XX", "XX", "OQ", "DR", "XX", "DR", "OQ", "XX"},
+	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1},
 	experimentalGroupTitles = {"null", "null", "null", "null", "exp_nutrition", "exp_flavor", "exp_quantity", "exp_filling", "null"},
 	experimentalSubGroupTitles = {"null", "null", "hitpoints", "quantity_bonus", "nutrition", "flavor", "quantity", "filling", "stomach"},
 	experimentalMin = {0, 0, 1000, 0, 75, 60, 60, 80, 1},

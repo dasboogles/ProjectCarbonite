@@ -1,6 +1,6 @@
 weapons_all = {
 	description = "",
-	minimumLevel = 0,
+	minimumLevel = 100,
 	maximumLevel = -1,
 	lootItems = {
 		-- Common (1/2)

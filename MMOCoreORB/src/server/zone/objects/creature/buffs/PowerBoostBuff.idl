@@ -30,7 +30,7 @@ class PowerBoostBuff extends Buff {
 
 		super.buffName = name;
 		pbBonus = value;
-		pbTick = value/20;
+		pbTick = value/10;
 		time = duration * 1000;
 		counter = 0;
 		haBuffAmount=0;

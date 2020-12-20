@@ -44,7 +44,7 @@
 object_tangible_food_crafted_drink_starshine_surprise = object_tangible_food_crafted_shared_drink_starshine_surprise:new {
 	templateType = CONSUMABLE,
 
-	duration = 1,
+	duration = 3600,
 	filling = 10,
 	nutrition = 10,
 

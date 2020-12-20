@@ -149,6 +149,20 @@ function TatooineStaticSpawnsNorthScreenPlay:spawnMobiles()
 	--Building Ruins (6395,195)
 	spawnMobile("tatooine", "sunstained_dune_lizard", 600, 6383.5, 64.5, 190.5, -54, 0)
 
+
+	-- -- Server Load Test
+	-- -- Anything over 250 seems to ddos clients.
+	-- -- Server does just fine though!
+
+	-- -- Imperials
+	-- local toSpawn = 0
+	-- while toSpawn < 150 do
+	-- 	spawnMobile("tatooine", "at_st", 1, 6333.63, 52.6025, 4204.82, 354, 0)
+	-- 	spawnMobile("tatooine", "rebel_droideka", 1, 6325.49, 53.8487, 4220.15, 174, 0)
+	-- 	toSpawn = toSpawn+1
+	-- end
+	-- -- Server Load Test
+
 end
 
 function TatooineStaticSpawnsNorthScreenPlay:notifyWarriorDead(pWarrior, pKiller)

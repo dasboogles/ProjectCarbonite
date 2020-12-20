@@ -37,6 +37,10 @@ class LightsaberCrystalComponent extends Component {
 	protected unsigned long ownerID;
 	protected string ownerName;
 
+	// Custom Stuff for PC Here
+	protected int rareMod;
+	// ------------------------
+
 	// TODO: Remove these after a server wipe
 	protected int forceCost;
 	protected int minimumDamage;
@@ -45,7 +49,7 @@ class LightsaberCrystalComponent extends Component {
 	// ----
 
 	public LightsaberCrystalComponent() {
-		attackSpeed = 0.0;
+		attackSpeed = 0.00;
 		sacHealth = 0;
 		sacAction = 0;
 		sacMind = 0;
@@ -53,10 +57,12 @@ class LightsaberCrystalComponent extends Component {
 		color = 0;
 		quality = 0;
 		itemLevel = 0;
-		floatForceCost = 0.0;
+		floatForceCost = 0.00;
 
 		ownerID = 0;
 		ownerName = "";
+
+		rareMod = 0;
 
 		// TODO: Remove these after a server wipe
 		forceCost = 0;
@@ -103,6 +109,9 @@ class LightsaberCrystalComponent extends Component {
 	public native int getRandomizedStat(int min, int max, int itemLevel);
 	public native float getRandomizedStat(float min, float max, int itemLevel);
 	public native int getCrystalQuality();
+	public native int generateColorCrystalStats(int itemLevel);
+	public native float generateFloatColorCrystalStats(int itemLevel);
+	public native float getQualityMod();
 
 	@read
 	public int getDamage() {
@@ -168,6 +177,10 @@ class LightsaberCrystalComponent extends Component {
 
 	public void setItemLevel(int value) {
 		itemLevel = value;
+	}
+
+	public void setRareMod(int value) {
+		rareMod = value;
 	}
 
 	public void setMinimumDamage(int value) {

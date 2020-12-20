@@ -543,6 +543,7 @@ void GamblingManagerImplementation::calculateOutcome(GamblingTerminal* terminal)
 
 				ManagedReference<CreatureObject*> player = terminal->getPlayersWindows()->elementAt(0).getKey();
 
+
 				if ((bet != nullptr) && (player != nullptr)) {
 
 					if (terminal->getFirst() == terminal->getSecond() && terminal->getSecond() == terminal->getThird()) {

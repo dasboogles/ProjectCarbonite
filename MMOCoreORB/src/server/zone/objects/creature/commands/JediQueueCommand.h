@@ -258,6 +258,8 @@ public:
 	float getFrsModifiedExtraForceCost(CreatureObject* creature, float val) const {
 		ManagedReference<PlayerObject*> ghost = creature->getPlayerObject();
 
+		// creature->sendSystemMessage("Your Starting val is: " + String::valueOf(val));
+
 		if (ghost == nullptr)
 			return val;
 
@@ -282,6 +284,9 @@ public:
 		if (manipulationMod == 0 || frsModifier == 0)
 			return val;
 
+		// creature->sendSystemMessage("Your frsMod is: " + String::valueOf(frsModifier));
+		// creature->sendSystemMessage("Your manipMod is: " + String::valueOf(manipulationMod));
+		// creature->sendSystemMessage("Your Ending val is: " + String::valueOf((val + ((float)manipulationMod * frsModifier))));
 		return val + ((float)manipulationMod * frsModifier);
 	}
 

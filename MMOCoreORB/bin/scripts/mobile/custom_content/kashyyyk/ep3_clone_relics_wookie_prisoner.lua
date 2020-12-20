@@ -1,4 +1,4 @@
-ep3_clone_relics_wookie_prisoner = Creature:new {
+ep3_clone_relics_wookiee_prisoner = Creature:new {
 	customName = "Wookiee Prisoner",
 	randomNameType = NAME_GENERIC_TAG,
 	socialGroup = "wookiee",
@@ -27,10 +27,10 @@ ep3_clone_relics_wookie_prisoner = Creature:new {
 	diet = HERBIVORE,
 
 	templates = {
-				"object/mobile/ep3/ep3_clone_relics_wookie_prisoner_01.iff",
-				"object/mobile/ep3/ep3_clone_relics_wookie_prisoner_02.iff",
-				"object/mobile/ep3/ep3_clone_relics_wookie_prisoner_03.iff",
-				"object/mobile/ep3/ep3_clone_relics_wookie_prisoner_04.iff"
+				"object/mobile/ep3/ep3_clone_relics_wookiee_prisoner_01.iff",
+				"object/mobile/ep3/ep3_clone_relics_wookiee_prisoner_02.iff",
+				"object/mobile/ep3/ep3_clone_relics_wookiee_prisoner_03.iff",
+				"object/mobile/ep3/ep3_clone_relics_wookiee_prisoner_04.iff"
 				},
 	lootGroups = {},
 	weapons = {},
@@ -38,4 +38,4 @@ ep3_clone_relics_wookie_prisoner = Creature:new {
 	--attacks = merge(brawlermaster,marksmanmaster)
 }
 
-CreatureTemplates:addCreatureTemplate(ep3_clone_relics_wookie_prisoner, "ep3_clone_relics_wookie_prisoner")
+CreatureTemplates:addCreatureTemplate(ep3_clone_relics_wookiee_prisoner, "ep3_clone_relics_wookiee_prisoner")

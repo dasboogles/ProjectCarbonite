@@ -89,6 +89,10 @@ int SaberInventoryContainerComponent::notifyObjectInserted(SceneObject* sceneObj
 			int color = crystal->getColor();
 			weao->setBladeColor(color);
 			weao->setCustomizationVariable("/private/index_color_blade", color, true);
+			weao->setMinDamage(weao->getMinDamage() + crystal->getDamage());
+			weao->setMaxDamage(weao->getMaxDamage() + crystal->getDamage());
+			weao->setWoundsRatio(weao->getWoundsRatio() + crystal->getWoundChance());
+			weao->setForceCost(weao->getForceCost() + crystal->getForceCost());
 		}
 	}
 
@@ -125,6 +129,10 @@ int SaberInventoryContainerComponent::notifyObjectRemoved(SceneObject* sceneObje
 			if (crystal->getColor() != 31) {
 				weao->setBladeColor(31);
 				weao->setCustomizationVariable("/private/index_color_blade", 31, true);
+				weao->setMinDamage(weao->getMinDamage() - crystal->getDamage());
+				weao->setMaxDamage(weao->getMaxDamage() - crystal->getDamage());
+				weao->setWoundsRatio(weao->getWoundsRatio() - crystal->getWoundChance());
+				weao->setForceCost(weao->getForceCost() - crystal->getForceCost());
 			}
 		}
 

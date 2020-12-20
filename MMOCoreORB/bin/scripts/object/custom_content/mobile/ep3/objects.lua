@@ -526,25 +526,25 @@ object_mobile_ep3_shared_ep3_clone_relics_warrzz = SharedCreatureObjectTemplate:
 }
 ObjectTemplates:addClientTemplate(object_mobile_ep3_shared_ep3_clone_relics_warrzz, "object/mobile/ep3/shared_ep3_clone_relics_warrzz.iff")
 --************************************************************************************************************************
-object_mobile_ep3_shared_ep3_clone_relics_wookie_prisoner_01 = SharedCreatureObjectTemplate:new {
-	clientTemplateFileName = "object/mobile/ep3/shared_ep3_clone_relics_wookie_prisoner_01.iff"
+object_mobile_ep3_shared_ep3_clone_relics_wookiee_prisoner_01 = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/mobile/ep3/shared_ep3_clone_relics_wookiee_prisoner_01.iff"
 }
-ObjectTemplates:addClientTemplate(object_mobile_ep3_shared_ep3_clone_relics_wookie_prisoner_01, "object/mobile/ep3/shared_ep3_clone_relics_wookie_prisoner_01.iff")
+ObjectTemplates:addClientTemplate(object_mobile_ep3_shared_ep3_clone_relics_wookiee_prisoner_01, "object/mobile/ep3/shared_ep3_clone_relics_wookiee_prisoner_01.iff")
 --************************************************************************************************************************
-object_mobile_ep3_shared_ep3_clone_relics_wookie_prisoner_02 = SharedCreatureObjectTemplate:new {
-	clientTemplateFileName = "object/mobile/ep3/shared_ep3_clone_relics_wookie_prisoner_02.iff"
+object_mobile_ep3_shared_ep3_clone_relics_wookiee_prisoner_02 = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/mobile/ep3/shared_ep3_clone_relics_wookiee_prisoner_02.iff"
 }
-ObjectTemplates:addClientTemplate(object_mobile_ep3_shared_ep3_clone_relics_wookie_prisoner_02, "object/mobile/ep3/shared_ep3_clone_relics_wookie_prisoner_02.iff")
+ObjectTemplates:addClientTemplate(object_mobile_ep3_shared_ep3_clone_relics_wookiee_prisoner_02, "object/mobile/ep3/shared_ep3_clone_relics_wookiee_prisoner_02.iff")
 --************************************************************************************************************************
-object_mobile_ep3_shared_ep3_clone_relics_wookie_prisoner_03 = SharedCreatureObjectTemplate:new {
-	clientTemplateFileName = "object/mobile/ep3/shared_ep3_clone_relics_wookie_prisoner_03.iff"
+object_mobile_ep3_shared_ep3_clone_relics_wookiee_prisoner_03 = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/mobile/ep3/shared_ep3_clone_relics_wookiee_prisoner_03.iff"
 }
-ObjectTemplates:addClientTemplate(object_mobile_ep3_shared_ep3_clone_relics_wookie_prisoner_03, "object/mobile/ep3/shared_ep3_clone_relics_wookie_prisoner_03.iff")
+ObjectTemplates:addClientTemplate(object_mobile_ep3_shared_ep3_clone_relics_wookiee_prisoner_03, "object/mobile/ep3/shared_ep3_clone_relics_wookiee_prisoner_03.iff")
 --************************************************************************************************************************
-object_mobile_ep3_shared_ep3_clone_relics_wookie_prisoner_04 = SharedCreatureObjectTemplate:new {
-	clientTemplateFileName = "object/mobile/ep3/shared_ep3_clone_relics_wookie_prisoner_04.iff"
+object_mobile_ep3_shared_ep3_clone_relics_wookiee_prisoner_04 = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/mobile/ep3/shared_ep3_clone_relics_wookiee_prisoner_04.iff"
 }
-ObjectTemplates:addClientTemplate(object_mobile_ep3_shared_ep3_clone_relics_wookie_prisoner_04, "object/mobile/ep3/shared_ep3_clone_relics_wookie_prisoner_04.iff")
+ObjectTemplates:addClientTemplate(object_mobile_ep3_shared_ep3_clone_relics_wookiee_prisoner_04, "object/mobile/ep3/shared_ep3_clone_relics_wookiee_prisoner_04.iff")
 --************************************************************************************************************************
 object_mobile_ep3_shared_ep3_clone_relics_zangvin_combat = SharedCreatureObjectTemplate:new {
 	clientTemplateFileName = "object/mobile/ep3/shared_ep3_clone_relics_zangvin_combat.iff"

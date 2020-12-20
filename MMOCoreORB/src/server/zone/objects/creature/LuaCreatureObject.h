@@ -120,6 +120,7 @@ namespace creature {
 		int getDamageDealerList(lua_State* L);
 		int getHealingThreatList(lua_State* L);
 		int getSkillMod(lua_State* L);
+		int broadcastToServer(lua_State* L);
 		int getGender(lua_State* L);
 		int isRidingMount(lua_State* L);
 		int dismount(lua_State* L);

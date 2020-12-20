@@ -52,7 +52,7 @@ public:
 
 		int baseMind = player->getBaseHAM(CreatureAttribute::MIND);
 
-		int pbBonus = baseMind / 2;
+		int pbBonus = baseMind / 5; // from 2 -> 5 to deal with 2500 as a possibel min and 3500 as possibel max base.
 
 		int meditateMod = player->getSkillMod("meditate");
 
@@ -60,7 +60,8 @@ public:
 		 * Taken from scrapbook
 		 * Duration: 5 min + (meditate skill mod/100 * 5min)
 		 */
-		int duration = 300 + ((meditateMod/100) * 300);
+		// Buffed from 5minutes + 5minutes (at max meditate) -> 5minutes + 25 (minutes at max meditate)
+		int duration = 300 + ((meditateMod/100) * 1500);
 
 		if(player->getHAM(CreatureAttribute::MIND) <= pbBonus) {
 			player->sendSystemMessage("@teraskasi:powerboost_mind"); // [mediation] You currently lack the mental capacity to focus your energies.

@@ -74,24 +74,33 @@ object_tangible_wearables_armor_mandalorian_rebel_armor_mandalorian_rebel_chest_
 	vulnerability = LIGHTSABER,
 
 	-- These are default Blue Frog stats
-	healthEncumbrance = 15,
-	actionEncumbrance = 15,
-	mindEncumbrance = 15,
-	
-	maxCondition = 30000,
+	healthEncumbrance = 250,
+	actionEncumbrance = 250,
+	mindEncumbrance = 250,
+
+	maxCondition = 55000,
 
 	-- LIGHT, MEDIUM, HEAVY
 	rating = LIGHT,
 
-	kinetic = 52,
-	energy = 52,
-	electricity = 62,
+	kinetic = 60,
+	energy = 60,
+	electricity = 60,
 	stun = 25,
-	blast = 62,
-	heat = 73,
-	cold = 62,
-	acid = 62,
-	lightSaber = 0,
+	blast = 60,
+	heat = 60,
+	cold = 60,
+	acid = 60,
+
+	numberExperimentalProperties = {1, 1, 1, 1, 2, 2, 2, 2, 2, 1, 1, 2, 1},
+	experimentalProperties = {"XX", "XX", "XX", "XX", "OQ", "SR", "OQ", "UT", "MA", "OQ", "MA", "OQ", "MA", "OQ", "XX", "XX", "OQ", "SR", "XX"},
+	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+	experimentalGroupTitles = {"null", "null", "null", "exp_durability", "exp_quality", "exp_resistance", "exp_durability", "exp_durability", "exp_durability", "null", "null", "exp_resistance", "null"},
+	experimentalSubGroupTitles = {"null", "null", "sockets", "hit_points", "armor_effectiveness", "armor_integrity", "armor_health_encumbrance", "armor_action_encumbrance", "armor_mind_encumbrance", "armor_rating", "armor_special_type", "armor_special_effectiveness", "armor_special_integrity"},
+	experimentalMin = {0, 0, 0, 1000, 1, 30000, 350, 350, 350, 1, 0, 0, 0},
+	experimentalMax = {0, 0, 0, 1000, 40, 50000, 185, 185, 185, 1, 0, 0, 0},
+	experimentalPrecision = {0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0},
+	experimentalCombineType = {0, 0, 4, 1, 1, 1, 1, 1, 1, 4, 4, 4, 1},
 	
 	skillMods = {
         {"slope_move", 2},

@@ -3,13 +3,13 @@ nightsister_enraged_rancor = Creature:new {
 	socialGroup = "nightsister",
 	faction = "nightsister",
 	level = 80,
-	chanceHit = 0.75,
-	damageMin = 570,
-	damageMax = 850,
+	chanceHit = 1.75,
+	damageMin = 670,
+	damageMax = 950,
 	baseXp = 7668,
-	baseHAM = 13000,
-	baseHAMmax = 16000,
-	armor = 1,
+	baseHAM = 15000,
+	baseHAMmax = 19000,
+	armor = 2,
 	resists = {30,160,30,200,200,200,30,30,-1},
 	meatType = "meat_carnivore",
 	meatAmount = 950,
@@ -31,13 +31,28 @@ nightsister_enraged_rancor = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "rancor_common", chance = 4000000},
-				{group = "armor_all", chance = 2000000},
-				{group = "weapons_all", chance = 2500000},
-				{group = "wearables_all", chance = 1500000}
+				{group = "rancor_common", chance = 10000000}
 			},
-			lootChance = 2600000
-		}
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "wearables_all", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
 	},
 	weapons = {},
 	conversationTemplate = "",

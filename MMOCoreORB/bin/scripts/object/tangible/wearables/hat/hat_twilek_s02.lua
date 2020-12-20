@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_hat_hat_twilek_s02 = object_tangible_wearables_hat_shared_hat_twilek_s02:new {
+	objectMenuComponent = "ArmorObjectMenuComponent",
 	playerRaces = { "object/creature/player/twilek_female.iff",
 				"object/mobile/vendor/twilek_female.iff" },
 

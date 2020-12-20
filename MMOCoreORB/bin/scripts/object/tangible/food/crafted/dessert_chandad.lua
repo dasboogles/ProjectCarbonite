@@ -44,18 +44,18 @@
 object_tangible_food_crafted_dessert_chandad = object_tangible_food_crafted_shared_dessert_chandad:new {
 	templateType = CONSUMABLE,
 
-	duration = 45,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 15,
 
 	effectType = 4,
 
-	fillingMin = 17,
+	fillingMin = 25,
 	fillingMax = 10,
-	flavorMin = 720,
-	flavorMax = 1440,
-	nutritionMin = 7,
-	nutritionMax = 12,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 5,
+	nutritionMax = 15,
 	quantityMin = 6,
 	quantityMax = 10,
 

@@ -43,7 +43,7 @@ object_tangible_food_crafted_dish_dustcrepe = object_tangible_food_crafted_share
 
 templateType = CONSUMABLE,
 
-	duration = 1,
+	duration = 3600,
 	filling = 10,
 	nutrition = 10,
 

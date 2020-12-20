@@ -107,6 +107,9 @@ class CreatureObject extends TangibleObject {
 	protected float slopeModPercent;
 	protected float slopeModAngle;
 
+	//Flags for temporary use on things like buffing or conversations
+	protected boolean isNotified;
+
 	protected unsigned long listenToID;
 	protected unsigned long watchToID;
 
@@ -826,6 +829,16 @@ class CreatureObject extends TangibleObject {
 
 	@dirty
 	public native boolean verifyCredits(int credits);
+
+	@dirty
+	public boolean getIsNotified() {
+		return isNotified;
+	}
+
+	@dirty
+	public void setIsNotified(boolean notifiedVal) {
+		isNotified = notifiedVal;
+	}
 
 	@dirty
 	public native boolean isDancing();

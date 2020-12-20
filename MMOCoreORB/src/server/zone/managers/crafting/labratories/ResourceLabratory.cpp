@@ -34,7 +34,8 @@ void ResourceLabratory::initialize(ZoneServer* server) {
 	bioModsTable.pop();
 
 }
-void ResourceLabratory::setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess) {
+
+void ResourceLabratory::setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess, float qualityBuffVal) {
 
 	if(manufactureSchematic == nullptr || manufactureSchematic->getDraftSchematic() == nullptr)
 		return;
@@ -75,6 +76,14 @@ void ResourceLabratory::setInitialCraftingValues(TangibleObject* prototype, Manu
 			// add to the weighted sum based on type and percentage
 			weightedSum += getWeightedValue(manufactureSchematic, type) * percentage;
 		}
+
+		// Enhanced Resource Quality from Player SkillStat
+		weightedSum *= qualityBuffVal;
+		if (weightedSum > 1000) {
+			weightedSum = 1000;
+		}
+
+		// Logger::console.warning("What the WeightedSum: " + String::valueOf(weightedSum));
 
 		// > 0 ensures that we don't add things when there is NaN value
 		if (weightedSum > 0) {

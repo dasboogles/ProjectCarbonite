@@ -874,11 +874,11 @@ object_mobile_shared_coa_aclo_tech_rod_f = SharedDraftSchematicObjectTemplate:ne
 
 ObjectTemplates:addClientTemplate(object_mobile_shared_coa_aclo_tech_rod_f, "object/mobile/shared_coa_aclo_tech_rod_f.iff")
 ----------------------------------------------------------------------------------------------------------------------------------------------------
-object_mobile_shared_coa_aclo_wookie_f = SharedDraftSchematicObjectTemplate:new {
-	clientTemplateFileName = "object/mobile/shared_coa_aclo_wookie_f.iff"
+object_mobile_shared_coa_aclo_wookiee_f = SharedDraftSchematicObjectTemplate:new {
+	clientTemplateFileName = "object/mobile/shared_coa_aclo_wookiee_f.iff"
 }
 
-ObjectTemplates:addClientTemplate(object_mobile_shared_coa_aclo_wookie_f, "object/mobile/shared_coa_aclo_wookie_f.iff")
+ObjectTemplates:addClientTemplate(object_mobile_shared_coa_aclo_wookiee_f, "object/mobile/shared_coa_aclo_wookiee_f.iff")
 ----------------------------------------------------------------------------------------------------------------------------------------------------
 object_mobile_shared_coa_colonel_braedic_ekirk = SharedDraftSchematicObjectTemplate:new {
 	clientTemplateFileName = "object/mobile/shared_coa_colonel_braedic_ekirk.iff"

@@ -82,22 +82,22 @@ object_tangible_wearables_armor_stormtrooper_armor_stormtrooper_pvp_officer_ches
 	-- LIGHT, MEDIUM, HEAVY
 	rating = LIGHT,
 
-	kinetic = 51,
-	energy = 51,
-	electricity = 51,
-	stun = 29,
-	blast = 60,
-	heat = 60,
-	cold = 60,
-	acid = 60,
+	kinetic = 45,
+	energy = 45,
+	electricity = 45,
+	stun = 10,
+	blast = 45,
+	heat = 45,
+	cold = 45,
+	acid = 45,
 	lightSaber = 0,
 	
 	skillMods = {
-        {"slope_move", 5},
-        {"dizzy_defense", 5},
-        {"melee_defense", 5},
-        {"ranged_defense", 5}
-    	}
+		{"slope_move", 5},
+		{"dizzy_defense", 5},
+		{"melee_defense", 5},
+		{"ranged_defense", 5}
+    }
 }
 
 ObjectTemplates:addTemplate(object_tangible_wearables_armor_stormtrooper_armor_stormtrooper_pvp_officer_chest_plate, "object/tangible/wearables/armor/stormtrooper/armor_stormtrooper_pvp_officer_chest_plate.iff")

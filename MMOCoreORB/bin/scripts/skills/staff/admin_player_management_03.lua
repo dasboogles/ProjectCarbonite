@@ -36,7 +36,8 @@ admin_player_management_03 = {
 		"setVeteranReward",
 		"setVeteranRewardTimeCs",
 		"snoop",
-		"wipeItems"
+		"wipeItems",
+		"wardev"
 	},
 	skillModifiers = {},
 	schematicsGranted = {},

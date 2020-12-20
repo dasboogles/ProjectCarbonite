@@ -44,7 +44,7 @@
 object_tangible_food_crafted_dessert_felbar = object_tangible_food_crafted_shared_dessert_felbar:new {
 	templateType = CONSUMABLE,
 
-	duration = 45,
+	duration = 3600,
 	filling = 10,
 	nutrition = 1000,
 
@@ -53,7 +53,7 @@ object_tangible_food_crafted_dessert_felbar = object_tangible_food_crafted_share
 	fillingMin = 23,
 	fillingMax = 15,
 	flavorMin = 1800,
-	flavorMax = 3600,
+	flavorMax = 5400,
 	nutritionMin = 675,
 	nutritionMax = 1250,
 	quantityMin = 3,

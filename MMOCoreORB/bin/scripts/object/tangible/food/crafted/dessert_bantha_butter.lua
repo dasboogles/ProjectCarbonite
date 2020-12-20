@@ -44,7 +44,7 @@
 object_tangible_food_crafted_dessert_bantha_butter = object_tangible_food_crafted_shared_dessert_bantha_butter:new {
 	templateType = CONSUMABLE,
 
-	duration = 45,
+	duration = 3600,
 	filling = 10,
 	nutrition = 10,
 

@@ -44,18 +44,18 @@
 object_tangible_food_crafted_dessert_air_cake = object_tangible_food_crafted_shared_dessert_air_cake:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
-	filling = 10,
-	nutrition = 10,
+	duration = 11000,
+	filling = 7,
+	nutrition = 20,
 
 	effectType = 2,
 
 	fillingMin = 11,
 	fillingMax = 7,
-	flavorMin = 720,
-	flavorMax = 1440,
-	nutritionMin = 15,
-	nutritionMax = 25,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 11000,	-- 3 hour duration for being such a weak effect
+	nutritionMin = 10,
+	nutritionMax = 20,
 	quantityMin = 6,
 	quantityMax = 10,
 

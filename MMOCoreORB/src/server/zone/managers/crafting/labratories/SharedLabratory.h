@@ -23,7 +23,7 @@ public:
 	SharedLabratory();
 	virtual ~SharedLabratory();
 	// setup the initial combine values
-	virtual void setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess) = 0;
+	virtual void setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess, float qualityBuffVal) = 0;
 	// allow each lab to handle the experimation results. You can callback to the crafting manage to determine changes if you wish
 	virtual void experimentRow(CraftingValues* craftingValues,int rowEffected, int pointsAttempted, float failure, int experimentationResult) = 0;
 	virtual void initialize(ZoneServer* server);

@@ -1,0 +1,5 @@
+object_tangible_loot_loot_schematic_universal_loot_schematic = object_tangible_loot_loot_schematic_shared_universal_loot_schematic:new {
+customObjectName = "Universal Loot Schematic",
+
+}
+ObjectTemplates:addTemplate(object_tangible_loot_loot_schematic_universal_loot_schematic, "object/tangible/loot/loot_schematic/universal_loot_schematic.iff")

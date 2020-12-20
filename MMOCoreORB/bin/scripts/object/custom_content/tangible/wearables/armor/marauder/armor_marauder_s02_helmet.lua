@@ -122,7 +122,7 @@ object_tangible_wearables_armor_marauder_armor_marauder_s02_helmet = object_tang
 				"object/mobile/vendor/zabrak_male.iff" },
 	
 	-- Damage types in WeaponObject
-	vulnerability = STUN + LIGHTSABER + COLD + BLAST,
+	vulnerability = STUN + LIGHTSABER,
 
 	specialResists = HEAT + ENERGY + KINETIC,
 

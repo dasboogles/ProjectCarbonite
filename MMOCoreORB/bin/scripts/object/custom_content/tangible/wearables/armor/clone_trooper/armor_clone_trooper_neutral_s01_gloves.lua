@@ -98,7 +98,7 @@ object_tangible_wearables_armor_clone_trooper_armor_clone_trooper_neutral_s01_gl
 				"object/creature/player/zabrak_female.iff" },
 	
 	-- Damage types in WeaponObject
-	vulnerability = STUN + LIGHTSABER + ACID,
+	vulnerability = STUN + LIGHTSABER,
 
 	specialResists = HEAT + ENERGY,
 

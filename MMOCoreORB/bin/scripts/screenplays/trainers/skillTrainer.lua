@@ -76,6 +76,8 @@ function SkillTrainer:sendSkillInfoSui(pPlayer, pNpc, skillName)
 	local moneyRequired = skillObject:getMoneyRequired()
 	local persuasion = CreatureObject(pPlayer):getSkillMod("force_persuade")
 
+	moneyRequired = moneyRequired * 0.77;
+
 	if (persuasion > 0) then
 		moneyRequired = moneyRequired - ((moneyRequired * persuasion) / 100)
 	end

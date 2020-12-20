@@ -706,6 +706,9 @@ RunSlashCommandsFile("skill.lua")
 RunSlashCommandsFile("smokebomb.lua")
 RunSlashCommandsFile("sniperShot.lua")
 RunSlashCommandsFile("snoop.lua")
+-- Custom
+RunSlashCommandsFile("wardev.lua")
+-- Custom
 RunSlashCommandsFile("social.lua")
 RunSlashCommandsFile("socialInternal.lua")
 RunSlashCommandsFile("spatialChat.lua")

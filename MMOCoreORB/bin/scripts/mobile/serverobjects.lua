@@ -7,6 +7,9 @@ includeFile("dressgroup/serverobjects.lua")
 --New Content
 includeFile("custom_content/serverobjects.lua")
 
+--Carbonite Custom 
+includeFile("custom/serverobjects.lua")
+
 -- Creatures
 includeFile("corellia/serverobjects.lua")
 includeFile("dantooine/serverobjects.lua")
@@ -51,3 +54,6 @@ includeFile("outfits/serverobjects.lua")
 
 -- Custom content - Loads last to allow for overrides
 includeFile("../custom_scripts/mobile/serverobjects.lua")
+
+-- TestServer NPCs
+includeFile("TEST_NPCS/serverobjects.lua")

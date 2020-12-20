@@ -310,3 +310,5 @@ includeFile("tatooine/wuher.lua")
 includeFile("tatooine/young_mos_taike_guard.lua")
 includeFile("tatooine/young_mountain_squill.lua")
 includeFile("tatooine/zucca_boar.lua")
+-- Custom
+includeFile("tatooine/krayt_dragon_queen.lua")

@@ -44,17 +44,17 @@
 object_tangible_food_crafted_drink_ruby_bliel = object_tangible_food_crafted_shared_drink_ruby_bliel:new {
 	templateType = CONSUMABLE,
 
-	duration = 17,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 35,
 
 	effectType = 3, -- Event Based Buff
 	eventTypes = {MEDPACKUSED},
 
-	fillingMin = 22,
-	fillingMax = 18,
-	flavorMin = 12,
-	flavorMax = 22,
+	fillingMin = 40,
+	fillingMax = 30,
+	flavorMin = 60,
+	flavorMax = 150,
 	nutritionMin = 20,
 	nutritionMax = 35,
 	quantityMin = 4,

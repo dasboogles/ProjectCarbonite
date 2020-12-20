@@ -4,15 +4,17 @@ nightsister_elder = Creature:new {
 	randomNameTag = true,
 	socialGroup = "nightsister",
 	faction = "nightsister",
-	level = 278,
-	chanceHit = 27.25,
+	level = 300,
+	chanceHit = 25.25,
 	damageMin = 1520,
 	damageMax = 2750,
 	baseXp = 26654,
 	baseHAM = 321000,
 	baseHAMmax = 392000,
 	armor = 3,
-	resists = {200,25,25,200,200,200,200,200,-1},
+	-- Put this here to help anyone who needs to know what they're changing on some mob somewhere!
+	-- {Kinetic, Energy, Blast, Heat, Cold, Elec, Acid, Stun, LS}
+	resists = {200,25,25,200,200,200,200,200,15},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -31,18 +33,100 @@ nightsister_elder = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "power_crystals", chance = 800000},
-				{group = "nightsister_common", chance = 2200000},
-				{group = "junk", chance = 1000000},
-				{group = "armor_attachments", chance = 500000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "pistols", chance = 800000},
-				{group = "rifles", chance = 800000},
-				{group = "carbines", chance = 900000},
-				{group = "melee_weapons", chance = 2000000},
-				{group = "wearables_scarce", chance = 500000}
-			}
-		}
+				{group = "nightsister_common", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "melee_weapons", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "rifles", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "pistols", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "carbines", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "containers", chance = 10000000}
+			},
+			lootChance = 2000000
+		},
+		{
+			groups = {
+				{group = "wearables_scarce", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "wearables_scarce", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
 	},
 	weapons = {"mixed_force_weapons"},
 	conversationTemplate = "",

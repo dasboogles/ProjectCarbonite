@@ -44,18 +44,18 @@
 object_tangible_food_crafted_dish_veghash = object_tangible_food_crafted_shared_dish_veghash:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 35,
 
 	effectType = 4,
 
-	fillingMin = 16,
-	fillingMax = 13,
-	flavorMin = 540,
-	flavorMax = 1080,
-	nutritionMin = 11,
-	nutritionMax = 18,
+	fillingMin = 20,
+	fillingMax = 15,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 10,
+	nutritionMax = 35,
 	quantityMin = 4,
 	quantityMax = 9,
 

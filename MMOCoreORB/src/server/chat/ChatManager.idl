@@ -6,10 +6,14 @@ package server.chat;
 
 import engine.core.ManagedService;
 import server.zone.ZoneServer;
+import server.chat.room.ChatRoom;
+import server.chat.room.ChatRoomMap;
 import server.zone.objects.creature.CreatureObject;
 import server.zone.objects.scene.SceneObject;
 import engine.service.proto.BaseMessage;
+import server.zone.managers.player.PlayerMap;
 import server.zone.managers.player.PlayerManager;
+import system.util.VectorMap;
 import server.zone.objects.player.PlayerObject;
 import server.zone.packets.chat.ChatInstantMessageToCharacter;
 import engine.log.Logger;
@@ -43,6 +47,7 @@ class ChatManager extends ManagedService implements Logger {
 	ChatRoom guildRoom;
 	ChatRoom auctionRoom;
 	ChatRoom systemRoom;
+	ChatRoom pvpRoom;
 
 	transient ChatRoomMap roomMap;
 
@@ -451,6 +456,13 @@ class ChatManager extends ManagedService implements Logger {
 	 */
 	public ChatRoom getSystemRoom() {
 		return systemRoom;
+	}
+
+	/*
+	* Returns the parent room for GCW chat rooms.
+	*/
+	public ChatRoom getPvpRoom() {
+		return pvpRoom;
 	}
 
 	@read

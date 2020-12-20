@@ -1,5 +1,5 @@
-coa_aclo_wookie_f = Creature:new {
-	customName = "coa_aclo_wookie_f",
+coa_aclo_wookiee_f = Creature:new {
+	customName = "coa_aclo_wookiee_f",
 	--objectName = "",
 	--randomNameType = NAME_GENERIC_TAG,
 	socialGroup = "townsperson",
@@ -27,7 +27,7 @@ coa_aclo_wookie_f = Creature:new {
 	optionsBitmask = AIENABLED,
 	diet = HERBIVORE,
 
-	templates = {"object/mobile/coa_aclo_wookie_f.iff"},
+	templates = {"object/mobile/coa_aclo_wookiee_f.iff"},
 	lootGroups = {},
 	weapons = {},
 	conversationTemplate = "",
@@ -35,5 +35,5 @@ coa_aclo_wookie_f = Creature:new {
 	}
 }
 
-CreatureTemplates:addCreatureTemplate(coa_aclo_wookie_f, "coa_aclo_wookie_f")
+CreatureTemplates:addCreatureTemplate(coa_aclo_wookiee_f, "coa_aclo_wookiee_f")
 

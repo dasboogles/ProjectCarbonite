@@ -44,20 +44,20 @@
 object_tangible_food_crafted_drink_corellian_brandy = object_tangible_food_crafted_shared_drink_corellian_brandy:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 15,
 
 	effectType = 4,
 
-	fillingMin = 17,
+	fillingMin = 25,
 	fillingMax = 10,
-	flavorMin = 720,
-	flavorMax = 1440,
-	nutritionMin = 7,
-	nutritionMax = 12,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 5,
+	nutritionMax = 15,
 	quantityMin = 6,
-	quantityMax = 10,
+	quantityMax = 12,
 
 	modifiers = { "knockdown_defense", 0 },
 

@@ -41,6 +41,6 @@
 --this exception also makes it possible to release a modified version 
 
 
-object_mobile_ep3_ep3_clone_relics_wookie_prisoner_01 = object_mobile_ep3_shared_ep3_clone_relics_wookie_prisoner_01:new {
+object_mobile_ep3_ep3_clone_relics_wookiee_prisoner_01 = object_mobile_ep3_shared_ep3_clone_relics_wookiee_prisoner_01:new {
 }
-ObjectTemplates:addTemplate(object_mobile_ep3_ep3_clone_relics_wookie_prisoner_01, "object/mobile/ep3/ep3_clone_relics_wookie_prisoner_01.iff")
+ObjectTemplates:addTemplate(object_mobile_ep3_ep3_clone_relics_wookiee_prisoner_01, "object/mobile/ep3/ep3_clone_relics_wookiee_prisoner_01.iff")

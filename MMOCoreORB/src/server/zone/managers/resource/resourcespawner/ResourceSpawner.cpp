@@ -19,6 +19,7 @@
 #include "server/zone/objects/player/sui/listbox/SuiListBox.h"
 #include "server/zone/objects/player/sessions/survey/SurveySession.h"
 #include "server/zone/managers/stringid/StringIdManager.h"
+#include "engine/log/Logger.h"
 
 ResourceSpawner::ResourceSpawner(ManagedReference<ZoneServer*> serv,
 		ZoneProcessServer* impl) {
@@ -372,6 +373,7 @@ void ResourceSpawner::shiftResources() {
 	manualPool->update();
 
 	dumpResources();
+	ghDumpAll();
 }
 
 ResourceSpawn* ResourceSpawner::createRecycledResourceSpawn(const ResourceTreeEntry* entry) const {
@@ -828,19 +830,25 @@ void ResourceSpawner::sendSurvey(CreatureObject* player, const String& resname) 
 	int toolRange = surveyTool->getRange(player);
 	int points = surveyTool->getPoints();
 
-	if (toolRange > 1024 || toolRange < 0)
-		toolRange = 320;
+	bool onlyGetMaxDensityLocation = false;
 
-	if (points <= 0 || points > 6)
-		points =  3;
+	// HEAVILY MODDED SURVEY METHOD BELOW FOR PROJECT CARBONITE
+	// We're not returning the points to the client when searching above 2k so this is ok to do!
+	if (toolRange >= 2000) {
+		onlyGetMaxDensityLocation = true;
+		points = 100;
+		toolRange += 1;
+	}
 
 	float spacer = float(toolRange) / float(points - 1);
-
-	float posX = player->getPositionX() - (((points - 1) / 2.0f) * spacer);
-	float posY = player->getPositionY() + (((points - 1) / 2.0f) * spacer);
+	float rangeMod = ((points-1) / 2.0f);
+	float posX = player->getPositionX() - (rangeMod * spacer);
+	float posY = player->getPositionY() + (rangeMod * spacer);
 
 	float maxDensity = -1;
 	float maxX = 0, maxY = 0;
+	int counted = 0;
+	int totalIter = 0;
 
 	for (int i = 0; i < points; i++) {
 		for (int j = 0; j < points; j++) {
@@ -853,14 +861,30 @@ void ResourceSpawner::sendSurvey(CreatureObject* player, const String& resname) 
 				maxY = posY;
 			}
 
-			surveyMessage->add(posX, posY, density);
-
+			// Do not return 100x100 to the client when searching above 2k!
+			if (!onlyGetMaxDensityLocation){
+				surveyMessage->add(posX, posY, density);
+			} else {
+				// Can achieve 10x10 with this piece
+				//if (((xIter % 10) == 0) && ((yIter % 10) == 0)){ // getting very first position AND very last
+				if (totalIter % 10 == 0){ // getting very first position AND very last
+					surveyMessage->add(posX, posY, density);
+					counted++;
+				}	
+			}	
+			totalIter++;
 			posX += spacer;
 		}
 
 		posY -= spacer;
 		posX -= (points * spacer);
 	}
+
+	// Returning only the highest density in a 100x100 grid of 2k or 5k
+	// Do NOT return an empty survey message, the game WILL crash!!!
+	// if (onlyGetMaxDensityLocation){
+	// 	surveyMessage->add(maxX, maxY, maxDensity);
+	// }
 
 	ManagedReference<WaypointObject*> waypoint = nullptr;
 
@@ -875,8 +899,11 @@ void ResourceSpawner::sendSurvey(CreatureObject* player, const String& resname) 
 
 		Locker locker(waypoint);
 
+		// Figure out the % value with a floating decimal of 2 places
+		float getDoublePrecFloatMax = Math::getPrecision((maxDensity * 100), 2);
+
 		// Update new waypoint
-		waypoint->setCustomObjectName(UnicodeString("Resource Survey"), false);
+		waypoint->setCustomObjectName(UnicodeString("Resource Survey Density: " + String::valueOf(getDoublePrecFloatMax) + "%"), false);
 		waypoint->setPlanetCRC(player->getZone()->getZoneCRC());
 		waypoint->setPosition(maxX, 0, maxY);
 		waypoint->setColor(WaypointObject::COLOR_BLUE);
@@ -975,12 +1002,12 @@ void ResourceSpawner::sendSampleResults(TransactionLog& trx, CreatureObject* pla
 		return;
 	}
 
-	Coordinate* richSampleLocation = session->getRichSampleLocation();
+	// Coordinate* richSampleLocation = session->getRichSampleLocation();
 
 	float sampleRate = (surveySkill * density) + System::random(100) + player->getSkillMod("private_spec_samplerate");
 
 	// Was the sample successful or not
-	if (!session->tryGamble() && richSampleLocation == nullptr && sampleRate < 40) {
+	if (!session->tryGamble() && sampleRate < 40) { //richSampleLocation == nullptr && sampleRate < 40) {
 		StringIdChatParameter message("survey", "sample_failed");
 		message.setTO(resname);
 		player->sendSystemMessage(message);
@@ -995,32 +1022,35 @@ void ResourceSpawner::sendSampleResults(TransactionLog& trx, CreatureObject* pla
 	int unitsExtracted = maxUnitsExtracted * (float(surveySkill) / 100.0f) * samplingMultiplier * cityMultiplier;
 	int xpcap = 40;
 
-	if (session->tryGamble()) {
-		if (System::random(2) == 1) {
-			player->sendSystemMessage("@survey:gamble_success");
-			unitsExtracted *= 5;
-		} else {
-			player->sendSystemMessage("@survey:gamble_fail");
-		}
-		session->clearGamble();
-		xpcap = 50;
-	}
+	// Double Sampling Rates
+	unitsExtracted *= 2;
 
-	if (richSampleLocation != nullptr && richSampleLocation->getPosition() != Vector3(0, 0, 0)) {
+	// if (session->tryGamble()) {
+	// 	if (System::random(2) == 1) {
+	// 		player->sendSystemMessage("@survey:gamble_success");
+	// 		unitsExtracted *= 5;
+	// 	} else {
+	// 		player->sendSystemMessage("@survey:gamble_fail");
+	// 	}
+	// 	session->clearGamble();
+	// 	xpcap = 50;
+	// }
 
-		if (player->getDistanceTo(richSampleLocation) < 10) {
+	// if (richSampleLocation != nullptr && richSampleLocation->getPosition() != Vector3(0, 0, 0)) {
 
-			player->sendSystemMessage("@survey:node_recovery");
-			unitsExtracted *= 5;
+	// 	if (player->getDistanceTo(richSampleLocation) < 10) {
 
-		} else {
+	// 		player->sendSystemMessage("@survey:node_recovery");
+	// 		unitsExtracted *= 5;
 
-			player->sendSystemMessage("@survey:node_not_close");
-		}
+	// 	} else {
 
-		session->clearRichSampleLocation();
-		xpcap = 50;
-	}
+	// 		player->sendSystemMessage("@survey:node_not_close");
+	// 	}
+
+	// 	session->clearRichSampleLocation();
+	// 	xpcap = 50;
+	// }
 
 	if (unitsExtracted < 2) {
 
@@ -1299,4 +1329,107 @@ String ResourceSpawner::healthCheck() {
 	health << manualPool->healthCheck() << endl;
 
 	return health.toString();
+}
+
+bool ResourceSpawner::ghDumpAll() {
+	/* This is custom code written to export resources in a way that an additional script can easily push them to Galaxy Harvester -c0pp3r */
+	if(!scriptLoading)
+		return false;
+	planets =  new Vector<String> ();
+	planets->add("corellia");
+	planets->add("dantooine");
+	planets->add("dathomir");
+	planets->add("endor");
+	planets->add("lok");
+	planets->add("naboo");
+	planets->add("rori");
+	planets->add("talus");
+	planets->add("tatooine");
+	planets->add("yavin4");
+	//String planets = "corellia";
+
+	try {
+		File* ghfile = new File("scripts/managers/ghoutput.xml");
+		
+		FileWriter* ghwriter = new FileWriter(ghfile);
+		ghwriter->writeLine("<SpawnOutput>");		
+		int last = 0;
+
+		for(int i = 0; i < resourceMap->size(); ++i) {
+
+			ManagedReference<ResourceSpawn*> spawn = resourceMap->get(i);
+
+			uint64 despawned = spawn->getDespawned();
+			uint64 currTime = System::getTime();
+
+			int diff = 0;
+			int inPhase = 0;
+			if(despawned > currTime) {
+				diff = despawned - currTime;
+			} else {
+				diff = currTime - despawned;
+			}
+			if(despawned > currTime) {
+				inPhase = 1;
+			}
+			if(String::valueOf(inPhase) == "1") {
+				for(int j = 0; j < planets->size(); ++j){
+					ZoneResourceMap* zoneMap = resourceMap->getZoneResourceList(planets->get(j));
+
+					// Making this code a lot less brittle, and allowing planets to be disabled or errors to exist in the planets array
+					if (zoneMap == nullptr){
+						// warning("ZoneMap is NULL for " + planets->get(j) + "!!!");
+						continue; // skip this planet's zonemap as it's empty or not declared!
+					}
+
+					ManagedReference<ResourceSpawn*> resourceSpawn;
+					/*ghwriter->writeLine("<resource>");*/
+					for (int b = 0; b< zoneMap->size(); ++b) {
+						resourceSpawn = zoneMap->get(b);
+						if (spawn->getName() == resourceSpawn->getName()){
+							ghwriter->writeLine("<resource>");
+							ghwriter->write("<SpawnName>");
+							ghwriter->write(spawn->getName());
+							ghwriter->writeLine("</SpawnName>");
+							ghwriter->write("<resType>");
+							for(int i = 0; i < 8; ++i) {
+								String spawnClass = spawn->getClass(i);
+								if(spawnClass != "") {
+									last = i;
+									String spawnClass2 = spawn->getStfClass(i);
+								}
+							}
+							ghwriter->write(spawn->getStfClass(last));
+							ghwriter->writeLine("</resType>");
+							//ghwriter->writeLine("<attributes>");
+							for(int i = 0; i < 12; ++i) {
+								String attribute = "";
+								int value = spawn->getAttributeAndValue(attribute, i);
+								if(attribute != "") {
+									ghwriter->writeLine("<attribute name=\"" + attribute + "\">" + String::valueOf(value) + "</attribute>");
+								}
+							}
+							//ghwriter->writeLine("</attributes>");
+							ghwriter->write("<planet>");
+							ghwriter->write(planets->get(j));
+							ghwriter->writeLine("</planet>");
+							ghwriter->writeLine("</resource>");
+							ghwriter->writeLine("");
+						}
+					}
+				}
+			}
+		
+		}
+		ghwriter->writeLine("</SpawnOutput>");
+		ghwriter->close();
+
+		delete ghwriter;
+
+		return true;
+	} catch (Exception& e) {
+		error("Error dumping resources");
+			return false;
+	}
+	return true;
 }

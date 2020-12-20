@@ -26,6 +26,7 @@ admin_general_admin_01 = {
 		"invulnerable",
 		"kill",
 		"setSpeed",
+		"wardev"
 	},
 	skillModifiers = {},
 	schematicsGranted = {},

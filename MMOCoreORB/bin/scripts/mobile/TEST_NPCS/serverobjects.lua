@@ -1,0 +1,7 @@
+includeFile("TEST_NPCS/TEST1_worrt.lua")
+includeFile("TEST_NPCS/TEST2_worrt.lua")
+includeFile("TEST_NPCS/TEST3_worrt.lua")
+includeFile("TEST_NPCS/TEST4_worrt.lua")
+includeFile("TEST_NPCS/TEST5_janta.lua")
+includeFile("TEST_NPCS/TEST6_ns_elder.lua")
+includeFile("TEST_NPCS/TEST7_acklay.lua")

@@ -44,27 +44,27 @@
 object_tangible_food_crafted_drink_mandalorian_wine = object_tangible_food_crafted_shared_drink_mandalorian_wine:new {
 	templateType = CONSUMABLE,
 	
-	duration = 45,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,
+	filling = 35,
+	nutrition = 500,
 
 	effectType = 1,
 	
-	fillingMin = 71,
-	fillingMax = 47,
+	fillingMin = 60,
+	fillingMax = 35,
 	
-	flavorMin = 360,
-	flavorMax = 720,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
 	
-	nutritionMin = 370,
-	nutritionMax = 600,
+	nutritionMin = 250,
+	nutritionMax = 500,
 	quantityMin = 1,
 	quantityMax = 6,
 
 	modifiers = { "constitution", 0, "stamina", 0, "willpower", 0 },
 
 	buffName = "food.drink_mandalorian_wine",
-	buffCRC = 0,
+	buffCRC = 0xDC5D4FD9,
 	speciesRestriction = "",
 
 

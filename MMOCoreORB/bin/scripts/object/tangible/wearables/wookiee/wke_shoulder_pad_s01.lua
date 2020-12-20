@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_wookiee_wke_shoulder_pad_s01 = object_tangible_wearables_wookiee_shared_wke_shoulder_pad_s01:new {
+	objectMenuComponent = "ArmorObjectMenuComponent",
 	playerRaces = { "object/creature/player/wookiee_male.iff",
 				"object/creature/player/wookiee_female.iff",
 				"object/mobile/vendor/wookiee_female.iff",

@@ -44,22 +44,25 @@
 object_tangible_food_crafted_drink_blue_milk = object_tangible_food_crafted_shared_drink_blue_milk:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
-	filling = 10,
-	nutrition = 10,
+	duration = 30,
+	filling = 75,
+	nutrition = 5000,
 
-	effectType = 6,
+	effectType = 1,
 
-	fillingMin = 36,
-	fillingMax = 22,
-	flavorMin = 0,
-	flavorMax = 0,
-	nutritionMin = 295,
-	nutritionMax = 495,
-	quantityMin = 4,
-	quantityMax = 7,
+	fillingMin = 100,
+	fillingMax = 70,
 
-	modifiers = { "mind", 0 },
+	flavorMin = 120,	-- Duration
+	flavorMax = 120,
+
+	nutritionMin = 2665,
+	nutritionMax = 5000,
+	quantityMin = 1,
+	quantityMax = 5,
+
+	-- modifiers = { "mind", 0 },
+	modifiers = { "willpower", 0 },
 
 	buffName = "",
 	buffCRC = 0,

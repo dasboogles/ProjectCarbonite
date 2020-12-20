@@ -44,12 +44,12 @@
 ScatterShot2Command = {
         name = "scattershot2",
 
-	damageMultiplier = 5.0,
+	damageMultiplier = 5.75,
 	speedMultiplier = 2.0,
 	healthCostMultiplier = 2.0,
 	actionCostMultiplier = 1.25,
 	mindCostMultiplier = 0.5,
-	accuracyBonus = 25,
+	accuracyBonus = 30,
 
 	animation = "fire_5_single", 
 	animType = GENERATE_RANGED,

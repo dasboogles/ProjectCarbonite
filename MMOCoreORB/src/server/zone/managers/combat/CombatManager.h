@@ -47,6 +47,9 @@ public:
 	// hitLocations
 	enum HitLocations { HIT_NONE, HIT_BODY, HIT_LARM, HIT_RARM, HIT_LLEG, HIT_RLEG, HIT_HEAD };
 
+	// Armor Re-Allocation
+	bool isChestOnly = true;
+
 	//Mitigation types
 	const static int PSG = 0x1;
 	const static int FORCESHIELD = 0x02;

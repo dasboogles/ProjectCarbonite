@@ -104,21 +104,23 @@ object_tangible_wearables_armor_stormtrooper_armor_stormtrooper_chest_plate_camo
 	vulnerability = LIGHTSABER,
 
 	-- These are default Blue Frog stats
-	healthEncumbrance = 1,
-	actionEncumbrance = 1,
-	mindEncumbrance = 1,
+	healthEncumbrance = 200,
+	actionEncumbrance = 200,
+	mindEncumbrance = 200,
 
 	-- LIGHT, MEDIUM, HEAVY
 	rating = LIGHT,
 
-	kinetic = 15,
-	energy = 15,
-	electricity = 15,
-	stun = 15,
-	blast = 15,
-	heat = 15,
-	cold = 15,
-	acid = 15,
+	maxCondition = 50000,
+
+	kinetic = 45,
+	energy = 45,
+	electricity = 45,
+	stun = 10,
+	blast = 45,
+	heat = 45,
+	cold = 45,
+	acid = 45,
 	lightSaber = 0
 }
 

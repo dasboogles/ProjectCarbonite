@@ -230,3 +230,6 @@ includeFile("draft_schematic/chemistry/medpack_wound_strength_d.lua")
 includeFile("draft_schematic/chemistry/medpack_wound_strength_e.lua")
 includeFile("draft_schematic/chemistry/quest_stimpack_a.lua")
 includeFile("draft_schematic/chemistry/stimpack_sm_s1.lua")
+
+-- Custom below here
+includeFile("draft_schematic/chemistry/medpack_enhance_omni.lua")

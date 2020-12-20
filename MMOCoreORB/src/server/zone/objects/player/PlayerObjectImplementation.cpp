@@ -255,6 +255,9 @@ void PlayerObjectImplementation::unload() {
 	MissionManager* missionManager = creature->getZoneServer()->getMissionManager();
 	missionManager->deactivateMissions(creature);
 
+	// Most likely moved to the SetLinkDead() method down below?
+	// notifyOffline(); // Not sure what this does but was added during Carbonite -> Latest Merge?
+
 	if (creature->isRidingMount()) {
 		creature->executeObjectControllerAction(STRING_HASHCODE("dismount"));
 	}
@@ -431,12 +434,41 @@ void PlayerObjectImplementation::notifySceneReady() {
 		}
 	}
 
+	//Join the faction chat rooms
+	switch (creature->getFaction())
+	{
+		case Factions::FACTIONIMPERIAL:
+			{
+				ManagedReference<ChatRoom*> chat = FactionManager::instance()->getImperialChat();
+				chat->sendTo(creature);
+				chatManager->handleChatEnterRoomById(creature, chat->getRoomID(), -1, true);
+// for gcw frs reporting wip
+				chat = FactionManager::instance()->getPvpNotificationChat();
+				chat->sendTo(creature);
+				chatManager->handleChatEnterRoomById(creature, chat->getRoomID(), -1, true);
+			}
+			break;
+		case Factions::FACTIONREBEL:
+			{
+				ManagedReference<ChatRoom*> chat = FactionManager::instance()->getRebelChat();
+				chat->sendTo(creature);
+				chatManager->handleChatEnterRoomById(creature, chat->getRoomID(), -1, true);
+// for gcw/frs reporting wip
+				chat = FactionManager::instance()->getPvpNotificationChat();
+				chat->sendTo(creature);
+				chatManager->handleChatEnterRoomById(creature, chat->getRoomID(), -1, true);
+			}
+			break;
+		default:
+			break;
+	}
+
 	//Re-join chat rooms player was a member of before disconnecting.
 	for (int i = chatRooms.size() - 1; i >= 0; i--) {
 		ChatRoom* room = chatManager->getChatRoom(chatRooms.get(i));
 		if (room != nullptr) {
 			int roomType = room->getChatRoomType();
-			if (roomType == ChatRoom::PLANET || roomType == ChatRoom::GUILD)
+			if (roomType == ChatRoom::PLANET || roomType == ChatRoom::GUILD || roomType == ChatRoom::PVP)
 				continue; //Planet and Guild are handled above.
 
 			room->sendTo(creature);
@@ -1658,6 +1690,14 @@ void PlayerObjectImplementation::increaseFactionStanding(const String& factionNa
 	if (player == nullptr)
 		return;
 
+	// --------- Ent Bonus Section ---------
+	float EntBuffBonus = 1.0f;
+	EntBuffBonus += (((float)player->getSkillMod("music_will_buff"))/100);
+
+	// Buff increased faction standing for missions, or special rewards!
+	amount *= EntBuffBonus;
+	// --------- Ent Bonus Section ---------
+
 	//Get the current amount of faction standing
 	float currentAmount = factionStandingList.getFactionStanding(factionName);
 
@@ -1866,12 +1906,13 @@ void PlayerObjectImplementation::doRecovery(int latency) {
 		Time currentTime;
 
 		int timeDelta = currentTime.getMiliTime() - lastDigestion.getMiliTime();
-		int fillingReduction = timeDelta / 18000;
+		int timeToReduce = 9000; // from 30minutes -> 10minutes for filling to be digested from 100% 
+		int fillingReduction = timeDelta / timeToReduce;
 
 		doDigest(fillingReduction);
 
 		lastDigestion.updateToCurrentTime();
-		cooldownTimerMap->updateToCurrentAndAddMili("digestEvent", 18000);
+		cooldownTimerMap->updateToCurrentAndAddMili("digestEvent", timeToReduce);
 	}
 
 	if (isOnline()) {
@@ -2299,7 +2340,7 @@ void PlayerObjectImplementation::doForceRegen() {
 		Reference<ForceMeditateTask*> medTask = creature->getPendingTask("forcemeditate").castTo<ForceMeditateTask*>();
 
 		if (medTask != nullptr)
-			modifier = 3;
+			modifier = 5; // Buffed from 3x -> 5x
 	}
 
 	uint32 forceTick = tick * modifier;
@@ -2897,11 +2938,12 @@ void PlayerObjectImplementation::doFieldFactionChange(int newStatus) {
 	inputbox->setPromptTitle("@gcw:gcw_status_change"); // GCW STATUS CHANGE CONFIRMATION
 	inputbox->setUsingObject(asPlayerObject());
 	inputbox->setCancelButton(true, "@cancel");
+	String overtMsg = "You are changing your GCW Status to 'Special Forces'. This transition will take 30 seconds. It will allow you to attack and be attacked by hostile players and NPC's. Type YES in this box to confirm the change.";
 
 	if (newStatus == FactionStatus::COVERT) {
 		inputbox->setPromptText("@gcw:gcw_status_change_covert"); // You are changing your GCW Status to 'Combatant'. This transition will take 30 seconds. It will allow you to attack and be attacked by enemy NPC's. Type YES in this box to confirm the change.
 	} else if (newStatus == FactionStatus::OVERT) {
-		inputbox->setPromptText("@gcw:gcw_status_change_overt"); // You are changing your GCW Status to 'Special Forces'. This transition will take 5 minutes. It will allow you to attack and be attacked by hostile players and NPC's.Type YES in this box to confirm the change.
+		inputbox->setPromptText(overtMsg); // You are changing your GCW Status to 'Special Forces'. This transition will take 5 minutes. It will allow you to attack and be attacked by hostile players and NPC's.Type YES in this box to confirm the change.
 	}
 
 	addSuiBox(inputbox);

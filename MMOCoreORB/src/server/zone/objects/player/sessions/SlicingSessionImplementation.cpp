@@ -44,6 +44,9 @@ int SlicingSessionImplementation::initializeSession() {
 	baseSlice = false;
 	keypadSlice = false;
 
+	selectedSliceType = "none";
+	isSelectingType = false;
+
 	return 0;
 }
 
@@ -125,7 +128,7 @@ void SlicingSessionImplementation::generateSliceMenu(SuiListBox* suiBox) {
 	prompt << "@slicing/slicing:";
 	prompt << getPrefix(tangibleObject);
 
-	if (progress == 0) {
+	if (progress == 0 && !isSelectingType) {
 		if (usedClamp)
 			prompt << "clamp_" << firstCable;
 		else if (usedNode)
@@ -139,6 +142,9 @@ void SlicingSessionImplementation::generateSliceMenu(SuiListBox* suiBox) {
 		if (!usedClamp && !usedNode) {
 			suiBox->addMenuItem("@slicing/slicing:use_clamp", 2);
 			suiBox->addMenuItem("@slicing/slicing:use_analyzer", 3);
+			if (selectedSliceType == "none"){
+				suiBox->addMenuItem("Choose your slice.", 4);
+			}
 		}
 
 	} else if (progress == 1) {
@@ -146,6 +152,17 @@ void SlicingSessionImplementation::generateSliceMenu(SuiListBox* suiBox) {
 
 		suiBox->addMenuItem((cableBlue) ? "@slicing/slicing:blue_cable_cut" : "@slicing/slicing:blue_cable", 0);
 		suiBox->addMenuItem((cableRed) ? "@slicing/slicing:red_cable_cut" : "@slicing/slicing:red_cable", 1);
+	} else if (isSelectingType == true) {
+		if (tangibleObject->isWeaponObject()) {
+			suiBox->addMenuItem("Damage Slice", 5);
+			suiBox->addMenuItem("Speed Slice", 6);
+		}
+
+		if (tangibleObject->isArmorObject()) {
+			suiBox->addMenuItem("Effectiveness", 7);
+			suiBox->addMenuItem("Encumberance", 8);
+		}
+
 	}
 
 	suiBox->setPromptText(prompt.toString());
@@ -204,6 +221,45 @@ void SlicingSessionImplementation::handleMenuSelect(CreatureObject* pl, byte men
 			handleUseFlowAnalyzer(); // Handle Use of Flow Analyzer
 			break;
 		}
+		case 4: {
+			// handleSliceSelection(); // Handle Slice Selection
+			if (!isSelectingType){
+				isSelectingType = true;
+			}
+			break;
+		}
+		case 5: {
+			// Weapon Damage Slice
+			selectedSliceType = "weaponDamage";
+			if (isSelectingType){
+				isSelectingType = false;
+			}
+			break;
+		}
+		case 6: {
+			// Weapon Speed Slice
+			selectedSliceType = "weaponSpeed";
+			if (isSelectingType){
+				isSelectingType = false;
+			}
+			break;
+		}
+		case 7: {
+			// Armor Effectiveness Slice
+			selectedSliceType = "armorEff";
+			if (isSelectingType){
+				isSelectingType = false;
+			}
+			break;
+		}
+		case 8: {
+			// Armor Encumberance Slice
+			selectedSliceType = "armorEnc";
+			if (isSelectingType){
+				isSelectingType = false;
+			}
+			break;
+		}
 		default:
 			cancelSession();
 			break;
@@ -233,7 +289,7 @@ void SlicingSessionImplementation::endSlicing() {
 	}
 
 	if (tangibleObject->isMissionTerminal())
-		player->addCooldown("slicing.terminal", (2 * (60 * 1000))); // 2min Cooldown
+		player->addCooldown("slicing.terminal", (2 * (5 * 1000))); // 2min Cooldown changed to 10 second coolddown!
 
 	cancelSession();
 
@@ -448,6 +504,7 @@ void SlicingSessionImplementation::handleUseFlowAnalyzer() {
 void SlicingSessionImplementation::handleSlice(SuiListBox* suiBox) {
 	ManagedReference<CreatureObject*> player = this->player.get();
 	ManagedReference<TangibleObject*> tangibleObject = this->tangibleObject.get();
+	int bonusSlicingMultiplier = 3;
 
 	if (player == nullptr || tangibleObject == nullptr)
 		return;
@@ -470,20 +527,20 @@ void SlicingSessionImplementation::handleSlice(SuiListBox* suiBox) {
 
 	if (tangibleObject->isContainerObject() || tangibleObject->getGameObjectType() == SceneObjectType::PLAYERLOOTCRATE) {
 		handleContainerSlice();
-		playerManager->awardExperience(player, "slicing", 250, true); // Container Slice XP
+		playerManager->awardExperience(player, "slicing", (250 * bonusSlicingMultiplier), true); // Container Slice XP
 	} else if (tangibleObject->isMissionTerminal()) {
 		MissionTerminal* term = cast<MissionTerminal*>( tangibleObject.get());
-		playerManager->awardExperience(player, "slicing", 100, true); // Terminal Slice XP
+		playerManager->awardExperience(player, "slicing", (100 * bonusSlicingMultiplier), true); // Terminal Slice XP
 		term->addSlicer(player);
 		player->sendSystemMessage("@slicing/slicing:terminal_success");
 	} else if (tangibleObject->isWeaponObject()) {
 		handleWeaponSlice();
-		playerManager->awardExperience(player, "slicing", 250, true); // Weapon Slice XP
+		playerManager->awardExperience(player, "slicing", (250 * bonusSlicingMultiplier), true); // Weapon Slice XP
 	} else if (tangibleObject->isArmorObject()) {
 		handleArmorSlice();
-		playerManager->awardExperience(player, "slicing", 250, true); // Armor Slice XP
+		playerManager->awardExperience(player, "slicing", (250 * bonusSlicingMultiplier), true); // Armor Slice XP
 	} else if ( isBaseSlice()){
-		playerManager->awardExperience(player,"slicing", 1000, true); // Base slicing
+		playerManager->awardExperience(player,"slicing", (1000 * bonusSlicingMultiplier), true); // Base slicing
 
 		Zone* zone = player->getZone();
 
@@ -524,7 +581,7 @@ void SlicingSessionImplementation::handleWeaponSlice() {
 		max += 5;
 	case 3:
 	case 2:
-		min += 10;
+		min += 5;
 		max += 25;
 		break;
 	default:
@@ -532,15 +589,36 @@ void SlicingSessionImplementation::handleWeaponSlice() {
 
 	}
 
+	// If a random slice, increase min/max to reward player
+	if (selectedSliceType == "none"){
+		min += 10;
+		max += 10;
+	}
+
 	uint8 percentage = System::random(max - min) + min;
 
-	switch(System::random(1)) {
-	case 0:
+	// Make sure we can't over-roll
+	if (percentage > max){
+		percentage = max;
+	}
+
+	player->sendSystemMessage(" \\#C7DB00\\Your Maximum allowed slice is: \\#ff0000" + String::valueOf(max));
+	player->sendSystemMessage(" \\#C7DB00\\Your Minimum allowed slice is: \\#ff0000" + String::valueOf(min));
+	player->sendSystemMessage(" \\#C7DB00\\Your Slice roll is: \\#ff0000" + String::valueOf(percentage));
+
+	if (selectedSliceType == "none"){
+		switch(System::random(1)) {
+		case 0:
+			handleSliceDamage(percentage);
+			break;
+		case 1:
+			handleSliceSpeed(percentage);
+			break;
+		}
+	} else if (selectedSliceType == "weaponDamage"){
 		handleSliceDamage(percentage);
-		break;
-	case 1:
+	} else if (selectedSliceType == "weaponSpeed"){
 		handleSliceSpeed(percentage);
-		break;
 	}
 }
 
@@ -638,15 +716,36 @@ void SlicingSessionImplementation::handleArmorSlice() {
 		return;
 	}
 
+	// If a random slice, increase min/max to reward player
+	if (selectedSliceType == "none"){
+		min += 10;
+		max += 5;
+	}
+
 	uint8 percent = System::random(max - min) + min;
 
-	switch (sliceType) {
-	case 0:
+	// Make sure we can't over-roll
+	if (percent > max){
+		percent = max;
+	}
+
+	player->sendSystemMessage(" \\#C7DB00\\Your Maximum allowed slice is: \\#ff0000" + String::valueOf(max));
+	player->sendSystemMessage(" \\#C7DB00\\Your Minimum allowed slice is: \\#ff0000" + String::valueOf(min));
+	player->sendSystemMessage(" \\#C7DB00\\Your Slice roll is: \\#ff0000" + String::valueOf(percent));
+
+	if (selectedSliceType == "none"){
+		switch (sliceType) {
+		case 0:
+			handleSliceEffectiveness(percent);
+			break;
+		case 1:
+			handleSliceEncumbrance(percent);
+			break;
+		}
+	} else if (selectedSliceType == "armorEff"){
 		handleSliceEffectiveness(percent);
-		break;
-	case 1:
+	} else if (selectedSliceType == "armorEnc"){
 		handleSliceEncumbrance(percent);
-		break;
 	}
 }
 

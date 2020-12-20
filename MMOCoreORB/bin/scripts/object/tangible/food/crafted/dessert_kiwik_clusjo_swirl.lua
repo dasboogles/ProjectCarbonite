@@ -44,18 +44,18 @@
 object_tangible_food_crafted_dessert_kiwik_clusjo_swirl = object_tangible_food_crafted_shared_dessert_kiwik_clusjo_swirl:new {
 	templateType = CONSUMABLE,
 
-	duration = 45,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,	-- Duration
+	filling = 35,	 	-- Filling
+	nutrition = 650, 	-- Buff Amount
 
 	effectType = 1,
 
-	fillingMin = 41,
-	fillingMax = 28,
-	flavorMin = 450,
-	flavorMax = 1050,
-	nutritionMin = 225,
-	nutritionMax = 375,
+	fillingMin = 65,	-- Filling
+	fillingMax = 35,	-- Filling
+	flavorMin = 1800,	-- Duration	-- Duration
+	flavorMax = 5400,	-- Duration
+	nutritionMin = 375,	-- Buff Amount
+	nutritionMax = 650,	-- Buff Amount
 	quantityMin = 6,
 	quantityMax = 10,
 

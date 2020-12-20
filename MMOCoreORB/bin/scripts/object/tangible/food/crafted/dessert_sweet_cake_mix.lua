@@ -44,7 +44,7 @@
 object_tangible_food_crafted_dessert_sweet_cake_mix = object_tangible_food_crafted_shared_dessert_sweet_cake_mix:new {
 	templateType = CONSUMABLE,
 
-	duration = 0,
+	duration = 3600,
 	filling = 0,
 	nutrition = 0,
 

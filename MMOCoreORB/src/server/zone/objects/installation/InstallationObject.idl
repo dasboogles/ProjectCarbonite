@@ -61,7 +61,7 @@ class InstallationObject extends StructureObject {
 
 		operatorList.setNoDuplicateInsertPlan();
 
-		hopperSizeMax = 10000;
+		hopperSizeMax = 100000;
 		extractionRate = 100;
 		spawnDensity = 0;
 	}
