@@ -255,8 +255,8 @@ void MissionManagerImplementation::handleMissionAccept(MissionTerminal* missionT
 		}
 	}
 
-	//Limit to two missions (only one of them can be a bounty mission)
-	if (missionCount >= 2 || (hasBountyMission && mission->getTypeCRC() == MissionTypes::BOUNTY)) {
+	//Limit to five missions (only one of them can be a bounty mission)
+	if (missionCount >= 5 || (hasBountyMission && mission->getTypeCRC() == MissionTypes::BOUNTY)) {
 		StringIdChatParameter stringId("mission/mission_generic", "too_many_missions");
 		player->sendSystemMessage(stringId);
 		return;
@@ -549,7 +549,25 @@ void MissionManagerImplementation::randomizeGeneralTerminalMissions(CreatureObje
 	SceneObject* missionBag = player->getSlottedObject("mission_bag");
 	int bagSize = missionBag->getContainerObjectsSize();
 
-	for (int i = 0; i < bagSize; ++i) {
+	//player->sendSystemMessage("Firing GenericTerminalMissions Code.");
+
+	// Refactored mission code to be more efficient
+	float entExpBonus = player->getSkillMod("dance_ent_buff");
+	//player->sendSystemMessage("Dancer Credit Bonus: " + String::valueOf(entExpBonus) + ".");
+	float cityBonus = 1.f + (player->getSkillMod("private_spec_missions") / 100.f);
+	//player->sendSystemMessage("CityBonus Pre-Dancer Credit Bonus Application: " + String::valueOf(cityBonus) + ".");
+	cityBonus += ((float)entExpBonus / 100);
+	//player->sendSystemMessage("CityBonus Post-Dancer Credit Bonus Application: " + String::valueOf(cityBonus) + ".");
+
+	//player->sendSystemMessage("Mission Bag Current Size: " + String::valueOf(bagSize));
+	//player->sendSystemMessage("MissionGenerationLimit: " + String::valueOf(missionGenerationLimit));
+
+	// Just in case this was done intentionally, we'll still have a lower limit dependent on bagsize
+	if (bagSize < missionGenerationLimit) {
+		missionGenerationLimit = bagSize;
+	}
+
+	for (int i = 0; i < missionGenerationLimit; i++) {
 		Reference<MissionObject*> mission = missionBag->getContainerObject(i).castTo<MissionObject*>( );
 
 		Locker locker(mission);
@@ -557,17 +575,18 @@ void MissionManagerImplementation::randomizeGeneralTerminalMissions(CreatureObje
 		//Clear mission type before calling mission generators.
 		mission->setTypeCRC(0);
 
-		if (i < 6) {
-			randomizeGenericDestroyMission(player, mission, Factions::FACTIONNEUTRAL);
-		} else if (i < 12) {
-			randomizeGenericDeliverMission(player, mission, Factions::FACTIONNEUTRAL);
-		}
+		// if (i < 6) {
+		// 	randomizeGenericDestroyMission(player, mission, Factions::FACTIONNEUTRAL);
+		// } else if (i < 12) {
+		// 	randomizeGenericDeliverMission(player, mission, Factions::FACTIONNEUTRAL);
+		// }
+
+		randomizeGenericDestroyMission(player, mission, Factions::FACTIONNEUTRAL);
 
 		if (slicer) {
 			mission->setRewardCredits(mission->getRewardCredits() * 1.5);
 		}
 
-		float cityBonus = 1.f + player->getSkillMod("private_spec_missions") / 100.f;
 		mission->setRewardCredits(mission->getRewardCredits() * cityBonus);
 
 		mission->setRefreshCounter(counter, true);
@@ -578,25 +597,34 @@ void MissionManagerImplementation::randomizeArtisanTerminalMissions(CreatureObje
 	SceneObject* missionBag = player->getSlottedObject("mission_bag");
 	int bagSize = missionBag->getContainerObjectsSize();
 
-	for (int i = 0; i < bagSize; ++i) {
+	// Refactored mission code to be more efficient
+	float entExpBonus = player->getSkillMod("dance_ent_buff");
+	float cityBonus = 1.f + (player->getSkillMod("private_spec_missions") / 100.f);
+	cityBonus += ((float)entExpBonus / 100);
+
+	// Just in case this was done intentionally, we'll still have a lower limit dependent on bagsize
+	if (bagSize < missionGenerationLimit) {
+		missionGenerationLimit = bagSize;
+	}
+
+	for (int i = 0; i < missionGenerationLimit; i++) {
 		Reference<MissionObject*> mission = missionBag->getContainerObject(i).castTo<MissionObject*>( );
 
 		Locker locker(mission);
 
 		//Clear mission type before calling mission generators.
 		mission->setTypeCRC(0);
-
-		if (i < 6) {
-			randomizeGenericSurveyMission(player, mission, Factions::FACTIONNEUTRAL);
-		} else if (i < 12) {
-			randomizeGenericCraftingMission(player, mission, Factions::FACTIONNEUTRAL);
-		}
+		randomizeGenericSurveyMission(player, mission, Factions::FACTIONNEUTRAL);
+		// if (i < 6) {
+		// 	randomizeGenericSurveyMission(player, mission, Factions::FACTIONNEUTRAL);
+		// } else if (i < 12) {
+		// 	randomizeGenericCraftingMission(player, mission, Factions::FACTIONNEUTRAL);
+		// }
 
 		if (slicer) {
 			mission->setRewardCredits(mission->getRewardCredits() * 1.5);
 		}
 
-		float cityBonus = 1.f + player->getSkillMod("private_spec_missions") / 100.f;
 		mission->setRewardCredits(mission->getRewardCredits() * cityBonus);
 
 		mission->setRefreshCounter(counter, true);
@@ -607,25 +635,34 @@ void MissionManagerImplementation::randomizeEntertainerTerminalMissions(Creature
 	SceneObject* missionBag = player->getSlottedObject("mission_bag");
 	int bagSize = missionBag->getContainerObjectsSize();
 
-	for (int i = 0; i < bagSize; ++i) {
+	// Refactored mission code to be more efficient
+	float entExpBonus = player->getSkillMod("dance_ent_buff");
+	float cityBonus = 1.f + (player->getSkillMod("private_spec_missions") / 100.f);
+	cityBonus += ((float)entExpBonus / 100);
+
+	// Just in case this was done intentionally, we'll still have a lower limit dependent on bagsize
+	if (bagSize < missionGenerationLimit) {
+		missionGenerationLimit = bagSize;
+	}
+
+	for (int i = 0; i < missionGenerationLimit; i++) {
 		Reference<MissionObject*> mission = missionBag->getContainerObject(i).castTo<MissionObject*>( );
 
 		Locker locker(mission);
 
 		//Clear mission type before calling mission generators.
 		mission->setTypeCRC(0);
-
-		if (i < 6) {
-			randomizeGenericEntertainerMission(player, mission, Factions::FACTIONNEUTRAL, MissionTypes::DANCER);
-		} else if (i < 12) {
-			randomizeGenericEntertainerMission(player, mission, Factions::FACTIONNEUTRAL, MissionTypes::MUSICIAN);
-		}
+		randomizeGenericEntertainerMission(player, mission, Factions::FACTIONNEUTRAL, MissionTypes::DANCER);
+		// if (i < 6) {
+		// 	randomizeGenericEntertainerMission(player, mission, Factions::FACTIONNEUTRAL, MissionTypes::DANCER);
+		// } else if (i < 12) {
+		// 	randomizeGenericEntertainerMission(player, mission, Factions::FACTIONNEUTRAL, MissionTypes::MUSICIAN);
+		// }
 
 		if (slicer) {
 			mission->setRewardCredits(mission->getRewardCredits() * 1.5);
 		}
 
-		float cityBonus = 1.f + player->getSkillMod("private_spec_missions") / 100.f;
 		mission->setRewardCredits(mission->getRewardCredits() * cityBonus);
 
 		mission->setRefreshCounter(counter, true);
@@ -636,25 +673,36 @@ void MissionManagerImplementation::randomizeScoutTerminalMissions(CreatureObject
 	SceneObject* missionBag = player->getSlottedObject("mission_bag");
 	int bagSize = missionBag->getContainerObjectsSize();
 
-	for (int i = 0; i < bagSize; ++i) {
+	// Refactored mission code to be more efficient
+	float entExpBonus = player->getSkillMod("dance_ent_buff");
+	float cityBonus = 1.f + (player->getSkillMod("private_spec_missions") / 100.f);
+	cityBonus += ((float)entExpBonus / 100);
+
+	// Just in case this was done intentionally, we'll still have a lower limit dependent on bagsize
+	if (bagSize < missionGenerationLimit) {
+		missionGenerationLimit = bagSize;
+	}
+
+	for (int i = 0; i < missionGenerationLimit; i++) {
 		Reference<MissionObject*> mission = missionBag->getContainerObject(i).castTo<MissionObject*>( );
 
 		Locker locker(mission);
 
 		//Clear mission type before calling mission generators.
 		mission->setTypeCRC(0);
+		randomizeGenericReconMission(player, mission, Factions::FACTIONNEUTRAL);
 
-		if (i < 6) {
-			randomizeGenericReconMission(player, mission, Factions::FACTIONNEUTRAL);
-		} else if (i < 12) {
-			randomizeGenericHuntingMission(player, mission, Factions::FACTIONNEUTRAL);
-		}
+		// if (i < 6) {
+		// 	randomizeGenericReconMission(player, mission, Factions::FACTIONNEUTRAL);
+		// } else if (i < 12) {
+		// 	randomizeGenericHuntingMission(player, mission, Factions::FACTIONNEUTRAL);
+		// }
 
 		if (slicer) {
 			mission->setRewardCredits(mission->getRewardCredits() * 1.5);
 		}
 
-		float cityBonus = 1.f + player->getSkillMod("private_spec_missions") / 100.f;
+		// float cityBonus = 1.f + player->getSkillMod("private_spec_missions") / 100.f;
 		mission->setRewardCredits(mission->getRewardCredits() * cityBonus);
 
 		mission->setRefreshCounter(counter, true);
@@ -667,19 +715,30 @@ void MissionManagerImplementation::randomizeBountyTerminalMissions(CreatureObjec
 
 	Vector<ManagedReference<PlayerBounty*>> potentialTargets = getPotentialPlayerBountyTargets(player);
 
-	for (int i = 0; i < bagSize; ++i) {
+	// Refactored mission code to be more efficient
+	float entExpBonus = player->getSkillMod("dance_ent_buff");
+	float cityBonus = 1.f + (player->getSkillMod("private_spec_missions") / 100.f);
+	cityBonus += ((float)entExpBonus / 100);
+
+	// Just in case this was done intentionally, we'll still have a lower limit dependent on bagsize
+	if (bagSize < missionGenerationLimit) {
+		missionGenerationLimit = bagSize;
+	}
+
+	for (int i = 0; i < missionGenerationLimit; i++) {
 		Reference<MissionObject*> mission = missionBag->getContainerObject(i).castTo<MissionObject*>( );
 
 		Locker locker(mission);
 
 		//Clear mission type before calling mission generators.
 		mission->setTypeCRC(0);
+		randomizeGenericBountyMission(player, mission, Factions::FACTIONNEUTRAL, &potentialTargets);
 
-		if (i < 10) {
-			randomizeGenericBountyMission(player, mission, Factions::FACTIONNEUTRAL, &potentialTargets);
-		}
+		// if (i < 10) {
+		// 	randomizeGenericBountyMission(player, mission, Factions::FACTIONNEUTRAL, &potentialTargets);
+		// }
 
-		float cityBonus = 1.f + player->getSkillMod("private_spec_missions") / 100.f;
+		// float cityBonus = 1.f + player->getSkillMod("private_spec_missions") / 100.f;
 		mission->setRewardCredits(mission->getRewardCredits() * cityBonus);
 
 		mission->setRefreshCounter(counter, true);
@@ -695,39 +754,48 @@ void MissionManagerImplementation::randomizeFactionTerminalMissions(CreatureObje
 	int numberOfDancerMissions = 0;
 	int numberOfMusicianMissions = 0;
 
-	for (int i = 0; i < bagSize; ++i) {
+	// Refactored mission code to be more efficient
+	float entExpBonus = player->getSkillMod("dance_ent_buff");
+	float cityBonus = 1.f + (player->getSkillMod("private_spec_missions") / 100.f);
+	cityBonus += ((float)entExpBonus / 100);
+
+	// Just in case this was done intentionally, we'll still have a lower limit dependent on bagsize
+	if (bagSize < missionGenerationLimit) {
+		missionGenerationLimit = bagSize;
+	}
+
+	for (int i = 0; i < missionGenerationLimit; i++) {
 		Reference<MissionObject*> mission = missionBag->getContainerObject(i).castTo<MissionObject*>( );
 
 		Locker locker(mission);
 
 		//Clear mission type before calling mission generators.
 		mission->setTypeCRC(0);
-
-		if (i < 6) {
-			randomizeGenericDestroyMission(player, mission, faction);
-		} else if (i < 12) {
-			randomizeGenericDeliverMission(player, mission, faction);
-		} else {
-			if (enableFactionalCraftingMissions && numberOfCraftingMissions < 6) {
-				randomizeGenericCraftingMission(player, mission, faction);
-				numberOfCraftingMissions++;
-			} else if (enableFactionalReconMissions && numberOfReconMissions < 6) {
-				randomizeGenericReconMission(player, mission, faction);
-				numberOfReconMissions++;
-			} else if (enableFactionalEntertainerMissions && numberOfDancerMissions < 6) {
-				randomizeGenericEntertainerMission(player, mission, faction, MissionTypes::DANCER);
-				numberOfDancerMissions++;
-			} else if (enableFactionalEntertainerMissions && numberOfMusicianMissions < 6) {
-				randomizeGenericEntertainerMission(player, mission, faction, MissionTypes::MUSICIAN);
-				numberOfMusicianMissions++;
-			}
-		}
+		randomizeGenericDestroyMission(player, mission, faction);
+		// if (i < 6) {
+		// 	randomizeGenericDestroyMission(player, mission, faction);
+		// } else if (i < 12) {
+		// 	randomizeGenericDeliverMission(player, mission, faction);
+		// } else {
+		// 	if (enableFactionalCraftingMissions && numberOfCraftingMissions < 6) {
+		// 		randomizeGenericCraftingMission(player, mission, faction);
+		// 		numberOfCraftingMissions++;
+		// 	} else if (enableFactionalReconMissions && numberOfReconMissions < 6) {
+		// 		randomizeGenericReconMission(player, mission, faction);
+		// 		numberOfReconMissions++;
+		// 	} else if (enableFactionalEntertainerMissions && numberOfDancerMissions < 6) {
+		// 		randomizeGenericEntertainerMission(player, mission, faction, MissionTypes::DANCER);
+		// 		numberOfDancerMissions++;
+		// 	} else if (enableFactionalEntertainerMissions && numberOfMusicianMissions < 6) {
+		// 		randomizeGenericEntertainerMission(player, mission, faction, MissionTypes::MUSICIAN);
+		// 		numberOfMusicianMissions++;
+		// 	}
+		// }
 
 		if (slicer) {
 			mission->setRewardCredits(mission->getRewardCredits() * 1.5);
 		}
 
-		float cityBonus = 1.f + player->getSkillMod("private_spec_missions") / 100.f;
 		mission->setRewardCredits(mission->getRewardCredits() * cityBonus);
 
 		mission->setRefreshCounter(counter, true);
@@ -764,10 +832,16 @@ void MissionManagerImplementation::randomizeGenericDestroyMission(CreatureObject
 		difficulty = 4;
 
 	int diffDisplay = difficultyLevel + 7;
+
+	PlayerObject* targetGhost = player->getPlayerObject();
+
 	if (player->isGrouped())
 		diffDisplay += player->getGroup()->getGroupLevel();
 	else
 		diffDisplay += playerLevel;
+
+	String dir = targetGhost->getScreenPlayData("mission_direction_choice", "directionChoice");
+  	float dirChoice = Float::valueOf(dir);
 
 	String building = lairTemplateObject->getMissionBuilding(difficulty);
 
@@ -793,9 +867,32 @@ void MissionManagerImplementation::randomizeGenericDestroyMission(CreatureObject
 	while (!foundPosition && maximumNumberOfTries-- > 0) {
 		foundPosition = true;
 
-		int distance = destroyMissionBaseDistance + destroyMissionDifficultyDistanceFactor * difficultyLevel;
-		distance += System::random(destroyMissionRandomDistance) + System::random(destroyMissionDifficultyRandomDistance * difficultyLevel);
-		startPos = player->getWorldCoordinate((float)distance, (float)System::random(360), false);
+		float direction = (float)System::random(360);
+		
+		// Player direction choice -/+ 8 degrees deviation from center to spread out the lairs a bit. Any higher will change the direction diplayed on the client.
+		if (dirChoice > 0){
+			int dev = System::random(8);
+			int isMinus = System::random(100);
+			
+			if (isMinus > 49)
+				dev *= -1;
+			
+			direction = dirChoice + dev;
+			
+			// Fix degree values greater than 360
+			if (direction > 360)
+				direction -= 360;
+		}
+
+		// Start position, always based on "facing north"
+		int distance = System::random(1000) + 1000;
+		float angleRads = direction * (M_PI / 180.0f);
+		float newAngle = angleRads + (M_PI / 2);
+		startPos.setX(player->getWorldPositionX() + (cos(newAngle) * distance)); // client has x/y inverted
+		startPos.setY(player->getWorldPositionY() + (sin(newAngle) * distance));
+		startPos.setZ(0.0f);
+
+		//startPos = player->getWorldCoordinate(System::random(1000) + 1000, (float)System::random(360), false);
 
 		if (zone->isWithinBoundaries(startPos)) {
 			float height = zone->getHeight(startPos.getX(), startPos.getY());
@@ -843,9 +940,11 @@ void MissionManagerImplementation::randomizeGenericDestroyMission(CreatureObject
 	mission->setFaction(faction);
 
 	int factionPointsReward = randomLairSpawn->getMinDifficulty();
-	if (factionPointsReward > 32)
+
+	// Buffed from 32 -> 64
+	if (factionPointsReward > 64)
 	{
-		factionPointsReward = 32;
+		factionPointsReward = 64;
 	}
 
 	String messageDifficulty;
@@ -863,7 +962,8 @@ void MissionManagerImplementation::randomizeGenericDestroyMission(CreatureObject
 	else
 		missionType = "_creature";
 
-	mission->setMissionTitle("mission/mission_destroy_neutral" + messageDifficulty + missionType, "m" + String::valueOf(randTexts) + "t");
+	// mission->setMissionTitle("mission/mission_destroy_neutral" + messageDifficulty + missionType, "m" + String::valueOf(randTexts) + "t");
+	mission->setMissionTitle("lair_n", lairTemplateObject->getName());
 	mission->setMissionDescription("mission/mission_destroy_neutral" +  messageDifficulty + missionType, "m" + String::valueOf(randTexts) + "d");
 
 	switch (faction) {

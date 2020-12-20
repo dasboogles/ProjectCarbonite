@@ -37,6 +37,11 @@ void AttachmentImplementation::updateCraftingValues(CraftingValues* values, bool
 
 		int mod = System::random(max - min) + min;
 
+		// Custom overcap
+		if (level > 400) {
+			mod = 25;
+		}
+
 		if(mod == 0)
 			mod = 1;
 
@@ -80,4 +85,8 @@ void AttachmentImplementation::fillAttributeList(AttributeListMessage* msg, Crea
 		name.deleteAll();
 	}
 
+}
+
+void AttachmentImplementation::updateAttachmentValues(const String& modName, int value) {
+        skillModMap.put(modName, value);
 }

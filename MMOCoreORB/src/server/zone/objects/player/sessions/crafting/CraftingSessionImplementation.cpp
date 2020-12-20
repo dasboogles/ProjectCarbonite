@@ -651,7 +651,13 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 	manufactureSchematic->setCrafter(crafter);
 
 	String expskill = draftSchematic->getExperimentationSkill();
-	experimentationPointsTotal = int(crafter->getSkillMod(expskill) / 10);
+	// Get Force_Experimentation
+	float forceSkill = crafter->getSkillMod("force_experimentation");
+	float totalExperimentationSkill = crafter->getSkillMod(expskill);
+	totalExperimentationSkill += forceSkill;
+	// Total Experimentation points
+	experimentationPointsTotal = int(totalExperimentationSkill / 10);
+
 	experimentationPointsUsed = 0;
 
 	// Calculate exp failure for red bars
@@ -670,8 +676,13 @@ void CraftingSessionImplementation::initialAssembly(int clientCounter) {
 	}
 
 	Locker locker(prototype);
+
+	// Get PlayerBuff values
+	float qualityBuffVal = 1.0f;
+	qualityBuffVal += (((float)crafter->getSkillMod("music_will_buff")) / 4) / 100;
+
 	//Set initial crafting percentages
-	craftingManager->setInitialCraftingValues(prototype, manufactureSchematic, assemblyResult);
+	craftingManager->setInitialCraftingValues(prototype, manufactureSchematic, assemblyResult, qualityBuffVal);
 	//prototype->setInitialCraftingValues(manufactureSchematic, assemblyResult);
 
 	Reference<CraftingValues*> craftingValues = manufactureSchematic->getCraftingValues();
@@ -1208,12 +1219,12 @@ void CraftingSessionImplementation::createPrototype(int clientCounter, bool crea
 
 		if (createItem) {
 
-			startCreationTasks(manufactureSchematic->getComplexity() * 2, false);
+			startCreationTasks(manufactureSchematic->getComplexity() * 0, false);
 
 		} else {
 
 			// This is for practicing
-			startCreationTasks(manufactureSchematic->getComplexity() * 2, true);
+			startCreationTasks(manufactureSchematic->getComplexity() * 0, true);
 			xp = round(xp * 1.05f);
 		}
 

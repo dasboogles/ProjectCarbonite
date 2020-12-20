@@ -44,21 +44,21 @@
 object_tangible_food_crafted_dish_ormachek = object_tangible_food_crafted_shared_dish_ormachek:new {
 	templateType = CONSUMABLE,
 
-	duration = 11,
-	filling = 10,
-	nutrition = 10,
+	duration = 250,
+	filling = 30,
+	nutrition = 50,
 
 	effectType = 3, -- Event Based Buff
 	eventTypes = {XPAWARDED},
 
 	fillingMin = 90,
-	fillingMax = 55,
-	flavorMin = 11,
-	flavorMax = 25,
-	nutritionMin = 3,
-	nutritionMax = 5,
+	fillingMax = 30,
+	flavorMin = 110,	-- # of Kills Min
+	flavorMax = 250,	-- # of Kills Max
+	nutritionMin = 30,
+	nutritionMax = 50,	-- % Exp gained per award amount from killing something
 	quantityMin = 1,
-	quantityMax = 1,
+	quantityMax = 10,
 
 	modifiers = { "xp_increase", 0 },
 

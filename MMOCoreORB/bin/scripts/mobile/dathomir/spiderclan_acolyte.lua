@@ -4,13 +4,13 @@ spiderclan_acolyte = Creature:new {
 	randomNameTag = true,
 	socialGroup = "spider_nightsister",
 	faction = "spider_nightsister",
-	level = 64,
-	chanceHit = 0.5,
-	damageMin = 445,
-	damageMax = 600,
+	level = 75,
+	chanceHit = 1.5,
+	damageMin = 745,
+	damageMax = 900,
 	baseXp = 6196,
-	baseHAM = 11000,
-	baseHAMmax = 14000,
+	baseHAM = 31000,
+	baseHAMmax = 54000,
 	armor = 1,
 	resists = {35,85,100,50,100,100,50,100,-1},
 	meatType = "",
@@ -31,19 +31,82 @@ spiderclan_acolyte = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 1500000},
-				{group = "power_crystals", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "armor_attachments", chance = 350000},
-				{group = "clothing_attachments", chance = 350000},
-				{group = "melee_weapons", chance = 2800000},
-				{group = "pistols", chance = 1000000},
-				{group = "rifles", chance = 1000000},
-				{group = "carbines", chance = 1000000},
-				{group = "wearables_common", chance = 500000},
-				{group = "wearables_uncommon", chance = 500000}
-			}
-		}
+				{group = "melee_weapons", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "rifles", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "pistols", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "carbines", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "containers", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "wearables_scarce", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "wearables_scarce", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
 	},
 	weapons = {"mixed_force_weapons"},
 	conversationTemplate = "",

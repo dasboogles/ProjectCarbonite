@@ -84,6 +84,42 @@ void WearableObjectImplementation::fillAttributeList(AttributeListMessage* alm,
 
 }
 
+bool WearableObjectImplementation::hasSeaRemovalTool(CreatureObject* player, bool removeItem) {
+
+	if (player == NULL){
+		return 0;
+	}
+
+	uint32 crc;
+	ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
+
+	if (inventory == nullptr){
+		return false;
+	}
+
+	Locker inventoryLocker(inventory);
+
+	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
+		ManagedReference<SceneObject*> sceno = inventory->getContainerObject(i);
+
+		crc = sceno->getServerObjectCRC();
+		if (String::valueOf(crc) == "3905622464") { //Sea Removal Tool
+
+			if (sceno != nullptr) {
+				if (removeItem) {
+					Locker locker(sceno);
+					sceno->destroyObjectFromWorld(true);
+					sceno->destroyObjectFromDatabase(true);
+				}
+
+				return true;
+			}
+		}
+	}
+
+	return 0;
+}
+
 void WearableObjectImplementation::updateCraftingValues(CraftingValues* values, bool initialUpdate) {
 	/*
 	 * Values available:	Range:
@@ -97,6 +133,10 @@ void WearableObjectImplementation::updateCraftingValues(CraftingValues* values, 
 }
 
 void WearableObjectImplementation::generateSockets(CraftingValues* craftingValues) {
+	// Moved inits of player and manuSchematic so I can use Player outside of the logic block below
+	ManagedReference<CreatureObject*> player = nullptr;
+	ManagedReference<ManufactureSchematic*> manuSchematic = nullptr; 
+
 	if (socketsGenerated) {
 		return;
 	}
@@ -105,10 +145,10 @@ void WearableObjectImplementation::generateSockets(CraftingValues* craftingValue
 	int luck = 0;
 
 	if (craftingValues != nullptr) {
-		ManagedReference<ManufactureSchematic*> manuSchematic = craftingValues->getManufactureSchematic();
+		manuSchematic = craftingValues->getManufactureSchematic();
 		if(manuSchematic != nullptr) {
 			ManagedReference<DraftSchematic*> draftSchematic = manuSchematic->getDraftSchematic();
-			ManagedReference<CreatureObject*> player = manuSchematic->getCrafter().get();
+			player = manuSchematic->getCrafter().get();
 
 			if (player != nullptr && draftSchematic != nullptr) {
 				String assemblySkill = draftSchematic->getAssemblySkill();
@@ -118,8 +158,10 @@ void WearableObjectImplementation::generateSockets(CraftingValues* craftingValue
 			}
 		}
 	}
-
-	int random = (System::random(750)) - 250; // -250 to 500
+	// Shifted roll chance from (-250 to 500) -> (100 to 850).
+	// This will drastically increase max sockets chance, but not gaurantee it.
+	// You will always roll at LEAST 1 socket.
+	int random = (System::random(750)) + 100;// - 250; // -250 to 500
 
 	float roll = System::random(skill + luck + random);
 

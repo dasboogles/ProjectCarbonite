@@ -45,6 +45,7 @@ object_weapon_ranged_rifle_rifle_victor_tusken = object_weapon_ranged_rifle_shar
 
 	playerRaces = { "object/creature/player/bothan_male.iff",
 				"object/creature/player/bothan_female.iff",
+				"object/creature/player/bothan_male.iff",
 				"object/creature/player/human_male.iff",
 				"object/creature/player/human_female.iff",
 				"object/creature/player/ithorian_male.iff",

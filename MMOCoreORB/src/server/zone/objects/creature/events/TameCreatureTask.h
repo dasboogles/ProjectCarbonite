@@ -82,7 +82,12 @@ public:
 		case FINAL:
 			float tamingChance = creature->getChanceToTame(player);
 
-			if (tamingChance > System::random(100))
+			int failureChance = System::random(100);
+
+			player->sendSystemMessage("Your taming chance against this creature was: " + String::valueOf(tamingChance));
+			player->sendSystemMessage("The creature rolled a " + String::valueOf(failureChance) + " against your tame!");
+		
+			if (tamingChance > failureChance)
 				success(false);
 			else {
 				player->sendSystemMessage("@hireling/hireling:taming_fail"); // You fail to tame the creature.

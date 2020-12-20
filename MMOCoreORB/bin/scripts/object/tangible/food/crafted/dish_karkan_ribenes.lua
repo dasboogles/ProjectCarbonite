@@ -44,7 +44,7 @@
 object_tangible_food_crafted_dish_karkan_ribenes = object_tangible_food_crafted_shared_dish_karkan_ribenes:new {
 	templateType = CONSUMABLE,
 
-	duration = 30,
+	duration = 3600,
 	filling = 10,
 	nutrition = 10,
 

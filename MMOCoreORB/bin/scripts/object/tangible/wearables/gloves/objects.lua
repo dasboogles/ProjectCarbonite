@@ -689,3 +689,9 @@ object_tangible_wearables_gloves_shared_gloves_tusken_raider = SharedTangibleObj
 }
 
 ObjectTemplates:addClientTemplate(object_tangible_wearables_gloves_shared_gloves_tusken_raider, "object/tangible/wearables/gloves/shared_gloves_tusken_raider.iff")
+
+object_tangible_wearables_gloves_shared_gloves_invis = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/wearables/gloves/shared_gloves_invis.iff"
+}
+
+ObjectTemplates:addClientTemplate(object_tangible_wearables_gloves_shared_gloves_corsec, "object/tangible/wearables/gloves/shared_gloves_invis.iff")

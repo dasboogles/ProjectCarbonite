@@ -492,8 +492,8 @@ void SuiManager::handleCharacterBuilderSelectItem(CreatureObject* player, SuiBox
 
 			} else if (templatePath == "credits") {
 				{
-					TransactionLog trx(TrxCode::CHARACTERBUILDER, player, 50000, true);
-					player->addCashCredits(50000, true);
+					TransactionLog trx(TrxCode::CHARACTERBUILDER, player, 500000, true);
+					player->addCashCredits(500000, true);
 				}
 				player->sendSystemMessage("You have received 50.000 Credits");
 

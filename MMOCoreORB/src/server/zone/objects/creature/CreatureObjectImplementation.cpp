@@ -11,6 +11,7 @@
 #include "server/zone/managers/objectcontroller/ObjectController.h"
 #include "server/zone/managers/skill/SkillManager.h"
 #include "server/zone/managers/player/PlayerManager.h"
+#include "server/zone/managers/faction/FactionManager.h"
 #include "server/zone/managers/combat/CombatManager.h"
 #include "server/zone/managers/mission/MissionManager.h"
 #include "server/zone/managers/creature/PetManager.h"
@@ -81,6 +82,7 @@
 
 #include "server/zone/objects/tangible/threat/ThreatMap.h"
 
+#include "server/chat/room/ChatRoom.h"
 #include "engine/core/TaskManager.h"
 #include "server/zone/objects/creature/credits/CreditObject.h"
 
@@ -177,6 +179,9 @@ void CreatureObjectImplementation::initializeMembers() {
 	setContainerInheritPermissionsFromParent(false);
 	setContainerDefaultDenyPermission(ContainerPermissions::MOVECONTAINER);
 	setContainerDenyPermission("owner", ContainerPermissions::MOVECONTAINER);
+
+	//Custom members below here
+	isNotified = false;
 }
 
 void CreatureObjectImplementation::loadTemplateData(
@@ -444,8 +449,7 @@ void CreatureObjectImplementation::sendNewbieTutorialEnableHudElement(
 	sendMessage(message);
 }
 
-void CreatureObjectImplementation::sendSystemMessage(
-		StringIdChatParameter& message) {
+void CreatureObjectImplementation::sendSystemMessage(StringIdChatParameter& message) {
 	if (!isPlayerCreature())
 		return;
 
@@ -2781,20 +2785,26 @@ void CreatureObjectImplementation::activateHAMRegeneration(int latency) {
 
 	// this formula gives the amount of regen per second
 	uint32 healthTick = (uint32) ceil((float) Math::max(0, getHAM(
-			CreatureAttribute::CONSTITUTION)) * 13.0f / 2100.0f * modifier);
+			CreatureAttribute::CONSTITUTION)) * (13.0f / 2100.0f) * modifier);
 	uint32 actionTick = (uint32) ceil((float) Math::max(0, getHAM(
-			CreatureAttribute::STAMINA)) * 13.0f / 2100.0f * modifier);
+			CreatureAttribute::STAMINA)) * (13.0f / 2100.0f) * modifier);
 	uint32 mindTick = (uint32) ceil((float) Math::max(0, getHAM(
-			CreatureAttribute::WILLPOWER)) * 13.0f / 2100.0f * modifier);
+			CreatureAttribute::WILLPOWER)) * (13.0f / 2100.0f) * modifier);
 
-	if (healthTick < 1)
+	if (healthTick < 1){
 		healthTick = 1;
+	}
 
-	if (actionTick < 1)
+	if (actionTick < 1){
 		actionTick = 1;
+	}
 
-	if (mindTick < 1)
+	if (mindTick < 1){
 		mindTick = 1;
+	}
+
+	// Regen debug
+	// warning("Hp/s: " + String::valueOf(healthTick)  + " Act/s: " + String::valueOf(actionTick) +" Mind/s: " + String::valueOf(mindTick));
 
 	healDamage(asCreatureObject(), CreatureAttribute::HEALTH, healthTick, true, false);
 	healDamage(asCreatureObject(), CreatureAttribute::ACTION, actionTick, true, false);
@@ -3377,6 +3387,7 @@ Reference<WeaponObject*> CreatureObjectImplementation::getWeapon() {
 }
 
 void CreatureObjectImplementation::setFaction(unsigned int crc) {
+	const int previousFaction = getFaction();
 	faction = crc;
 
 	if (isPlayerCreature()) {
@@ -3430,6 +3441,68 @@ void CreatureObjectImplementation::setFaction(unsigned int crc) {
 			pet->setFaction(crc);
 		}
 
+		// Chat rooms
+ 		{
+			using namespace server::chat::room;
+
+ 			Locker _lock(player);
+ 			FactionManager* factionManager = FactionManager::instance();
+			ManagedReference<ChatManager*> chatManager = ServerCore::getZoneServer()->getChatManager();
+
+			switch (previousFaction) {
+				case Factions::FACTIONIMPERIAL:
+					{
+						ManagedReference<ChatRoom*> chat = factionManager->getImperialChat();
+						Locker cLocker(chat, player);
+						chat->removePlayer(player);
+						chat->sendDestroyTo(player);
+					}
+					break;
+				case Factions::FACTIONREBEL:
+					{
+						ManagedReference<ChatRoom*> chat = factionManager->getRebelChat();
+						Locker cLocker(chat, player);
+						chat->removePlayer(player);
+						chat->sendDestroyTo(player);
+					}
+					break;
+				default:
+					break;
+			}
+
+ 			switch (faction) {
+ 				case Factions::FACTIONIMPERIAL:
+					{
+						ManagedReference<ChatRoom*> chat = factionManager->getImperialChat();
+						chat->sendTo(player);
+						chatManager->handleChatEnterRoomById(player, chat->getRoomID(), -1, true);
+
+						chat = factionManager->getPvpNotificationChat();
+						chat->sendTo(player);
+						chatManager->handleChatEnterRoomById(player, chat->getRoomID(), -1, true);
+					}
+					break;
+ 				case Factions::FACTIONREBEL:
+ 					{
+						ManagedReference<ChatRoom*> chat = factionManager->getRebelChat();
+						chat->sendTo(player);
+						chatManager->handleChatEnterRoomById(player, chat->getRoomID(), -1, true);
+
+						chat = factionManager->getPvpNotificationChat();
+						chat->sendTo(player);
+						chatManager->handleChatEnterRoomById(player, chat->getRoomID(), -1, true);
+ 					}
+ 					break;
+ 				default:
+					{
+						ManagedReference<ChatRoom*> chat = factionManager->getPvpNotificationChat();
+						Locker cLocker(chat, player);
+						chat->removePlayer(player);
+						chat->sendDestroyTo(player);
+					}
+					break;
+ 			}
+ 		}
 		StoreSpawnedChildrenTask* task = new StoreSpawnedChildrenTask(player, std::move(petsToStore));
 		task->execute();
 	}

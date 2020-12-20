@@ -67,7 +67,7 @@ object_draft_schematic_food_drink_caf = object_draft_schematic_food_shared_drink
    ingredientTitleNames = {"water", "flavoring_extract", "glass", "additive"},
    ingredientSlotType = {0, 0, 2, 3},
    resourceTypes = {"water", "cereal", "object/tangible/component/food/base/shared_drink_container_base.iff", "object/tangible/food/crafted/additive/shared_additive_light.iff"},
-   resourceQuantities = {10, 5, 1, 1},
+   resourceQuantities = {140, 70, 14, 14},
    contribution = {100, 100, 100, 100},
 
 

@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_ithorian_ith_pants_s20 = object_tangible_wearables_ithorian_shared_ith_pants_s20:new {
+	objectMenuComponent = "ArmorObjectMenuComponent",
 	playerRaces = { "object/creature/player/ithorian_male.iff",
 				"object/creature/player/ithorian_female.iff",
 				"object/mobile/vendor/ithorian_female.iff",

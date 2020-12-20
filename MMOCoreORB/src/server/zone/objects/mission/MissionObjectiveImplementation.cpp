@@ -221,13 +221,18 @@ void MissionObjectiveImplementation::awardReward() {
 		players.add(owner);
 	}
 
-	int divisor = mission->getRewardCreditsDivisor();
+	// Old incorrect code
+	// int divisor = mission->getRewardCreditsDivisor();
+
+	// Setting Divisor to # of players in range of mission, why this wasn't this way to begin with is beyond me?
+	int divisor = players.size();
 	bool expanded = false;
 
-	if (playerCount > divisor) {
-		divisor = playerCount;
-		expanded = true;
-	}
+	// Part of OLD broken code
+	// if (playerCount > divisor) {
+	// 	divisor = playerCount;
+	// 	expanded = true;
+	// }
 
 	if (playerCount > players.size()) {
 		owner->sendSystemMessage("@mission/mission_generic:group_too_far"); // Mission Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.

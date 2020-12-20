@@ -133,10 +133,20 @@ public:
 		if (lootCredits < 1)
 			return;
 
-		int luck = player->getSkillMod("force_luck");
+		// Refactored Luck to a more straight forward math calculation
+		// int luck = player->getSkillMod("force_luck");
 
-		if (luck > 0)
-			lootCredits += (lootCredits * luck) / 20;
+		// if (luck > 0){
+		// 	lootCredits += (lootCredits * luck) / 20;
+		// }
+
+		// Changed credits bonus from luck to EntBuff
+		float buffMod = 1.0f;
+		buffMod += ((float)player->getSkillMod("dance_ent_buff")) / 100;
+
+		if (buffMod > 1.0f){
+			lootCredits *= buffMod;
+		}
 
 		Locker clocker(group, corpse);
 

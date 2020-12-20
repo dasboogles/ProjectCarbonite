@@ -80,6 +80,7 @@ CreatureTemplate::~CreatureTemplate() {
 }
 
 void CreatureTemplate::readObject(LuaObject* templateData) {
+	int harvestingBonus = 5;
 	conversationTemplate = String(templateData->getStringField("conversationTemplate").trim()).hashCode();
 	objectName = templateData->getStringField("objectName").trim();
 	randomNameType = templateData->getIntField("randomNameType");
@@ -99,13 +100,38 @@ void CreatureTemplate::readObject(LuaObject* templateData) {
 	baseHAM = templateData->getIntField("baseHAM");
 	baseHAMmax = templateData->getIntField("baseHAMmax");
 	armor = templateData->getIntField("armor");
+
+	// MEAT -- Harvesting Refactor
 	meatType = templateData->getStringField("meatType").trim();
-	meatAmount = templateData->getIntField("meatAmount");
+	if (templateData->getIntField("meatAmount") < 10) {
+		meatAmount = (templateData->getIntField("meatAmount") * (harvestingBonus * 2));
+	} else {
+		meatAmount = (templateData->getIntField("meatAmount") * harvestingBonus);
+	}
+
+	// HIDE -- Harvesting Refactor
 	hideType = templateData->getStringField("hideType").trim();
-	hideAmount = templateData->getIntField("hideAmount");
+	if (templateData->getIntField("hideAmount") < 10) {
+		hideAmount = (templateData->getIntField("hideAmount") * (harvestingBonus * 2));
+	} else {
+		hideAmount = (templateData->getIntField("hideAmount") * harvestingBonus);
+	}
+
+	// BONE -- Harvesting Refactor
 	boneType = templateData->getStringField("boneType").trim();
-	boneAmount = templateData->getIntField("boneAmount");
-	milk = templateData->getIntField("milk");
+	if (templateData->getIntField("boneAmount") < 10) {
+		boneAmount = (templateData->getIntField("boneAmount") * harvestingBonus * 2);
+	} else {
+		boneAmount = (templateData->getIntField("boneAmount") * harvestingBonus);
+	}
+
+	// MILK -- Harvesting Refactor
+	if (templateData->getIntField("milk") < 10) {
+		milk = (templateData->getIntField("milk") * (harvestingBonus * 3));
+	} else {
+		milk = (templateData->getIntField("milk") * (harvestingBonus * 2));
+	}
+
 	tamingChance = templateData->getFloatField("tamingChance");
 	ferocity = templateData->getIntField("ferocity");
 	aggroRadius = templateData->getIntField("aggroRadius");
@@ -127,15 +153,60 @@ void CreatureTemplate::readObject(LuaObject* templateData) {
 
 	LuaObject res = templateData->getObjectField("resists");
 	if (res.getTableSize() == 9) {
-		kinetic = res.getFloatAt(1);
-		energy = res.getFloatAt(2);
-		blast = res.getFloatAt(3);
-		heat = res.getFloatAt(4);
-		cold = res.getFloatAt(5);
-		electricity = res.getFloatAt(6);
-		acid = res.getFloatAt(7);
-		stun = res.getFloatAt(8);
-		lightSaber = res.getFloatAt(9);
+		// Kinetic
+		if (res.getFloatAt(1) > 85) {
+			kinetic = 85;
+		}else {
+			kinetic = res.getFloatAt(1);
+		}
+		// Energy
+		if (res.getFloatAt(2) > 85) {
+			energy = 85;
+		}else {
+			energy = res.getFloatAt(2);
+		}
+		// Blast
+		if (res.getFloatAt(3) > 85) {
+			blast = 85;
+		}else {
+			blast = res.getFloatAt(3);
+		}
+		// Heat
+		if (res.getFloatAt(4) > 85) {
+			heat = 85;
+		}else {
+			heat = res.getFloatAt(4);
+		}
+		// Cold
+		if (res.getFloatAt(5) > 85) {
+			cold = 85;
+		}else {
+			cold = res.getFloatAt(5);
+		}
+		// Electricity
+		if (res.getFloatAt(6) > 85) {
+			electricity = 85;
+		}else {
+			electricity = res.getFloatAt(6);
+		}
+		// Acid
+		if (res.getFloatAt(7) > 85) {
+			acid = 85;
+		}else {
+			acid = res.getFloatAt(7);
+		}
+		// Stun
+		if (res.getFloatAt(8) > 85) {
+			stun = 85;
+		}else {
+			stun = res.getFloatAt(8);
+		}
+		// Lighstaber
+		if (res.getFloatAt(9) > 85) {
+			lightSaber = 85;
+		}else {
+			lightSaber = res.getFloatAt(9);
+		}
 	}
 
 	res.pop();

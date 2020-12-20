@@ -2,6 +2,7 @@ package.path = package.path .. ";scripts/screenplays/themepark/?.lua;scripts/scr
 require("screenplay")
 require("conv_handler")
 require("themeParkLogic")
+require("screenplayHelper")
 require("corvetteTicketGiverLogic")
 require("corvetteTicketTakerLogic")
 
@@ -651,6 +652,11 @@ includeFile("static_spawns/yavin4_static_spawns.lua")
 --Magic Eight Ball
 includeFile("tools/MagicEightBallMenuComponent.lua")
 
+--Carbonite Custom
+includeFile("dungeon/exar_encounter.lua")
+includeFile("event/bounty_vendor.lua")
+includeFile("events/world_boss_spawner.lua")
+
 --Treasure Maps
 includeFile("treasure_map/EncodedDiskMenuComponent.lua")
 includeFile("treasure_map/TreasureMapMenuComponent.lua")
@@ -675,3 +681,7 @@ includeFile("events/ServerEventAutomation.lua")
 
 -- Custom content - Loads last to allow for overrides
 includeFile("../custom_scripts/screenplays/screenplays.lua")
+includeFile("custom_screenplays/screenplays.lua")
+
+-- Mission Terminal Stuff
+includeFile("tools/mission_direction_choice.lua")

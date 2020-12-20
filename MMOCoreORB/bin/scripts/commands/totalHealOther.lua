@@ -58,7 +58,7 @@ TotalHealOtherCommand = {
 	healWoundAmount = 250,
 	forceCost = 300,
 	forceCostMultiplier = 0.1,
-	defaultTime = 3,
+	defaultTime = 1,
 	range = 32,
 }
 

@@ -134,7 +134,16 @@ int ConsumableImplementation::handleObjectMenuSelect(CreatureObject* player, byt
 		return 0;
 	}
 
-	if (player->hasBuff(buffCRC)  && (!isAttributeEffect() || isForagedFood())) {
+	const BuffList* buffs = player->getBuffList();
+
+	// Debug stuff for food/buffs
+	// player->sendSystemMessage("[[[[ You tried consuming: " + buffName + " ]]]]");
+	// player->sendSystemMessage("You have: "+ String::valueOf(buffs->getBuffListSize()) + " buffs active.");
+
+	// if (player->hasBuff(buffCRC)  && (!isAttributeEffect() || isForagedFood())) {
+
+	// You can no longer stack consumables that add to Stats
+	if (player->hasBuff(buffCRC) || isForagedFood()) {
 		player->sendSystemMessage("@combat_effects:already_affected"); //You are already under the influence of that food. Eating more won't enhance the effect.
 		return 0;
 	}
@@ -147,18 +156,25 @@ int ConsumableImplementation::handleObjectMenuSelect(CreatureObject* player, byt
 	if (ghost == nullptr)
 		return 1;
 
-	if (isFood())
+	if (isFood()){
 		availfill = ghost->getFoodFillingMax() - ghost->getFoodFilling();
+		// player->sendSystemMessage("Your current available Food filling is: " + String::valueOf(availfill));
+	}
 
-	if (isDrink())
+	if (isDrink()){
 		availfill = ghost->getDrinkFillingMax() - ghost->getDrinkFilling();
+		// player->sendSystemMessage("Your current available Drink filling is: " + String::valueOf(availfill));
+	}
 
 	if (filling > availfill) {
-		if (isFood())
-			player->sendSystemMessage("@error_message:full_food"); //You are too full to eat that.
+		if (isFood()){
+			player->sendSystemMessage("You are too full to eat that. You have " + String::valueOf(availfill) + " fill remaining."); //You are too full to eat that.
+		}
 
-		if (isDrink())
-			player->sendSystemMessage("@error_message:full_drink"); //You are too full to drink that.
+		if (isDrink()){
+			String msg = ", available filling: " + String::valueOf(availfill);
+			player->sendSystemMessage("You are too full to drink that. You have " + String::valueOf(availfill) + " fill remaining."); //You are too full to eat that.
+		}
 
 		return 1;
 	}

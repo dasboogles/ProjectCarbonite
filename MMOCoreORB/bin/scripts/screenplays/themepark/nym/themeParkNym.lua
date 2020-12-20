@@ -362,7 +362,6 @@ function NymContainerComponent:canAddObject(pContainer, pObj, slot)
 	if (containerSceo:getObjectName() == "nym" and creature:hasScreenPlayState(1, "nym_theme_park_nymNpc") and (not creature:hasScreenPlayState(4, "nym_theme_park_nymNpc") or not creature:hasScreenPlayState(8, "nym_theme_park_nymNpc")) and not creature:hasScreenPlayState(16, "nym_theme_park_nymNpc")) then
 		return true
 	end
-
 	return -1
 end
 

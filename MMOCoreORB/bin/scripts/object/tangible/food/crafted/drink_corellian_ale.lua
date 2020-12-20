@@ -44,18 +44,18 @@
 object_tangible_food_crafted_drink_corellian_ale = object_tangible_food_crafted_shared_drink_corellian_ale:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,
+	filling = 40,
+	nutrition = 50,
 
 	effectType = 4,
 
-	fillingMin = 17,
-	fillingMax = 10,
-	flavorMin = 720,
-	flavorMax = 1440,
-	nutritionMin = 7,
-	nutritionMax = 12,
+	fillingMin = 50,
+	fillingMax = 40,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 11000,	-- This is a Wound Healing food, make it last awhile!
+	nutritionMin = 25,
+	nutritionMax = 50,
 	quantityMin = 6,
 	quantityMax = 12,
 

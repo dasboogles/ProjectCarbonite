@@ -119,7 +119,7 @@ public:
 			Locker locker(prototype);
 			Locker mlock(manuSchematic, prototype);
 
-			craftingManager->setInitialCraftingValues(prototype, manuSchematic, CraftingManager::GREATSUCCESS);
+			craftingManager->setInitialCraftingValues(prototype, manuSchematic, CraftingManager::GREATSUCCESS, 1.0f);
 
 			Reference<CraftingValues*> craftingValues = manuSchematic->getCraftingValues();
 			craftingValues->setManufactureSchematic(manuSchematic);

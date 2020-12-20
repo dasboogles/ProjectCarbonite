@@ -22,16 +22,21 @@ public:
     
 		// Skill mods.
 		skillMods.put("force_run", 1);
-		skillMods.put("slope_move", 33);
+		skillMods.put("slope_move", 66);
 	}
 
 	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {
-		int res = creature->hasBuff(buffCRC) ? NOSTACKJEDIBUFF : doJediSelfBuffCommand(creature);
 
-		if (res == NOSTACKJEDIBUFF) {
-			creature->sendSystemMessage("@jedi_spam:already_force_running"); // You are already force running.
-			return GENERALERROR;
-		}
+		// Make ForceRun toggle-able
+		int res = creature->hasBuff(buffCRC) ? creature->removeBuff(buffCRC) : doJediSelfBuffCommand(creature);
+
+		// int res = creature->hasBuff(buffCRC) ? NOSTACKJEDIBUFF : doJediSelfBuffCommand(creature);
+
+		// if (res == NOSTACKJEDIBUFF) {
+		// 	creature->sendSystemMessage("@jedi_spam:already_force_running"); // You are already force running.
+		// 	return GENERALERROR;
+		// }
+
 		// Return if something is in error.
 		if (res != SUCCESS) {
 			return res;

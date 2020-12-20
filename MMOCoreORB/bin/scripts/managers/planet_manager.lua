@@ -41,7 +41,7 @@
 --which carries forward this exception.
 
 --Time, in seconds, that a shuttle is away for
-shuttleportAwayTime = 300
+shuttleportAwayTime = 60
 starportAwayTime = 60
 
 --Time, in seconds, that a shuttle takes to land
@@ -49,8 +49,8 @@ shuttleportLandingTime = 11
 starportLandingTime = 14
 
 --Time, in seconds, that a shuttle is landed for
-shuttleportLandedTime = 120
-starportLandedTime = 120
+shuttleportLandedTime = 180
+starportLandedTime = 180
 
 
 corellia = {
@@ -148,7 +148,8 @@ dathomir = {
 
 	planetTravelPoints = {
 		{name = "Trade Outpost", x = 618.89258, z = 6.039608, y = 3092.0142, interplanetaryTravelAllowed = 1, incomingTravelAllowed = 1},
-		{name = "Science Outpost", x = -49.021923, z = 18, y = -1584.7278, interplanetaryTravelAllowed = 1, incomingTravelAllowed = 1}
+		{name = "Science Outpost", x = -49.021923, z = 18, y = -1584.7278, interplanetaryTravelAllowed = 1, incomingTravelAllowed = 1},
+		{name = "Aurilian Village", x = 5271, z = 78, y = -4075, interplanetaryTravelAllowed = 1, incomingTravelAllowed = 1}
 	},
 
 	badgeAreas = {
@@ -201,6 +202,18 @@ dathomir = {
 	}
 }
 
+
+dungeon1 = {
+	weatherEnabled = 0,
+	gcwEnabled = 0,
+}
+
+
+dungeon2 = {
+	weatherEnabled = 0,
+	gcwEnabled = 0,
+}
+
 endor = {
 	weatherEnabled = 1,
 	gcwEnabled = 1,
@@ -243,6 +256,61 @@ endor = {
 	}
 }
 
+kashyyyk_dead_forest = {
+	weatherEnabled = 0,
+	gcwEnabled = 0,
+}
+
+kashyyyk_hunting = {
+	weatherEnabled = 0,
+	gcwEnabled = 0,
+}
+
+kashyyyk_main = {
+
+	weatherEnabled = 1,
+	gcwEnabled = 0,
+
+	planetTravelPoints = {
+		{name = "Kachirho Starport", x = -690.3, z = 20.4, y = -168, interplanetaryTravelAllowed = 1, incomingTravelAllowed = 1},
+
+	},
+
+	badgeAreas = {
+		--{"badge_kachirho",-690,-168,10,xx},
+
+	},
+
+	navAreas = {
+		{"kachirho_starport",-678,-160,63},
+		{"kachirho",-513,-81,125},
+	},
+
+	planetObjects = {
+		{templateFile = "object/tangible/terminal/terminal_character_builder.iff", ox = 0, oy = -0.705623, oz = 0, ow = 0.708587, x = -6917.18, z = 73, y = -5732.25, parentid = 0}
+	}
+}
+
+kashyyyk_north_dungeons = {
+	weatherEnabled = 0,
+	gcwEnabled = 0,
+}
+
+kashyyyk_pob_dungeons = {
+	weatherEnabled = 0,
+	gcwEnabled = 0,
+}
+
+kashyyyk_rryatt_trail = {
+	weatherEnabled = 0,
+	gcwEnabled = 0,
+}
+
+kashyyyk_south_dungeons = {
+	weatherEnabled = 0,
+	gcwEnabled = 0,
+}
+
 lok = {
 	weatherEnabled = 1,
 	gcwEnabled = 1,
@@ -279,6 +347,11 @@ lok = {
 	planetObjects = {
 		{templateFile = "object/tangible/terminal/terminal_character_builder.iff", ox = 0, oy = 0.999879, oz = 0, ow = 0.015506, x = 464.677, z = 8.75806, y = 5506.49, parentid = 0}
 	}
+}
+
+mustafar = {
+	weatherEnabled = 0,
+	gcwEnabled = 0,
 }
 
 naboo = {
@@ -706,7 +779,3 @@ tutorial = {
 	gcwEnabled = 0,
 }
 
-dungeon1 = {
-	weatherEnabled = 0,
-	gcwEnabled = 0,
-}

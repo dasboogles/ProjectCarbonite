@@ -129,6 +129,7 @@ class TransactionLog {
 	JSONSerializationType mContext = JSONSerializationType::object();
 	JSONSerializationType mTransaction = JSONSerializationType::object();
 
+// I REALLY wish these had comments saying what they're for!!!!
 public:
 	TransactionLog(SceneObject* src, SceneObject* dst, SceneObject* subject, TrxCode code, bool exportSubject = false, CAPTURE_CALLER_DECLARE);
 

@@ -44,18 +44,18 @@
 object_tangible_food_crafted_drink_accarragm = object_tangible_food_crafted_shared_drink_accarragm:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,
+	filling = 60,
+	nutrition = 725,
 
 	effectType = 1,
 
-	fillingMin = 55,
-	fillingMax = 33,
-	flavorMin = 1800,
-	flavorMax = 3600,
-	nutritionMin = 150,
-	nutritionMax = 240,
+	fillingMin = 60,
+	fillingMax = 30,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 200,
+	nutritionMax = 725,
 	quantityMin = 6,
 	quantityMax = 10,
 

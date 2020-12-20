@@ -44,12 +44,12 @@
 ChargeShot2Command = {
         name = "chargeshot2",
 
-	damageMultiplier = 2.5,
+	damageMultiplier = 2.875,
 	speedMultiplier = 2.0,
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 1.5,
 	mindCostMultiplier = 0.5,
-	accuracyBonus = 25,
+	accuracyBonus = 30,
 
 	animation = "charge",
 

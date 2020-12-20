@@ -90,7 +90,7 @@ void GeneticLabratory::recalculateResist(CraftingValues* craftingValues) {
 	}
 
 }
-void GeneticLabratory::setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess) {
+void GeneticLabratory::setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess, float qualityBuffVal) {
 	if (manufactureSchematic == nullptr)
 		return;
 

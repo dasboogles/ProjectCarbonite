@@ -44,12 +44,12 @@
 LegShot2Command = {
 	name = "legshot2",
 
-	damageMultiplier = 2,
+	damageMultiplier = 2.3,
 	speedMultiplier = 2,
 	healthCostMultiplier = 0.5,
 	actionCostMultiplier = 1.5,
 	mindCostMultiplier = 1.5,
-	accuracyBonus = 25,
+	accuracyBonus = 30,
 
 	stateEffects = {
 	  StateEffect( 

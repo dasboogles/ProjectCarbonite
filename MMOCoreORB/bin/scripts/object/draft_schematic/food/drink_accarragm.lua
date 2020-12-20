@@ -67,7 +67,7 @@ object_draft_schematic_food_drink_accarragm = object_draft_schematic_food_shared
    ingredientTitleNames = {"alcohol", "fungus_extract", "glass", "additive"},
    ingredientSlotType = {1, 0, 2, 3},
    resourceTypes = {"object/tangible/food/crafted/shared_drink_alcohol.iff", "vegetable_fungi", "object/tangible/component/food/base/shared_drink_container_base.iff", "object/tangible/food/crafted/additive/shared_additive_medium.iff"},
-   resourceQuantities = {2, 30, 1, 1},
+   resourceQuantities = {6, 90, 3, 3},
    contribution = {100, 100, 100, 100},
 
 

@@ -162,7 +162,13 @@ class LootManager extends ManagedService implements Logger {
 	public native TangibleObject createLootObject(final LootItemTemplate templateObject, int level, boolean maxCondition = false);
 
 	@local
+	private native boolean isExcludedPrototype(TangibleObject proto);
+
+	@local
 	public native string getRandomLootableMod( unsigned int sceneObjectType );
+
+	@local
+    public native TangibleObject createLootAttachment(final LootItemTemplate templateObject, final string modName, int value);
 
 	public native int calculateLootCredits(int level);
 
@@ -178,6 +184,9 @@ class LootManager extends ManagedService implements Logger {
 	@local
 	public native boolean createLootSet(@dereferenced TransactionLog trx, SceneObject container, final string lootGroup, int level, boolean maxCondition,int setSize);
 
+	@local
+	public native boolean createNamedLoot(@dereferenced TransactionLog trx, SceneObject container, final string lootGroup, final string name, int level = -1, boolean maxCondition = false);
+	
 	//public native void generateStats(final string lootTemplate, CraftingValues)
 
 	@read

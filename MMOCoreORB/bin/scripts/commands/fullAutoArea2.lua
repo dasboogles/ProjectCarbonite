@@ -44,12 +44,12 @@
 FullAutoArea2Command = {
         name = "fullautoarea2",
 
-	damageMultiplier = 2.0,
+	damageMultiplier = 2.3,
 	speedMultiplier = 1.5,
 	healthCostMultiplier = 2.5,
 	actionCostMultiplier = 2.5,
 	mindCostMultiplier = 0.5,
-	accuracyBonus = 25,
+	accuracyBonus = 30,
 
 	animation = "fire_area",
 	animType = GENERATE_INTENSITY,

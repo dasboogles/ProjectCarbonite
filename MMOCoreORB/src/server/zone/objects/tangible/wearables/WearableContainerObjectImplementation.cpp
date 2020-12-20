@@ -9,6 +9,7 @@
 #include "server/zone/objects/creature/CreatureObject.h"
 #include "server/zone/managers/skill/SkillModManager.h"
 #include "server/zone/packets/scene/AttributeListMessage.h"
+#include "server/zone/objects/scene/SceneObjectType.h"
 
 void WearableContainerObjectImplementation::initializeTransientMembers() {
 	ContainerImplementation::initializeTransientMembers();

@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_ithorian_hat_chef_s01_ith = object_tangible_wearables_ithorian_shared_hat_chef_s01_ith:new {
+	objectMenuComponent = "ArmorObjectMenuComponent",
 	playerRaces = { "object/creature/player/ithorian_male.iff",
 				"object/creature/player/ithorian_female.iff",
 				"object/mobile/vendor/ithorian_female.iff",

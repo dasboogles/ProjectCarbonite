@@ -43,7 +43,7 @@ void LightsaberCrystalComponentImplementation::notifyLoadFromDatabase() {
 		else
 			itemLevel = 330 + System::random(20);
 
-		attackSpeed = 0.0;
+		attackSpeed = 0.00;
 		minimumDamage = 0;
 		maximumDamage = 0;
 		sacHealth = 0;
@@ -51,7 +51,7 @@ void LightsaberCrystalComponentImplementation::notifyLoadFromDatabase() {
 		sacMind = 0;
 		woundChance = 0;
 		forceCost = 0;
-		floatForceCost = 0.0;
+		floatForceCost = 0.00;
 
 		generateCrystalStats();
 	}
@@ -72,8 +72,25 @@ void LightsaberCrystalComponentImplementation::generateCrystalStats() {
 		return;
 	}
 
+	float qualityModifier = getQualityMod();
+
 	int minStat = crystalData->getMinHitpoints();
 	int maxStat = crystalData->getMaxHitpoints();
+
+	// HAM of crystals
+	if (rareMod == 1) {
+		minStat *= 1.25;
+		maxStat *= 1.25;
+	} else if (rareMod == 2) {
+		minStat *= 1.75;
+		maxStat *= 1.75;
+	} else if (rareMod == 3) {
+		minStat *= 2.5;
+		maxStat *= 2.5;
+	}
+
+	// Allow quality of crystal to affect minimums
+	minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
 
 	setMaxCondition(getRandomizedStat(minStat, maxStat, itemLevel));
 
@@ -81,37 +98,166 @@ void LightsaberCrystalComponentImplementation::generateCrystalStats() {
 		int minStat = crystalData->getMinDamage();
 		int maxStat = crystalData->getMaxDamage();
 
+		// DMG of crystals
+		if (rareMod == 1) {
+			minStat += 5;
+			maxStat += 5;
+		} else if (rareMod == 2) {
+			minStat += 10;
+			maxStat += 10;
+		} else if (rareMod == 3) {
+			minStat += 15;
+			maxStat += 15;
+		}
+
+		// Allow quality of crystal to affect minimums
+		minStat = qualityModifier * maxStat; // % of max since min can be 0 for a lot of stuff
+
+		// warning("NormalRoll Crystal Quality possible: " + String::valueOf(getCrystalQuality()));
+		// warning("NormalRoll Crystal qualMod possible: " + String::valueOf(qualityModifier));
+		// warning("NormalRoll Crystal maxStat possible: " + String::valueOf(maxStat));
+		// warning("NormalRoll Crystal minStat possible after Modifier: " + String::valueOf(minStat));
+
 		damage = getRandomizedStat(minStat, maxStat, itemLevel);
 
 		minStat = crystalData->getMinHealthSac();
 		maxStat = crystalData->getMaxHealthSac();
 
+		// Allow quality of crystal to affect minimums
+		minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
 		sacHealth = getRandomizedStat(minStat, maxStat, itemLevel);
 
 		minStat = crystalData->getMinActionSac();
 		maxStat = crystalData->getMaxActionSac();
 
+		// Allow quality of crystal to affect minimums
+		minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
 		sacAction = getRandomizedStat(minStat, maxStat, itemLevel);
 
 		minStat = crystalData->getMinMindSac();
 		maxStat = crystalData->getMaxMindSac();
 
+		// Allow quality of crystal to affect minimums
+		minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
 		sacMind = getRandomizedStat(minStat, maxStat, itemLevel);
 
 		minStat = crystalData->getMinWoundChance();
 		maxStat = crystalData->getMaxWoundChance();
 
+		// WOUND of crystals
+		if (rareMod == 1) {
+			minStat += 2;
+			maxStat += 2;
+		} else if (rareMod == 2) {
+			minStat += 4;
+			maxStat += 4;
+		} else if (rareMod == 3) {
+			minStat += 6;
+			maxStat += 6;
+		}
+
+		// Allow quality of crystal to affect minimums
+		minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
 		woundChance = getRandomizedStat(minStat, maxStat, itemLevel);
 
 		float minFloatStat = crystalData->getMinForceCost();
 		float maxFloatStat = crystalData->getMaxForceCost();
 
-		floatForceCost = getRandomizedStat(minFloatStat, maxFloatStat, itemLevel);
+		// FC of crystals
+		if (rareMod == 1) {
+			minFloatStat -= 0.5;
+			maxFloatStat -= 0.5;
+		} else if (rareMod == 2) {
+			minFloatStat -= 1.0;
+			maxFloatStat -= 1.0;
+		} else if (rareMod == 3) {
+			minFloatStat -= 1.5;
+			maxFloatStat -= 1.5;
+		}
+
+		// Allow quality of crystal to affect minimums
+		minFloatStat = (qualityModifier * maxFloatStat);
+		floatForceCost = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
 
 		minFloatStat = crystalData->getMinAttackSpeed();
 		maxFloatStat = crystalData->getMaxAttackSpeed();
 
+		// AttackSpeed of crystals
+		if (rareMod == 1) {
+			minFloatStat -= 0.1;
+			maxFloatStat -= 0.1;
+		} else if (rareMod == 2) {
+			minFloatStat -= 0.2;
+			maxFloatStat -= 0.2;
+		} else if (rareMod == 3) {
+			minFloatStat -= 0.3;
+			maxFloatStat -= 0.3;
+		}
+
+		// Allow quality of crystal to affect minimums
+		minFloatStat = (qualityModifier * maxFloatStat);
 		attackSpeed = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
+	} else if (color != 31) { // Setting Color Crystal stats pre-tune
+		// Color Crystal Damage
+		if (rareMod != 0){
+			int minStat = 0;
+			int maxStat = 0;
+			int minimumMod = 1;	
+			if (rareMod == 1) {
+				int rngDmgMod = System::random(4) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			} else if (rareMod == 2) {
+				int rngDmgMod = System::random(14) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			} else if (rareMod == 3) {
+				int rngDmgMod = System::random(24) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			}
+			damage = getRandomizedStat(minStat, maxStat, itemLevel);
+
+			// WOUND of crystals
+			minStat = 0;
+			maxStat = 0;
+			if (rareMod == 1) {
+				int rngDmgMod = System::random(3) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			} else if (rareMod == 2) {
+				int rngDmgMod = System::random(5) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			} else if (rareMod == 3) {
+				int rngDmgMod = System::random(9) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			}
+			woundChance = getRandomizedStat(minStat, maxStat, itemLevel);
+
+
+			// FC of crystals
+			float minFloatStat = 0.0;
+			float maxFloatStat = -1.5;
+			float minimumFloatMod = -0.1;
+			if (rareMod == 1) {
+				float rngModVal = System::getMTRand()->rand(-0.4) + minimumFloatMod;
+				minFloatStat = rngModVal;
+				maxFloatStat = rngModVal;
+			} else if (rareMod == 2) {
+				float rngModVal = System::getMTRand()->rand(-0.9) + minimumFloatMod;
+				minFloatStat = rngModVal;
+				maxFloatStat = rngModVal;
+			} else if (rareMod == 3) {
+				float rngModVal = System::getMTRand()->rand(-1.4) + minimumFloatMod;
+				minFloatStat = rngModVal;
+				maxFloatStat = rngModVal;
+			}
+			floatForceCost = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
+		} else {
+			damage = getRandomizedStat(0, 0, itemLevel);
+		}
 	}
 
 	quality = getCrystalQuality();
@@ -130,8 +276,22 @@ void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 		return;
 	}
 
+	float qualityModifier = getQualityMod();
+
 	int minStat = crystalData->getMinHitpoints();
 	int maxStat = crystalData->getMaxHitpoints();
+
+	// HAM of crystals
+	if (rareMod == 1) {
+		minStat *= 1.25;
+		maxStat *= 1.25;
+	} else if (rareMod == 2) {
+		minStat *= 1.75;
+		maxStat *= 1.75;
+	} else if (rareMod == 3) {
+		minStat *= 2.5;
+		maxStat *= 2.5;
+	}
 
 	if (getMaxCondition() > maxStat || getMaxCondition() < minStat)
 		setMaxCondition(getRandomizedStat(minStat, maxStat, itemLevel));
@@ -140,11 +300,32 @@ void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 		minStat = crystalData->getMinDamage();
 		maxStat = crystalData->getMaxDamage();
 
+		// DMG of crystals
+		if (rareMod == 1) {
+			minStat += 5;
+			maxStat += 5;
+		} else if (rareMod == 2) {
+			minStat += 10;
+			maxStat += 10;
+		} else if (rareMod == 3) {
+			minStat += 15;
+			maxStat += 15;
+		}
+
+		// Allow quality of crystal to affect minimums
+		minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
+
+		// warning("Validating Crystal maxStat possible: " + String::valueOf(maxStat));
+		// warning("Validating Crystal minStat possible after Modifier: " + String::valueOf(minStat));
+
 		if (damage > maxStat || damage < minStat)
 			damage = getRandomizedStat(minStat, maxStat, itemLevel);
 
 		minStat = crystalData->getMinHealthSac();
 		maxStat = crystalData->getMaxHealthSac();
+
+		// Allow quality of crystal to affect minimums
+		minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
 
 		if (sacHealth > maxStat || sacHealth < minStat)
 			sacHealth = getRandomizedStat(minStat, maxStat, itemLevel);
@@ -152,11 +333,17 @@ void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 		minStat = crystalData->getMinActionSac();
 		maxStat = crystalData->getMaxActionSac();
 
+		// Allow quality of crystal to affect minimums
+		minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
+
 		if (sacAction > maxStat || sacAction < minStat)
 			sacAction = getRandomizedStat(minStat, maxStat, itemLevel);
 
 		minStat = crystalData->getMinMindSac();
 		maxStat = crystalData->getMaxMindSac();
+
+		// Allow quality of crystal to affect minimums
+		minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
 
 		if (sacMind > maxStat || sacMind < minStat)
 			sacMind = getRandomizedStat(minStat, maxStat, itemLevel);
@@ -164,35 +351,147 @@ void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 		minStat = crystalData->getMinWoundChance();
 		maxStat = crystalData->getMaxWoundChance();
 
+		// WOUND of crystals
+		if (rareMod == 1) {
+			minStat += 2;
+			maxStat += 2;
+		} else if (rareMod == 2) {
+			minStat += 4;
+			maxStat += 4;
+		} else if (rareMod == 3) {
+			minStat += 6;
+			maxStat += 6;
+		}
+
+		// Allow quality of crystal to affect minimums
+		minStat = (qualityModifier * maxStat); // % of max since min can be 0 for a lot of stuff
+
 		if (woundChance > maxStat || woundChance < minStat)
 			woundChance = getRandomizedStat(minStat, maxStat, itemLevel);
 
 		float minFloatStat = crystalData->getMinForceCost();
 		float maxFloatStat = crystalData->getMaxForceCost();
 
+		// FC of crystals
+		if (rareMod == 1) {
+			minFloatStat -= 0.5;
+			maxFloatStat -= 0.5;
+		} else if (rareMod == 2) {
+			minFloatStat -= 1.0;
+			maxFloatStat -= 1.0;
+		} else if (rareMod == 3) {
+			minFloatStat -= 1.5;
+			maxFloatStat -= 1.5;
+		}
+
+		// Allow quality of crystal to affect minimums
+		minFloatStat = (qualityModifier * maxFloatStat);
+
 		if (floatForceCost > maxFloatStat || floatForceCost < minFloatStat)
-			floatForceCost = getRandomizedStat(minFloatStat, maxFloatStat, itemLevel);
+			floatForceCost = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
 
 		minFloatStat = crystalData->getMinAttackSpeed();
 		maxFloatStat = crystalData->getMaxAttackSpeed();
 
+		// AttackSpeed of crystals
+		if (rareMod == 1) {
+			minFloatStat -= 0.1;
+			maxFloatStat -= 0.1;
+		} else if (rareMod == 2) {
+			minFloatStat -= 0.2;
+			maxFloatStat -= 0.2;
+		} else if (rareMod == 3) {
+			minFloatStat -= 0.3;
+			maxFloatStat -= 0.3;
+		}
+
+		// Allow quality of crystal to affect minimums
+		minFloatStat = (qualityModifier * maxFloatStat);
+
 		if (attackSpeed > maxFloatStat || attackSpeed < minFloatStat)
 			attackSpeed = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
+	} else if (color != 31) { // Setting Color Crystal stats post-tune
+		// Color Crystal Damage
+		if (rareMod != 0){
+			int minStat = 0;
+			int maxStat = 25;
+			int minimumMod = 1;	
+			if (rareMod == 1) {
+				int rngDmgMod = System::random(4) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			} else if (rareMod == 2) {
+				int rngDmgMod = System::random(14) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			} else if (rareMod == 3) {
+				int rngDmgMod = System::random(24) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			}
+			if (damage > maxStat || damage < minStat){
+				damage = getRandomizedStat(minStat, maxStat, itemLevel);
+			}
+
+			// WOUND of crystals
+			minStat = 0;
+			maxStat = 6;
+			if (rareMod == 1) {
+				int rngDmgMod = System::random(3) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			} else if (rareMod == 2) {
+				int rngDmgMod = System::random(5) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			} else if (rareMod == 3) {
+				int rngDmgMod = System::random(9) + minimumMod;
+				minStat = rngDmgMod;
+				maxStat = rngDmgMod;
+			}
+			if (woundChance > maxStat || woundChance < minStat){
+				woundChance = getRandomizedStat(minStat, maxStat, itemLevel);
+			}
+
+
+			// FC of crystals
+			float minFloatStat = 0.0;
+			float maxFloatStat = -1.5;
+			float minimumFloatMod = -0.1;
+			if (rareMod == 1) {
+				float rngModVal = System::getMTRand()->rand(-0.4) + minimumFloatMod;
+				minFloatStat = rngModVal;
+				maxFloatStat = rngModVal;
+			} else if (rareMod == 2) {
+				float rngModVal = System::getMTRand()->rand(-0.9) + minimumFloatMod;
+				minFloatStat = rngModVal;
+				maxFloatStat = rngModVal;
+			} else if (rareMod == 3) {
+				float rngModVal = System::getMTRand()->rand(-1.4) + minimumFloatMod;
+				minFloatStat = rngModVal;
+				maxFloatStat = rngModVal;
+			}
+			if (floatForceCost > maxFloatStat || floatForceCost < minFloatStat){
+				floatForceCost = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
+			}
+		} else {
+			damage = getRandomizedStat(0, 0, itemLevel);
+		}
 	}
 }
 
 int LightsaberCrystalComponentImplementation::getCrystalQuality() {
-	if (itemLevel < 40)
+	if (itemLevel < 30)
 		return POOR;
-	else if (itemLevel < 70)
+	else if (itemLevel < 50)
 		return FAIR;
-	else if (itemLevel < 100)
+	else if (itemLevel < 70)
 		return GOOD;
-	else if (itemLevel < 140)
+	else if (itemLevel < 100)
 		return QUALITY;
-	else if (itemLevel < 220)
+	else if (itemLevel < 150)
 		return SELECT;
-	else if (itemLevel < 330)
+	else if (itemLevel < 280)
 		return PREMIUM;
 	else
 		return FLAWLESS;
@@ -211,7 +510,8 @@ int LightsaberCrystalComponentImplementation::getRandomizedStat(int min, int max
 		invertedValues = true;
 	}
 
-	float avgLevel = (float)(itemLevel - 60) / 220.f;
+	// float avgLevel = (float)(itemLevel - 60) / 220.f;
+	float avgLevel = (float)(itemLevel) / 220.f;
 
 	float midLevel = min + ((max - min) * avgLevel);
 
@@ -230,8 +530,17 @@ int LightsaberCrystalComponentImplementation::getRandomizedStat(int min, int max
 
 	int result = randMin + System::random(randMax - randMin);
 
-	if (invertedValues)
+	if (invertedValues){
+		if (itemLevel > 325){
+			return invertedMax;
+		}
+
 		result = invertedMin + (invertedMax - result);
+	}
+
+	if (itemLevel > 325){
+		return max;
+	}
 
 	return result;
 }
@@ -249,7 +558,8 @@ float LightsaberCrystalComponentImplementation::getRandomizedStat(float min, flo
 		invertedValues = true;
 	}
 
-	float avgLevel = (float)(itemLevel - 60) / 220.f;
+	// float avgLevel = (float)(itemLevel - 60) / 220.f;
+	float avgLevel = (float)(itemLevel) / 220.f;
 
 	float midLevel = min + ((max - min) * avgLevel);
 
@@ -268,8 +578,20 @@ float LightsaberCrystalComponentImplementation::getRandomizedStat(float min, flo
 
 	float result = System::getMTRand()->rand(randMax - randMin) + randMin;
 
-	if (invertedValues)
+	// if (invertedValues)
+	// 	result = invertedMin + (invertedMax - result);
+
+	if (invertedValues){
+		if (itemLevel > 325){
+			return invertedMax;
+		}
+
 		result = invertedMin + (invertedMax - result);
+	}
+
+	if (itemLevel > 325){
+		return max;
+	}
 
 	return result;
 }
@@ -291,7 +613,22 @@ void LightsaberCrystalComponentImplementation::fillAttributeList(AttributeListMe
 			StringBuffer str3;
 			str3 << "@jedi_spam:saber_color_" << getColor();
 			alm->insertAttribute("color", str3);
+
+			// Is tuned to someone OR is an admin so we can see pre-tune
+			if (ownerID != 0 || player->isPrivileged()) {
+				if (damage > 100 || damage < 0) {
+					validateCrystalStats();
+				} else if (damage > 0) { // Color crystals can't have 0 dmg if rare!
+					alm->insertAttribute("mindamage", damage);
+					alm->insertAttribute("maxdamage", damage);
+					alm->insertAttribute("wpn_wound_chance", woundChance);
+					alm->insertAttribute("forcecost", (float)getForceCost());
+				}
+			}
 		} else {
+			if (damage > 100 || damage < 0) {
+				validateCrystalStats();
+			}
 			if (ownerID != 0 || player->isPrivileged()) {
 				alm->insertAttribute("mindamage", damage);
 				alm->insertAttribute("maxdamage", damage);
@@ -300,7 +637,7 @@ void LightsaberCrystalComponentImplementation::fillAttributeList(AttributeListMe
 				alm->insertAttribute("wpn_attack_cost_health", sacHealth);
 				alm->insertAttribute("wpn_attack_cost_action", sacAction);
 				alm->insertAttribute("wpn_attack_cost_mind", sacMind);
-				alm->insertAttribute("forcecost", (int)getForceCost());
+				alm->insertAttribute("forcecost", (float)getForceCost());
 
 				// For debugging
 				if (player->isPrivileged()) {
@@ -487,6 +824,10 @@ int LightsaberCrystalComponentImplementation::inflictDamage(TangibleObject* atta
 			if (getColor() != 31) {
 				weapon->setBladeColor(31);
 				weapon->setCustomizationVariable("/private/index_color_blade", 31, true);
+				weapon->setMinDamage(weapon->getMinDamage() - getDamage());
+				weapon->setMaxDamage(weapon->getMaxDamage() - getDamage());
+				weapon->setWoundsRatio(weapon->getWoundsRatio() - getWoundChance());
+				weapon->setForceCost(weapon->getForceCost() - getForceCost());
 
 				if (weapon->isEquipped()) {
 					ManagedReference<CreatureObject*> parent = cast<CreatureObject*>(weapon->getParent().get().get());
@@ -499,4 +840,85 @@ int LightsaberCrystalComponentImplementation::inflictDamage(TangibleObject* atta
 	}
 
 	return 0;
+}
+
+int LightsaberCrystalComponentImplementation::generateColorCrystalStats(int itemLevel) {
+	int result = 0;
+	int minimumMod = 1;
+	int min = 0;
+	int max = 0;
+
+	// Color Crystal Damage
+	if (rareMod == 1) {
+		int rngDmgMod = System::random(4) + minimumMod;
+		min = rngDmgMod;
+		max = rngDmgMod;
+	} else if (rareMod == 2) {
+		int rngDmgMod = System::random(14) + minimumMod;
+		min = rngDmgMod;
+		max = rngDmgMod;
+	} else if (rareMod == 3) {
+		int rngDmgMod = System::random(24) + minimumMod;
+		min = rngDmgMod;
+		max = rngDmgMod;
+	}
+	// Crystal Damage Returned
+	result = getRandomizedStat(min, max, itemLevel);
+
+	return result;
+}
+
+float LightsaberCrystalComponentImplementation::generateFloatColorCrystalStats(int itemLevel) {
+	float result = 0.0;
+	float minimumMod = 0.0;
+	float min = 0.0;
+	float max = 0.0;
+
+	// FC of crystals
+	if (rareMod == 1) {
+		float rngModVal = System::getMTRand()->rand(0.4) + 0.1;
+		min -= rngModVal;
+		max -= rngModVal;
+	} else if (rareMod == 2) {
+		float rngModVal = System::getMTRand()->rand(0.9) + 0.1;
+		min -= rngModVal;
+		max -= rngModVal;
+	} else if (rareMod == 3) {
+		float rngModVal = System::getMTRand()->rand(1.4) + 0.1;
+		min -= rngModVal;
+		max -= rngModVal;
+	}
+
+	// Crystal Damage Returned
+	result = getRandomizedStat(min, max, itemLevel);
+	return result;
+}
+
+float LightsaberCrystalComponentImplementation::getQualityMod() {
+	float qualModVal = 0.f;
+	int currentQual = getCrystalQuality();
+
+	if (currentQual == POOR){
+		qualModVal = 0.5f;
+	}
+	else if (currentQual == FAIR) {
+		qualModVal = 0.10f;
+	}
+	else if (currentQual == GOOD){
+		qualModVal = 0.15f;
+	}
+	else if (currentQual == QUALITY) {
+		qualModVal = 0.20f;
+	}
+	else if (currentQual == SELECT) {
+		qualModVal = 0.25f;
+	}
+	else if (currentQual == PREMIUM) {
+		qualModVal = 0.30f;
+	}
+	else if (currentQual == FLAWLESS) {
+		qualModVal = 0.35f;
+	}
+
+	return qualModVal;
 }

@@ -44,7 +44,7 @@
 object_tangible_food_crafted_dessert_blap_biscuit = object_tangible_food_crafted_shared_dessert_blap_biscuit:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 3600,
 	filling = 10,
 	nutrition = 10,
 
@@ -53,7 +53,7 @@ object_tangible_food_crafted_dessert_blap_biscuit = object_tangible_food_crafted
 	fillingMin = 24,
 	fillingMax = 10,
 	flavorMin = 1800,
-	flavorMax = 3600,
+	flavorMax = 5400,
 	nutritionMin = 550,
 	nutritionMax = 875,
 	quantityMin = 3,

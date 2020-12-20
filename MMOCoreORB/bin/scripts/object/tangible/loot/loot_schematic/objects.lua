@@ -4937,3 +4937,153 @@ object_tangible_loot_loot_schematic_shared_utensils_schematic = SharedTangibleOb
 }
 
 ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_utensils_schematic, "object/tangible/loot/loot_schematic/shared_utensils_schematic.iff")
+
+--Carbonite Custom
+
+--Armor
+ 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_belt_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_belt_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_belt_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_belt_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_bicep_l_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_bicep_l_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_bicep_l_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_bicep_l_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_bicep_r_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_bicep_r_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_bicep_r_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_bicep_r_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_bracer_r_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_bracer_r_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_bracer_r_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_bracer_r_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_bracer_l_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_bracer_l_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_bracer_l_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_bracer_l_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_boots_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_boots_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_boots_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_boots_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_chest_plate_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_chest_plate_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_chest_plate_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_chest_plate_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_helmet_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_helmet_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_helmet_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_helmet_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_gloves_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_gloves_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_gloves_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_gloves_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_leggings_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_leggings_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_imperial_leggings_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_imperial_leggings_schematic.iff")
+
+
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_belt_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_belt_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_belt_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_belt_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_bracer_l_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_bracer_l_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_bracer_l_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_bracer_l_schematic.iff")
+
+--
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_bracer_r_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_bracer_r_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_bracer_r_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_bracer_r_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_bicep_r_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_bicep_r_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_bicep_r_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_bicep_r_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_bicep_l_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_bicep_l_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_bicep_l_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_bicep_l_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_boots_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_boots_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_boots_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_boots_schematic.iff")
+
+--
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_chest_plate_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_chest_plate_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_chest_plate_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_chest_plate_schematic.iff")
+
+--
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_helmet_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_helmet_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_helmet_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_helmet_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_gloves_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_gloves_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_gloves_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_gloves_schematic.iff")
+
+-- 
+
+object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_leggings_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_leggings_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_armor_mandalorian_rebel_leggings_schematic, "object/tangible/loot/loot_schematic/shared_armor_mandalorian_rebel_leggings_schematic.iff")
+
+object_tangible_loot_loot_schematic_shared_universal_loot_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_universal_loot_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_universal_loot_schematic, "object/tangible/loot/loot_schematic/shared_universal_loot_schematic.iff")

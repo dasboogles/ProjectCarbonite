@@ -133,3 +133,7 @@ includeFile("dathomir/young_baz_nitch.lua")
 includeFile("dathomir/young_malkloc.lua")
 includeFile("dathomir/young_malkloc_plainswalker.lua")
 includeFile("dathomir/young_reptilian_flier.lua")
+
+-- Custom Stuff here
+includeFile("dathomir/feral_mutant_bull_rancor.lua")
+includeFile("dathomir/gar_vak.lua")

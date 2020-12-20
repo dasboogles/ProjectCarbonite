@@ -44,9 +44,19 @@
 object_tangible_deed_harvester_deed_harvester_creature_deed = object_tangible_deed_harvester_deed_shared_harvester_creature_deed:new {
 	templateType = STRUCTUREDEED,
 	placeStructureComponent = "PlaceStructureComponent",
-	generatedObjectTemplate = "object/installation/mining_organic/mining_organic_creature_farm.iff"
+	generatedObjectTemplate = "object/installation/mining_organic/mining_organic_creature_farm.iff",
 
 
+	
+	numberExperimentalProperties = {1, 1, 3, 2, 1},
+	experimentalProperties = {"XX", "XX", "HR", "SR", "UT", "MA", "UT", "XX"},
+	experimentalWeights = {1, 1, 1, 1, 2, 1, 2, 1},
+	experimentalGroupTitles = {"null", "null", "expEffeciency", "expStorage", "null"},
+	experimentalSubGroupTitles = {"null", "null", "extractrate", "hoppersize", "hitpoints"},
+	experimentalMin = {0, 0, 3, 100000, 1000},
+	experimentalMax = {0, 0, 15, 250000, 1000},
+	experimentalPrecision = {0, 0, 0, 0, 0},
+	experimentalCombineType = {0, 0, 1, 1, 4},
 }
 
 ObjectTemplates:addTemplate(object_tangible_deed_harvester_deed_harvester_creature_deed, "object/tangible/deed/harvester_deed/harvester_creature_deed.iff")

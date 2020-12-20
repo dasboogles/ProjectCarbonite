@@ -54,6 +54,13 @@ int PlayerContainerComponent::canAddObject(SceneObject* sceneObject, SceneObject
 			}
 		}
 
+		// Thanks TOXIC :)
+		// Code that breaks gear and disables it from being equippable!
+		if ((wearable->getMaxCondition() - wearable->getConditionDamage()) <= 0) {
+			errorDescription = "It would be a waste of time to try to use this.";
+				return TransferErrorCode::PLAYERUSEMASKERROR;
+		}
+
 		if (object->isArmorObject()) {
 			PlayerManager* playerManager = sceneObject->getZoneServer()->getPlayerManager();
 

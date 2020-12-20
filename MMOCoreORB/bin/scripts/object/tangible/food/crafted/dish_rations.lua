@@ -45,7 +45,7 @@ object_tangible_food_crafted_dish_rations = object_tangible_food_crafted_shared_
 
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 3600,
 	filling = 10,
 	nutrition = 10,
 

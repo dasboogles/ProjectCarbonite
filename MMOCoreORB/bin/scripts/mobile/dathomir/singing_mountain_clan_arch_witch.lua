@@ -4,15 +4,15 @@ singing_mountain_clan_arch_witch = Creature:new {
 	randomNameTag = true,
 	socialGroup = "mtn_clan",
 	faction = "mtn_clan",
-	level = 107,
-	chanceHit = 1,
-	damageMin = 645,
-	damageMax = 1000,
+	level = 115,
+	chanceHit = 2.25,
+	damageMin = 1025,
+	damageMax = 1275,
 	baseXp = 10174,
-	baseHAM = 24000,
-	baseHAMmax = 30000,
+	baseHAM = 34000,
+	baseHAMmax = 50000,
 	armor = 2,
-	resists = {100,5,5,100,100,100,100,100,-1},
+	resists = {100,25,25,100,100,100,100,100,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -31,19 +31,52 @@ singing_mountain_clan_arch_witch = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 1500000},
-				{group = "power_crystals", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "armor_attachments", chance = 400000},
-				{group = "clothing_attachments", chance = 400000},
-				{group = "melee_weapons", chance = 2700000},
-				{group = "rifles", chance = 1000000},
-				{group = "pistols", chance = 1000000},
-				{group = "carbines", chance = 1000000},
-				{group = "wearables_uncommon", chance = 500000},
-				{group = "tailor_components", chance = 500000}
-			}
-		}
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 3050000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 3050000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 3050000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 3050000
+		},
+		{
+			groups = {
+				{group = "melee_weapons", chance = 10000000}
+			},
+			lootChance = 3050000
+		},
+		{
+			groups = {
+				{group = "rifles", chance = 10000000}
+			},
+			lootChance = 3050000
+		},
+		{
+			groups = {
+				{group = "pistols", chance = 10000000}
+			},
+			lootChance = 3050000
+		},
+		{
+			groups = {
+				{group = "carbines", chance = 10000000}
+			},
+			lootChance = 3050000
+		},
 	},
 	weapons = {"mixed_force_weapons"},
 	conversationTemplate = "",

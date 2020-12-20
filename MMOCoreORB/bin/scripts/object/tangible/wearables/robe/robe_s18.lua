@@ -42,6 +42,7 @@
 
 
 object_tangible_wearables_robe_robe_s18 = object_tangible_wearables_robe_shared_robe_s18:new {
+	objectMenuComponent = "ArmorObjectMenuComponent",
 	playerRaces = { "object/creature/player/wookiee_male.iff",
 				"object/creature/player/wookiee_female.iff",
 				"object/mobile/vendor/wookiee_female.iff",

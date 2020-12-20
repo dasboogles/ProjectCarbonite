@@ -298,6 +298,9 @@
 #include "server/zone/objects/creature/commands/SmokebombCommand.h"
 #include "server/zone/objects/creature/commands/SniperShotCommand.h"
 #include "server/zone/objects/creature/commands/SnoopCommand.h"
+// Custom
+#include "server/zone/objects/creature/commands/custom/WarDevCommand.h"
+// Custom
 #include "server/zone/objects/creature/commands/SocialCommand.h"
 #include "server/zone/objects/creature/commands/SocialInternalCommand.h"
 #include "server/zone/objects/creature/commands/SpatialChatCommand.h"
@@ -598,6 +601,9 @@ void CommandConfigManager::registerCommands3() {
 	commandFactory.registerCommand<SmokebombCommand>(String("smokebomb").toLowerCase());
 	commandFactory.registerCommand<SniperShotCommand>(String("sniperShot").toLowerCase());
 	commandFactory.registerCommand<SnoopCommand>(String("snoop").toLowerCase());
+	// Custom
+	commandFactory.registerCommand<WarDevCommand>(String("wardev").toLowerCase());
+	// Custom
 	commandFactory.registerCommand<SocialCommand>(String("social").toLowerCase());
 	commandFactory.registerCommand<SocialInternalCommand>(String("socialInternal").toLowerCase());
 	commandFactory.registerCommand<SpatialChatCommand>(String("spatialChat").toLowerCase());

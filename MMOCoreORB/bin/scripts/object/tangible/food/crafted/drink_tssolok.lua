@@ -44,7 +44,7 @@
 object_tangible_food_crafted_drink_tssolok = object_tangible_food_crafted_shared_drink_tssolok:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 3600,
 	filling = 10,
 	nutrition = 10,
 
@@ -52,8 +52,8 @@ object_tangible_food_crafted_drink_tssolok = object_tangible_food_crafted_shared
 
 	fillingMin = 46,
 	fillingMax = 32,
-	flavorMin = 360,
-	flavorMax = 720,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
 	nutritionMin = 15,
 	nutritionMax = 24,
 	quantityMin = 3,

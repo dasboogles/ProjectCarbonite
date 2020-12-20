@@ -109,6 +109,9 @@
 #include <sys/stat.h>
 #include "server/zone/objects/transaction/TransactionLog.h"
 #include "server/zone/objects/creature/commands/TransferItemMiscCommand.h"
+// Custom includes
+#include "server/zone/objects/creature/buffs/PrivateBuff.h"
+#include "server/zone/objects/creature/buffs/PrivateSkillMultiplierBuff.h"
 
 PlayerManagerImplementation::PlayerManagerImplementation(ZoneServer* zoneServer, ZoneProcessServer* impl,
 					bool trackOnlineUsers) : Logger("PlayerManager") {
@@ -1524,6 +1527,9 @@ void PlayerManagerImplementation::sendPlayerToCloner(CreatureObject* player, uin
 					obj->setOptionsBitmask(bitmask);
 				} else {
 					//5% Decay for uninsured items
+					//obj->inflictDamage(obj, 0, 0.05 * obj->getMaxCondition(), true, true);
+					
+					// Testing Clothing Breaking
 					obj->inflictDamage(obj, 0, 0.05 * obj->getMaxCondition(), true, true);
 				}
 
@@ -1542,6 +1548,27 @@ void PlayerManagerImplementation::sendPlayerToCloner(CreatureObject* player, uin
 
 	}
 
+	// PvP-Death Debuff -- 5minutes
+	if (typeofdeath == 1) {
+		// Variables for deathDebuff
+		int deathDebuffVal = -2000;
+		int deathDebuffTime = 300;
+
+		// Handle Debuff -- NEED TO FIGURE OUT HOW TO CREATE CUSTOM BUFFS/DEBUFFS
+		ManagedReference<PrivateBuff *> deathDebuff = new PrivateBuff(player, 0xF531B147, deathDebuffTime, BuffType::JEDI);
+		Locker locker(deathDebuff);
+
+		// Loops through all stats and applies our death debuff
+		for(int i = 0; i < CreatureAttribute::ARRAYSIZE; i++){
+			deathDebuff->setAttributeModifier(i, deathDebuffVal);
+		}
+
+		// Add buffs to player
+		player->addBuff(deathDebuff);
+
+		// Release locker when we no longer need it
+		locker.release();
+	}
 
 
 	Reference<Task*> task = new PlayerIncapacitationRecoverTask(player, true);
@@ -1875,59 +1902,66 @@ bool PlayerManagerImplementation::checkEncumbrancies(CreatureObject* player, Arm
 }
 
 void PlayerManagerImplementation::applyEncumbrancies(CreatureObject* player, ArmorObject* armor) {
+	CombatManager* combatManager = CombatManager::instance();
 	int healthEncumb = Math::max(0, armor->getHealthEncumbrance());
 	int actionEncumb = Math::max(0, armor->getActionEncumbrance());
 	int mindEncumb = Math::max(0, armor->getMindEncumbrance());
 
-	player->addEncumbrance(CreatureEncumbrance::HEALTH, healthEncumb, true);
-	player->addEncumbrance(CreatureEncumbrance::ACTION, actionEncumb, true);
-	player->addEncumbrance(CreatureEncumbrance::MIND, mindEncumb, true);
+	// Applying the flag for isChestOnly so we can only care about chest armor encumberance!
+	if ((combatManager->isChestOnly && (armor->getHitLocation() == 1 || armor->getHitLocation() == 11)) || !combatManager->isChestOnly){
+		player->addEncumbrance(CreatureEncumbrance::HEALTH, healthEncumb, true);
+		player->addEncumbrance(CreatureEncumbrance::ACTION, actionEncumb, true);
+		player->addEncumbrance(CreatureEncumbrance::MIND, mindEncumb, true);
 
-	player->inflictDamage(player, CreatureAttribute::STRENGTH, healthEncumb, true);
-	player->addMaxHAM(CreatureAttribute::STRENGTH, -healthEncumb, true);
+		player->inflictDamage(player, CreatureAttribute::STRENGTH, healthEncumb, true);
+		player->addMaxHAM(CreatureAttribute::STRENGTH, -healthEncumb, true);
 
-	player->inflictDamage(player, CreatureAttribute::CONSTITUTION, healthEncumb, true);
-	player->addMaxHAM(CreatureAttribute::CONSTITUTION, -healthEncumb, true);
+		player->inflictDamage(player, CreatureAttribute::CONSTITUTION, healthEncumb, true);
+		player->addMaxHAM(CreatureAttribute::CONSTITUTION, -healthEncumb, true);
 
-	player->inflictDamage(player, CreatureAttribute::QUICKNESS, actionEncumb, true);
-	player->addMaxHAM(CreatureAttribute::QUICKNESS, -actionEncumb, true);
+		player->inflictDamage(player, CreatureAttribute::QUICKNESS, actionEncumb, true);
+		player->addMaxHAM(CreatureAttribute::QUICKNESS, -actionEncumb, true);
 
-	player->inflictDamage(player, CreatureAttribute::STAMINA, actionEncumb, true);
-	player->addMaxHAM(CreatureAttribute::STAMINA, -actionEncumb, true);
+		player->inflictDamage(player, CreatureAttribute::STAMINA, actionEncumb, true);
+		player->addMaxHAM(CreatureAttribute::STAMINA, -actionEncumb, true);
 
-	player->inflictDamage(player, CreatureAttribute::FOCUS, mindEncumb, true);
-	player->addMaxHAM(CreatureAttribute::FOCUS, -mindEncumb, true);
+		player->inflictDamage(player, CreatureAttribute::FOCUS, mindEncumb, true);
+		player->addMaxHAM(CreatureAttribute::FOCUS, -mindEncumb, true);
 
-	player->inflictDamage(player, CreatureAttribute::WILLPOWER, mindEncumb, true);
-	player->addMaxHAM(CreatureAttribute::WILLPOWER, -mindEncumb, true);
+		player->inflictDamage(player, CreatureAttribute::WILLPOWER, mindEncumb, true);
+		player->addMaxHAM(CreatureAttribute::WILLPOWER, -mindEncumb, true);
+	}
 }
 
 void PlayerManagerImplementation::removeEncumbrancies(CreatureObject* player, ArmorObject* armor) {
+	CombatManager* combatManager = CombatManager::instance();
 	int healthEncumb = Math::max(0, armor->getHealthEncumbrance());
 	int actionEncumb = Math::max(0, armor->getActionEncumbrance());
 	int mindEncumb = Math::max(0, armor->getMindEncumbrance());
 
-	player->addEncumbrance(CreatureEncumbrance::HEALTH, -healthEncumb, true);
-	player->addEncumbrance(CreatureEncumbrance::ACTION, -actionEncumb, true);
-	player->addEncumbrance(CreatureEncumbrance::MIND, -mindEncumb, true);
+	if ((combatManager->isChestOnly && (armor->getHitLocation() == 1 || armor->getHitLocation() == 11)) || !combatManager->isChestOnly){
+		player->addEncumbrance(CreatureEncumbrance::HEALTH, -healthEncumb, true);
+		player->addEncumbrance(CreatureEncumbrance::ACTION, -actionEncumb, true);
+		player->addEncumbrance(CreatureEncumbrance::MIND, -mindEncumb, true);
 
-	player->addMaxHAM(CreatureAttribute::STRENGTH, healthEncumb, true);
-	player->healDamage(player, CreatureAttribute::STRENGTH, healthEncumb, true);
+		player->addMaxHAM(CreatureAttribute::STRENGTH, healthEncumb, true);
+		player->healDamage(player, CreatureAttribute::STRENGTH, healthEncumb, true);
 
-	player->addMaxHAM(CreatureAttribute::CONSTITUTION, healthEncumb, true);
-	player->healDamage(player, CreatureAttribute::CONSTITUTION, healthEncumb, true);
+		player->addMaxHAM(CreatureAttribute::CONSTITUTION, healthEncumb, true);
+		player->healDamage(player, CreatureAttribute::CONSTITUTION, healthEncumb, true);
 
-	player->addMaxHAM(CreatureAttribute::QUICKNESS, actionEncumb, true);
-	player->healDamage(player, CreatureAttribute::QUICKNESS, actionEncumb, true);
+		player->addMaxHAM(CreatureAttribute::QUICKNESS, actionEncumb, true);
+		player->healDamage(player, CreatureAttribute::QUICKNESS, actionEncumb, true);
 
-	player->addMaxHAM(CreatureAttribute::STAMINA, actionEncumb, true);
-	player->healDamage(player, CreatureAttribute::STAMINA, actionEncumb, true);
+		player->addMaxHAM(CreatureAttribute::STAMINA, actionEncumb, true);
+		player->healDamage(player, CreatureAttribute::STAMINA, actionEncumb, true);
 
-	player->addMaxHAM(CreatureAttribute::FOCUS, mindEncumb, true);
-	player->healDamage(player, CreatureAttribute::FOCUS, mindEncumb, true);
+		player->addMaxHAM(CreatureAttribute::FOCUS, mindEncumb, true);
+		player->healDamage(player, CreatureAttribute::FOCUS, mindEncumb, true);
 
-	player->addMaxHAM(CreatureAttribute::WILLPOWER, mindEncumb, true);
-	player->healDamage(player, CreatureAttribute::WILLPOWER, mindEncumb, true);
+		player->addMaxHAM(CreatureAttribute::WILLPOWER, mindEncumb, true);
+		player->healDamage(player, CreatureAttribute::WILLPOWER, mindEncumb, true);
+	}
 }
 
 void PlayerManagerImplementation::awardBadge(PlayerObject* ghost, uint32 badgeId) {
@@ -2034,21 +2068,37 @@ int PlayerManagerImplementation::awardExperience(CreatureObject* player, const S
 		return 0;
 
 	float speciesModifier = 1.f;
+	float musicBuff = 1.0f;
+	musicBuff += ((float)player->getSkillMod("music_exp_buff")*2) / 100; // ie: ((12.5 * 2) / 100) == (0.25 + 1.0) == (1.25), or +25% bonus
+
+	if (musicBuff > 1.25f){
+		musicBuff = 1.25f;
+	}
 
 	if (amount > 0)
 		speciesModifier = getSpeciesXpModifier(player->getSpeciesName(), xpType);
 
 	float buffMultiplier = 1.f;
 
-	if (player->hasBuff(BuffCRC::FOOD_XP_INCREASE) && !player->containsActiveSession(SessionFacadeType::CRAFTING))
+	if (player->hasBuff(BuffCRC::FOOD_XP_INCREASE) && !player->containsActiveSession(SessionFacadeType::CRAFTING)){
 		buffMultiplier += player->getSkillModFromBuffs("xp_increase") / 100.f;
+	}
 
 	int xp = 0;
 
-	if (applyModifiers)
-		xp = playerObject->addExperience(xpType, (int) (amount * speciesModifier * buffMultiplier * localMultiplier * globalExpMultiplier));
-	else
+	if (applyModifiers){
+		//player->sendSystemMessage("Effective Experience Pre-Bonuses:" + String::valueOf(amount));
+		float modifiedExpToGrant = (amount * speciesModifier * buffMultiplier * localMultiplier * globalExpMultiplier);
+		//player->sendSystemMessage("Music Buff Amount:" + String::valueOf(musicBuff));
+		//player->sendSystemMessage("Effective Experience Pre-EntBuff :" + String::valueOf(modifiedExpToGrant));
+		modifiedExpToGrant *= musicBuff;
+		//player->sendSystemMessage("Effective Experience Post-EntBuff :" + String::valueOf(modifiedExpToGrant));
+		//player->sendSystemMessage("Effective Experience Post-Bonuses:" + String::valueOf(modifiedExpToGrant));
+		xp = playerObject->addExperience(xpType, (int) (modifiedExpToGrant)); // Round float value down to a flat int for experience granting.
+	}
+	else {
 		xp = playerObject->addExperience(xpType, (int)amount);
+	}
 
 	player->notifyObservers(ObserverEventType::XPAWARDED, player, xp);
 

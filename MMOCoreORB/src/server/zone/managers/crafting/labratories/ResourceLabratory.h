@@ -19,7 +19,7 @@ class ResourceLabratory: public SharedLabratory {
 public:
 	ResourceLabratory();
 	virtual ~ResourceLabratory();
-	void setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess);
+	void setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess, float qualityBuffVal);
 	void experimentRow(CraftingValues* craftingValues,int rowEffected, int pointsAttempted, float failure, int experimentationResult);
 	void initialize(ZoneServer* server);
 	int getCreationCount(ManufactureSchematic* manufactureSchematic);

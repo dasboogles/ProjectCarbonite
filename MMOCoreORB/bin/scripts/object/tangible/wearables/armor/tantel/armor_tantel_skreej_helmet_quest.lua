@@ -43,9 +43,19 @@
 
 object_tangible_wearables_armor_tantel_armor_tantel_skreej_helmet_quest = object_tangible_wearables_armor_tantel_shared_armor_tantel_skreej_helmet_quest:new {
 	templateType = ARMOROBJECT,
-
-	playerRaces = { "object/creature/player/bothan_male.iff",
+	objectMenuComponent = "ArmorObjectMenuComponent",
+	playerRaces = { 	"object/creature/player/smc_female.iff",
+				"object/creature/player/smc_male.iff",
+				"object/creature/player/nightsister_female.iff",
+				"object/creature/player/nightsister_male.iff",
+				"object/creature/player/nikto_male.iff",
+				"object/creature/player/nikto_female.iff",
+				"object/creature/player/chiss_female.iff",
+				"object/creature/player/chiss_male.iff",
+				"object/creature/player/devaronian_male.iff",
+				"object/creature/player/devaronian_female.iff",
 				"object/creature/player/bothan_female.iff",
+				"object/creature/player/bothan_male.iff",
 				"object/creature/player/human_male.iff",
 				"object/creature/player/human_female.iff",
 				"object/creature/player/moncal_male.iff",
@@ -78,26 +88,28 @@ object_tangible_wearables_armor_tantel_armor_tantel_skreej_helmet_quest = object
 				"object/mobile/vendor/zabrak_female.iff",
 				"object/mobile/vendor/zabrak_male.iff" },
 	
+
 	-- Damage types in WeaponObject
-	vulnerability = LIGHTSABER,
+	vulnerability = STUN + LIGHTSABER,
+
+	-- specialResists = ELECTRICITY + HEAT + ENERGY,
 
 	-- These are default Blue Frog stats
-	healthEncumbrance = 1,
-	actionEncumbrance = 1,
-	mindEncumbrance = 1,
+	healthEncumbrance = 20,
+	actionEncumbrance = 20,
+	mindEncumbrance = 20,
+
+	maxCondition = 30000,
 
 	-- LIGHT, MEDIUM, HEAVY
 	rating = LIGHT,
 
-	kinetic = 15,
-	energy = 15,
-	electricity = 15,
-	stun = 15,
-	blast = 15,
-	heat = 15,
-	cold = 15,
-	acid = 15,
-	lightSaber = 0
+	kinetic = 65,
+	energy = 80,
+	electricity = 80,
+	heat = 80,
+	cold = 65,
+	acid = 65,
 }
 
 ObjectTemplates:addTemplate(object_tangible_wearables_armor_tantel_armor_tantel_skreej_helmet_quest, "object/tangible/wearables/armor/tantel/armor_tantel_skreej_helmet_quest.iff")

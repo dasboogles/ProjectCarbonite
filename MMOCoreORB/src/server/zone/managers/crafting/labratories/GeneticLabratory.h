@@ -22,7 +22,7 @@ private:
 public:
 	GeneticLabratory();
 	virtual ~GeneticLabratory();
-	void setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess);
+	void setInitialCraftingValues(TangibleObject* prototype, ManufactureSchematic* manufactureSchematic, int assemblySuccess, float qualityBuffVal);
 	void experimentRow(CraftingValues* craftingValues,int rowEffected, int pointsAttempted, float failure, int experimentationResult);
 	void initialize(ZoneServer* server);
 	int getCreationCount(ManufactureSchematic* manufactureSchematic);

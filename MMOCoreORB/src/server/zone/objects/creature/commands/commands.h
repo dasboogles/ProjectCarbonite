@@ -837,7 +837,9 @@
 #include "InspacereloadCommand.h"
 #include "InspacerrCommand.h"
 #include "RequestSpaceTrainerCommand.h"
-
+// Custom
+#include "custom/WarDevCommand.h"
+// Custom
 
 
 

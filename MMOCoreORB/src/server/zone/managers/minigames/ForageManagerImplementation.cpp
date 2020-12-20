@@ -361,12 +361,19 @@ bool ForageManagerImplementation::forageGiveResource(TransactionLog& trx, Creatu
 	if (player == nullptr)
 		return false;
 
+	bool shouldBoostQuant = false;
+
+	if (resType == "meat_egg") {
+		shouldBoostQuant = true;
+	}
+
 	ManagedReference<ResourceManager*> resourceManager = player->getZoneServer()->getResourceManager();
 
 	if (resourceManager == nullptr)
 		return false;
 
 	ManagedReference<ResourceSpawn*> resource = nullptr;
+
 
 	if(resType.isEmpty()) {
 		//Get a list of the flora on the planet.
@@ -403,6 +410,14 @@ bool ForageManagerImplementation::forageGiveResource(TransactionLog& trx, Creatu
 	}
 
 	int quantity = System::random(30) + 10;
+	player->sendSystemMessage("You originally found " + String::valueOf(quantity) + " of " + String::valueOf(resType));
+
+	if (shouldBoostQuant) {
+		quantity *= 200; // Harvesting eggs buff
+	}
+
+	player->sendSystemMessage("You were given more " + String::valueOf(resType) + " at:" + String::valueOf(quantity));
+
 	resourceManager->harvestResourceToPlayer(trx, player, resource, quantity);
 	return true;
 }

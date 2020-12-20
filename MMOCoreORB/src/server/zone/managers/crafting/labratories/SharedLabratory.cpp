@@ -142,19 +142,23 @@ float SharedLabratory::getWeightedValue(ManufactureSchematic* manufactureSchemat
 int SharedLabratory::calculateAssemblySuccess(CreatureObject* player,DraftSchematic* draftSchematic, float effectiveness){
 	// assemblyPoints is 0-12
 	/// City bonus should be 10
+	float entExpBonus = player->getSkillMod("music_exp_buff");
 	float cityBonus = player->getSkillMod("private_spec_assembly");
+	cityBonus += entExpBonus; // Roll Entertainer bonus into cityBonus to reduce code duplication.
 
 	int assemblySkill = player->getSkillMod(draftSchematic->getAssemblySkill());
 	assemblySkill += player->getSkillMod("force_assembly");
+	assemblySkill += entExpBonus; // Entertainer Bonus
 
-	float assemblyPoints = ((float)assemblySkill) / 10.0f;
+	float assemblyPoints = ((float)assemblySkill) / 10.0f; 
+
 	int failMitigate = (player->getSkillMod(draftSchematic->getAssemblySkill()) - 100 + cityBonus) / 7;
 	failMitigate += player->getSkillMod("force_failure_reduction");
 
 	if(failMitigate < 0)
 		failMitigate = 0;
-	if(failMitigate > 5)
-		failMitigate = 5;
+	if(failMitigate > 7) // Raise Fail Mitigation by 2
+		failMitigate = 7;
 
 	// 0.85-1.15
 	float toolModifier = 1.0f + (effectiveness / 100.0f);
@@ -183,6 +187,8 @@ int SharedLabratory::calculateAssemblySuccess(CreatureObject* player,DraftSchema
 
 	luckRoll += System::random(player->getSkillMod("luck") + player->getSkillMod("force_luck"));
 
+	// Technically EntBonus is applied twice, once to luckroll and once to assemblyPoints, however it merely makes AmazingSuccess a teeny tiny bit more likely,
+	// and Greater Success slightly more likely.
 	int assemblyRoll = (toolModifier * (luckRoll + (assemblyPoints * 5)));
 
 	if (assemblyRoll > 70)

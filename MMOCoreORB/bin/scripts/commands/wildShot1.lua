@@ -44,12 +44,12 @@
 WildShot1Command = {
         name = "wildshot1",
 
-	damageMultiplier = 2.25,
+	damageMultiplier = 2.60,
 	speedMultiplier = 2.0,
 	healthCostMultiplier = 1.75,
 	actionCostMultiplier = 1.25,
 	mindCostMultiplier = 0.5,
-	accuracyBonus = 25,
+	accuracyBonus = 30,
 
 	animation = "fire_7_single", 
 	animType = GENERATE_RANGED,

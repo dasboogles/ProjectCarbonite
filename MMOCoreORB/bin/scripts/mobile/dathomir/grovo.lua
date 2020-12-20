@@ -2,21 +2,21 @@ grovo = Creature:new {
 	objectName = "@monster_name:grovo",
 	socialGroup = "nightsister",
 	faction = "nightsister",
-	level = 75,
-	chanceHit = 0.7,
-	damageMin = 520,
-	damageMax = 750,
-	baseXp = 7207,
-	baseHAM = 12000,
-	baseHAMmax = 15000,
-	armor = 1,
-	resists = {25,160,25,200,200,200,25,25,-1},
+	level = 275,
+	chanceHit = 10.7,
+	damageMin = 1120,
+	damageMax = 2250,
+	baseXp = 27207,
+	baseHAM = 120000,
+	baseHAMmax = 150000,
+	armor = 2,
+	resists = {55,60,55,75,75,75,45,45,-1},
 	meatType = "meat_carnivore",
-	meatAmount = 1000,
+	meatAmount = 3000,
 	hideType = "hide_leathery",
-	hideAmount = 1000,
+	hideAmount = 3000,
 	boneType = "bone_mammal",
-	boneAmount = 950,
+	boneAmount = 1950,
 	milk = 0,
 	tamingChance = 0,
 	ferocity = 0,
@@ -27,18 +27,58 @@ grovo = Creature:new {
 
 	templates = {"object/mobile/nsister_rancor_grovo.iff"},
 	hues = { 16, 17, 18, 19, 20, 21, 22, 23 },
-	scale = 1.25,
+	scale = 1.55,
 	lootGroups = {
 		{
 			groups = {
-				{group = "rancor_common", chance = 4000000},
-				{group = "armor_all", chance = 2000000},
-				{group = "weapons_all", chance = 2500000},
-				{group = "wearables_all", chance = 1500000}
+				{group = "rancor_common", chance = 10000000}
 			},
-			lootChance = 2500000
-		}
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "wearables_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "wearables_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "wearables_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
 	},
+
 	weapons = {},
 	conversationTemplate = "",
 	attacks = {

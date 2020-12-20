@@ -60,6 +60,8 @@ object_tangible_component_armor_shield_generator_personal_imperial_test = object
 				"object/creature/player/twilek_female.iff",
 				"object/creature/player/zabrak_male.iff",
 				"object/creature/player/zabrak_female.iff",
+				"object/creature/player/ithorian_male.iff",
+				"object/creature/player/ithorian_female.iff",
 				"object/mobile/vendor/aqualish_female.iff",
 				"object/mobile/vendor/aqualish_male.iff",
 				"object/mobile/vendor/bith_female.iff",
@@ -97,6 +99,7 @@ object_tangible_component_armor_shield_generator_personal_imperial_test = object
 	
 	-- Damage types in WeaponObject
 	vulnerability = ACID + BLAST + KINETIC,
+	specialResists = LIGHTSABER,
 
 	-- These are default Blue Frog stats
 	healthEncumbrance = 0,
@@ -105,7 +108,7 @@ object_tangible_component_armor_shield_generator_personal_imperial_test = object
 
 	-- LIGHT, MEDIUM, HEAVY
 	rating = LIGHT,
-
+	maxCondition = 30000,
 	kinetic = 0,
 	energy = 15,
 	electricity = 10,

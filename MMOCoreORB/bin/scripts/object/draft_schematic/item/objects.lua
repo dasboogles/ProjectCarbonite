@@ -3421,3 +3421,11 @@ object_draft_schematic_item_shared_item_weapon_tool = SharedDraftSchematicObject
 }
 
 ObjectTemplates:addClientTemplate(object_draft_schematic_item_shared_item_weapon_tool, "object/draft_schematic/item/shared_item_weapon_tool.iff")
+
+-- Custom Stuff Below Here
+ObjectTemplates:addClientTemplate(object_draft_schematic_item_shared_item_weapon_tool, "object/draft_schematic/item/shared_item_weapon_tool.iff")
+
+object_draft_schematic_item_shared_item_clothing_sea_removal_tool = SharedDraftSchematicObjectTemplate:new {
+	clientTemplateFileName = "object/draft_schematic/item/shared_clothing_sea_removal_tool.iff"
+}
+ObjectTemplates:addClientTemplate(object_draft_schematic_item_shared_item_clothing_sea_removal_tool, "object/draft_schematic/item/shared_clothing_sea_removal_tool.iff")

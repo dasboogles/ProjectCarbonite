@@ -45,7 +45,7 @@ object_tangible_food_crafted_drink_jaar = object_tangible_food_crafted_shared_dr
 
 	templateType = CONSUMABLE,
 
-	duration = 30,
+	duration = 3600,
   filling = 11,
   nutrition = 10,
 

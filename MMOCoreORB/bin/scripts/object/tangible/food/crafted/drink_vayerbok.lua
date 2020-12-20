@@ -44,20 +44,20 @@
 object_tangible_food_crafted_drink_vayerbok = object_tangible_food_crafted_shared_drink_vayerbok:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 15,
 
 	effectType = 4,
 
-	fillingMin = 24,
-	fillingMax = 13, -- 17 on http://swgemu.wikia.com/wiki/Category:Chef
-	flavorMin = 720,
-	flavorMax = 1440,
-	nutritionMin = 7,
-	nutritionMax = 12,
+	fillingMin = 25,
+	fillingMax = 10,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 5,
+	nutritionMax = 15,
 	quantityMin = 6,
-	quantityMax = 10,
+	quantityMax = 12,
 
 	modifiers = { "block", 0 },
 

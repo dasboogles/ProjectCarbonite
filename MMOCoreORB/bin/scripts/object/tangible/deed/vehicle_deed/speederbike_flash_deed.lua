@@ -46,7 +46,16 @@ object_tangible_deed_vehicle_deed_speederbike_flash_deed = object_tangible_deed_
 	templateType = VEHICLEDEED,	
 	noTrade = 1,
 	controlDeviceObjectTemplate = "object/intangible/vehicle/speederbike_flash_pcd.iff",
-	generatedObjectTemplate = "object/mobile/vehicle/speederbike_flash.iff"
+	generatedObjectTemplate = "object/mobile/vehicle/speederbike_flash.iff",
+	numberExperimentalProperties = {1, 1, 1},
+	experimentalProperties = {"XX", "XX", "SR"},
+	experimentalWeights = {1, 1, 1},
+	experimentalGroupTitles = {"null", "null", "exp_durability"},
+	experimentalSubGroupTitles = {"null", "null", "hit_points"},
+	experimentalMin = {0, 0, 5000},
+	experimentalMax = {0, 0, 9000},
+	experimentalPrecision = {0, 0, 0},
+	experimentalCombineType = {0, 0, 1},
 }
 
 ObjectTemplates:addTemplate(object_tangible_deed_vehicle_deed_speederbike_flash_deed, "object/tangible/deed/vehicle_deed/speederbike_flash_deed.iff")

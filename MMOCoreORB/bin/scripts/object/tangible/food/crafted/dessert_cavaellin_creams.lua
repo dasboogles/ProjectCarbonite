@@ -44,7 +44,7 @@
 object_tangible_food_crafted_dessert_cavaellin_creams = object_tangible_food_crafted_shared_dessert_cavaellin_creams:new {
 	templateType = CONSUMABLE,
 
-	duration = 1,
+	duration = 3600,
 	filling = 10,
 	nutrition = 10,
 

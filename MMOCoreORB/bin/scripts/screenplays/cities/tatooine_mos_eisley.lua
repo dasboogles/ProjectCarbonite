@@ -559,7 +559,7 @@ function TatooineMosEisleyScreenPlay:spawnMobiles()
 	self:setMoodString(pNpc, "npc_sitting_table")
 	spawnMobile(self.planet, "scientist",60,3666.51,5,-4856.14,121.288,0)
 	spawnMobile(self.planet, "scientist",60,3348.69,5,-4513.14,182.356,0)
-	pNpc = spawnMobile(self.planet, "settler_townsperson",300,3420.74,5,-5007.61,2.42392,0)
+	pNpc = spawnMobile(self.planet, "settler_thug",300,3420.74,5,-5007.61,2.42392,0)
 	self:setMoodString(pNpc, "conversation")
 	pNpc = spawnMobile(self.planet, "smuggler",300,3358.7,5,-4779.7,256,0)
 	self:setMoodString(pNpc, "npc_sitting_table")
@@ -634,4 +634,17 @@ function TatooineMosEisleyScreenPlay:spawnMobiles()
 	spawnMobile(self.planet, "trainer_scout",0,3519.76,5,-4786.9,77,0)
 	pNpc = spawnMobile(self.planet, "trainer_smuggler",0,3401,5,-4879,340,0)
 	self:setMoodString(pNpc, "worried")
+
+	--Testing NPCs
+	-- To the left and front of the Eisley Starport
+	spawnMobile(self.planet, "TEST1_worrt", 1, 3560.81, 5, -4757.34, -89, 0)
+	spawnMobile(self.planet, "TEST2_worrt", 1, 3558.96, 5, -4759.46, -74, 0)
+	spawnMobile(self.planet, "TEST3_worrt", 1, 3556.54, 5, -4761.73, -94, 0)
+	spawnMobile(self.planet, "TEST4_worrt", 1, 3554.56, 5, -4763.93, -78, 0)
+	spawnMobile(self.planet, "TEST5_janta", 1, 3552.56, 5, -4765.93, -78, 0)
+
+	-- Back of Eisley Starport
+	-- spawnMobile(self.planet, "TEST6_ns_elder", 1, 3705.39, 5, -4842.35, 88, 0)
+	-- spawnMobile(self.planet, "TEST7_acklay", 1, 3705.39, 5, -4832.35, 88, 0)
+
 end

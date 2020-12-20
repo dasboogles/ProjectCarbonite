@@ -44,7 +44,7 @@
 object_tangible_food_crafted_drink_breath_of_heaven = object_tangible_food_crafted_shared_drink_breath_of_heaven:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
+	duration = 3600,
 	filling = 10,
 	nutrition = 10,
 
@@ -52,8 +52,8 @@ object_tangible_food_crafted_drink_breath_of_heaven = object_tangible_food_craft
 
 	fillingMin = 71,
 	fillingMax = 47,
-	flavorMin = 360,
-	flavorMax = 720,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
 	nutritionMin = 370,
 	nutritionMax = 600,
 	quantityMin = 1,

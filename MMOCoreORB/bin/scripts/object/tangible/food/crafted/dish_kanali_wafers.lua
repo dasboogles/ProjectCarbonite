@@ -44,20 +44,20 @@
 object_tangible_food_crafted_dish_kanali_wafers = object_tangible_food_crafted_shared_dish_kanali_wafers:new {
 	templateType = CONSUMABLE,
 
-	duration = 45,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,
+	filling = 40,
+	nutrition = 700,
 
 	effectType = 1,
 
-	fillingMin = 17,
-	fillingMax = 10,
+	fillingMin = 76,
+	fillingMax = 40,
 
-	flavorMin = 1800,
-	flavorMax = 3600,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
 
-	nutritionMin = 30,
-	nutritionMax = 60,
+	nutritionMin = 240,
+	nutritionMax = 700,
 	quantityMin = 6,
 	quantityMax = 10,
 

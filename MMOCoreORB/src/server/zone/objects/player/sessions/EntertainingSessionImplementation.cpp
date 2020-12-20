@@ -632,8 +632,17 @@ void EntertainingSessionImplementation::addEntertainerBuffDuration(CreatureObjec
 
 	buffDuration += duration;
 
-	if (buffDuration > (120.0f + (10.0f / 60.0f)) ) // 2 hrs 10 seconds
-		buffDuration = (120.0f + (10.0f / 60.0f)); // 2hrs 10 seconds
+	// if (buffDuration > (120.0f + (10.0f / 60.0f)) ) // 2 hrs 10 seconds
+	// 	buffDuration = (120.0f + (10.0f / 60.0f)); // 2hrs 10 seconds
+
+	if (buffDuration > 210.0f) { // If duration greater than 3 hrs 30 minutes
+		// Add notification to player when they can stop listening/watching.
+		if (!creature->getIsNotified()) {
+			creature->setIsNotified(true);
+			creature->sendSystemMessage("The Entertainer's Influence on you has reached its limit.");
+		}
+		buffDuration = 210.0f; // Set to 3hrs and 30 minutes
+	}
 
 	setEntertainerBuffDuration(creature, performanceType, buffDuration);
 }
@@ -895,8 +904,8 @@ void EntertainingSessionImplementation::activateEntertainerBuff(CreatureObject* 
 
 		//1 minute minimum listen/watch time
 		int timeElapsed = time(0) - getEntertainerBuffStartTime(creature, performanceType);
-		if(timeElapsed < 60) {
-			creature->sendSystemMessage("You must listen or watch a performer for at least 1 minute in order to gain the entertainer buffs.");
+		if(timeElapsed < 30) {
+			creature->sendSystemMessage("You must listen or watch a performer for at least 30 seconds in order to gain the entertainer buffs.");
 			return;
 		}
 
@@ -927,6 +936,10 @@ void EntertainingSessionImplementation::activateEntertainerBuff(CreatureObject* 
 
 			Locker locker2(willBuff);
 			creature->addBuff(willBuff);
+
+			//Reset notification flag as it is no longer being used.
+			creature->setIsNotified(false);
+
 			break;
 		}
 		case PerformanceType::DANCE:
@@ -939,6 +952,10 @@ void EntertainingSessionImplementation::activateEntertainerBuff(CreatureObject* 
 
 			Locker locker(mindBuff);
 			creature->addBuff(mindBuff);
+
+			//Reset notification flag as it is no longer being used.
+			creature->setIsNotified(false);
+
 			break;
 		}
 		}
@@ -1020,7 +1037,10 @@ void EntertainingSessionImplementation::increaseEntertainerBuff(CreatureObject* 
 	if(isInDenyServiceList(patron))
 		return;
 
-	float buffAcceleration = 1 + ((float)entertainer->getSkillMod("accelerate_entertainer_buff") / 100.f);
+	// float buffAcceleration = 1 + ((float)entertainer->getSkillMod("accelerate_entertainer_buff") / 100.f);
+
+	// Changed from 1 -> 5 to decrease time needed to buff
+	float buffAcceleration = 5 + ((float)entertainer->getSkillMod("accelerate_entertainer_buff") / 100.f);
 
 	addEntertainerBuffDuration(patron, performance->getType(), 2.0f * buffAcceleration);
 	addEntertainerBuffStrength(patron, performance->getType(), performance->getHealShockWound());

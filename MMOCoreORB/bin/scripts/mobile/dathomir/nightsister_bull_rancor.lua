@@ -2,15 +2,15 @@ nightsister_bull_rancor = Creature:new {
 	objectName = "@mob/creature_names:nightsister_bull_rancor",
 	socialGroup = "nightsister",
 	faction = "nightsister",
-	level = 65,
-	chanceHit = 0.6,
-	damageMin = 455,
-	damageMax = 620,
+	level = 85,
+	chanceHit = 2.6,
+	damageMin = 755,
+	damageMax = 920,
 	baseXp = 6288,
-	baseHAM = 11000,
-	baseHAMmax = 14000,
-	armor = 1,
-	resists = {15,160,15,200,200,200,15,15,-1},
+	baseHAM = 25000,
+	baseHAMmax = 39000,
+	armor = 2,
+	resists = {45,160,15,200,200,200,15,15,-1},
 	meatType = "meat_carnivore",
 	meatAmount = 1000,
 	hideType = "hide_leathery",
@@ -31,13 +31,28 @@ nightsister_bull_rancor = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "rancor_common", chance = 4000000},
-				{group = "armor_all", chance = 2000000},
-				{group = "weapons_all", chance = 2500000},
-				{group = "wearables_all", chance = 1500000}
+				{group = "rancor_common", chance = 10000000}
 			},
-			lootChance = 2300000
-		}
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "wearables_all", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
 	},
 	weapons = {},
 	conversationTemplate = "",

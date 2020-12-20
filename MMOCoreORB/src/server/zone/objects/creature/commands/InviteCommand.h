@@ -36,19 +36,61 @@ public:
 				godMode = true;
 		}
 
+		// creature->sendSystemMessage("Target is: " + String::valueOf(target));
 		GroupManager* groupManager = GroupManager::instance();
 
-		ManagedReference<SceneObject*> object = server->getZoneServer()->getObject(target);
+		// Try to Invite by remote name
+		if (target == 0){
+			String targetName;
+			try {
+				UnicodeTokenizer args(arguments);
+				args.getStringToken(targetName);
+				if (targetName != "") {
+					if (targetName.contains("\"")) {
+						targetName = targetName.replaceAll("\"","");
+					}
+					ManagedReference<PlayerManager*> playerManager = server->getPlayerManager();
+					CreatureObject* targetCreature = playerManager->getPlayer(targetName);
 
-		if (object == nullptr)
-			return GENERALERROR;
+					if (targetCreature == nullptr) {
+						creature->sendSystemMessage(targetName + " does not exist or is not online.");
+						return INVALIDTARGET;
+					}
+
+					if (targetCreature->getZone() == nullptr) {
+						creature->sendSystemMessage("You tried to invite a player that is not in a zone that is currently loaded.");
+						return INVALIDTARGET;
+					}
+
+					if (creature == targetCreature) {
+						creature->sendSystemMessage("You cannot invite yourself.");
+						return INVALIDTARGET;
+					}
+
+					// Try to invite
+					if (!targetCreature->getPlayerObject()->isIgnoring(creature->getFirstName().toLowerCase()) || godMode){
+						groupManager->inviteToGroup(creature, targetCreature);
+					}
+				}
+
+			} catch (Exception& e) {
+				creature->sendSystemMessage("SYNTAX: /invite PlayerName");
+				return INVALIDPARAMETERS;
+			}
+		} else { // Invite by Target
+			ManagedReference<SceneObject*> object = server->getZoneServer()->getObject(target);
+
+			if (object == nullptr)
+				return GENERALERROR;
 
 
-		if (object->isPlayerCreature()) {
-			CreatureObject* player = cast<CreatureObject*>( object.get());
+			if (object->isPlayerCreature()) {
+				CreatureObject* player = cast<CreatureObject*>( object.get());
 
-			if (!player->getPlayerObject()->isIgnoring(creature->getFirstName().toLowerCase()) || godMode)
-				groupManager->inviteToGroup(creature, player);
+				if (!player->getPlayerObject()->isIgnoring(creature->getFirstName().toLowerCase()) || godMode){
+					groupManager->inviteToGroup(creature, player);
+				}
+			}
 		}
 
 		return SUCCESS;

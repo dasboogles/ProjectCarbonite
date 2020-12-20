@@ -46,22 +46,42 @@
 includeFile("creature/player/base/serverobjects.lua")
 
 -- Server Objects
+includeFile("creature/player/aqualish_female.lua") --Aqualish female
+includeFile("creature/player/aqualish_male.lua") --Aqualish male
+includeFile("creature/player/bith_female.lua") --Bith female
+includeFile("creature/player/bith_male.lua") --Bith male
 includeFile("creature/player/bothan_female.lua")
 includeFile("creature/player/bothan_male.lua")
+includeFile("creature/player/chiss_female.lua") --Chiss female
+includeFile("creature/player/chiss_male.lua") --Chiss male
+includeFile("creature/player/devaronian_male.lua") --Devaronian male
+includeFile("creature/player/gotal_male.lua") --Gotal male
+includeFile("creature/player/gran_male.lua") --Gran male
 includeFile("creature/player/human_female.lua")
 includeFile("creature/player/human_male.lua")
+includeFile("creature/player/hutt_female.lua") --Hutt female
+includeFile("creature/player/hutt_male.lua") --Hutt male
+includeFile("creature/player/ishi_tib_male.lua") --Ishi Tib male
 includeFile("creature/player/ithorian_female.lua")
 includeFile("creature/player/ithorian_male.lua")
 includeFile("creature/player/moncal_female.lua")
 includeFile("creature/player/moncal_male.lua")
+includeFile("creature/player/nautolan_male.lua") --Nautolan male
+includeFile("creature/player/nightsister_female.lua") --Nightsister female
+includeFile("creature/player/nikto_male.lua") --Nikto male
+includeFile("creature/player/quarren_male.lua") --Quarren male
 includeFile("creature/player/rodian_female.lua")
 includeFile("creature/player/rodian_male.lua")
+includeFile("creature/player/smc_female.lua") --Singing Mountain Clan female
 includeFile("creature/player/sullustan_female.lua")
 includeFile("creature/player/sullustan_male.lua")
+includeFile("creature/player/talz_male.lua") --Talz male
+includeFile("creature/player/togruta_female.lua") --Togruta female
 includeFile("creature/player/trandoshan_female.lua")
 includeFile("creature/player/trandoshan_male.lua")
 includeFile("creature/player/twilek_female.lua")
 includeFile("creature/player/twilek_male.lua")
+includeFile("creature/player/weequay_male.lua") --Weequay male
 includeFile("creature/player/wookiee_female.lua")
 includeFile("creature/player/wookiee_male.lua")
 includeFile("creature/player/zabrak_female.lua")

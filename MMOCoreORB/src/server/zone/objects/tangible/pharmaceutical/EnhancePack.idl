@@ -55,6 +55,11 @@ class EnhancePack extends PharmaceuticalObject {
 		string enhace = "examine_enhance_" + attributeName;
 		string durationStr = "examine_duration_" + attributeName;
 
+		if (attribute == 69){
+			enhace = "unknown_enhancement_strength";
+			durationStr = "unknown_duration";
+		}
+
 		msg.insertAttribute(enhace, Math.getPrecision(effectiveness, 0));
 		msg.insertAttribute(durationStr, Math.getPrecision(duration, 0));
 

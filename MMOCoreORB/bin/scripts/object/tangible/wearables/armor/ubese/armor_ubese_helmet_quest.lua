@@ -43,9 +43,19 @@
 
 object_tangible_wearables_armor_ubese_armor_ubese_helmet_quest = object_tangible_wearables_armor_ubese_shared_armor_ubese_helmet_quest:new {
 	templateType = ARMOROBJECT,
-
-	playerRaces = { "object/creature/player/bothan_male.iff",
+	objectMenuComponent = "ArmorObjectMenuComponent",
+	playerRaces = { 	"object/creature/player/smc_female.iff",
+				"object/creature/player/smc_male.iff",
+				"object/creature/player/nightsister_female.iff",
+				"object/creature/player/nightsister_male.iff",
+				"object/creature/player/nikto_male.iff",
+				"object/creature/player/nikto_female.iff",
+				"object/creature/player/chiss_female.iff",
+				"object/creature/player/chiss_male.iff",
+				"object/creature/player/devaronian_male.iff",
+				"object/creature/player/devaronian_female.iff",
 				"object/creature/player/bothan_female.iff",
+				"object/creature/player/bothan_male.iff",
 				"object/creature/player/human_male.iff",
 				"object/creature/player/human_female.iff",
 				"object/creature/player/moncal_male.iff",
@@ -81,27 +91,25 @@ object_tangible_wearables_armor_ubese_armor_ubese_helmet_quest = object_tangible
 				"object/mobile/vendor/zabrak_male.iff" },
 	
 	-- Damage types in WeaponObject
-	vulnerability = HEAT + COLD + STUN + LIGHTSABER,
+	vulnerability = STUN + LIGHTSABER,
+
+	-- specialResists = ELECTRICITY + ENERGY + COLD,
 
 	-- These are default Blue Frog stats
-	healthEncumbrance = 9,
-	actionEncumbrance = 11,
-	mindEncumbrance = 180,
+	healthEncumbrance = 20,
+	actionEncumbrance = 20,
+	mindEncumbrance = 20,
+
+	maxCondition = 30000,
 
 	-- LIGHT, MEDIUM, HEAVY
 	rating = LIGHT,
 
-	maxCondition = 20000,
-
-	kinetic = 20,
-	energy = 15,
-	electricity = 15,
-	stun = 0,
-	blast = 15,
-	heat = 0,
-	cold = 0,
-	acid = 15,
-	lightSaber = 0
+	kinetic = 65,
+	energy = 80,
+	electricity = 80,
+	blast = 65,
+	cold = 80,
 }
 
 ObjectTemplates:addTemplate(object_tangible_wearables_armor_ubese_armor_ubese_helmet_quest, "object/tangible/wearables/armor/ubese/armor_ubese_helmet_quest.iff")

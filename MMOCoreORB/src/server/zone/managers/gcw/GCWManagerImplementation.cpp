@@ -123,6 +123,7 @@ void GCWManagerImplementation::loadLuaConfig() {
 	LuaObject pointsObject = lua->getGlobalObject("HQValues");
 
 	if (pointsObject.isValidTable()) {
+
 		for (int i = 1; i <= pointsObject.getTableSize(); ++i) {
 			LuaObject baseObject = pointsObject.getObjectAt(i);
 			if (baseObject.isValidTable()) {
@@ -131,6 +132,7 @@ void GCWManagerImplementation::loadLuaConfig() {
 				addPointValue(templateString, pointsValue);
 			}
 			baseObject.pop();
+
 		}
 	}
 
@@ -449,6 +451,7 @@ bool GCWManagerImplementation::hasTooManyBasesNearby(int x, int y) {
 
 void GCWManagerImplementation::registerGCWBase(BuildingObject* building, bool initializeBase) {
 	if (!hasBase(building)) {
+
 		if (building->getFaction() == Factions::FACTIONIMPERIAL)
 			imperialBases++;
 		else if (building->getFaction() == Factions::FACTIONREBEL)
@@ -498,6 +501,7 @@ void GCWManagerImplementation::registerGCWBase(BuildingObject* building, bool in
 }
 
 void GCWManagerImplementation::unregisterGCWBase(BuildingObject* building) {
+
 	if (hasBase(building)) {
 		dropBase(building);
 
@@ -530,6 +534,7 @@ void GCWManagerImplementation::unregisterGCWBase(BuildingObject* building) {
 // pre: building is locked
 // initializes times when a base is placed for the first time
 void GCWManagerImplementation::initializeBaseTimers(BuildingObject* building) {
+
 	// THESE WORK IF YOU DONT WANT A BASE VULN ON PLANT
 	// IT DOES THE NEXT ONE
 	/*
@@ -734,6 +739,7 @@ void GCWManagerImplementation::scheduleVulnerabilityStart(BuildingObject* buildi
 	if (!hasBase(building))
 		return;
 
+
 	if (baseData == nullptr)
 		return;
 
@@ -885,8 +891,7 @@ String GCWManagerImplementation::getVulnerableStatus(BuildingObject* building, C
 	dif = dif - (hours * 3600);
 	int minutes = (int)ceil(dif / 60.f);
 
-	return "@player_structure:next_vulnerability_prompt " + String::valueOf(days) + " days, " + String::valueOf(hours) + " hours, " + String::valueOf(minutes) +
-		   " minutes";
+	return "@player_structure:next_vulnerability_prompt " + String::valueOf(days) + " days, " + String::valueOf(hours) + " hours, " + String::valueOf(minutes) + " minutes";
 }
 
 bool GCWManagerImplementation::isBaseVulnerable(BuildingObject* building) {
@@ -934,6 +939,7 @@ bool GCWManagerImplementation::isTerminalDamaged(TangibleObject* securityTermina
 }
 
 bool GCWManagerImplementation::isSecurityTermSliced(BuildingObject* building) {
+
 	DestructibleBuildingDataComponent* baseData = getDestructibleBuildingData(building);
 
 	if (baseData == nullptr) {
@@ -951,6 +957,7 @@ bool GCWManagerImplementation::isDNASampled(BuildingObject* building) {
 	}
 
 	return (baseData->getState() >= DestructibleBuildingDataComponent::DNA);
+
 }
 
 bool GCWManagerImplementation::isPowerOverloaded(BuildingObject* building) {
@@ -1079,13 +1086,14 @@ void GCWManagerImplementation::sendJamUplinkMenu(CreatureObject* creature, Build
 		status->setPromptText("Select the BAND that you wish to search.");
 
 		for (int i = 0; i < 10; i++)
-			status->addMenuItem("Band #" + String::valueOf(i + 1), 9);
+			status->addMenuItem("Band #" + String::valueOf(i+1), 9);
 	} else {
 		status->setPromptText("Select the CHANNEL that you wish to search.");
 
 		for (int i = 0; i < 10; i++)
-			status->addMenuItem("Channel #" + String::valueOf(i + 1), 9);
+			status->addMenuItem("Channel #" + String::valueOf(i+1), 9);
 	}
+
 
 	ghost->addSuiBox(status);
 	creature->sendSystemMessage("You begin scanning for baseline carrier signals...");
@@ -1161,7 +1169,7 @@ bool GCWManagerImplementation::canStartSlice(CreatureObject* creature, TangibleO
 	} else if (isSecurityTermSliced(building)) {
 		creature->sendSystemMessage("@slicing/slicing:not_again"); // There isn't anything more you can do to the terminal.
 		return false;
-	} else if (!isUplinkJammed(building)) {
+	} else if (!isUplinkJammed(building))	{
 		creature->sendSystemMessage("@faction/faction_hq/faction_hq_response:other_objectives"); // Other objectives must be disabled prior to gaining access to this one.
 		return false;
 	} else if (creature->isInCombat()) {
@@ -1234,6 +1242,7 @@ void GCWManagerImplementation::repairTerminal(CreatureObject* creature, Tangible
 
 	if (building == nullptr)
 		return;
+
 
 	DestructibleBuildingDataComponent* baseData = getDestructibleBuildingData(building);
 
@@ -1465,9 +1474,9 @@ void GCWManagerImplementation::sendPowerRegulatorControls(CreatureObject* creatu
 
 	for (int i = 0; i < powerSwitchCount; i++) {
 		if (baseData->getPowerPosition(i))
-			status->addMenuItem("Switch #" + String::valueOf(i + 1) + ": ON", i);
+			status->addMenuItem("Switch #" + String::valueOf(i+1) + ": ON",i);
 		else
-			status->addMenuItem("Switch #" + String::valueOf(i + 1) + ": OFF", i);
+			status->addMenuItem("Switch #" + String::valueOf(i+1) + ": OFF",i);
 	}
 
 	ghost->addSuiBox(status);
@@ -1778,6 +1787,7 @@ void GCWManagerImplementation::resetVulnerability(CreatureObject* creature, Buil
 	nextTime.addMiliTime(vulnerabilityDuration * 1000);
 	baseData->setVulnerabilityEndTime(nextTime);
 
+
 	Reference<Task*> task = getStartTask(building->getObjectID());
 	if (task != nullptr) {
 		task->cancel();
@@ -1798,7 +1808,7 @@ bool GCWManagerImplementation::hasResetTimerPast(BuildingObject* building) {
 
 	Time ttime = baseData->getLastResetTime();
 
-	ttime.addMiliTime(resetTimer * 1000);
+	ttime.addMiliTime(resetTimer*1000);
 
 	return ttime.isPast();
 }
@@ -1843,6 +1853,7 @@ void GCWManagerImplementation::sendBaseDefenseStatus(CreatureObject* creature, B
 		ManagedReference<SceneObject*> sceno = zoneServer->getObject(baseData->getTurretID(i));
 
 		if (sceno != nullptr && sceno->isTurret()) {
+
 			status->addMenuItem(sceno->getDisplayedName(), sceno->getObjectID());
 		}
 	}
@@ -1880,7 +1891,7 @@ void GCWManagerImplementation::sendRemoveDefenseConfirmation(BuildingObject* bui
 		return;
 
 	StringBuffer text;
-	text << "@faction/faction_hq/faction_hq_response:terminal_response25 " << endl << endl;				// Are you sure you want to remove the selected defense?
+	text << "@faction/faction_hq/faction_hq_response:terminal_response25 " << endl << endl; // Are you sure you want to remove the selected defense?
 	text << "@faction/faction_hq/faction_hq_response:selected_defense " << defense->getDisplayedName(); // Selected Defense:
 
 	ManagedReference<SuiMessageBox*> removeDefense = new SuiMessageBox(creature, SuiWindowType::HQ_TERMINAL);
@@ -2057,7 +2068,7 @@ void GCWManagerImplementation::sendSelectDeedToDonate(BuildingObject* building, 
 	ManagedReference<SuiListBox*> donate = new SuiListBox(creature, SuiWindowType::HQ_TERMINAL);
 
 	donate->setPromptTitle("@faction/faction_hq/faction_hq_response:terminal_response26"); // Donate Deed
-	donate->setPromptText("@faction/faction_hq/faction_hq_response:terminal_response23");  // Which deed would you like to donate?
+	donate->setPromptText("@faction/faction_hq/faction_hq_response:terminal_response23"); // Which deed would you like to donate?
 	donate->setUsingObject(building);
 	donate->setOkButton(true, "@ok");
 	donate->setCancelButton(true, "@cancel");
@@ -2432,6 +2443,7 @@ void GCWManagerImplementation::sendTurretAttackListTo(CreatureObject* creature, 
 	}
 
 	generateTurretControlBoxTo(creature, turretObject, turretControlTerminal);
+
 }
 
 bool GCWManagerImplementation::canUseTurret(TangibleObject* turret, SceneObject* terminal, CreatureObject* creature) {
@@ -2455,6 +2467,7 @@ bool GCWManagerImplementation::canUseTurret(TangibleObject* turret, SceneObject*
 			// try to close it from the old controller if it's still up
 			controllerGhost->closeSuiWindowType(SuiWindowType::HQ_TURRET_TERMINAL);
 		} else if (controllerGhost != nullptr) {
+
 			// if the controller creatures has the same window up
 			if (turretData->getManualTarget() != nullptr) {
 				int controllingSuiBoxID = controlData->getSuiBoxID();
@@ -2544,6 +2557,7 @@ void GCWManagerImplementation::generateTurretControlBoxTo(CreatureObject* creatu
 		CreatureObject* creo = targets.get(i);
 
 		if (creo != nullptr) {
+
 			int distance = turret->getDistanceTo(creo);
 
 			status->addMenuItem(creo->getDisplayedName() + " - " + String::valueOf(distance) + "m", creo->getObjectID());
@@ -2568,6 +2582,7 @@ void GCWManagerImplementation::generateTurretControlBoxTo(CreatureObject* creatu
 // returns a cost multiplier for faction items
 // includes racial penalty and Bonus&Penality for Loser and Winner side
 float GCWManagerImplementation::getGCWDiscount(CreatureObject* creature) {
+
 	float discount = 1.0f;
 
 	if (getWinningFaction() != 0 && creature->getFaction() != 0) {

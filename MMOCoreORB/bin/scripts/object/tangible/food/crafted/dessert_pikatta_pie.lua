@@ -44,17 +44,17 @@
 object_tangible_food_crafted_dessert_pikatta_pie = object_tangible_food_crafted_shared_dessert_pikatta_pie:new {
 	templateType = CONSUMABLE,
 
-	duration = 45,
-	filling = 19,
-	nutrition = 15,
+	duration = 5400,
+	filling = 15,
+	nutrition = 30,
 
 	effectType = 2,
 
-	fillingMin = 29,
-	fillingMax = 19,
-	flavorMin = 960,
-	flavorMax = 1920,
-	nutritionMin = 16,
+	fillingMin = 30,
+	fillingMax = 15,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 15,
 	nutritionMax = 30,
 	quantityMin = 5,
 	quantityMax = 7,

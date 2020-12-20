@@ -44,16 +44,16 @@
 object_tangible_food_crafted_dish_thakitillo = object_tangible_food_crafted_shared_dish_thakitillo:new {
 	templateType = CONSUMABLE,
 
-	duration = 30,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,
+	filling = 50,
+	nutrition = 50,
 
 	effectType = 4,
 
-	fillingMin = 47,
-	fillingMax = 33,
-	flavorMin = 540,
-	flavorMax = 1080,
+	fillingMin = 75,
+	fillingMax = 50,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
 	nutritionMin = 30,
 	nutritionMax = 50,
 	quantityMin = 1,
@@ -63,6 +63,7 @@ object_tangible_food_crafted_dish_thakitillo = object_tangible_food_crafted_shar
 
 	buffName = "food.dish_thakitillo",
 	buffCRC = 0xDC5D4FD7,
+
 	speciesRestriction = "",
 
 	numberExperimentalProperties = {1, 1, 1, 2, 2, 2, 2},

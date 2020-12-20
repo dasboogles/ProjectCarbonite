@@ -1,0 +1,5 @@
+object_tangible_loot_creature_loot_generic_bh_skull = object_tangible_loot_creature_loot_generic_shared_bh_skull:new {
+
+}
+
+ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_bh_skull, "object/tangible/loot/creature/loot/generic/bh_skull.iff")

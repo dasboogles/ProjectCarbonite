@@ -2302,6 +2302,8 @@ bool AiAgentImplementation::isScentMasked(CreatureObject* target) {
 	// Step 1. Check for break
 	bool success = false;
 	int camoSkill = effectiveTarget->getSkillMod("mask_scent");
+	camoSkill += 25; // Buff Scent mask so it isn't so untrustworthy!
+	
 	int creatureLevel = getLevel();
 
 	int mod = 100;
@@ -2313,7 +2315,8 @@ bool AiAgentImplementation::isScentMasked(CreatureObject* target) {
 		mod -= 35;
 
 	success = System::random(100) <= mod - (float)creatureLevel / ((float)camoSkill / 100.0f) / 20.f;
-
+	effectiveTarget->sendSystemMessage("Your maskScent skill is: " + String::valueOf(camoSkill) + " and you rolled a: " + String::valueOf(success));
+	
 	if (success)
 		camouflagedObjects.put(effectiveTargetID); // add to award
 	else
@@ -2511,6 +2514,11 @@ int AiAgentImplementation::inflictDamage(TangibleObject* attacker, int damageTyp
 		if (damage > 0) {
 			// This damage is DOT or other types of non direct combat damage, it should not count towards loot and thus not be added to the threat map damage.
 			// Adding aggro should still be done.
+			// getThreatMap()->addAggro(creature, 1);
+
+			// The heck? Changed this back, because DOTs SHOULD count towards lootable kills.
+			getThreatMap()->addDamage(creature, damage);
+			// I want a lot of aggro for dots ;)
 			getThreatMap()->addAggro(creature, 1);
 		}
 	}

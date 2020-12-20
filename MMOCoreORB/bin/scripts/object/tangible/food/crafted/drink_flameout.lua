@@ -44,21 +44,21 @@
 object_tangible_food_crafted_drink_flameout = object_tangible_food_crafted_shared_drink_flameout:new {
 	templateType = CONSUMABLE,
 
-	duration = 3,
-	filling = 10,
-	nutrition = 10,
+	duration = 18,
+	filling = 40,
+	nutrition = 100,
 
 	effectType = 3, -- Event Based Buff
 	eventTypes = {DAMAGERECEIVED},
 
 	fillingMin = 72,
-	fillingMax = 43,
-	flavorMin = 3,
-	flavorMax = 6,
+	fillingMax = 40,
+	flavorMin = 10,
+	flavorMax = 20,
 	nutritionMin = 70,
 	nutritionMax = 100,
 	quantityMin = 2,
-	quantityMax = 5,-- 2 on http://swgemu.wikia.com/wiki/Category:Chef
+	quantityMax = 10,-- 2 on http://swgemu.wikia.com/wiki/Category:Chef
 
 	modifiers = { "mitigate_damage", 0 },
 

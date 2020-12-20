@@ -44,18 +44,18 @@
 object_tangible_food_crafted_dish_rakririan_burnout_sauce = object_tangible_food_crafted_shared_dish_rakririan_burnout_sauce:new {
 	templateType = CONSUMABLE,
 
-	duration = 10,
-	filling = 10,
-	nutrition = 10,
+	duration = 5400,
+	filling = 25,
+	nutrition = 25,
 
 	effectType = 4,
 
 	fillingMin = 55,
-	fillingMax = 33,
-	flavorMin = 720,
-	flavorMax = 1560,
-	nutritionMin = 7,
-	nutritionMax = 12,
+	fillingMax = 25,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 5,
+	nutritionMax = 25,
 	quantityMin = 2,
 	quantityMax = 5,
 

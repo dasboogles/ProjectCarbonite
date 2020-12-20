@@ -335,6 +335,13 @@ int CombatManager::doTargetCombatAction(CreatureObject* attacker, WeaponObject* 
 }
 
 int CombatManager::doTargetCombatAction(CreatureObject* attacker, WeaponObject* weapon, CreatureObject* defender, const CreatureAttackData& data, bool* shouldGcwCrackdownTef, bool* shouldGcwTef, bool* shouldBhTef) const {
+
+	// Make sure that sabers can't go below 5fc
+	if (attacker->isPlayerCreature() && weapon->isJediWeapon() && weapon->getForceCost() <= 5) {
+  		Locker locker(weapon);
+ 		weapon->setForceCost(5);
+	}
+
 	if (defender->isEntertaining())
 		defender->stopEntertaining();
 
@@ -523,8 +530,10 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 	for (int i = 0; i < dotEffects->size(); i++) {
 		const DotEffect& effect = dotEffects->get(i);
 
-		if (defender->hasDotImmunity(effect.getDotType()) || effect.getDotDuration() == 0 || System::random(100) > effect.getDotChance())
+		// If target has dotImmunity, OR has no duration on the dot left, OR they WIN a chance roll per chance definition
+		if (defender->hasDotImmunity(effect.getDotType()) || effect.getDotDuration() == 0 || System::random(100) > effect.getDotChance()){
 			continue;
+		}
 
 		const Vector<String>& defenseMods = effect.getDefenderStateDefenseModifers();
 		int resist = 0;
@@ -542,6 +551,8 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 		}
 
 		int potency = effect.getDotPotency();
+		// defender->sendSystemMessage("///////////////////////////////////////");
+		// defender->sendSystemMessage("DotPotency-Pre: " + String::valueOf(potency));
 
 		if (potency == 0) {
 			potency = 150;
@@ -554,14 +565,54 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 		}
 
 		debug() << "entering addDotState with dotType:" << dotType;
-
 		float damMod = attacker->isAiAgent() ? cast<AiAgent*>(attacker)->getSpecialDamageMult() : 1.f;
-		defender->addDotState(attacker, dotType, data.getCommand()->getNameCRC(),
-				effect.isDotDamageofHit() ? damageToApply * effect.getPrimaryPercent() / 100.0f
-					: effect.getDotStrength() * damMod,
-				pool, effect.getDotDuration(), potency, resist,
-				effect.isDotDamageofHit() ? damageToApply * effect.getSecondaryPercent() / 100.0f
-					: effect.getDotStrength() * damMod);
+
+		// Making DotStrength from command definitions actually work
+		int primaryDotStrength = 0;
+		int secondaryDotStrength = 0;
+
+		// If an attack is being used that contains 'creature' AND the attacker is an NPC then we
+		// respect the dotStrength value being given.
+		if (String::valueOf(data.getCommand()->getQueueCommandName()).contains("creature") && attacker->isAiAgent()){
+			damageToApply = damageToApply * (effect.getDotStrength() / 100.0f);
+		}
+
+		if (effect.isDotDamageofHit()) {
+			primaryDotStrength = damageToApply * effect.getPrimaryPercent() / 100.0f;
+			secondaryDotStrength = damageToApply * effect.getSecondaryPercent() / 100.0f;
+		} else {
+			primaryDotStrength = effect.getDotStrength() * damMod;
+			secondaryDotStrength = effect.getDotStrength() * damMod;
+		}
+
+		defender->addDotState(
+			attacker, 
+			dotType, 
+			data.getCommand()->getNameCRC(),
+			primaryDotStrength,
+			pool, 
+			effect.getDotDuration(), 
+			potency, 
+			resist,
+			secondaryDotStrength
+		);
+
+		// if (String::valueOf(data.getCommand()->getQueueCommandName()).contains("creature")){
+		// 	defender->sendSystemMessage("Command contains Creature!");
+		// }
+		// defender->sendSystemMessage("You're being diseased from this method!");
+		// defender->sendSystemMessage("Type: " + String::valueOf(data.getCommand()->getQueueCommandName()));
+		// defender->sendSystemMessage("DmgOfHit: " + String::valueOf(effect.isDotDamageofHit()));
+		// defender->sendSystemMessage("DmgToApply: " + String::valueOf(damageToApply));
+		// defender->sendSystemMessage("Primary%: " + String::valueOf(effect.getPrimaryPercent()));
+		// defender->sendSystemMessage("Secondary%: " + String::valueOf(effect.getSecondaryPercent()));
+		// defender->sendSystemMessage("DamMod: " + String::valueOf(damMod));
+		// defender->sendSystemMessage("DotPotency-Post: " + String::valueOf(potency));
+		// defender->sendSystemMessage("DotStrength: " + String::valueOf(effect.getDotStrength()));
+		// defender->sendSystemMessage("Chance: " + String::valueOf(effect.getDotChance()));
+		// defender->sendSystemMessage("Duration: " + String::valueOf(effect.getDotDuration()));
+		// defender->sendSystemMessage("DotDamageFromHit: " + String::valueOf(effect.isDotDamageofHit()));
+		// defender->sendSystemMessage("///////////////////////////////////////");
 	}
 }
 
@@ -924,22 +975,53 @@ int CombatManager::calculateDamageRange(TangibleObject* attacker, CreatureObject
 }
 
 float CombatManager::applyDamageModifiers(CreatureObject* attacker, WeaponObject* weapon, float damage, const CreatureAttackData& data) const {
+	// Disable/Enable this for system message helpers
+	bool showDebugHelpers = false;
+
 	if (!data.isForceAttack()) {
 		const auto weaponDamageMods = weapon->getDamageModifiers();
 
-		for (int i = 0; i < weaponDamageMods->size(); ++i) {
-			damage += attacker->getSkillMod(weaponDamageMods->get(i));
+		// Help with showing damage modifiers
+		if (showDebugHelpers){
+			attacker->sendSystemMessage("Damage Pre-Mods:" + String::valueOf(damage));
 		}
 
-		if (weapon->getAttackType() == SharedWeaponObjectTemplate::MELEEATTACK)
+		for (int i = 0; i < weaponDamageMods->size(); ++i) {
+			damage += attacker->getSkillMod(weaponDamageMods->get(i));
+
+			// Help with showing damage modifiers
+			if (showDebugHelpers){
+				attacker->sendSystemMessage("Displaying Damage Mod index of: " + String::valueOf(i) + " with value: " + String::valueOf(attacker->getSkillMod(weaponDamageMods->get(i))));
+			}
+
+		}
+
+		if (weapon->getAttackType() == SharedWeaponObjectTemplate::MELEEATTACK){
 			damage += attacker->getSkillMod("private_melee_damage_bonus");
-		if (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK)
+
+			// Help with showing damage modifiers
+			if (showDebugHelpers){
+				attacker->sendSystemMessage("Private Melee Damage Bonus: " + String::valueOf(attacker->getSkillMod("private_melee_damage_bonus")));
+			}
+		}
+		if (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK){
 			damage += attacker->getSkillMod("private_ranged_damage_bonus");
+
+			// Help with showing damage modifiers
+			if (showDebugHelpers){
+				attacker->sendSystemMessage("Private Ranged Damage Bonus: " + String::valueOf(attacker->getSkillMod("private_ranged_damage_bonus")));
+			}
+		}
 	}
 
 	damage += attacker->getSkillMod("private_damage_bonus");
 
 	int damageMultiplier = attacker->getSkillMod("private_damage_multiplier");
+
+	// Help with showing damage modifiers
+	if (showDebugHelpers){
+		attacker->sendSystemMessage("Private Generic Damage Bonus: " + String::valueOf(attacker->getSkillMod("private_damage_multiplier")));
+	}
 
 	if (damageMultiplier != 0)
 		damage *= damageMultiplier;
@@ -948,6 +1030,11 @@ float CombatManager::applyDamageModifiers(CreatureObject* attacker, WeaponObject
 
 	if (damageDivisor != 0)
 		damage /= damageDivisor;
+
+	// Help with showing damage modifiers
+	if (showDebugHelpers){
+		attacker->sendSystemMessage("Damage Post-Mods:" + String::valueOf(damage));
+	}
 
 	return damage;
 }
@@ -1105,6 +1192,13 @@ int CombatManager::getArmorVehicleReduction(VehicleObject* defender, int damageT
 int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* weapon, CreatureObject* defender, float damage, int hitLocation, const CreatureAttackData& data) const {
 	int damageType = 0, armorPiercing = 1;
 
+	// defender->sendSystemMessage("Beginning Incoming Damage: " + String::valueOf(damage));
+
+	// Reduce all force attack damage from NPCs when attacking a player.
+	if (attacker->isAiAgent() && defender->isPlayerObject() && data.isForceAttack()){
+		damage = damage * 0.75; // From 100% -> 75% effectiveness
+	}
+
 	if (!data.isForceAttack()) {
 		damageType = weapon->getDamageType();
 		armorPiercing = weapon->getArmorPiercing();
@@ -1180,7 +1274,9 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 
 		// Force Absorb
 		if (defender->getSkillMod("force_absorb") > 0 && defender->isPlayerCreature()) {
-			defender->notifyObservers(ObserverEventType::FORCEABSORB, attacker, data.getForceCost());
+			if (!defender->hasBuff(BuffCRC::JEDI_AVOID_INCAPACITATION)) {
+				defender->notifyObservers(ObserverEventType::FORCEABSORB, attacker, data.getForceCost());
+			}
 		}
 	}
 
@@ -1189,15 +1285,19 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 
 	if (psg != nullptr && !psg->isVulnerable(damageType)) {
 		float armorReduction =  getArmorObjectReduction(psg, damageType);
+
+		// Moved the armorPiercing code before setting dmbAbsorbed so it stops breaking on AP weapons
+		damage *= getArmorPiercing(psg, armorPiercing); 
 		float dmgAbsorbed = damage;
 
-		damage *= getArmorPiercing(psg, armorPiercing);
-
-        if (armorReduction > 0) damage *= 1.f - (armorReduction / 100.f);
+        if (armorReduction > 0) {
+			damage *= 1.f - (armorReduction / 100.f);
+		}
 
 		dmgAbsorbed -= damage;
-		if (dmgAbsorbed > 0)
+		if (dmgAbsorbed > 0){
 			sendMitigationCombatSpam(defender, psg, (int)dmgAbsorbed, PSG);
+		}
 
 		Locker plocker(psg);
 
@@ -1208,14 +1308,21 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 	// Standard Armor
 	ManagedReference<ArmorObject*> armor = nullptr;
 
+	// If we're only using the ChestArmor for protection then overwrite, otherwise leave as normal.
+	// We do this so we can change back to normal armor system via a simple flag.
+	if (isChestOnly) {
+		hitLocation = HIT_BODY;
+	}
+
 	armor = getArmorObject(defender, hitLocation);
 
 	if (armor != nullptr && !armor->isVulnerable(damageType)) {
 		float armorReduction = getArmorObjectReduction(armor, damageType);
-		float dmgAbsorbed = damage;
 
-		// use only the damage applied to the armor for piercing (after the PSG takes some off)
+		// Moved the armorPiercing modifier to before we set dmgAbsorbed so negative values don't occur with AP/non-AP
+		// Use only the damage applied to the armor for piercing (after the PSG takes some off)
 		damage *= getArmorPiercing(armor, armorPiercing);
+		float dmgAbsorbed = damage;
 
 		if (armorReduction > 0) {
 			damage *= (1.f - (armorReduction / 100.f));
@@ -1226,7 +1333,15 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 		// inflict condition damage
 		Locker alocker(armor);
 
-		armor->inflictDamage(armor, 0, damage * 0.2, true, true);
+		// We want to reduce all incoming damage to the ChestPlate to 1/4th to simulate a minisuit durability
+		float chestOnlyReduction = 1.00;
+
+		// If isChestOnly then overwrite our reduction mod with a 4th of normal incoming damage
+		if (isChestOnly){
+			chestOnlyReduction = 0.25;
+		}
+
+		armor->inflictDamage(armor, 0, (damage * 0.2) * chestOnlyReduction, true, true);
 	}
 
 	return damage;
@@ -1349,10 +1464,23 @@ float CombatManager::doDroidDetonation(CreatureObject* droid, CreatureObject* de
 			// player
 			static uint8 bodyHitLocations[] = {HIT_BODY, HIT_BODY, HIT_LARM, HIT_RARM};
 
-			ArmorObject* healthArmor = getArmorObject(defender, bodyHitLocations[System::random(3)]);
-			ArmorObject* mindArmor = getArmorObject(defender, HIT_HEAD);
-			ArmorObject* actionArmor = getArmorObject(defender, HIT_LLEG); // This hits both the pants and feet regardless
 			ArmorObject* psgArmor = getPSGArmor(defender);
+			ArmorObject* healthArmor = nullptr;
+			ArmorObject* mindArmor = nullptr;
+			ArmorObject* actionArmor = nullptr;
+
+			// If we're only using the ChestArmor for protection then overwrite, otherwise leave as normal.
+			// We do this so we can change back to normal armor system via a simple flag.
+			if (isChestOnly){
+				healthArmor = getArmorObject(defender, HIT_BODY);
+				mindArmor = getArmorObject(defender, HIT_BODY);
+				actionArmor = getArmorObject(defender, HIT_BODY);
+			} else {
+				healthArmor = getArmorObject(defender, bodyHitLocations[System::random(3)]);
+				mindArmor = getArmorObject(defender, HIT_HEAD);
+				actionArmor = getArmorObject(defender, HIT_LLEG); // This hits both the pants and feet regardless
+			}
+
 			if (psgArmor != nullptr && !psgArmor->isVulnerable(SharedWeaponObjectTemplate::BLAST)) {
 				float armorReduction =  psgArmor->getBlast();
 				if (armorReduction > 0) damage *= (1.f - (armorReduction / 100.f));
@@ -1510,8 +1638,22 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 	}
 
 	// PvP Damage Reduction.
-	if (attacker->isPlayerCreature() && defender->isPlayerCreature() && !data.isForceAttack())
+	if (attacker->isPlayerCreature() && defender->isPlayerCreature() && !data.isForceAttack()) {
 		damage *= 0.25;
+	}
+
+	// Global Pet Mitigation Buff
+	if (defender->isPet()){
+		ManagedReference<CreatureObject*> petOwner = defender->getLinkedCreature();
+		if (petOwner != nullptr && petOwner->isPlayerCreature()) {
+			// If in PVP we want pets to gain their parent's dmg reduction
+			if (attacker->isPlayerCreature()){
+				damage *= 0.25;
+			} else {
+				damage *= 0.75; // If a player's pet is taking damage in PVE then just reduce incoming dmg by 25%
+			}
+		}
+	}
 
 	if (damage < 1) damage = 1;
 
@@ -1581,15 +1723,29 @@ int CombatManager::getHitChance(TangibleObject* attacker, CreatureObject* target
 	debug() << "Base attacker accuracy is " << attackerAccuracy;
 
 	// need to also add in general attack accuracy (mostly gotten from posture and states)
-
+	//targetCreature->sendSystemMessage("///////////////////////////////////////");
 	int bonusAccuracy = 0;
 
-	if (creoAttacker != nullptr)
+	if (creoAttacker != nullptr){
 		bonusAccuracy = getAttackerAccuracyBonus(creoAttacker, weapon);
+	}
 
-	// this is the scout/ranger creature hit bonus that only works against creatures (not NPCS)
-	if (targetCreature->isCreature() && creoAttacker != nullptr)
-		bonusAccuracy += creoAttacker->getSkillMod("creature_hit_bonus");
+	// this is the scout/ranger creature hit bonus
+	if (creoAttacker != nullptr){
+		int petOwnerToHitBonus = 0;
+
+		if (creoAttacker->isPet()){
+			ManagedReference<CreatureObject*> petOwner = creoAttacker->getLinkedCreature();
+			if (petOwner != nullptr) {
+				if (petOwner->getSkillMod("creature_hit_bonus") > 0){
+					petOwnerToHitBonus += petOwner->getSkillMod("creature_hit_bonus");
+				}
+			}
+		}
+
+		// bonusAccuracy += creoAttacker->getSkillMod("creature_hit_bonus"); // OLD, DID NOT WORK
+		bonusAccuracy += petOwnerToHitBonus;
+	}
 
 	debug() << "Attacker total bonus is " << bonusAccuracy;
 
@@ -1609,15 +1765,25 @@ int CombatManager::getHitChance(TangibleObject* attacker, CreatureObject* target
 	float attackerRoll = (float)System::random(249) + 1.f;
 	float defenderRoll = (float)System::random(150) + 25.f;
 
+	float totalAccuracy = (attackerAccuracy + weaponAccuracy + accuracyBonus + postureAccuracy + bonusAccuracy);
+	float totalAccuracyWithoutBonus = (attackerAccuracy + weaponAccuracy + accuracyBonus + postureAccuracy);
+
+	// targetCreature->sendSystemMessage("Attacker's Accuracy is: " + String::valueOf(totalAccuracy));
+	// targetCreature->sendSystemMessage("Attacker's Accuracy without Bonus is: " + String::valueOf(totalAccuracyWithoutBonus));
+	// targetCreature->sendSystemMessage("Attacker's BonusAccuracy is: " + String::valueOf(bonusAccuracy));
+
+
 	// TODO (dannuic): add the trapmods in here somewhere (defense down trapmods)
 	float accTotal = hitChanceEquation(attackerAccuracy + weaponAccuracy + accuracyBonus + postureAccuracy + bonusAccuracy, attackerRoll, targetDefense + postureDefense, defenderRoll);
 
 	debug() << "Final hit chance is " << accTotal;
 
-	if (System::random(100) > accTotal) // miss, just return MISS
+	if (System::random(100) > accTotal){ // miss, just return MISS
 		return MISS;
+	}
 
 	debug() << "Attack hit successfully";
+	// targetCreature->sendSystemMessage("///////////////////////////////////////");
 
 	// now we have a successful hit, so calculate secondary defenses if there is a damage component
 	if (damage > 0) {
@@ -1998,6 +2164,9 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 	int totalFoodMit = 0;
 
 	if (healthDamaged) {
+		// Tell us what pool was hit!
+		//defender->sendSystemMessage("Health Damage was taken by: " + String::valueOf(damage));
+
 		static const uint8 bodyLocations[] = {HIT_BODY, HIT_BODY, HIT_LARM, HIT_RARM};
 		hitLocation = bodyLocations[System::random(3)];
 
@@ -2023,6 +2192,9 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 	}
 
 	if (actionDamaged) {
+		// Tell us what pool was hit!
+		//defender->sendSystemMessage("Action Damage was taken by: " + String::valueOf(damage));
+
 		static const uint8 legLocations[] = {HIT_LLEG, HIT_RLEG};
 		hitLocation = legLocations[System::random(1)];
 
@@ -2048,6 +2220,9 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 	}
 
 	if (mindDamaged) {
+		// Tell us what pool was hit!
+		//defender->sendSystemMessage("Mind Damage was taken by: " + String::valueOf(damage));
+
 		hitLocation = HIT_HEAD;
 		mindDamage = getArmorReduction(attacker, weapon, defender, damage * data.getMindDamageMultiplier(), hitLocation, data) * damageMultiplier;
 
@@ -2075,15 +2250,25 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 
 		int spillOverRemainder = (totalSpillOver % numSpillOverPools) + spillDamagePerPool;
 
-		if ((poolsToDamage ^ 0x7) & HEALTH)
+		if ((poolsToDamage ^ 0x7) & HEALTH){
+			// Tell us what pool was hit!
+			//defender->sendSystemMessage("Health Damage was taken from spill by: " + String::valueOf(spillDamagePerPool));
 			defender->inflictDamage(attacker, CreatureAttribute::HEALTH, (numSpillOverPools-- > 1 ? spillDamagePerPool : spillOverRemainder), true, xpType, true, true);
-		if ((poolsToDamage ^ 0x7) & ACTION)
+		}
+		if ((poolsToDamage ^ 0x7) & ACTION){
+			// Tell us what pool was hit!
+			//defender->sendSystemMessage("Action Damage was taken from spill by: " + String::valueOf(spillDamagePerPool));
 			defender->inflictDamage(attacker, CreatureAttribute::ACTION, (numSpillOverPools-- > 1 ? spillDamagePerPool : spillOverRemainder), true, xpType, true, true);
-		if ((poolsToDamage ^ 0x7) & MIND)
+		}
+		if ((poolsToDamage ^ 0x7) & MIND){
+			// Tell us what pool was hit!
+			//defender->sendSystemMessage("Mind Damage was taken from spill by: " + String::valueOf(spillDamagePerPool));
 			defender->inflictDamage(attacker, CreatureAttribute::MIND, (numSpillOverPools-- > 1 ? spillDamagePerPool : spillOverRemainder), true, xpType, true, true);
+		}
 	}
 
 	int totalDamage =  (int) (healthDamage + actionDamage + mindDamage);
+
 	defender->notifyObservers(ObserverEventType::DAMAGERECEIVED, attacker, totalDamage);
 
 	if (poolsToWound.size() > 0 && System::random(100) < ratio) {
@@ -2148,6 +2333,7 @@ int CombatManager::applyDamage(CreatureObject* attacker, WeaponObject* weapon, T
 	}
 
 	defender->inflictDamage(attacker, 0, damage, true, xpType, true, true);
+
 
 	defender->notifyObservers(ObserverEventType::DAMAGERECEIVED, attacker, damage);
 

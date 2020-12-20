@@ -1220,3 +1220,9 @@ object_tangible_wearables_hat_shared_singing_mountain_clan_mask_s01 = SharedTang
 }
 
 ObjectTemplates:addClientTemplate(object_tangible_wearables_hat_shared_singing_mountain_clan_mask_s01, "object/tangible/wearables/hat/shared_singing_mountain_clan_mask_s01.iff")
+
+object_tangible_wearables_hat_shared_hat_invis = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/wearables/hat/shared_hat_invis.iff"
+}
+
+ObjectTemplates:addClientTemplate(object_tangible_wearables_hat_shared_hat_invis, "object/tangible/wearables/hat/shared_hat_invis.iff")

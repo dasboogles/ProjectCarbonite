@@ -26,6 +26,7 @@ public:
 		if (!creature->isPlayerCreature())
 			return GENERALERROR;
 
+		// Why is this being re-cast to the same object type?
 		ManagedReference<CreatureObject*> player = cast<CreatureObject*>(creature);
 		ManagedReference<GroupObject*> group = player->getGroup();
 
@@ -41,20 +42,24 @@ public:
 		if (!inflictHAM(player, healthCost, actionCost, mindCost))
 			return GENERALERROR;
 
-		int chance = 75;
+		// Set to 100 to remove failure chance, stupid that this can fail.
+		// Consider refactoring this check later to reduce load on server?
+		// int chance = 100;
 
-		if (System::random(100) > chance) {
-			player->sendSystemMessage("@cbt_spam:rally_fail_single"); //"You fail to rally the group!"
-			sendRallyCombatSpam(player, group, false);
-		} else {
-			if (!doRally(player, group))
-				return GENERALERROR;
+		// if (System::random(100) > chance) {
+		// 	player->sendSystemMessage("@cbt_spam:rally_fail_single"); //"You fail to rally the group!"
+		// 	sendRallyCombatSpam(player, group, false);
+		// } else {
+		if (!doRally(player, group)){
+			return GENERALERROR;
 		}
+		//}
 
 		return SUCCESS;
 	}
 
 	bool doRally(CreatureObject* leader, GroupObject* group) const {
+
 		if (leader == nullptr || group == nullptr)
 			return false;
 

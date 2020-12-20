@@ -44,19 +44,19 @@
 object_tangible_food_crafted_dessert_gorrnar = object_tangible_food_crafted_shared_dessert_gorrnar:new {
 	templateType = CONSUMABLE,
 
-	duration = 1,
+	duration = 5400,
 	filling = 10,
-	nutrition = 10,
+	nutrition = 100,
 
 	effectType = 3, -- Event Based Buff
 	eventTypes = {PLAYERCLONED},
 
 	fillingMin = 30,
 	fillingMax = 25,
-	flavorMin = 960,
-	flavorMax = 1920,
-	nutritionMin = 11,
-	nutritionMax = 17,
+	flavorMin = 1800,	-- Duration
+	flavorMax = 5400,
+	nutritionMin = 50,
+	nutritionMax = 100,
 	quantityMin = 2,
 	quantityMax = 5,
 
