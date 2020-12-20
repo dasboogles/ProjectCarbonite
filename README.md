@@ -1,5 +1,7 @@
 # SWGEmu Core3
 
+## This is Project Carbonite based on bleeding edge unstable SWGemu with MTG assets! ##
+
 ## What is SWGEmu?
 
 Star Wars Galaxies was a massively multi-player online role playing game introduced by Sony Online Entertainment in the year 2003 and shut down in 2011.
