@@ -353,9 +353,9 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 				killerCreature->sendSystemMessage("Some players were too far away from the kill!"); // Mission Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.
 			}
 
-			int dividedKill = 6000 / players.size();//award gcw xp for group 
+			int dividedKill = 5000 / players.size();//award gcw xp for group 
 			if (players.size() == 1)
-				dividedKill = 4000;//award gcw xp for solo
+				dividedKill = 5000;//award gcw xp for solo
 			if (dividedKill < 1000)
 				dividedKill = 1000;
 			for (int i = 0; i < players.size(); i++){
