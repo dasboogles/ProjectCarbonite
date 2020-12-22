@@ -44,6 +44,16 @@
 object_installation_mining_organic_mining_organic_creature_farm = object_installation_mining_organic_shared_mining_organic_creature_farm:new {
 	lotSize = 1,
 	baseMaintenanceRate = 30,
+	-- Requires at least one of the following skills to place
+	skillsRequired = {
+		"crafting_architect_master", 
+		"crafting_armorsmith_master", 
+		"outdoors_bio_engineer_master", 
+		"crafting_chef_master", 
+		"crafting_droidengineer_master", 
+		"crafting_tailor_master", 
+		"crafting_weaponsmith_master"
+	},
 	basePowerRate = 25,
 	width = 3,
 	length = 3,

@@ -16,6 +16,7 @@ protected:
 
 	String constructionMarkerTemplate;
 	String abilityRequired;
+	SortedVector<String> skillsRequired;
 
 	int baseMaintenanceRate;
 	int basePowerRate;
@@ -100,6 +101,10 @@ public:
 
 	inline const String& getAbilityRequired() const {
 		return abilityRequired;
+	}
+	
+	inline const SortedVector<String>& getSkillsRequired() const {
+		return skillsRequired;
 	}
 
 	inline uint8 getCityRankRequired() const {

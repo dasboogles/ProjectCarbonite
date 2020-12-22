@@ -44,6 +44,16 @@
 object_installation_mining_liquid_mining_liquid_moisture_harvester_medium = object_installation_mining_liquid_shared_mining_liquid_moisture_harvester_medium:new {
 	lotSize = 1,
 	baseMaintenanceRate = 60,
+	-- Requires at least one of the following skills to place
+	skillsRequired = {
+		"crafting_architect_master", 
+		"crafting_armorsmith_master", 
+		"outdoors_bio_engineer_master", 
+		"crafting_chef_master", 
+		"crafting_droidengineer_master", 
+		"crafting_tailor_master", 
+		"crafting_weaponsmith_master"
+	},
 	-- SOLAR = 1; CHEMICAL = 2; FLORA = 3; GAS = 4; GEOTHERMAL = 5; MINERAL = 6; WATER = 7; WIND = 8; FUSION = 9;
 	installationType = 7,
 	basePowerRate = 50,

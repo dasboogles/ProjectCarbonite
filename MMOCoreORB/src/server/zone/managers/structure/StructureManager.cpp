@@ -420,13 +420,35 @@ int StructureManager::placeStructureFromDeed(CreatureObject* creature, Structure
 	if (ghost != nullptr) {
 		String abilityRequired = serverTemplate->getAbilityRequired();
 
+		// Check for any required abilities
 		if (!abilityRequired.isEmpty() && !ghost->hasAbility(abilityRequired)) {
 			creature->sendSystemMessage("@player_structure:" + abilityRequired);
 			return 1;
 		}
 
-		int lots = serverTemplate->getLotSize();
+		// Check the array of skills for ANY skill we're looking for
+		const Vector<String>& skillsRequired = serverTemplate->getSkillsRequired();
+		if (skillsRequired.size() > 0) {
+			bool hasSkill = false;
 
+			for (int i = 0; i < skillsRequired.size(); i++) {
+				const String& skill = skillsRequired.get(i);
+				// creature->sendSystemMessage("Checking for Required Skill: " + skill);
+
+				if (!skill.isEmpty() && creature->hasSkill(skill)) {
+					hasSkill = true;
+					break;
+				}
+			}
+
+			if (!hasSkill) {
+				creature->sendSystemMessage("@error_message:insufficient_skill"); // You lack the skill to use this item.
+				return 1;
+			}
+		}
+
+		// Check lots
+		int lots = serverTemplate->getLotSize();
 		if (!ghost->hasLotsRemaining(lots)) {
 			StringIdChatParameter param("@player_structure:not_enough_lots");
 			param.setDI(lots);

@@ -117,6 +117,30 @@ public:
 			return GENERALERROR;
 		}
 
+		// Make sure we add the skillRequired code here too in order to prevent exploiting!
+		// Check the array of skills for ANY skill we're looking for
+		const Vector<String>& skillsRequired = tmpl->getSkillsRequired();
+		if (skillsRequired.size() > 0) {
+			bool hasSkill = false;
+
+			for (int i = 0; i < skillsRequired.size(); i++) {
+				const String& skill = skillsRequired.get(i);
+				// creature->sendSystemMessage("Checking for Required Skill: " + skill);
+
+				if (!skill.isEmpty() && creature->hasSkill(skill)) {
+					hasSkill = true;
+					break;
+				}
+			}
+
+			if (!hasSkill) {
+				StringIdChatParameter params("@player_structure:not_able_to_own"); //%NT is not able to own this structure.
+				params.setTT(targetCreature->getObjectID());
+				creature->sendSystemMessage(params);
+				return GENERALERROR;
+			}
+		}
+
 		return doTransferStructure(creature, targetCreature, structure);
 	}
 

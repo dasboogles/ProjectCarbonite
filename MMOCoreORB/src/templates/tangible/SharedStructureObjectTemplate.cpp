@@ -38,4 +38,12 @@ void SharedStructureObjectTemplate::readObject(LuaObject* templateData) {
 	cityMaintenanceBase = templateData->getIntField("cityMaintenanceBase");
 
 	cityMaintenanceRate = templateData->getIntField("cityMaintenanceRate");
+
+	// Grabbing an object containing skills required for deed-placement of a structure.
+	LuaObject skillsRequiredFromLua = templateData->getObjectField("skillsRequired");
+	skillsRequired.removeAll();
+	for (int i = 1; i <= skillsRequiredFromLua.getTableSize(); ++i) {
+		skillsRequired.add(skillsRequiredFromLua.getStringAt(i));
+	}
+	skillsRequiredFromLua.pop();
 }
