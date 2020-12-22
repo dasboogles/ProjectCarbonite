@@ -193,8 +193,13 @@ void EntertainingSessionImplementation::healWounds(CreatureObject* creature, flo
 }
 
 void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
-	ManagedReference<CreatureObject*> entertainer = this->entertainer.get();
+	
+	// We only want to go past this point if we're actually going to award exp!
+	if (xp < 1) {
+		return;
+	}
 
+	ManagedReference<CreatureObject*> entertainer = this->entertainer.get();
 	ManagedReference<GroupObject*> group = entertainer->getGroup();
 	ManagedReference<PlayerManager*> playerManager = entertainer->getZoneServer()->getPlayerManager();
 
@@ -209,8 +214,14 @@ void EntertainingSessionImplementation::addHealingXpGroup(int xp) {
 					&& groupMember->hasSkill("social_entertainer_novice")) {
 					String healxptype("entertainer_healing");
 
-					if (playerManager != nullptr)
+					if (playerManager != nullptr) {
+						
+						// groupMember->sendSystemMessage("Giving group member healing exp pre-entertainer bonus! ["+ String::valueOf(xp)+"]");
+						xp = xp * entertainerBonusXpMulti;
+						// groupMember->sendSystemMessage("Giving group member healing exp post-entertainer bonus! ["+ String::valueOf(xp)+"]");
+
 						playerManager->awardExperience(groupMember, healxptype, xp, true);
+					}
 				}
 			}
 		} catch (Exception& e) {
@@ -1117,8 +1128,12 @@ void EntertainingSessionImplementation::awardEntertainerExperience() {
 
 			xpAmount = ceil(xpAmount * totalBonus);
 
-			if (playerManager != nullptr)
+			if (playerManager != nullptr){
+				// player->sendSystemMessage("Getting normal exp pre-bonus! ["+ String::valueOf(xpAmount)+"]");
+				xpAmount = xpAmount * entertainerBonusXpMulti;
+				// player->sendSystemMessage("Getting normal exp post-bonus! ["+ String::valueOf(xpAmount)+"]");
 				playerManager->awardExperience(player, xptype, xpAmount, true);
+			}
 
 			oldFlourishXp = flourishXp;
 			flourishXp = 0;
@@ -1129,8 +1144,12 @@ void EntertainingSessionImplementation::awardEntertainerExperience() {
 		if (healingXp > 0) {
 			String healxptype("entertainer_healing");
 
-			if (playerManager != nullptr)
+			if (playerManager != nullptr){
+				// player->sendSystemMessage("Getting healing exp pre-bonus! ["+ String::valueOf(healingXp)+"]");
+				healingXp = healingXp * entertainerBonusXpMulti;
+				// player->sendSystemMessage("Getting healing exp post-bonus! ["+ String::valueOf(healingXp)+"]");
 				playerManager->awardExperience(player, healxptype, healingXp, true);
+			}
 
 			healingXp = 0;
 		}

@@ -49,6 +49,8 @@ class EntertainingSession extends Facade {
 	protected boolean targetInstrument;
 	protected Instrument externalInstrument;
 	protected boolean hasNotified;
+
+	protected int entertainerBonusXpMulti;
 	
 	public EntertainingSession(CreatureObject ent) {
 		entertainer = ent;
@@ -58,6 +60,8 @@ class EntertainingSession extends Facade {
 		healingXp = 0;
 		flourishCount = 0;
 		applauseCount = 0;
+
+		entertainerBonusXpMulti = 5; // This bonus is multiplicative with global exp mod!
 		
 		observer = null;
 		

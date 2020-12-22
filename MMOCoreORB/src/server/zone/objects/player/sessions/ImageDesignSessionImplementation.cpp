@@ -150,9 +150,10 @@ void ImageDesignSessionImplementation::updateImageDesign(CreatureObject* updater
 			ManagedReference<Facade*> facade = strongReferenceTarget->getActiveSession(SessionFacadeType::MIGRATESTATS);
 			ManagedReference<MigrateStatsSession*> session = dynamic_cast<MigrateStatsSession*>(facade.get());
 
+			// Buffed from 2000 -> 2500 due to the 4minute wait time between Stat Migrations
 			if (session != nullptr) {
 				session->migrateStats();
-				xpGranted = 2000;
+				xpGranted = 2500;
 			}
 		}
 
@@ -177,13 +178,15 @@ void ImageDesignSessionImplementation::updateImageDesign(CreatureObject* updater
 				hairObject->setCustomizationString(oldCustomization);
 			}
 
-			if (xpGranted < 100)
+			if (xpGranted < 100) {
 				xpGranted = 100;
+			}
 		}
 
 		if (bodyAttributes->size() > 0) {
-			if (xpGranted < 300)
+			if (xpGranted < 300) {
 				xpGranted = 300;
+			}
 			for (int i = 0; i < bodyAttributes->size(); ++i) {
 				VectorMapEntry<String, float>* entry = &bodyAttributes->elementAt(i);
 				imageDesignManager->updateCustomization(strongReferenceDesigner, entry->getKey(), entry->getValue(), strongReferenceTarget);
@@ -191,8 +194,9 @@ void ImageDesignSessionImplementation::updateImageDesign(CreatureObject* updater
 		}
 
 		if (colorAttributes->size() > 0) {
-			if (xpGranted < 100)
+			if (xpGranted < 100) {
 				xpGranted = 100;
+			}
 			for (int i = 0; i < colorAttributes->size(); ++i) {
 				VectorMapEntry<String, uint32>* entry = &colorAttributes->elementAt(i);
 				imageDesignManager->updateColorCustomization(strongReferenceDesigner, entry->getKey(), entry->getValue(), hairObject, strongReferenceTarget);
@@ -209,16 +213,23 @@ void ImageDesignSessionImplementation::updateImageDesign(CreatureObject* updater
 
 			strongReferenceTarget->sendSystemMessage("@image_designer:new_holoemote"); //"Congratulations! You have purchased a new Holo-Emote generator. Type '/holoemote help' for instructions."
 
-			if (xpGranted < 100)
+			if (xpGranted < 100) {
 				xpGranted = 100;
+			}
 		}
 
 		// Award XP.
 		PlayerManager* playerManager = strongReferenceDesigner->getZoneServer()->getPlayerManager();
 
 		if (playerManager != nullptr && xpGranted > 0) {
-			if (strongReferenceDesigner == strongReferenceTarget)
+			// If ID'ing themselves then half exp
+			if (strongReferenceDesigner == strongReferenceTarget){
 				xpGranted /= 2;
+			}
+
+			// Image Designer Exp buff by x5
+			xpGranted = xpGranted * 5;
+
 			playerManager->awardExperience(strongReferenceDesigner, "imagedesigner", xpGranted, true);
 		}
 

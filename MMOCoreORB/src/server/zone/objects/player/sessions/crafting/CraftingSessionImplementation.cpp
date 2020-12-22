@@ -1209,8 +1209,7 @@ void CraftingSessionImplementation::createPrototype(int clientCounter, bool crea
 	Locker locker(manufactureSchematic);
 
 
-	if (manufactureSchematic->isAssembled()
-			&& !manufactureSchematic->isCompleted()) {
+	if (manufactureSchematic->isAssembled() && !manufactureSchematic->isCompleted()) {
 
 		closeCraftingWindow(clientCounter, true);
 
@@ -1225,7 +1224,9 @@ void CraftingSessionImplementation::createPrototype(int clientCounter, bool crea
 
 			// This is for practicing
 			startCreationTasks(manufactureSchematic->getComplexity() * 0, true);
-			xp = round(xp * 1.05f);
+			// crafter->sendSystemMessage("Pre-Global Exp Modifier: " + String::valueOf(xp));
+			xp = round(xp * 2.00f); // Crafting experience bonus from 1.05f -> 2.0f aka: from 5% to double bonus for practicing
+			// crafter->sendSystemMessage("Post-Global Exp Modifier: " + String::valueOf(xp));
 		}
 
 		Reference<PlayerManager*> playerManager = crafter->getZoneServer()->getPlayerManager();

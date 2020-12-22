@@ -2059,8 +2059,7 @@ void PlayerManagerImplementation::setExperienceMultiplier(float globalMultiplier
 	playerManager->awardExperience(playerCreature, "resource_harvesting_inorganic", 500);
  *
  */
-int PlayerManagerImplementation::awardExperience(CreatureObject* player, const String& xpType,
-		int amount, bool sendSystemMessage, float localMultiplier, bool applyModifiers) {
+int PlayerManagerImplementation::awardExperience(CreatureObject* player, const String& xpType, int amount, bool sendSystemMessage, float localMultiplier, bool applyModifiers) {
 
 	PlayerObject* playerObject = player->getPlayerObject();
 
@@ -2072,7 +2071,7 @@ int PlayerManagerImplementation::awardExperience(CreatureObject* player, const S
 	musicBuff += ((float)player->getSkillMod("music_exp_buff")*2) / 100; // ie: ((12.5 * 2) / 100) == (0.25 + 1.0) == (1.25), or +25% bonus
 
 	if (musicBuff > 1.25f){
-		musicBuff = 1.25f;
+		musicBuff = 1.25f; // +25% exp bonus from musician buff
 	}
 
 	if (amount > 0)
@@ -2087,13 +2086,15 @@ int PlayerManagerImplementation::awardExperience(CreatureObject* player, const S
 	int xp = 0;
 
 	if (applyModifiers){
-		//player->sendSystemMessage("Effective Experience Pre-Bonuses:" + String::valueOf(amount));
+		// player->sendSystemMessage("//////////////////////////");
+		// player->sendSystemMessage("Effective Experience Pre-Bonuses:" + String::valueOf(amount));
 		float modifiedExpToGrant = (amount * speciesModifier * buffMultiplier * localMultiplier * globalExpMultiplier);
-		//player->sendSystemMessage("Music Buff Amount:" + String::valueOf(musicBuff));
-		//player->sendSystemMessage("Effective Experience Pre-EntBuff :" + String::valueOf(modifiedExpToGrant));
+		// player->sendSystemMessage("Music Buff Amount:" + String::valueOf(musicBuff));
+		// player->sendSystemMessage("Effective Experience Pre-EntBuff :" + String::valueOf(modifiedExpToGrant));
 		modifiedExpToGrant *= musicBuff;
-		//player->sendSystemMessage("Effective Experience Post-EntBuff :" + String::valueOf(modifiedExpToGrant));
-		//player->sendSystemMessage("Effective Experience Post-Bonuses:" + String::valueOf(modifiedExpToGrant));
+		// player->sendSystemMessage("Effective Experience Post-EntBuff :" + String::valueOf(modifiedExpToGrant));
+		// player->sendSystemMessage("Effective Experience Post-Bonuses:" + String::valueOf(modifiedExpToGrant));
+		// player->sendSystemMessage("//////////////////////////");
 		xp = playerObject->addExperience(xpType, (int) (modifiedExpToGrant)); // Round float value down to a flat int for experience granting.
 	}
 	else {
