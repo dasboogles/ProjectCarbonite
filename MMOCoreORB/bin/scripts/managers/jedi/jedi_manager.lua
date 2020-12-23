@@ -11,7 +11,9 @@ if _TEST then
 	ITEMTHEATERDATAPAD = 2
 end
 
-jediProgressionType = VILLAGEJEDIPROGRESSION
+-- Disabling jedi for launch, come back to this immediately post-launch bug fixes!
+jediProgressionType = NOJEDIPROGRESSION
+-- jediProgressionType = VILLAGEJEDIPROGRESSION
 
 jediManagerName = "JediManager"
 
