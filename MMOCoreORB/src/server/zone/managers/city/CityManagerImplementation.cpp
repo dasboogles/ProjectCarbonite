@@ -733,6 +733,9 @@ void CityManagerImplementation::assessCitizens(CityRegion* city) {
 }
 
 void CityManagerImplementation::processCityUpdate(CityRegion* city) {
+	// Instead of being lame and using an NPC to grant we'll just make it super fast to get normally!
+	int politicianExpBonus = 25;
+
 	info("Processing city update: " + city->getRegionName(), true);
 
 	ManagedReference<StructureObject*> ch = city->getCityHall();
@@ -761,7 +764,7 @@ void CityManagerImplementation::processCityUpdate(CityRegion* city) {
 			Reference<PlayerObject*> ghost = mayor->getSlottedObject("ghost").castTo<PlayerObject*> ();
 
 			if (ghost != nullptr) {
-				ghost->addExperience("political", 750, true);
+				ghost->addExperience("political", (750 * politicianExpBonus), true);
 			}
 		}
 		updateCityVoting(city);
@@ -1106,6 +1109,9 @@ void CityManagerImplementation::sendMaintenanceDestroyEmail(CityRegion* city, Sc
 void CityManagerImplementation::updateCityVoting(CityRegion* city, bool override) {
 	if (!city->isVotingPeriodOver() && !override)
 		return;
+	
+	// Instead of being lame and using an NPC to grant we'll just make it super fast to get normally!
+	int politicianExpBonus = 25;
 
 	VectorMap<uint64, int>* candidates = city->getCandidates();
 	uint64 incumbentID = city->getMayorID();
@@ -1148,7 +1154,7 @@ void CityManagerImplementation::updateCityVoting(CityRegion* city, bool override
 			Reference<PlayerObject*> ghost = mayorObject->getSlottedObject("ghost").castTo<PlayerObject*>();
 
 			if (ghost != nullptr) {
-				ghost->addExperience("political", votes * 300, true);
+				ghost->addExperience("political", (votes * 300) * politicianExpBonus, true);
 			}
 
 			if (votes > topVotes || (votes == topVotes && candidateID == incumbentID)) {

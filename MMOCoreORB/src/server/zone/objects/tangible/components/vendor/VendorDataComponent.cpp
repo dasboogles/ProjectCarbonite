@@ -198,14 +198,16 @@ void VendorDataComponent::runVendorUpdate() {
 		}
 
 	} else {
+		// Buffing merchant exp to not actually be something grindy
+		int merchantExpBonus = 10;
 
 		/// Award hourly XP
 		E3_ASSERT(vendor->isLockedByCurrentThread());
 
 		Locker locker(owner, vendor);
-		playerManager->awardExperience(owner, "merchant", 150 * hoursSinceLastUpdate, false);
+		playerManager->awardExperience(owner, "merchant", (150 * hoursSinceLastUpdate) * merchantExpBonus, false);
 
-		playerManager->awardExperience(owner, "merchant", awardUsageXP * 50, false);
+		playerManager->awardExperience(owner, "merchant", (awardUsageXP * 50) * merchantExpBonus, false);
 
 	}
 
