@@ -637,11 +637,11 @@ function TatooineMosEisleyScreenPlay:spawnMobiles()
 
 	--Testing NPCs
 	-- To the left and front of the Eisley Starport
-	spawnMobile(self.planet, "TEST1_worrt", 1, 3560.81, 5, -4757.34, -89, 0)
-	spawnMobile(self.planet, "TEST2_worrt", 1, 3558.96, 5, -4759.46, -74, 0)
-	spawnMobile(self.planet, "TEST3_worrt", 1, 3556.54, 5, -4761.73, -94, 0)
-	spawnMobile(self.planet, "TEST4_worrt", 1, 3554.56, 5, -4763.93, -78, 0)
-	spawnMobile(self.planet, "TEST5_janta", 1, 3552.56, 5, -4765.93, -78, 0)
+	-- spawnMobile(self.planet, "TEST1_worrt", 1, 3560.81, 5, -4757.34, -89, 0)
+	-- spawnMobile(self.planet, "TEST2_worrt", 1, 3558.96, 5, -4759.46, -74, 0)
+	-- spawnMobile(self.planet, "TEST3_worrt", 1, 3556.54, 5, -4761.73, -94, 0)
+	-- spawnMobile(self.planet, "TEST4_worrt", 1, 3554.56, 5, -4763.93, -78, 0)
+	-- spawnMobile(self.planet, "TEST5_janta", 1, 3552.56, 5, -4765.93, -78, 0)
 
 	-- Back of Eisley Starport
 	-- spawnMobile(self.planet, "TEST6_ns_elder", 1, 3705.39, 5, -4842.35, 88, 0)

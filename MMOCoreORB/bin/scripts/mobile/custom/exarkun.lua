@@ -8,8 +8,8 @@ exarkun = Creature:new {
 	damageMin = 1500,
 	damageMax = 2800,
 	baseXp = 50000,
-	baseHAM = 1600000,
-	baseHAMmax = 1600000,
+	baseHAM = 2600000,
+	baseHAMmax = 3600000,
 	armor = 3,
 	resists = {85,85,85,85,85,85,85,85,75},
 	meatType = "",
@@ -33,30 +33,73 @@ exarkun = Creature:new {
 			groups = {
 				{group = "power_crystals", chance = 10000000},
 			},
-			lootChance = 10000000,
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000},
+			},
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000},
+			},
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000},
+			},
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000},
+			},
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000},
+			},
+			lootChance = 4500000,
 		},
 		{
 			groups = {
 				{group = "krayt_tissue_rare", chance = 10000000},
 			},
-			lootChance = 10000000
+			lootChance = 2500000,
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 2500000},
-				{group = "holocron_dark", chance = 2500000},
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "holocron_dark", chance = 5000000},
 			},
-			lootChance = 10000000
+			lootChance = 2500000,
 		},
 		{
 			groups = {
-				{group = "holocron_dark", chance = 3300000},
-				{group = "krayt_pearls", chance = 3300000},
-				{group = "armor_attachments", chance = 3400000},
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "holocron_dark", chance = 5000000},
 			},
-			lootChance = 9900000
+			lootChance = 2500000,
 		},
-		
+		{
+			groups = {
+				{group = "holocron_dark", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000},
+			},
+			lootChance = 2500000,
+		},
+		{
+			groups = {
+				{group = "holocron_dark", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000},
+			},
+			lootChance = 2500000,
+		},
+		-- look for some unique furniture to have drop too
 	},
 	weapons = {"dark_jedi_weapons_gen4"},
 	conversationTemplate = "",

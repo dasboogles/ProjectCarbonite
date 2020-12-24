@@ -9,7 +9,7 @@ janta_hides = {
 		{"armor_special_type",0,0,0},
 		{"armor_effectiveness",10,18,10},
 		{"hitpoints",0,0,0,0},
-		{"useCount",10,24,0},
+		{"useCount",12,48,0},
 	},
 	customizationStringNames = {},
 	customizationValues = {}

@@ -17,7 +17,7 @@ nightsister_vibro_unit = {
 		{"attackhealthcost",8,2,0},
 		{"attackactioncost",8,2,0},
 		{"attackmindcost",8,2,0},
-		{"useCount",1,5,0},
+		{"useCount",3,9,0},
 	},
 	customizationStringNames = {},
 	customizationValues = {}

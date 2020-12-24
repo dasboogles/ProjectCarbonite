@@ -41,9 +41,9 @@
 --which carries forward this exception.
 
 --Determines how often exceptional and legendary items can drop.
-yellowChance = 50 -- 1 in 1,000
-exceptionalChance = 500 --1 in 100,000
-legendaryChance = 5000 --1 in 1,000,000
+yellowChance = 100 -- 1 in 1,000
+exceptionalChance = 1000 --1 in 100,000
+legendaryChance = 10000 --1 in 1,000,000
 --yellowChance = 50 --1 in 50 for testing
 --exceptionalChance = 100 --1 in 100 for testing
 --legendaryChance = 1000 --1 in 1000 for testing
@@ -146,8 +146,8 @@ lootableArmorAttachmentStatMods = {
 	"foraging",
 	"force_luck",
 	"force_persuade",
-	"melee_accuracy",
-	"melee_accuracy",
+	-- "melee_accuracy",
+	-- "melee_speed",
 	"force_vehicle_control",
 	"force_vehicle_speed"
 }
@@ -274,8 +274,8 @@ lootableClothingAttachmentStatMods = {
 	"foraging",
 	"force_luck",
 	"force_persuade",
-	"melee_accuracy",
-	"melee_accuracy",
+	-- "melee_accuracy",
+	-- "melee_speed",
 	"force_vehicle_control",
 	"force_vehicle_speed"
 }
@@ -395,8 +395,8 @@ lootableArmorStatMods = {
 	"foraging",
 	"force_luck",
 	"force_persuade",
-	"melee_accuracy",
-	"melee_accuracy",
+	-- "melee_accuracy",
+	-- "melee_speed",
 	"force_vehicle_control",
 	"force_vehicle_speed"
 }
@@ -516,8 +516,8 @@ lootableClothingStatMods = {
 	"foraging",
 	"force_luck",
 	"force_persuade",
-	"melee_accuracy",
-	"melee_accuracy",
+	-- "melee_accuracy",
+	-- "melee_speed",
 	"force_vehicle_control",
 	"force_vehicle_speed"
 }
