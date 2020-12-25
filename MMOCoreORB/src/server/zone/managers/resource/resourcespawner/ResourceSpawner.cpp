@@ -373,7 +373,7 @@ void ResourceSpawner::shiftResources() {
 	manualPool->update();
 
 	dumpResources();
-	//ghDumpAll(); // Enable for PROD only
+	ghDumpAll(); // Enable for PROD only
 }
 
 ResourceSpawn* ResourceSpawner::createRecycledResourceSpawn(const ResourceTreeEntry* entry) const {

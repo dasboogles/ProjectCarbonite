@@ -153,58 +153,186 @@ void CreatureTemplate::readObject(LuaObject* templateData) {
 
 	LuaObject res = templateData->getObjectField("resists");
 	if (res.getTableSize() == 9) {
+		float tempVal = 0.f;
+		float maxResistPossible = 85;
+
 		// Kinetic
-		if (res.getFloatAt(1) > 85) {
-			kinetic = 85;
-		}else {
+		if (res.getFloatAt(1) > maxResistPossible) {
+			if (res.getFloatAt(1) <= 100) {
+				kinetic = maxResistPossible;
+			} else {
+				tempVal = res.getFloatAt(1) - 100.f;
+				if (tempVal < 0) {
+					kinetic = 0;
+				} else {
+					if (tempVal > maxResistPossible) {
+						kinetic = maxResistPossible;
+					} else {
+						kinetic = tempVal;
+					}
+				}
+			}
+		} else {
 			kinetic = res.getFloatAt(1);
 		}
+
 		// Energy
-		if (res.getFloatAt(2) > 85) {
-			energy = 85;
-		}else {
+		if (res.getFloatAt(2) > maxResistPossible) {
+			if (res.getFloatAt(2) <= 100) {
+				energy = maxResistPossible;
+			} else {
+				tempVal = res.getFloatAt(2) - 100.f;
+				if (tempVal < 0) {
+					energy = 0;
+				} else {
+					if (tempVal > maxResistPossible) {
+						energy = maxResistPossible;
+					} else {
+						energy = tempVal;
+					}
+				}
+			}
+		} else {
 			energy = res.getFloatAt(2);
 		}
+
 		// Blast
-		if (res.getFloatAt(3) > 85) {
-			blast = 85;
-		}else {
+		if (res.getFloatAt(3) > maxResistPossible) {
+			if (res.getFloatAt(3) <= 100) {
+				blast = maxResistPossible;
+			} else {
+				tempVal = res.getFloatAt(3) - 100.f;
+				if (tempVal < 0) {
+					blast = 0;
+				} else {
+					if (tempVal > maxResistPossible) {
+						blast = maxResistPossible;
+					} else {
+						blast = tempVal;
+					}
+				}
+			}
+		} else {
 			blast = res.getFloatAt(3);
 		}
+
 		// Heat
-		if (res.getFloatAt(4) > 85) {
-			heat = 85;
-		}else {
+		if (res.getFloatAt(4) > maxResistPossible) {
+			if (res.getFloatAt(4) <= 100) {
+				heat = maxResistPossible;
+			} else {
+				tempVal = res.getFloatAt(4) - 100.f;
+				if (tempVal < 0) {
+					heat = 0;
+				} else {
+					if (tempVal > maxResistPossible) {
+						heat = maxResistPossible;
+					} else {
+						heat = tempVal;
+					}
+				}
+			}
+		} else {
 			heat = res.getFloatAt(4);
 		}
+
 		// Cold
-		if (res.getFloatAt(5) > 85) {
-			cold = 85;
-		}else {
+		if (res.getFloatAt(5) > maxResistPossible) {
+			if (res.getFloatAt(5) <= 100) {
+				cold = maxResistPossible;
+			} else {
+				tempVal = res.getFloatAt(5) - 100.f;
+				if (tempVal < 0) {
+					cold = 0;
+				} else {
+					if (tempVal > maxResistPossible) {
+						cold = maxResistPossible;
+					} else {
+						cold = tempVal;
+					}
+				}
+			}
+		} else {
 			cold = res.getFloatAt(5);
 		}
+
 		// Electricity
-		if (res.getFloatAt(6) > 85) {
-			electricity = 85;
-		}else {
+		if (res.getFloatAt(6) > maxResistPossible) {
+			if (res.getFloatAt(6) <= 100) {
+				electricity = maxResistPossible;
+			} else {
+				tempVal = res.getFloatAt(6) - 100.f;
+				if (tempVal < 0) {
+					electricity = 0;
+				} else {
+					if (tempVal > maxResistPossible) {
+						electricity = maxResistPossible;
+					} else {
+						electricity = tempVal;
+					}
+				}
+			}
+		} else {
 			electricity = res.getFloatAt(6);
 		}
+
 		// Acid
-		if (res.getFloatAt(7) > 85) {
-			acid = 85;
-		}else {
+		if (res.getFloatAt(7) > maxResistPossible) {
+			if (res.getFloatAt(7) <= 100) {
+				acid = maxResistPossible;
+			} else {
+				tempVal = res.getFloatAt(7) - 100.f;
+				if (tempVal < 0) {
+					acid = 0;
+				} else {
+					if (tempVal > maxResistPossible) {
+						acid = maxResistPossible;
+					} else {
+						acid = tempVal;
+					}
+				}
+			}
+		} else {
 			acid = res.getFloatAt(7);
 		}
+
 		// Stun
-		if (res.getFloatAt(8) > 85) {
-			stun = 85;
-		}else {
+		if (res.getFloatAt(8) > maxResistPossible) {
+			if (res.getFloatAt(8) <= 100) {
+				stun = maxResistPossible;
+			} else {
+				tempVal = res.getFloatAt(8) - 100.f;
+				if (tempVal < 0) {
+					stun = 0;
+				} else {
+					if (tempVal > maxResistPossible) {
+						stun = maxResistPossible;
+					} else {
+						stun = tempVal;
+					}
+				}
+			}
+		} else {
 			stun = res.getFloatAt(8);
 		}
+
 		// Lighstaber
-		if (res.getFloatAt(9) > 85) {
-			lightSaber = 85;
-		}else {
+		if (res.getFloatAt(9) > maxResistPossible) {
+			if (res.getFloatAt(9) <= 100) {
+				lightSaber = maxResistPossible;
+			} else {
+				tempVal = res.getFloatAt(9) - 100.f;
+				if (tempVal < 0) {
+					lightSaber = 0;
+				} else {
+					if (tempVal > maxResistPossible) {
+						lightSaber = maxResistPossible;
+					} else {
+						lightSaber = tempVal;
+					}
+				}
+			}
+		} else {
 			lightSaber = res.getFloatAt(9);
 		}
 	}
