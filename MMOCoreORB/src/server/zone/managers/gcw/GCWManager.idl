@@ -142,7 +142,7 @@ class GCWManager extends ManagedService implements Logger {
 		bonusXP = 15;
 		loserBonus = 0;
 		winnerBonus = 30;
-		racialPenaltyEnabled = true;
+		racialPenaltyEnabled = false;
 		spawnDefenses = true;
 		initialVulnerabilityDelay = 0;
 

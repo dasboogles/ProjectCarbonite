@@ -132,24 +132,24 @@ object_weapon_ranged_pistol_pistol_power5 = object_weapon_ranged_pistol_shared_p
 
 
 	-- The values below are the default values.  To be used for blue frog objects primarily
-	healthAttackCost = 14,
-	actionAttackCost = 33,
-	mindAttackCost = 13,
+	healthAttackCost = 25,
+	actionAttackCost = 25,
+	mindAttackCost = 25,
 	forceCost = 0,
 
 	pointBlankRange = 0,
-	pointBlankAccuracy = 0,
+	pointBlankAccuracy = 20,
 
-	idealRange = 10,
+	idealRange = 15,
 	idealAccuracy = 5,
 
 	maxRange = 64,
-	maxRangeAccuracy = -70,
+	maxRangeAccuracy = -25,
 
 	minDamage = 25,
 	maxDamage = 125,
 
-	attackSpeed = 3.6,
+	attackSpeed = 3.0,
 
 	woundsRatio = 10,
 

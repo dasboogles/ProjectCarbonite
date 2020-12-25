@@ -57,7 +57,7 @@ medicalDuration = 12600 -- in seconds
 groupExpMultiplier = 1.5 -- +50% exp bonus when grouped
 
 --Sets a global experience multiplier
-globalExpMultiplier = 2.0 -- +200% exp bonus server wide
+globalExpMultiplier = 4.0 -- +200% exp bonus server wide
 
 --Sets the base number of control devices of each type that a player can have in their datapad at once
 --For creature pets, A Creature Handler will have the base number + their stored pets skill mod as limit

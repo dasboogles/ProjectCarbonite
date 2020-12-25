@@ -26,7 +26,7 @@ dnaStrandLength = 23
 destructionTimer = 600
 
 -- maximum bases per planet
-maxBases = 25
+maxBases = 10 -- from 25 -> 10
 
 -- time in seconds that a player must be overt before aborting a facility shutdown
 overtCooldown = 300
