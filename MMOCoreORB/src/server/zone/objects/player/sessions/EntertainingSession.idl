@@ -61,7 +61,7 @@ class EntertainingSession extends Facade {
 		flourishCount = 0;
 		applauseCount = 0;
 
-		entertainerBonusXpMulti = 5; // This bonus is multiplicative with global exp mod!
+		entertainerBonusXpMulti = 7; // This bonus is multiplicative with global exp mod!
 		
 		observer = null;
 		
