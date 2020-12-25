@@ -977,9 +977,11 @@ void ResourceSpawner::sendSampleResults(TransactionLog& trx, CreatureObject* pla
 
 	Zone* zne = player->getZone();
 
-	if (zne == nullptr)
+	if (zne == nullptr) {
 		return;
+	}
 
+	int samplingXPBonus = 2;
 	String zoneName = zne->getZoneName();
 
 	// If density is too low, we can't obtain a sample
@@ -1080,8 +1082,9 @@ void ResourceSpawner::sendSampleResults(TransactionLog& trx, CreatureObject* pla
 			* xpcap);
 	ManagedReference<PlayerManager*> playerManager = server->getPlayerManager();
 
-	if (playerManager != nullptr)
-		playerManager->awardExperience(player, "resource_harvesting_inorganic", xp, true);
+	if (playerManager != nullptr) {
+		playerManager->awardExperience(player, "resource_harvesting_inorganic", (xp * samplingXPBonus), true);
+	}
 
 	addResourceToPlayerInventory(trx, player, resourceSpawn, unitsExtracted);
 	player->notifyObservers(ObserverEventType::SAMPLE, resourceSpawn, density * 100);
