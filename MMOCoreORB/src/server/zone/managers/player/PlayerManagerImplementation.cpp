@@ -1746,20 +1746,21 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				continue;
 			}
 			ManagedReference<GroupObject*> group = attacker->getGroup();
-
+			
 			uint32 combatXp = 0;
-
+			
 			Locker crossLocker(attacker, destructedObject);
+
+			// Track how much damage the player does in this encounter so we can divide up the multi-weapon exp, if any!
+			int totalPlayerDamage = entry->getTotalDamage();
 
 			for (int j = 0; j < entry->size(); ++j) {
 				uint32 damage = entry->elementAt(j).getValue();
 				String xpType = entry->elementAt(j).getKey();
 				float xpAmount = baseXp;
 
-				// attacker->sendSystemMessage("Exp before dividing by totalDamage done: " + String::valueOf(xpAmount));
-				// Remove splitting based on damage done, Spin groups ahoy!
-				// xpAmount *= (float) damage / totalDamage;
-				// attacker->sendSystemMessage("Exp after dividing by totalDamage done: " + String::valueOf(xpAmount));
+				// Remove splitting between players, and only based on multi-weapon use! Hurray spin groups now!
+				xpAmount *= (float) damage / totalPlayerDamage;
 
 				//Cap xp based on level
 				xpAmount = Math::min(xpAmount, calculatePlayerLevel(attacker, xpType) * 300.f);
