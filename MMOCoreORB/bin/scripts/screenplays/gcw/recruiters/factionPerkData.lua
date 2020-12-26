@@ -16,7 +16,7 @@ rebelRewardData = {
 	},
 
 	weaponsArmor = {
-		armor_marine_backpack = { index=0, type=factionRewardType.armor, display="@wearables_name:armor_marine_backpack", item="object/tangible/tcg/series7/wearable_backpack_armored.iff",cost=250},
+		armor_marine_backpack = { index=0, type=factionRewardType.armor, display="@wearables_name:armor_marine_backpack", item="object/tangible/wearables/armor/marine/armor_marine_backpack.iff",cost=250},
 		armor_marine_bicep_l_gcw = { index=1, type=factionRewardType.armor, display="@wearables_name:armor_marine_bicep_l", item="object/tangible/wearables/armor/marine/armor_marine_bicep_l_gcw.iff",cost=50},
 		armor_marine_bicep_r_gcw = { index=2, type=factionRewardType.armor, display="@wearables_name:armor_marine_bicep_r", item="object/tangible/wearables/armor/marine/armor_marine_bicep_r_gcw.iff",cost=50},
 		armor_marine_boots_gcw = { index=3, type=factionRewardType.armor, display="@wearables_name:armor_marine_boots", item="object/tangible/wearables/armor/marine/armor_marine_boots_gcw.iff",cost=50},
@@ -114,7 +114,7 @@ imperialRewardData = {
 	},
 
 	weaponsArmor = {
-		armor_stormtrooper_backpack = { type=factionRewardType.armor, display="@wearables_name:armor_stormtrooper_backpack", item="object/tangible/tcg/series7/wearable_backpack_armored.iff",cost=250},
+		armor_stormtrooper_backpack = { type=factionRewardType.armor, display="@wearables_name:backpack_s03_quest", item="object/tangible/tcg/series7/wearable_backpack_armored.iff",cost=250},
 		armor_stormtrooper_bicep_l_gcw = { type=factionRewardType.armor, display="@wearables_name:armor_stormtrooper_bicep_l", item="object/tangible/wearables/armor/stormtrooper/armor_stormtrooper_bicep_l_gcw.iff",cost=50},
 		armor_stormtrooper_bicep_r_gcw = { type=factionRewardType.armor, display="@wearables_name:armor_stormtrooper_bicep_r", item="object/tangible/wearables/armor/stormtrooper/armor_stormtrooper_bicep_r_gcw.iff",cost=50},
 		armor_stormtrooper_boots_gcw = { type=factionRewardType.armor, display="@wearables_name:armor_stormtrooper_boots", item="object/tangible/wearables/armor/stormtrooper/armor_stormtrooper_boots_gcw.iff",cost=50},
