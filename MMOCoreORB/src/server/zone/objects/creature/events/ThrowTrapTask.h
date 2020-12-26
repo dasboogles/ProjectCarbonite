@@ -68,8 +68,10 @@ public:
 			//Not sure on exact xp value, estimate now and update later
 			int xp = target->getLevel() * 15;
 			ManagedReference<PlayerManager*> playerManager = player->getZoneServer()->getPlayerManager();
-			if(playerManager != nullptr)
+			if(playerManager != nullptr) {
+				xp = xp * 3; // Exp trapping bonus, throw more grenades!!
 				playerManager->awardExperience(player, "trapping", xp, true);
+			}
 		}
 
 	}

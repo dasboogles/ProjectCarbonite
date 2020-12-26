@@ -242,6 +242,7 @@ bool CampSiteActiveAreaImplementation::despawnCamp() {
 
 		amount += (int)((visitors.size() -1) * (campXp / 30) * durationUsed);
 		amount += (int)(currentXp * durationUsed);
+		amount = amount * 10; // Massive boost to camping exp, this is a dreadful task!
 
 		playerManager->awardExperience(campOwner, "camp", amount, true);
 	}

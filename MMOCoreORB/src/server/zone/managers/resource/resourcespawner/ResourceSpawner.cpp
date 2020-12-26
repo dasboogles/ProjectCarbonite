@@ -1024,8 +1024,10 @@ void ResourceSpawner::sendSampleResults(TransactionLog& trx, CreatureObject* pla
 	int unitsExtracted = maxUnitsExtracted * (float(surveySkill) / 100.0f) * samplingMultiplier * cityMultiplier;
 	int xpcap = 40;
 
-	// Double Sampling Rates
-	unitsExtracted *= 2;
+	// Sampling Rates bonus
+	// player->sendSystemMessage("Pre-Sample Bonus: " + String::valueOf(unitsExtracted));
+	unitsExtracted = unitsExtracted * 1.5;
+	// player->sendSystemMessage("Post-Sample Bonus: " + String::valueOf(unitsExtracted));
 
 	// if (session->tryGamble()) {
 	// 	if (System::random(2) == 1) {

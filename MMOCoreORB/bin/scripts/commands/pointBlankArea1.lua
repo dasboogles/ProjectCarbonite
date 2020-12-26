@@ -61,7 +61,7 @@ PointBlankArea1Command = {
 	
 	weaponType = RANGEDWEAPON,
 
-	range = 12
+	range = 15
 }
 
 AddCommand(PointBlankArea1Command)

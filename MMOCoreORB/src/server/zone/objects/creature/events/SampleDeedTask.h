@@ -101,8 +101,10 @@ public:
 	void award(int cl, float rollMod) {
 		int xp = DnaManager::instance()->generateXp(cl);
 		ManagedReference<PlayerManager*> playerManager = player->getZoneServer()->getPlayerManager();
-		if(playerManager != nullptr)
+		if(playerManager != nullptr) {
+			xp = xp * 3; // Exp sampledna bonus, more BEs!!
 			playerManager->awardExperience(player, "bio_engineer_dna_harvesting", xp, true);
+		}
 		int quality = deed->getQuality();
 		int newQuality = quality;
 		// generate quality based on skill

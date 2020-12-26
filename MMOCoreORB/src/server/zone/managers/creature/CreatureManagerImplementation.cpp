@@ -783,6 +783,8 @@ void CreatureManagerImplementation::droidHarvest(Creature* creature, CreatureObj
 
 	int xp = creature->getLevel() * 5 + 19;
 
+	xp = xp * 2; // Exp harvesting bonus, more scouts!!
+
 	if(playerManager != nullptr)
 		playerManager->awardExperience(owner, "scout", xp, true);
 
@@ -932,6 +934,8 @@ void CreatureManagerImplementation::harvest(Creature* creature, CreatureObject* 
 	ManagedReference<PlayerManager*> playerManager = zoneServer->getPlayerManager();
 
 	int xp = creature->getLevel() * 5 + 19;
+
+	xp = xp * 2; // Exp harvesting bonus, more scouts!!
 
 	if(playerManager != nullptr)
 		playerManager->awardExperience(player, "scout", xp, true);

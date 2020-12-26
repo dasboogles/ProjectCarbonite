@@ -120,7 +120,8 @@ class ZoneServer extends ManagedService implements Logger {
 
 	// The range of objects kept within closeObjects vectors.
 	// Changing this will have a large impact on performance.
-	public static final float CLOSEOBJECTRANGE = 1024; // from 192 -> 1024, this is a gamble, let's see what happens with modern hardware and code!
+	public static final float CLOSEOBJECTRANGE = 512; // from 192 -> 1024 -> 512, this is a gamble, let's see what happens with modern hardware and code!
+	// Possible AI pressure with range being too high? Testing!!
 
 	public native ZoneServer(ConfigManager config);
 

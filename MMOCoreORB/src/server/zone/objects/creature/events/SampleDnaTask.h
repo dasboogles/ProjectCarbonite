@@ -215,8 +215,10 @@ public:
 	void award(int cl, float rollMod, int skillMod) {
 		int xp = DnaManager::instance()->generateXp(cl);
 		ManagedReference<PlayerManager*> playerManager = player->getZoneServer()->getPlayerManager();
-		if(playerManager != nullptr)
+		if(playerManager != nullptr) {
+			xp = xp * 3; // Exp samplenda bonus, more BEs!!
 			playerManager->awardExperience(player, "bio_engineer_dna_harvesting", xp, true);
+		}
 		int quality = 0;
 		// generate quality based on skill
 		int luckRoll = System::random(100);

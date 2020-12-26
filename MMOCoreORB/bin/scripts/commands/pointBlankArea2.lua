@@ -42,7 +42,7 @@
 --true = 1, false = 0
 
 PointBlankArea2Command = {
-        name = "pointblankarea2",
+    name = "pointblankarea2",
 
 	damageMultiplier = 4.0,
 	speedMultiplier = 1.5,
@@ -51,17 +51,17 @@ PointBlankArea2Command = {
 	mindCostMultiplier = 0.5,
 	accuracyBonus = 50,
 
-	coneAngle = 60,
-	coneAction = true,
+	areaRange = 25,
+	areaAction = true,
 
 	animation = "fire_area_no_trails", 
 	animType = GENERATE_INTENSITY,
 
-	combatSpam = "areashot",
+	combatSpam = "pointblankblast",
 	
 	weaponType = PISTOLWEAPON,
 
-	range = 12
+	range = 25
 }
 
 AddCommand(PointBlankArea2Command)
