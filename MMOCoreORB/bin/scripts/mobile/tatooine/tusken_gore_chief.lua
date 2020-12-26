@@ -2,15 +2,15 @@ tusken_gore_chief = Creature:new {
 	objectName = "@mob/creature_names:tusken_gore_chief",
 	socialGroup = "tusken_raider",
 	faction = "tusken_raider",
-	level = 51,
-	chanceHit = 0.51,
-	damageMin = 400,
-	damageMax = 510,
-	baseXp = 5007,
-	baseHAM = 10000,
-	baseHAMmax = 13000,
+	level = 60,
+	chanceHit = 0.50,
+	damageMin = 475,
+	damageMax = 550,
+	baseXp = 1000,
+	baseHAM = 9800,
+	baseHAMmax = 14500,
 	armor = 0,
-	resists = {30,30,0,30,-1,30,0,0,-1},
+	resists = {35,15,25,15,25,45,15,25,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -29,18 +29,52 @@ tusken_gore_chief = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 1500000},
-				{group = "tusken_common", chance = 3500000},
-				{group = "wearables_common", chance = 1000000},
-				{group = "wearables_uncommon", chance = 500000},
-				{group = "bone_armor", chance = 750000},
-				{group = "chitin_armor", chance = 750000},
-				{group = "armor_attachments", chance = 500000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000}
-			}
-		}
+				{group = "containers", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "tusken_common", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "wearables_common", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "wearables_uncommon", chance = 10000000}
+			},
+			lootChance = 300000
+		},
+		{
+			groups = {
+				{group = "bone_armor", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "chitin_armor", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 300000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 300000
+		},
 	},
 	weapons = {"tusken_weapons"},
 	conversationTemplate = "",

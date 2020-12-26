@@ -1185,13 +1185,18 @@ void CreatureObjectImplementation::setBaseHAM(int type, int value,
 	}
 }
 
-void CreatureObjectImplementation::setWounds(int type, int value,
-		bool notifyClient) {
-	if (value < 0)
-		value = 0;
+void CreatureObjectImplementation::setWounds(int type, int value, bool notifyClient) {
+	// Set how far we want wounds to go
+	float totalHAMWoundPossible = 0.5f;
 
-	if (value >= baseHAM.get(type))
-		value = baseHAM.get(type) - 1;
+	if (value < 0) {
+		value = 0;
+	}
+
+	// Cap wounds with a limiter now instead of 100%
+	if (value >= baseHAM.get(type) * totalHAMWoundPossible) {
+		value = (baseHAM.get(type) * totalHAMWoundPossible) - 1;
+	}
 
 	if (wounds.get(type) == value)
 		return;

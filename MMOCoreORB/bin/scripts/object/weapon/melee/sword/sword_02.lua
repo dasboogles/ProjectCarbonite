@@ -104,7 +104,7 @@ object_weapon_melee_sword_sword_02 = object_weapon_melee_sword_shared_sword_02:n
 	damageType = KINETIC,
 
 	-- NONE, LIGHT, MEDIUM, HEAVY
-	armorPiercing = NONE,
+	armorPiercing = LIGHT,
 
 	-- combat_rangedspecialize_bactarifle, combat_rangedspecialize_rifle, combat_rangedspecialize_pistol, combat_rangedspecialize_heavy, combat_rangedspecialize_carbine
 	-- combat_meleespecialize_unarmed, combat_meleespecialize_twohand, combat_meleespecialize_polearm, combat_meleespecialize_onehand, combat_general,
@@ -146,12 +146,12 @@ object_weapon_melee_sword_sword_02 = object_weapon_melee_sword_shared_sword_02:n
 	maxRange = 4,
 	maxRangeAccuracy = 5,
 
-	minDamage = 25,
-	maxDamage = 100,
+	minDamage = 50,
+	maxDamage = 150,
 
-	attackSpeed = 3.1,
+	attackSpeed = 3.0,
 
-	woundsRatio = 18,
+	woundsRatio = 25,
 
 	numberExperimentalProperties = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	experimentalProperties = {"XX", "XX", "SR", "SR", "SR", "SR", "SR", "SR", "SR", "XX", "SR", "XX", "SR", "SR", "SR"},

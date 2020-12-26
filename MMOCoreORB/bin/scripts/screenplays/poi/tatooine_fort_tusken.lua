@@ -11,19 +11,52 @@ FortTuskenScreenPlay = ScreenPlay:new {
 		7875789
 	},
 
-	lootLevel = 26,
+	lootLevel = 150,
 
 	lootGroups = {
 		{
-			groups = {
-				{group = "color_crystals", chance = 3500000},
-				{group = "junk", chance = 3500000},
-				{group = "rifles", chance = 1000000},
-				{group = "pistols", chance = 1000000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "armor_attachments", chance = 500000}
+			{
+				groups = {
+					{group = "color_crystals", chance = 10000000}
+				},
+				lootChance = 500000
 			},
-			lootChance = 8000000
+			{
+				groups = {
+					{group = "clothing_attachments", chance = 10000000}
+				},
+				lootChance = 500000
+			},
+			{
+				groups = {
+					{group = "armor_attachments", chance = 10000000}
+				},
+				lootChance = 500000
+			},
+			{
+				groups = {
+					{group = "pistols", chance = 10000000}
+				},
+				lootChance = 2500000
+			},
+			{
+				groups = {
+					{group = "carbines", chance = 10000000}
+				},
+				lootChance = 2500000
+			},
+			{
+				groups = {
+					{group = "rifles", chance = 10000000}
+				},
+				lootChance = 2500000
+			},
+			{
+				groups = {
+					{group = "melee_baton", chance = 10000000}
+				},
+				lootChance = 2500000
+			}
 		}
 	},
 
@@ -97,9 +130,9 @@ function FortTuskenScreenPlay:spawnMobiles()
 	spawnMobile("tatooine", "tusken_chief",300,2.0,1.3,10.0,118,1189174)
 	spawnMobile("tatooine", "tusken_warlord",300,-0.9,1.3,9.6,109,1189174)
 	spawnMobile("tatooine", "tusken_flesh_hunter",300,0.6,1.4,12.7,0,1189174)
-	spawnMobile("tatooine", "tusken_witch_doctor",300,1.3,1.5,-10.8,118,1189175)
+	spawnMobile("tatooine", "tusken_witch_doctor",900,1.3,1.5,-10.8,118,1189175)
 	spawnMobile("tatooine", "tusken_observer",300,0.8,1.7,-7.5,-11,1189175)
-	spawnMobile("tatooine", "tusken_executioner",300, -1.54, 1.58, 0.90,-102,1189175)
+	spawnMobile("tatooine", "tusken_executioner",900, -1.54, 1.58, 0.90,-102,1189175)
 	spawnMobile("tatooine", "tusken_avenger",300,-4.7,1.5,-7.0,0,1189175)
 	spawnMobile("tatooine", "tusken_warlord",300,-12.6,2.9,1.0,109,1189175)
 	spawnMobile("tatooine", "tusken_chief",300,-15.9,3.4,-2.4,118,1189176)
@@ -111,8 +144,8 @@ function FortTuskenScreenPlay:spawnMobiles()
 	spawnMobile("tatooine", "tusken_flesh_hunter",300,-10.3,6.6,-21.8,118,1189177)
 	spawnMobile("tatooine", "tusken_raid_leader",300,2.9,8.4,-28.2,-95,1189178)
 	spawnMobile("tatooine", "tusken_warlord",300,0.7,8.0,-18.9,109,1189178)
-	spawnMobile("tatooine", "tusken_witch_doctor",300,2.17, 8.36, -32.02,118,1189178)
-	spawnMobile("tatooine", "tusken_executioner", 300, 6.54, 8.0, -34.17, 180, 1189178)
+	spawnMobile("tatooine", "tusken_witch_doctor",900,2.17, 8.36, -32.02,118,1189178)
+	spawnMobile("tatooine", "tusken_executioner", 900, 6.54, 8.0, -34.17, 180, 1189178)
 	spawnMobile("tatooine", "tusken_observer",300,8.5,8.2,-33.5,0,1189178)
 	spawnMobile("tatooine", "tusken_observer",300,1.2,8.15,-20.5,0,1189178)
 	spawnMobile("tatooine", "tusken_observer",300,3.07, 8.31, -39.26,0,1189178)
@@ -140,7 +173,7 @@ function FortTuskenScreenPlay:spawnMobiles()
 	spawnMobile("tatooine", "tusken_death_hunter",300,38.0,20.8,-3.6,-51,1189182)
 	spawnMobile("tatooine", "tusken_chief",300,31,21.5,-9.4,167,1189182)
 	spawnMobile("tatooine", "tusken_death_hunter",300,32.0,22.1,2.6,90,1189182)
-	spawnMobile("tatooine", "tusken_executioner",300,20.8,22.9,-15.2,-102,1189183)
+	spawnMobile("tatooine", "tusken_executioner",900,20.8,22.9,-15.2,-102,1189183)
 	spawnMobile("tatooine", "tusken_gore_chief",300,15.1,22.8,-17.0,163,1189183)
 	spawnMobile("tatooine", "tusken_brute",300,2.5,22.9,-19.2,101,1189183)
 	spawnMobile("tatooine", "tusken_carnage_champion",300,8.7,23,-28.5,121,1189183)
@@ -154,4 +187,82 @@ function FortTuskenScreenPlay:spawnMobiles()
 	spawnMobile("tatooine", "tusken_blood_champion",300,-7.5,37.9,11.6,-136,1189185)
 	spawnMobile("tatooine", "tusken_warlord",300,-11.0,37.9,7.8,46,1189185)
 	spawnMobile("tatooine", "tusken_war_master",300,3.1,37.9,-21.5,-55,1189187)
+
+	-------------------------------------------------------------------------------------
+	------------------------------Carbonite Additions------------------------------------
+	-------------------------------------------------------------------------------------
+	-- Above Pool
+	spawnMobile("tatooine", "tusken_guard", 300, -3986.09, 60, 6298.79, 353, 0)
+	spawnMobile("tatooine", "tusken_guard", 300, -3973, 60, 6300.04, 341, 0)
+	spawnMobile("tatooine", "tusken_guard", 300, -3983.61, 60, 6295.32, 7, 0)
+	spawnMobile("tatooine", "tusken_commoner", 300, -3979.93, 60, 6293.73, 348, 0)
+	spawnMobile("tatooine", "tusken_guard", 300, -3993.57, 60, 6306.3, 299, 0)
+	spawnMobile("tatooine", "tusken_guard", 300, -3994.87, 60, 6309.75, 208, 0)
+	spawnMobile("tatooine", "tusken_brute", 300, -3998.09, 60, 6309.05, 120, 0)
+	spawnMobile("tatooine", "tusken_brute", 300, -3962.27, 60, 6305.17, 14, 0)
+	spawnMobile("tatooine", "tusken_gore_chief", 300, -3958.85, 60, 6308.32, 272, 0)
+	spawnMobile("tatooine", "tusken_elite_guard", 300, -4004.45, 60, 6301.39, 208, 0)
+	spawnMobile("tatooine", "tusken_blood_champion", 300, -4013.49, 60, 6298.94, 149, 0)
+	spawnMobile("tatooine", "tusken_war_master", 300, -3967.96, 60, 6302.57, 144, 0)
+	spawnMobile("tatooine", "tusken_raider", 300, -3952.64, 60, 6295.68, 242, 0)
+	spawnMobile("tatooine", "tusken_brute", 300, -3954.96, 60, 6298.25, 309, 0)
+	spawnMobile("tatooine", "tusken_brute", 300, -3990.56, 60, 6285.36, 106, 0)
+	spawnMobile("tatooine", "tusken_avenger", 300, -3994.45, 60, 6276.91, 2, 0)
+	spawnMobile("tatooine", "tusken_raider", 300, -3976.73, 60, 6271.49, 273, 0)
+	spawnMobile("tatooine", "tusken_commoner", 300, -3974.56, 60, 6284.32, 77, 0)
+	spawnMobile("tatooine", "tusken_avenger", 300, 1.97583, 37.9261, -30.7195, 240, 1189186)
+	spawnMobile("tatooine", "tusken_elite_guard", 300, 1.54945, 37.9261, -32.4889, 291, 1189186)
+	spawnMobile("tatooine", "tusken_raider", 300, 24.4874, 37.942, -29.2753, 245, 1189189)
+	spawnMobile("tatooine", "tusken_brute", 300, 31.0738, 37.9421, -27.9963, 103, 1189189)
+	spawnMobile("tatooine", "tusken_brute", 300, 31.2953, 37.942, -18.6322, 311, 1189190)
+	spawnMobile("tatooine", "tusken_avenger", 300, 26.7117, 37.942, -18.7818, 250, 1189190)
+	spawnMobile("tatooine", "tusken_raider", 300, 26.8954, 37.942, -17.1968, 281, 1189190)
+	spawnMobile("tatooine", "tusken_war_master", 300, 30.59, 37.942, -14.5161, 190, 1189190)
+	spawnMobile("tatooine", "tusken_avenger", 300, 34.5429, 37.942, -19.2521, 112, 1189190)
+	spawnMobile("tatooine", "tusken_avenger", 300, 23.5264, 37.942, -22.0313, 90, 1189191)
+	spawnMobile("tatooine", "tusken_commoner", 300, 19.8158, 37.942, -23.9807, 266, 1189191)
+	spawnMobile("tatooine", "tusken_brute", 300, 30.8094, 43.9613, -21.3522, 97, 1189192)
+	spawnMobile("tatooine", "tusken_blood_champion", 300, 27.4417, 43.9658, -31.5079, 223, 1189193)
+	spawnMobile("tatooine", "tusken_elite_guard", 300, 30.2977, 43.9627, -31.6697, 138, 1189193)
+	spawnMobile("tatooine", "tusken_war_master", 300, 32.5195, 43.9586, -18.1022, 330, 1189192)
+	spawnMobile("tatooine", "tusken_avenger", 300, 1.0059, 37.9261, -18.6686, 273, 1189187)
+	spawnMobile("tatooine", "tusken_gore_chief", 300, -1.21032, 37.9261, -18.4348, 89, 1189187)
+	spawnMobile("tatooine", "tusken_brute", 300, -3994.2, 60, 6246.32, 341, 0)
+	spawnMobile("tatooine", "tusken_avenger", 300, -3989.37, 60, 6245.77, 55, 0)
+	spawnMobile("tatooine", "tusken_avenger", 300, 24.4688, 36.9505, 4.69323, 2, 1189194)
+	spawnMobile("tatooine", "tusken_war_master", 300, 31.093, 37.9421, 4.91734, 5, 1189196)
+	spawnMobile("tatooine", "tusken_avenger", 300, 35.1457, 37.942, 5.67872, 34, 1189196)
+	spawnMobile("tatooine", "tusken_raider", 300, 14.7667, 37.942, -3.46546, 190, 1189195)
+	spawnMobile("tatooine", "tusken_commoner", 300, 14.3634, 37.942, 4.36281, 328, 1189195)
+	spawnMobile("tatooine", "tusken_avenger", 300, -4012.57, 67.7578, 6269.3, 258, 0)
+	spawnMobile("tatooine", "tusken_brute", 300, -4012.48, 67.7559, 6271.87, 266, 0)
+	spawnMobile("tatooine", "tusken_brute", 300, -4001.24, 68.5068, 6284.45, 133, 0)
+	spawnMobile("tatooine", "tusken_blood_champion", 300, -4008.72, 68.5059, 6293.03, 107, 0)
+	spawnMobile("tatooine", "tusken_avenger", 300, -4008.79, 68.5078, 6289.42, 84, 0)
+	spawnMobile("tatooine", "tusken_raider", 300, -4004.38, 72.915, 6293.32, 221, 0)
+	spawnMobile("tatooine", "tusken_war_master", 300, -4004.73, 73.1113, 6287.18, 326, 0)
+	spawnMobile("tatooine", "tusken_elite_guard", 300, -4010.3, 73.1123, 6293.44, 205, 0)
+	spawnMobile("tatooine", "tusken_avenger", 300, -4010.17, 70.7334, 6287.1, 87, 0)
+	spawnMobile("tatooine", "tusken_brute", 300, -3990.18, 67.7568, 6294.78, 177, 0)
+	spawnMobile("tatooine", "tusken_brute", 300, -3971.69, 67.7559, 6294.23, 189, 0)
+	spawnMobile("tatooine", "tusken_raider", 300, -3951.45, 67.7559, 6268.85, 192, 0)
+	spawnMobile("tatooine", "tusken_blood_champion", 300, -3964.31, 60, 6228.81, 332, 0)
+	spawnMobile("tatooine", "tusken_war_master", 300, -3962.44, 60, 6230.73, 306, 0)
+	spawnMobile("tatooine", "tusken_gore_chief", 300, -3958.13, 60, 6235.9, 262, 0)
+	spawnMobile("tatooine", "tusken_brute", 300, -3958.01, 60, 6281.17, 269, 0)
+	spawnMobile("tatooine", "tusken_avenger", 300, -3959.37, 60, 6281.28, 89, 0)
+	--------------------------------
+	-- Underground tunnels
+	--King
+	spawnMobile("tatooine", "tusken_king", 1800, -22.1577, 3.83799, 10.4815, 165, 1189176)
+	-- King's Guard
+	spawnMobile("tatooine", "tusken_executioner", 900, -16.8909, 3.28242, 9.26107, 102, 1189176)
+	spawnMobile("tatooine", "tusken_torture_lord", 300, -16.1819, 3.23275, 7.49179, 35, 1189176)
+	spawnMobile("tatooine", "tusken_torture_lord", 300, -26.256, 3.46879, 6.96159, 244, 1189176)
+	spawnMobile("tatooine", "tusken_executioner", 900, -14.9581, 3.49896, -0.449103, 109, 1189176)
+	spawnMobile("tatooine", "tusken_witch_doctor", 900, -25.3458, 3.27424, -3.9055, 163, 1189176)
+	spawnMobile("tatooine", "tusken_witch_doctor", 900, -27.624, 3.36296, -4.64515, 146, 1189176)
+	-------------------------------------------------------------------------------------
+	------------------------------Carbonite Additions------------------------------------
+	-------------------------------------------------------------------------------------
 end

@@ -519,10 +519,10 @@ void SuiManager::handleCharacterBuilderSelectItem(CreatureObject* player, SuiBox
 				player->addDotState(player, CreatureState::BLEEDING, scob->getObjectID(), 100, CreatureAttribute::UNKNOWN, 60, -1, 0);
 
 			} else if (templatePath == "apply_disease_dot") {
-				player->addDotState(player, CreatureState::DISEASED, scob->getObjectID(), 100, CreatureAttribute::UNKNOWN, 60, -1, 0);
+				player->addDotState(player, CreatureState::DISEASED, scob->getObjectID(), 500, CreatureAttribute::UNKNOWN, 60, -1, 0);
 
 			} else if (templatePath == "apply_fire_dot") {
-				player->addDotState(player, CreatureState::ONFIRE, scob->getObjectID(), 100, CreatureAttribute::UNKNOWN, 60, -1, 0, 20);
+				player->addDotState(player, CreatureState::ONFIRE, scob->getObjectID(), 500, CreatureAttribute::UNKNOWN, 60, -1, 0, 20);
 
 			} else if (templatePath == "clear_dots") {
 				player->clearDots();

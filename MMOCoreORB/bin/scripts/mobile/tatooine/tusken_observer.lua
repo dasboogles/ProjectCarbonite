@@ -2,13 +2,13 @@ tusken_observer = Creature:new {
 	objectName = "@mob/creature_names:tusken_observer",
 	socialGroup = "tusken_raider",
 	faction = "tusken_raider",
-	level = 227,
-	chanceHit = 19.75,
+	level = 225,
+	chanceHit = 15,
 	damageMin = 1270,
 	damageMax = 2250,
 	baseXp = 21630,
-	baseHAM = 208000,
-	baseHAMmax = 254000,
+	baseHAM = 228000,
+	baseHAMmax = 274000,
 	armor = 3,
 	resists = {185,185,135,200,10,130,145,180,-1},
 	meatType = "",
@@ -29,17 +29,64 @@ tusken_observer = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 1500000},
-				{group = "tusken_common", chance = 3000000},
-				{group = "wearables_scarce", chance = 2000000},
-				{group = "bone_armor", chance = 750000},
-				{group = "chitin_armor", chance = 750000},
-				{group = "armor_attachments", chance = 500000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000}
-			}
-		}
+				{group = "containers", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "tusken_common", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "wearables_common", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "wearables_uncommon", chance = 10000000}
+			},
+			lootChance = 1750000
+		},
+		{
+			groups = {
+				{group = "bone_armor", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "chitin_armor", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 750000
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 750000
+		},
 	},
 	weapons = {"tusken_weapons"},
 	conversationTemplate = "",

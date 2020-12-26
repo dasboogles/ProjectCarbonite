@@ -2,13 +2,13 @@ tusken_torture_lord = Creature:new {
 	objectName = "@mob/creature_names:tusken_torture_lord",
 	socialGroup = "tusken_raider",
 	faction = "tusken_raider",
-	level = 57,
-	chanceHit = 0.57,
-	damageMin = 430,
-	damageMax = 570,
-	baseXp = 5555,
-	baseHAM = 11000,
-	baseHAMmax = 13000,
+	level = 85,
+	chanceHit = 0.75,
+	damageMin = 555,
+	damageMax = 680,
+	baseXp = 1000,
+	baseHAM = 14150,
+	baseHAMmax = 26700,
 	armor = 0,
 	resists = {50,30,0,60,-1,30,-1,-1,-1},
 	meatType = "",
@@ -29,18 +29,64 @@ tusken_torture_lord = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 1500000},
-				{group = "tusken_common", chance = 3500000},
-				{group = "wearables_common", chance = 1000000},
-				{group = "wearables_uncommon", chance = 500000},
-				{group = "bone_armor", chance = 750000},
-				{group = "chitin_armor", chance = 750000},
-				{group = "armor_attachments", chance = 500000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000}
-			}
-		}
+				{group = "containers", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "tusken_common", chance = 10000000}
+			},
+			lootChance = 1000000
+		},
+		{
+			groups = {
+				{group = "wearables_common", chance = 10000000}
+			},
+			lootChance = 1000000
+		},
+		{
+			groups = {
+				{group = "wearables_uncommon", chance = 10000000}
+			},
+			lootChance = 750000
+		},
+		{
+			groups = {
+				{group = "bone_armor", chance = 10000000}
+			},
+			lootChance = 1000000
+		},
+		{
+			groups = {
+				{group = "chitin_armor", chance = 10000000}
+			},
+			lootChance = 1000000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 750000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 750000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 750000
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 750000
+		},
 	},
 	weapons = {"tusken_weapons"},
 	conversationTemplate = "",

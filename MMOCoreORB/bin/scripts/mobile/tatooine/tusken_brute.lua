@@ -2,15 +2,15 @@ tusken_brute = Creature:new {
 	objectName = "@mob/creature_names:tusken_brute",
 	socialGroup = "tusken_raider",
 	faction = "tusken_raider",
-	level = 34,
-	chanceHit = 0.41,
-	damageMin = 315,
-	damageMax = 340,
-	baseXp = 3460,
-	baseHAM = 8700,
-	baseHAMmax = 10700,
+	level = 45,
+	chanceHit = 0.40,
+	damageMin = 250,
+	damageMax = 300,
+	baseXp = 1000,
+	baseHAM = 5500,
+	baseHAMmax = 7500,
 	armor = 0,
-	resists = {40,0,0,30,-1,30,-1,-1,-1},
+	resists = {15,15,25,5,25,15,5,15,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -29,18 +29,52 @@ tusken_brute = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 1500000},
-				{group = "tusken_common", chance = 3500000},
-				{group = "wearables_common", chance = 1000000},
-				{group = "wearables_uncommon", chance = 500000},
-				{group = "bone_armor", chance = 750000},
-				{group = "chitin_armor", chance = 750000},
-				{group = "armor_attachments", chance = 500000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000}
-			}
-		}
+				{group = "containers", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "tusken_common", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "wearables_common", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "wearables_uncommon", chance = 10000000}
+			},
+			lootChance = 300000
+		},
+		{
+			groups = {
+				{group = "bone_armor", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "chitin_armor", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 300000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 300000
+		},
 	},
 	weapons = {"tusken_weapons"},
 	conversationTemplate = "",

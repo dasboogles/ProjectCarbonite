@@ -2,15 +2,15 @@ tusken_berserker = Creature:new {
 	objectName = "@mob/creature_names:tusken_berserker",
 	socialGroup = "tusken_raider",
 	faction = "tusken_raider",
-	level = 41,
-	chanceHit = 0.45,
-	damageMin = 350,
-	damageMax = 410,
-	baseXp = 4097,
-	baseHAM = 9400,
-	baseHAMmax = 11400,
+	level = 60,
+	chanceHit = 0.50,
+	damageMin = 475,
+	damageMax = 550,
+	baseXp = 1000,
+	baseHAM = 9500,
+	baseHAMmax = 12500,
 	armor = 0,
-	resists = {45,45,0,30,-1,30,-1,-1,-1},
+	resists = {35,15,25,15,25,45,15,25,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -29,18 +29,52 @@ tusken_berserker = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 1500000},
-				{group = "tusken_common", chance = 3500000},
-				{group = "wearables_common", chance = 1000000},
-				{group = "wearables_uncommon", chance = 500000},
-				{group = "bone_armor", chance = 750000},
-				{group = "chitin_armor", chance = 750000},
-				{group = "armor_attachments", chance = 500000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000}
-			}
-		}
+				{group = "containers", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "tusken_common", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "wearables_common", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "wearables_uncommon", chance = 10000000}
+			},
+			lootChance = 300000
+		},
+		{
+			groups = {
+				{group = "bone_armor", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "chitin_armor", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 300000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 300000
+		},
 	},
 	weapons = {"tusken_weapons"},
 	conversationTemplate = "",

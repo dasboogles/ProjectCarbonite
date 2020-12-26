@@ -12,7 +12,7 @@ factionRewardType = {
 rebelRewardData = {
 	weaponsArmorList = {
 		"armor_marine_backpack", "armor_marine_helmet_gcw", "armor_marine_chest_plate_gcw", "armor_marine_leggings_gcw", "armor_marine_boots_gcw", "armor_marine_bicep_l_gcw", "armor_marine_belt_gcw",
-		"armor_marine_bicep_r_gcw", "carbine_laser", "pistol_scout_blaster", "metal_sword", "lance_staff_metal", "rocket_launcher", "mine_drx", "mine_xg", "armor_marine_bracer_r_gcw", "armor_marine_bracer_l_gcw", "armor_marine_gloves_gcw",
+		"armor_marine_bicep_r_gcw", "carbine_laser", "pistol_scout_blaster", "sword_02", "lance_staff_metal", "rocket_launcher", "mine_drx", "mine_xg", "armor_marine_bracer_r_gcw", "armor_marine_bracer_l_gcw", "armor_marine_gloves_gcw",
 	},
 
 	weaponsArmor = {
@@ -26,7 +26,7 @@ rebelRewardData = {
 		armor_marine_leggings_gcw = { index=7, type=factionRewardType.armor, display="@wearables_name:armor_marine_leggings", item="object/tangible/wearables/armor/marine/armor_marine_leggings_gcw.iff",cost=50},
 		carbine_laser = { index=8, type=factionRewardType.weapon, display="@weapon_name:carbine_laser", item="object/weapon/ranged/carbine/carbine_laser.iff", cost=50},
 		pistol_scout_blaster = { index=9, type=factionRewardType.weapon, display="@weapon_name:pistol_scout_blaster", item="object/weapon/ranged/pistol/pistol_scout_blaster.iff", cost=50},
-		metal_sword = { index=10, type=factionRewardType.weapon, display="@weapon_name:sword_02", item="object/weapon/ranged/melee/sword/sword_02.iff", cost=50},
+		sword_02 = { type=factionRewardType.weapon, display="@weapon_name:sword_02", item="object/weapon/melee/sword/sword_02.iff", cost=50},
 		rocket_launcher = { index=11, type=factionRewardType.weapon, display="@weapon_name:rocket_launcher", item="object/weapon/ranged/heavy/heavy_rocket_launcher.iff", cost=500},
 		lance_staff_metal = { index=12, type=factionRewardType.weapon, display="@weapon_name:lance_staff_metal", item="object/weapon/melee/polearm/lance_staff_metal.iff", cost=50},
 		armor_marine_bracer_r_gcw = { index=13, type=factionRewardType.armor, display="@wearables_name:armor_marine_bracer_r", item="object/tangible/wearables/armor/marine/armor_marine_bracer_r_gcw.iff",cost=50},

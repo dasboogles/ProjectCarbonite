@@ -2,15 +2,15 @@ tusken_flesh_hunter = Creature:new {
 	objectName = "@mob/creature_names:tusken_flesh_hunter",
 	socialGroup = "tusken_raider",
 	faction = "tusken_raider",
-	level = 31,
-	chanceHit = 0.39,
-	damageMin = 300,
-	damageMax = 310,
-	baseXp = 3188,
-	baseHAM = 8500,
-	baseHAMmax = 10300,
+	level = 45,
+	chanceHit = 0.40,
+	damageMin = 250,
+	damageMax = 300,
+	baseXp = 1000,
+	baseHAM = 5500,
+	baseHAMmax = 7500,
 	armor = 0,
-	resists = {0,0,0,0,0,0,0,0,-1},
+	resists = {5,5,25,5,25,15,5,15,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -29,17 +29,52 @@ tusken_flesh_hunter = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 1500000},
-				{group = "tusken_common", chance = 3000000},
-				{group = "wearables_common", chance = 2000000},
-				{group = "bone_armor", chance = 750000},
-				{group = "chitin_armor", chance = 750000},
-				{group = "armor_attachments", chance = 500000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000}
-			}
-		}
+				{group = "containers", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "tusken_common", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "wearables_common", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "wearables_uncommon", chance = 10000000}
+			},
+			lootChance = 300000
+		},
+		{
+			groups = {
+				{group = "bone_armor", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "chitin_armor", chance = 10000000}
+			},
+			lootChance = 550000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 300000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 300000
+		},
 	},
 	weapons = {"tusken_weapons"},
 	conversationTemplate = "",
