@@ -1867,6 +1867,72 @@ class CreatureObject extends TangibleObject {
 			return "ithorian";
 		else if(species == 0x31)
 			return "sullustan";
+		else if(species == 0x1F)
+			return "hutt";
+		else if(species == 0xE6)
+			return "nautolan";
+		else if(species == 0xE7)
+			return "togruta";
+		else if(species == 0xE8)
+			return "chiss";
+		else if(species == 0x11)
+			return "devaronian";
+		else if(species == 0x1C)
+			return "gran";
+		else if(species == 0x20)
+			return "ish_tib";
+		else if(species == 0xE9)
+			return "nightsister";
+		else if(species == 0xA2)
+			return "nikto";
+		else if(species == 0x2E)
+			return "quarren";
+		else if(species == 0xEA)
+			return "singing_mountain_clan";
+		else if(species == 0x37)
+			return "weequay";
+		else if(species == 9)
+			return "aqualish";
+		else if(species == 0xDC)
+			return "bith";
+		else if(species == 0x1B)
+			return "gotal";
+		else if(species == 0x32)
+			return "talz";
+		else if(species == 8)
+			return "abyssin";
+		else if(species == 0x0A)
+			return "arcona";
+		else if(species == 0xEB)
+			return "cerean";
+		else if(species == 0x0E)
+			return "chadra_fan";
+		else if(species == 0x13)
+			return "dug";
+		else if(species == 0x14)
+			return "duros";
+		else if(species == 0x16)
+			return "ewok";
+		else if(species == 0xE4)
+			return "geonosion";
+		else if(species == 0xEC)
+			return "iktotchi";
+		else if(species == 0xED)
+			return "jenet";
+		else if(species == 0x22)
+			return "jawa";
+		else if(species == 0xEE)
+			return "kel_dor";
+		else if(species == 0x27)
+			return "kubaz";
+		else if(species == 0xEF)
+			return "mirialan";
+		else if(species == 0xF0)
+			return "marauder";
+		else if(species == 0xF1)
+			return "zelton";
+		else if(species == 0x35)
+			return "toydarian";
 		else
 			return "";
 	}

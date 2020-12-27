@@ -1701,6 +1701,7 @@ object_creature_player_shared_zabrak_male = SharedCreatureObjectTemplate:new {
 
 ObjectTemplates:addClientTemplate(object_creature_player_shared_zabrak_male, "object/creature/player/shared_zabrak_male.iff")
 
+
 --Added Races
 --Hutt male
 object_creature_player_shared_hutt_male = SharedCreatureObjectTemplate:new {
@@ -1792,13 +1793,110 @@ object_creature_player_shared_bith_male = SharedCreatureObjectTemplate:new {
 	clientTemplateFileName = "object/creature/player/shared_bith_male.iff"}
 ObjectTemplates:addClientTemplate(object_creature_player_shared_bith_male, "object/creature/player/shared_bith_male.iff")
 
---Gotal male
 object_creature_player_shared_gotal_male = SharedCreatureObjectTemplate:new {
 	clientTemplateFileName = "object/creature/player/shared_gotal_male.iff"}
 ObjectTemplates:addClientTemplate(object_creature_player_shared_gotal_male, "object/creature/player/shared_gotal_male.iff")
 
---Talz male
 object_creature_player_shared_talz_male = SharedCreatureObjectTemplate:new {
 	clientTemplateFileName = "object/creature/player/shared_talz_male.iff"}
 ObjectTemplates:addClientTemplate(object_creature_player_shared_talz_male, "object/creature/player/shared_talz_male.iff")
 
+object_creature_player_shared_abyssin_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_abyssin_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_abyssin_male, "object/creature/player/shared_abyssin_male.iff")
+
+object_creature_player_shared_arcona_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_arcona_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_arcona_male, "object/creature/player/shared_arcona_male.iff")
+
+object_creature_player_shared_cerean_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_cerean_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_cerean_male, "object/creature/player/shared_cerean_male.iff")
+
+object_creature_player_shared_chadra_fan_female = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_chadra_fan_female.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_chadra_fan_female, "object/creature/player/shared_chadra_fan_female.iff")
+
+object_creature_player_shared_chadra_fan_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_chadra_fan_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_chadra_fan_male, "object/creature/player/shared_chadra_fan_male.iff")
+
+object_creature_player_shared_dug_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_dug_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_dug_male, "object/creature/player/shared_dug_male.iff")
+
+object_creature_player_shared_duros_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_duros_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_duros_male, "object/creature/player/shared_duros_male.iff")
+
+object_creature_player_shared_ewok_female = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_ewok_female.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_ewok_female, "object/creature/player/shared_ewok_female.iff")
+
+object_creature_player_shared_ewok_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_ewok_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_ewok_male, "object/creature/player/shared_ewok_male.iff")
+
+object_creature_player_shared_geonosian_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_geonosian_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_geonosian_male, "object/creature/player/shared_geonosian_male.iff")
+
+object_creature_player_shared_gungan_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_gungan_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_gungan_male, "object/creature/player/shared_gungan_male.iff")
+
+object_creature_player_shared_iktotchi_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_iktotchi_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_iktotchi_male, "object/creature/player/shared_iktotchi_male.iff")
+
+object_creature_player_shared_jenet_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_jenet_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_jenet_male, "object/creature/player/shared_jenet_male.iff")
+
+object_creature_player_shared_kel_dor_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_kel_dor_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_kel_dor_male, "object/creature/player/shared_kel_dor_male.iff")
+
+object_creature_player_shared_kubaz_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_kubaz_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_kubaz_male, "object/creature/player/shared_kubaz_male.iff")
+
+object_creature_player_shared_mirialan_female = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_mirialan_female.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_mirialan_female, "object/creature/player/shared_mirialan_female.iff")
+
+object_creature_player_shared_mirialan_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_mirialan_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_mirialan_male, "object/creature/player/shared_mirialan_male.iff")
+
+object_creature_player_shared_ortolan_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_ortolan_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_ortolan_male, "object/creature/player/shared_ortolan_male.iff")
+
+object_creature_player_shared_sanyassan_female = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_sanyassan_female.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_sanyassan_female, "object/creature/player/shared_sanyassan_female.iff")
+
+object_creature_player_shared_sanyassan_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_sanyassan_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_sanyassan_male, "object/creature/player/shared_sanyassan_male.iff")
+
+object_creature_player_shared_togorian_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_togorian_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_togorian_male, "object/creature/player/shared_togorian_male.iff")
+
+object_creature_player_shared_zeltron_female = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_zeltron_female.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_zeltron_female, "object/creature/player/shared_zeltron_female.iff")
+
+object_creature_player_shared_zeltron_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_zeltron_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_zeltron_male, "object/creature/player/shared_zeltron_male.iff")
+
+object_creature_player_shared_toydarian_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_toydarian_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_toydarian_male, "object/creature/player/shared_toydarian_male.iff")
+
+object_creature_player_shared_jawa_male = SharedCreatureObjectTemplate:new {
+	clientTemplateFileName = "object/creature/player/shared_jawa_male.iff"}
+ObjectTemplates:addClientTemplate(object_creature_player_shared_jawa_male, "object/creature/player/shared_jawa_male.iff")
