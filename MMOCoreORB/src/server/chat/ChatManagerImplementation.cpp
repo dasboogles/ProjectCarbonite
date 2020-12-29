@@ -74,7 +74,9 @@ void ChatManagerImplementation::stop() {
 	systemRoom = nullptr;
 	groupRoom = nullptr;
 	guildRoom = nullptr;
+	generalRoom = nullptr;
 	auctionRoom = nullptr;
+	pvpRoom = nullptr;
 	gameRooms.removeAll();
 }
 
@@ -306,10 +308,10 @@ void ChatManagerImplementation::initiateRooms() {
 	guildRoom = createRoom("guild", systemRoom);
 	guildRoom->setPrivate();
 
-	pvpRoom = createRoom("pvp", systemRoom);
+	Reference<ChatRoom*> pvpRoom = createRoom("pvp");
 	pvpRoom->setPrivate();
 	
-	Reference<ChatRoom*> generalRoom = createRoom("Carbonite", galaxyRoom);
+	generalRoom = createRoom("Carbonite", galaxyRoom);
 	generalRoom->setCanEnter(true);
 	generalRoom->setAllowSubrooms(true);
 	generalRoom->setTitle("Carbonite General Chat");
@@ -318,6 +320,15 @@ void ChatManagerImplementation::initiateRooms() {
 	auctionRoom->setCanEnter(true);
 	auctionRoom->setChatRoomType(ChatRoom::AUCTION);
 
+	servicesRoom = createRoom("Services", galaxyRoom);
+	servicesRoom->setCanEnter(true);
+	servicesRoom->setAllowSubrooms(true);
+	servicesRoom->setTitle("Services Advertising");
+	
+	thePitRoom = createRoom("The Pit", galaxyRoom);
+	thePitRoom->setCanEnter(true);
+	thePitRoom->setAllowSubrooms(true);
+	thePitRoom->setTitle("The Pit - Warning: Unmoderated!");
 }
 
 void ChatManagerImplementation::initiatePlanetRooms() {
@@ -739,6 +750,8 @@ void ChatManagerImplementation::handleChatRoomMessage(CreatureObject* sender, co
 
 	// Auction Chat and Planet Chat should adhere to player ignore list
 	if(auctionRoom != nullptr && auctionRoom->getRoomID() == roomID) {
+		channel->broadcastMessageCheckIgnore(msg, name);
+	} else if (generalRoom != nullptr && generalRoom->getRoomID() == roomID) {
 		channel->broadcastMessageCheckIgnore(msg, name);
 	} else if (planetRoom != nullptr && planetRoom->getRoomID() == roomID) {
 		channel->broadcastMessageCheckIgnore(msg, name);
@@ -1626,6 +1639,45 @@ void ChatManagerImplementation::handleAuctionChat(CreatureObject* sender, const 
 	if (auctionRoom != nullptr) {
 		BaseMessage* msg = new ChatRoomMessage(fullName, server->getGalaxyName(), formattedMessage, auctionRoom->getRoomID());
 		auctionRoom->broadcastMessageCheckIgnore(msg, name);
+	}
+
+}
+
+void ChatManagerImplementation::handleGeneralChat(CreatureObject* sender, const UnicodeString& message) {
+	String name = sender->getFirstName();
+	String fullName = "";
+
+	if (sender->isPlayerCreature()) {
+		ManagedReference<PlayerObject*> senderGhost = sender->getPlayerObject();
+
+		if (senderGhost == nullptr)
+			return;
+
+		if (senderGhost->isMuted()) {
+			String reason = senderGhost->getMutedReason();
+
+			if (reason != "")
+				sender->sendSystemMessage("Your chat abilities are currently disabled by Customer Support for '" + reason + "'.");
+			else
+				sender->sendSystemMessage("Your chat abilities are currently disabled by Customer Support.");
+
+			return;
+		}
+
+		fullName = getTaggedName(senderGhost, name);
+	}
+
+	StringTokenizer args(message.toString());
+	if (!args.hasMoreTokens()) {
+		sender->sendSystemMessage("@ui:im_no_message"); // You need to include a message!
+		return;
+	}
+
+	UnicodeString formattedMessage(formatMessage(message));
+
+	if (generalRoom != nullptr) {
+		BaseMessage* msg = new ChatRoomMessage(fullName, server->getGalaxyName(), formattedMessage, generalRoom->getRoomID());
+		generalRoom->broadcastMessageCheckIgnore(msg, name);
 	}
 
 }
