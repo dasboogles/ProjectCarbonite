@@ -3,7 +3,7 @@ gar_vak = Creature:new {
 	customName = "Gar'Vak",
 	socialGroup = "rancor",
 	faction = "",
-	level = 500,
+	level = 350,
 	chanceHit = 30.0,
 	damageMin = 4500,
 	damageMax = 6500,
@@ -30,6 +30,12 @@ gar_vak = Creature:new {
 	hues = { 16, 17, 18, 19, 20, 21, 22, 23 },
 	scale = 4.50,
 	lootGroups = {
+		{
+			groups = {
+				{group = "rare_boss_loot_tier1", chance = 10000000},
+			},
+			lootChance = 2500000,
+		},
 		{
 			groups = {
 				{group = "rancor_common", chance = 10000000}

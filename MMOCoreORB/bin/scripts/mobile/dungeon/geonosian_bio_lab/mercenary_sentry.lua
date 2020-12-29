@@ -4,10 +4,10 @@ mercenary_sentry = Creature:new {
 	randomNameTag = true,
 	socialGroup = "geonosian",
 	faction = "",
-	level = 66,
-	chanceHit = 0.65,
-	damageMin = 470,
-	damageMax = 650,
+	level = 96,
+	chanceHit = 2.65,
+	damageMin = 770,
+	damageMax = 950,
 	baseXp = 6380,
 	baseHAM = 12000,
 	baseHAMmax = 14000,
@@ -29,15 +29,7 @@ mercenary_sentry = Creature:new {
 
 	templates = {
 		"object/mobile/dressed_noble_human_male_03.iff"},
-	lootGroups = {
-		{
-			groups = {
-				{group = "geonosian_hard", chance = 1000000},
-				{group = "geonosian_common", chance = 4500000},
-				{group = "geonosian_relic", chance = 4500000}
-			}
-		}
-	},
+	lootGroups = {},
 	weapons = {"geonosian_mercenary_weapons"},
 	conversationTemplate = "",
 	attacks = merge(brawlermaster,marksmanmaster,pistoleermaster,riflemanmaster,fencermaster)

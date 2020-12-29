@@ -5,14 +5,14 @@ crazed_geonosian_guard = Creature:new {
 	socialGroup = "self",
 	faction = "",
 	level = 65,
-	chanceHit = 0.64,
-	damageMin = 480,
-	damageMax = 670,
+	chanceHit = 1.64,
+	damageMin = 680,
+	damageMax = 970,
 	baseXp = 6288,
-	baseHAM = 11000,
-	baseHAMmax = 14000,
+	baseHAM = 27000,
+	baseHAMmax = 34000,
 	armor = 1,
-	resists = {125,135,-1,165,25,125,-1,25,-1},
+	resists = {25,35,-1,65,25,25,-1,25,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -33,11 +33,23 @@ crazed_geonosian_guard = Creature:new {
 		"object/mobile/dressed_geonosian_warrior_03.iff"},
 	lootGroups = {
 		{
-			groups = {
-				{group = "geonosian_common", chance = 5000000},
-				{group = "geonosian_relic", chance = 5000000}
-			}
-		}
+	        groups = {
+				{group = "geonosian_common", chance = 10000000},
+			},
+			lootChance = 1500000,
+		},
+		{
+	        groups = {
+				{group = "geonosian_relic", chance = 10000000},
+			},
+			lootChance = 1500000,
+		},
+		{
+	        groups = {
+				{group = "geonosian_cubes", chance = 10000000},
+			},
+			lootChance = 500000,
+        },
 	},
 	weapons = {"geonosian_weapons"},
 	conversationTemplate = "",

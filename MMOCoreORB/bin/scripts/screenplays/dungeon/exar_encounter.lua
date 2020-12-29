@@ -23,10 +23,8 @@ function exar_encounter:spawnSceneObjects()
 end
 
 function exar_encounter:spawnMobiles()
-
-
-
-	local pTrigger = spawnMobile("yavin4", "exar_add", 3600, 5079, 73, 5538, 90, 0)
+	-- Respawns anywhere between 4 hours to 6 hours
+	local pTrigger = spawnMobile("yavin4", "ancient_mouse_droid", getRandomNumber(14400, 21600), 5079, 73, 5538, 90, 0)
 	if (pTrigger ~= nil ) then
         createObserver(OBJECTDESTRUCTION, "exar_encounter", "notifyTriggerDead", pTrigger)
 	end
@@ -63,7 +61,6 @@ function exar_encounter:despawnBoss(pBoss, pPlayer)
 end
 
 function exar_encounter:boss_damage(pBoss, pPlayer)
-
 
 	local player = LuaCreatureObject(pPlayer)
 	local boss = LuaCreatureObject(pBoss)

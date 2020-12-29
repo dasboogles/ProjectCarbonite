@@ -3,14 +3,14 @@ enhanced_kwi = Creature:new {
 	socialGroup = "geonosian_creature",
 	faction = "",
 	level = 106,
-	chanceHit = 1.75,
-	damageMin = 690,
-	damageMax = 1090,
+	chanceHit = 2.25,
+	damageMin = 790,
+	damageMax = 1290,
 	baseXp = 10081,
-	baseHAM = 27000,
-	baseHAMmax = 33000,
+	baseHAM = 29000,
+	baseHAMmax = 35000,
 	armor = 2,
-	resists = {140,140,5,140,5,5,5,5,-1},
+	resists = {40,40,25,40,15,15,15,15,-1},
 	meatType = "meat_herbivore",
 	meatAmount = 100,
 	hideType = "hide_leathery",
@@ -26,15 +26,8 @@ enhanced_kwi = Creature:new {
 	diet = HERBIVORE,
 
 	templates = {"object/mobile/kwi.iff"},
-	scale = 1.4,
-	lootGroups = {
-		{
-			groups = {
-				{group = "enhanced_kwi", chance = 10000000}
-			},
-			lootChance = 3120000
-		}
-	},
+	scale = 1.5,
+	lootGroups = {}, -- Refactor?
 	weapons = {},
 	conversationTemplate = "",
 	attacks = {

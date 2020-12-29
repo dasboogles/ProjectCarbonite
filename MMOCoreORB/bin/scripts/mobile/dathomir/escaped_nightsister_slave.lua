@@ -31,8 +31,6 @@ escaped_nightsister_slave = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "nightsister_common", chance = 500000},
-				{group = "junk", chance = 4500000},
 				{group = "tailor_components", chance = 2000000},
 				{group = "loot_kit_parts", chance = 1500000},
 				{group = "wearables_common", chance = 1500000}

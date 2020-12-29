@@ -1200,7 +1200,15 @@ includeFile("items/wearables/wookiee/wke_skirt_s01.lua")
 includeFile("items/wearables/wookiee/wke_skirt_s02.lua")
 includeFile("items/wearables/wookiee/wke_skirt_s03.lua")
 includeFile("items/wearables/wookiee/wke_skirt_s04.lua")
-
--- Custom for Carbonite
+--------------------------------------------------
+-------------- Custom for Carbonite
 includeFile("items/custom/bh_skull.lua")
 includeFile("items/custom/rare_spider_fang.lua")
+-- GeoCave 3.0
+includeFile("items/custom/geo_cave/overclocked_sword_core.lua")
+includeFile("items/custom/geo_cave/experimental_nightsister_vibro_unit.lua")
+includeFile("items/custom/geo_cave/experimental_geo_power_cube_green.lua")
+includeFile("items/custom/geo_cave/experimental_geo_power_cube_red.lua")
+includeFile("items/custom/geo_cave/experimental_geo_power_cube_white.lua")
+includeFile("items/custom/geo_cave/experimental_geo_power_cube_yellow.lua")
+--------------------------------------------------

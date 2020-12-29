@@ -12,14 +12,15 @@ armor_all = {
 		{itemTemplate = "ithorian_guardian_armor_chest_plate", weight = 1000000},
 		{itemTemplate = "kashyyykian_ceremonial_armor_chest_plate", weight = 1000000},
 		-- Uncommon NEW	(30% Total Chance)
-		{itemTemplate = "tantel_armor_chest_plate", weight = 750000},
-		{itemTemplate = "padded_armor_chest_plate", weight = 750000},
-		{itemTemplate = "ithorian_defender_armor_chest_plate", weight = 750000},
-		{itemTemplate = "kashyyykian_black_mtn_armor_chest_plate", weight = 750000},
+		{itemTemplate = "tantel_armor_chest_plate", weight = 650000},
+		{itemTemplate = "padded_armor_chest_plate", weight = 650000},
+		{itemTemplate = "ithorian_defender_armor_chest_plate", weight = 650000},
+		{itemTemplate = "kashyyykian_black_mtn_armor_chest_plate", weight = 650000},
+		{itemTemplate = "ubese_armor_jacket", weight = 650000},
 		-- Rare NEW	(20% Total Chance)
-		{itemTemplate = "composite_armor_chest_plate", weight = 666666},
-		{itemTemplate = "ithorian_sentinel_armor_chest_plate", weight = 666666},
-		{itemTemplate = "kashyyykian_hunting_armor_chest_plate", weight = 666666},
+		{itemTemplate = "composite_armor_chest_plate", weight = 583333},
+		{itemTemplate = "ithorian_sentinel_armor_chest_plate", weight = 583333},
+		{itemTemplate = "kashyyykian_hunting_armor_chest_plate", weight = 583333},
 
 		-- Common OLD
 		-- {itemTemplate = "bone_armor_bicep_l", weight = 147784},

@@ -3,17 +3,17 @@ enhanced_gaping_spider = Creature:new {
 	customName = "Fire Breathing Spider",
 	socialGroup = "geonosian_creature",
 	faction = "",
-	level = 108,
-	chanceHit = 2.5,
-	damageMin = 715,
-	damageMax = 1140,
+	level = 195,
+	chanceHit = 7.5,
+	damageMin = 1715,
+	damageMax = 2140,
 	baseXp = 10267,
-	baseHAM = 32000,
-	baseHAMmax = 39000,
+	baseHAM = 95000,
+	baseHAMmax = 155000,
 	armor = 2,
-	resists = {150,10,-1,195,-1,10,10,10,-1},
+	resists = {50,25,15,85,-1,-1,25,50,-1},
 	meatType = "meat_insect",
-	meatAmount = 50,
+	meatAmount = 0,
 	hideType = "",
 	hideAmount = 0,
 	boneType = "",
@@ -30,10 +30,48 @@ enhanced_gaping_spider = Creature:new {
 	scale = 2.5,
 	lootGroups = {
 		{
-			groups = {
-				{group = "fire_breathing_spider", chance = 10000000}
-			}
-		}
+	        groups = 
+			{
+				{group = "carbonite_painting_collectables", chance = 10000000},
+			},
+			lootChance = 1000000,
+        },
+		{
+	        groups = {
+				{group = "fire_breathing_spider", chance = 10000000},
+			},
+			lootChance = 2500000,
+		},
+		{
+	        groups = {
+				{group = "fire_breathing_spider", chance = 10000000},
+			},
+			lootChance = 2500000,
+		},
+		{
+	        groups = {
+				{group = "armor_all", chance = 10000000},
+			},
+			lootChance = 1500000,
+		},
+		{
+	        groups = {
+				{group = "armor_all", chance = 10000000},
+			},
+			lootChance = 1000000,
+		},	
+		{
+	        groups = {
+				{group = "geonosian_common", chance = 10000000},
+			},
+			lootChance = 2500000,
+		},
+		{
+	        groups = {
+				{group = "geonosian_relic", chance = 10000000},
+			},
+			lootChance = 1500000,
+        },
 	},
 	weapons = {"creature_spit_heavy_flame"},
 	conversationTemplate = "",

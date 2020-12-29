@@ -128,6 +128,11 @@ public:
 			quantityExtracted = int(quantityExtracted * 0.50f);
 		}
 
+		// 25% milk harvesting for having Master Ranger
+		if (player->hasSkill("outdoors_ranger_master")) {
+			quantityExtracted =  quantityExtracted * 1.25;
+		}
+
 		TransactionLog trx(TrxCode::HARVESTED, player, resourceSpawn);
 		resourceManager->harvestResourceToPlayer(trx, player, resourceSpawn, quantityExtracted);
 

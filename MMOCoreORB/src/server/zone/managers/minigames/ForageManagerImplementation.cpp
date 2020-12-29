@@ -416,7 +416,10 @@ bool ForageManagerImplementation::forageGiveResource(TransactionLog& trx, Creatu
 		quantity *= 200; // Harvesting eggs buff
 	}
 
-	player->sendSystemMessage("You were given more " + String::valueOf(resType) + " at:" + String::valueOf(quantity));
+	// 25% Egg harvesting for having Master Ranger
+	if (player->hasSkill("outdoors_ranger_master")) {
+		quantity =  quantity * 1.25;
+	}
 
 	resourceManager->harvestResourceToPlayer(trx, player, resource, quantity);
 	return true;

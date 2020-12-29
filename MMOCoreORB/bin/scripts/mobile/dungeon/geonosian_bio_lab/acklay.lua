@@ -3,15 +3,17 @@ acklay = Creature:new {
 	customName = "Acklay",
 	socialGroup = "geonosian_creature",
 	faction = "",
-	level = 157,
-	chanceHit = 92.5,
-	damageMin = 935,
-	damageMax = 1580,
-	baseXp = 14884,
-	baseHAM = 96000,
-	baseHAMmax = 118000,
+	level = 300,
+	chanceHit = 31.0,
+	damageMin = 2700,
+	damageMax = 3625,
+	baseXp = 26654,
+	baseHAM = 421000,
+	baseHAMmax = 592000,
 	armor = 2,
-	resists = {130,145,155,155,145,30,30,30,-1},
+	-- Put this here to help anyone who needs to know what they're changing on some mob somewhere!
+	-- {Kinetic, Energy, Blast, Heat, Cold, Elec, Acid, Stun, LS}
+	resists = {75,45,15,55,25,45,-1,30,25},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -25,15 +27,78 @@ acklay = Creature:new {
 	creatureBitmask = PACK + KILLER,
 	optionsBitmask = AIENABLED,
 	diet = CARNIVORE,
+	scale = 1.25,
 
 	templates = {"object/mobile/acklay_hue.iff"},
+	-- Redo This-v
 	lootGroups = {
 		{
 			groups = {
-				{group = "acklay", chance = 10000000}
-			}
-		}
+				{group = "rare_boss_loot_tier1", chance = 10000000},
+			},
+			lootChance = 1500000,
+		},
+		{
+	        groups = 
+			{
+				{group = "carbonite_painting_collectables", chance = 10000000},
+			},
+			lootChance = 2500000,
+        },
+		{
+	        groups = 
+			{
+				{group = "carbonite_painting_collectables", chance = 10000000},
+			},
+			lootChance = 2500000,
+        },
+		{
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 5500000,
+        },
+        {
+	        groups = {
+				{group = "armor_all", chance = 10000000},
+			},
+			lootChance = 5500000,
+		},
+		{
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 5500000,
+        },
+        {
+	        groups = {
+				{group = "armor_all", chance = 10000000},
+			},
+			lootChance = 5500000,
+		},
+		---------------------------------
+		-- Acklay multi-drop chance group
+		{
+	        groups = {
+				{group = "acklay", chance = 10000000},
+			},
+			lootChance = 5500000,
+		},
+		{
+	        groups = {
+				{group = "acklay", chance = 10000000},
+			},
+			lootChance = 3500000,
+		},
+		{
+	        groups = {
+				{group = "acklay", chance = 10000000},
+			},
+			lootChance = 1500000,
+		},
+		---------------------------------
 	},
+	-- Redo This-^
 	weapons = {},
 	conversationTemplate = "",
 	attacks = {

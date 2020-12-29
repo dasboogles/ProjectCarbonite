@@ -22,3 +22,13 @@ includeFile("dungeon/geonosian_bio_lab/herald_biogenic_harmon.lua")
 includeFile("dungeon/geonosian_bio_lab/herald_biogenic_teraeza.lua")
 includeFile("dungeon/geonosian_bio_lab/imperial_observer.lua")
 includeFile("dungeon/geonosian_bio_lab/mercenary_sentry.lua")
+
+-- Carbonite Custom
+includeFile("dungeon/geonosian_bio_lab/carbonite_custom/higg_jibb.lua")
+includeFile("dungeon/geonosian_bio_lab/carbonite_custom/failed_experiment_62.lua")
+includeFile("dungeon/geonosian_bio_lab/carbonite_custom/failed_ns_clone.lua")
+includeFile("dungeon/geonosian_bio_lab/carbonite_custom/enhanced_rancor.lua")
+includeFile("dungeon/geonosian_bio_lab/carbonite_custom/hej_marden.lua")
+includeFile("dungeon/geonosian_bio_lab/carbonite_custom/be_rok_sa.lua")
+includeFile("dungeon/geonosian_bio_lab/carbonite_custom/geo_cavern_spider.lua")
+includeFile("dungeon/geonosian_bio_lab/carbonite_custom/higg_jibb_hallucination.lua")

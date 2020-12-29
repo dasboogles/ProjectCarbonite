@@ -52,7 +52,10 @@ object_installation_mining_organic_mining_organic_creature_farm = object_install
 		"crafting_chef_master", 
 		"crafting_droidengineer_master", 
 		"crafting_tailor_master", 
-		"crafting_weaponsmith_master"
+		"crafting_weaponsmith_master",
+		"science_doctor_master",
+		"science_combatmedic_master",
+		"outdoors_ranger_master"
 	},
 	basePowerRate = 25,
 	width = 3,
