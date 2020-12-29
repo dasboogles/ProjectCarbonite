@@ -102,6 +102,8 @@ public:
 
 	FactionMap* getFactionMap();
 
+	String getFactionHex(CreatureObject* creature);
+	String getFactionColorName(CreatureObject* creature);
 	String getRankName(int idx);
 	int getRankCost(int rank);
 	int getRankDelegateRatioFrom(int rank);

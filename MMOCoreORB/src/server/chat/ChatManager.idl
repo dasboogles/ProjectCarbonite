@@ -47,6 +47,9 @@ class ChatManager extends ManagedService implements Logger {
 	ChatRoom guildRoom;
 	ChatRoom auctionRoom;
 	ChatRoom systemRoom;
+	ChatRoom generalRoom;
+	ChatRoom servicesRoom;
+	ChatRoom thePitRoom;
 	ChatRoom pvpRoom;
 
 	transient ChatRoomMap roomMap;
@@ -365,6 +368,7 @@ class ChatManager extends ManagedService implements Logger {
 	public native void handleGuildChat(CreatureObject player, final unicode message);
 	public native void handlePlanetChat(CreatureObject player, final unicode message);
 	public native void handleAuctionChat(CreatureObject player, final unicode message);
+	public native void handleGeneralChat(CreatureObject player, final unicode message); // Added by Tyclo - 2020 08-30
 	public native void handleChatRoomMessage(CreatureObject sender, final unicode message, unsigned int roomID, unsigned int counter);
 	public native void handleSocialInternalMessage(CreatureObject sender, final unicode arguments);
 	@local
@@ -458,6 +462,27 @@ class ChatManager extends ManagedService implements Logger {
 		return systemRoom;
 	}
 
+	/*
+	 * Returns the general (Carbonite) chat room
+	 */
+	public ChatRoom getGeneralRoom() {
+		return generalRoom;
+	}
+
+	/*
+	 * Returns the Services chat room
+	 */
+	public ChatRoom getServicesRoom() {
+		return servicesRoom;
+	}
+	
+	/*
+	 * Returns the The Pit chat room
+	 */
+	public ChatRoom getThePitRoom() {
+		return thePitRoom;
+	}
+	
 	/*
 	* Returns the parent room for GCW chat rooms.
 	*/

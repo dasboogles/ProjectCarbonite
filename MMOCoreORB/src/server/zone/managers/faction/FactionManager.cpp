@@ -98,32 +98,26 @@ void FactionManager::createGcwRooms(ChatManager* chatManager) {
 	ManagedReference<ChatRoom*> pvpRoom = chatManager->getPvpRoom();
 
 	// Imperial
-	{
-		imperialChat = chatManager->createRoom("Imperial", pvpRoom);
-		imperialChat->setPrivate();
-		imperialChat->setTitle("Imperial Chat");
-		imperialChat->setCanEnter(true);
-		imperialChat->setChatRoomType(ChatRoom::PVP);
-	}
+	imperialChat = chatManager->createRoom("Imperial", pvpRoom);
+	imperialChat->setPrivate();
+	imperialChat->setTitle("Imperial Chat");
+	imperialChat->setCanEnter(true);
+	imperialChat->setChatRoomType(ChatRoom::PVP);
 
 	// Rebel
-	{
-		rebelChat = chatManager->createRoom("Rebel", pvpRoom);
-		rebelChat->setPrivate();
-		rebelChat->setTitle("Rebel Chat");
-		rebelChat->setCanEnter(true);
-		rebelChat->setChatRoomType(ChatRoom::PVP);
-	}
+	rebelChat = chatManager->createRoom("Rebel", pvpRoom);
+	rebelChat->setPrivate();
+	rebelChat->setTitle("Rebel Chat");
+	rebelChat->setCanEnter(true);
+	rebelChat->setChatRoomType(ChatRoom::PVP);
 
 	// Kills
-	{
-		pvpNotificationChat = chatManager->createRoom("Notifications", pvpRoom);
-		pvpNotificationChat->setPrivate();
-		pvpNotificationChat->setTitle("Notifications");
-		pvpNotificationChat->setCanEnter(true);
-		pvpNotificationChat->setChatRoomType(ChatRoom::PVP);
-		pvpNotificationChat->setModerated(true);
-	}
+	pvpNotificationChat = chatManager->createRoom("Notifications", pvpRoom);
+	pvpNotificationChat->setPrivate();
+	pvpNotificationChat->setTitle("Notifications");
+	pvpNotificationChat->setCanEnter(true);
+	pvpNotificationChat->setChatRoomType(ChatRoom::PVP);
+	pvpNotificationChat->setModerated(true);
 }
 
 FactionMap* FactionManager::getFactionMap() {
@@ -201,31 +195,30 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 		CreatureObject* killerCreature = cast<CreatureObject*>(killer);
 		
 
-		if (killerCreature == destructedObject){ //if killer is target
-            return; //Prevent Fight club warning on self/enviroment kills
-        }
+		if (killerCreature == destructedObject)
+			return; // If killer is target: Prevent Fight club warning on self/enviroment kills
 
 		ManagedReference<PlayerObject*> ghost = killerCreature->getPlayerObject();
-		ManagedReference<GroupObject*> group;
+		ManagedReference<GroupObject*> group;		
 		ManagedReference<PlayerObject*> killedGhost = destructedObject->getPlayerObject();
 		ManagedReference<PlayerManager*> playerManager = killerCreature->getZoneServer()->getPlayerManager();
 
-		//Broadcast to Server
-		String playerName = destructedObject->getFirstName();
-		String killerNames = "[" + killerCreature->getFirstName() + "] ";
-	
-			if (Zone* zone = ghost->getZone()) {
+		// Broadcast to Server
+		String playerName = getFactionHex(destructedObject) + destructedObject->getFirstName();
 		
-		// Fight Clubbing
-		const String fightClubMessage = "Fight Clubbing is not tolerated within the FRS/GCW.  You will be penalized.";
-		const bool isFightClubbing = ghost->getAccountID() == killedGhost->getAccountID();
-		if (isFightClubbing)
-			{
+		String killerNames = getFactionHex(killerCreature) + killerCreature->getFirstName();
+	
+		if (Zone* zone = ghost->getZone()) {
+			// Fight Clubbing
+			const String fightClubMessage = " \\#f0f497[GCW] \\#ff982bFight Clubbing \\#ffffffis not tolerated. You will be penalized.";
+			const bool isFightClubbing = ghost->getAccountID() == killedGhost->getAccountID();
+			if (isFightClubbing) {
 				killerCreature->sendSystemMessage(fightClubMessage);
 				//ghost->addExperience("gcw_skill_xp", -20000,true);//remove target xp
-			   	//ghost->addExperience("force_rank_xp", -20000,true);//remove target xp
-				UnicodeString message = killerCreature->getFirstName() + " penalized for Fight Clubbing.";
-				BaseMessage* msg = new ChatRoomMessage("[Carbonite Fight clubbing warning!!!Fight Clubbing will not be tolerated!!]", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
+				//ghost->addExperience("force_rank_xp", -20000,true);//remove target xp
+
+				UnicodeString message = " " + killerNames + " \\#ffffffhas been penalized for \\#ff982bFight Clubbing\\#ffffff.";
+				BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
 				pvpNotificationChat->broadcastMessage(msg);
 			}
 		//Grouped Fight clubbing
@@ -234,8 +227,7 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 			int groupMembersInRange = 1; // includes the original killer
 
 			// iterate group 
-			if (killerCreature->isGrouped())
-			{
+			if (killerCreature->isGrouped()) {
 				ManagedReference<GroupObject*> group = killerCreature->getGroup();
 				int groupSize = group->getGroupSize();
 
@@ -254,7 +246,7 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 						if (groupMemberCreature == nullptr)
 							continue;
 
-						killerNames += "[" + groupMemberCreature->getFirstName() + "] ";
+						killerNames += " " + getFactionHex(groupMemberCreature) + groupMemberCreature->getFirstName();
 
 						if (!groupMemberCreature->isPlayerCreature())
 							continue;
@@ -271,16 +263,15 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 						const bool isFightClubbing = groupMemberGhost->getAccountID() == killedGhost->getAccountID();
 						
 
-							if (isFightClubbing)
-							{
+							if (isFightClubbing) {
 								killerCreature->sendSystemMessage(fightClubMessage);
 							
 								//killedGhost->addExperience("gcw_skill_xp", -20000,true);//remove target xp
 								//killedGhost->addExperience("force_rank_xp", -20000,true);//remove target xp
-								UnicodeString message = groupMemberCreature->getFirstName() + " penalized for Fight Clubbing.";
-								BaseMessage* msg = new ChatRoomMessage("[Carbonite Fight clubbing warning!!!Fight Clubbing will not be tolerated!!]", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-								pvpNotificationChat->broadcastMessage(msg);							
-								
+
+								UnicodeString message = " " + getFactionHex(groupMemberCreature) + groupMemberCreature->getFirstName() + "\\#ffffff penalized for \\#ff982bFight Clubbing\\#ffffff.";
+								BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
+								pvpNotificationChat->broadcastMessage(msg);
 							}
 						}		
 					}
@@ -292,38 +283,34 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 			PlayMusicMessage* pmm = new PlayMusicMessage("sound/music_themequest_victory_imperial.snd");
  			killer->sendMessage(pmm);
 			
-			killedGhost->addExperience("gcw_skill_xp", -2000,true);//remove target xp
+			killedGhost->addExperience("gcw_skill_xp", -2000, true); // remove target xp
+
+			UnicodeString message;
 			
 			if (killerCreature->hasSkill("force_rank_light_novice") && (destructedObject->hasSkill("force_rank_dark_novice") || destructedObject->hasSkill("force_rank_light_novice"))) {		
-			UnicodeString message = "[" + destructedObject->getFirstName() + "] has been killed by " + killerNames;
-			BaseMessage* msg = new ChatRoomMessage("[\\#00e604FRS]", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-			pvpNotificationChat->broadcastMessage(msg);
-			
+				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
+				BaseMessage* msg = new ChatRoomMessage(" \\#9b97f4[FRS] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
+				pvpNotificationChat->broadcastMessage(msg);
 			} else if (killerCreature->hasSkill("force_rank_dark_novice") && (destructedObject->hasSkill("force_rank_light_novice") || destructedObject->hasSkill("force_rank_dark_novice"))) {
-			UnicodeString message = "[" + destructedObject->getFirstName() + "] has been killed by " + killerNames;
-			BaseMessage* msg = new ChatRoomMessage("[\\#00e604FRS]", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-			pvpNotificationChat->broadcastMessage(msg);
-			
+				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
+				BaseMessage* msg = new ChatRoomMessage(" \\#9b97f4[FRS] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
+				pvpNotificationChat->broadcastMessage(msg);
 			} else if (killerCreature->hasSkill("force_rank_light_novice") && destructedObject->hasSkill("force_title_jedi_rank_02")) {
-			UnicodeString message = "[" + destructedObject->getFirstName() + "] has been killed by " + killerNames;
-			BaseMessage* msg = new ChatRoomMessage("[\\#00e604FRS]", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-			pvpNotificationChat->broadcastMessage(msg);
-			
+				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
+				BaseMessage* msg = new ChatRoomMessage(" \\#9b97f4[FRS] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
+				pvpNotificationChat->broadcastMessage(msg);
 			} else if (killerCreature->hasSkill("force_rank_dark_novice") && destructedObject->hasSkill("force_title_jedi_rank_02")) {
-			UnicodeString message = "[" + destructedObject->getFirstName() + "] has been killed by " + killerNames;
-			BaseMessage* msg = new ChatRoomMessage("[\\#00e604FRS]", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-			pvpNotificationChat->broadcastMessage(msg);
-			
+				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
+				BaseMessage* msg = new ChatRoomMessage(" \\#9b97f4[FRS] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
+				pvpNotificationChat->broadcastMessage(msg);
 			} else if ((killerCreature->hasSkill("force_rank_dark_novice") || killerCreature->hasSkill("force_rank_light_novice")) && destructedObject->isPlayerCreature()) {
-			UnicodeString message = "[" + destructedObject->getFirstName() + "] has been killed by " + killerNames;
-			BaseMessage* msg = new ChatRoomMessage("[\\#00e604GCW]", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-			pvpNotificationChat->broadcastMessage(msg);
-
+				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
+				BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
+				pvpNotificationChat->broadcastMessage(msg);
 			} else if (killer->isPlayerCreature() && destructedObject->isPlayerCreature()) {
-			UnicodeString message = "[" + destructedObject->getFirstName() + "] has been killed by " + killerNames;
-			BaseMessage* msg = new ChatRoomMessage("[\\#e60000GCW]", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-			pvpNotificationChat->broadcastMessage(msg);
-			
+				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
+				BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
+				pvpNotificationChat->broadcastMessage(msg);
 			}
 		
 		// Group kill split GCW	
@@ -345,13 +332,11 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 				players.add(killerCreature);
 			}
 
-			if (players.size() == 0) {
+			if (players.size() == 0)
 				players.add(killerCreature);
-			}
 
-			if (playerCount > players.size()) {
-				killerCreature->sendSystemMessage("Some players were too far away from the kill!"); // Mission Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.
-			}
+			if (playerCount > players.size())
+				killerCreature->sendSystemMessage(" \\#f0f497[GCW] \\#ffffffSome players were too far away from the kill!"); // Mission Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.
 
 			int dividedKill = 5000 / players.size();//award gcw xp for group 
 			if (players.size() == 1)
@@ -363,10 +348,9 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 				ManagedReference<PlayerManager*> groupPlayerManager = player->getZoneServer()->getPlayerManager();
 				groupPlayerManager->awardExperience(player, "gcw_skill_xp", dividedKill);
 				StringBuffer sysMessage;
-				sysMessage << "You have received " << dividedKill << " GCW XP for your kill participation!";
-					
-					}
-				}			
+				sysMessage << " \\#f0f497[GCW] \\#ffffffYou have received \\#41f4d9" << dividedKill << " GCW XP \\#fffffffor your kill participation!";
+			}
+		}
 		// Faction gain
 		if (killer->isRebel() && destructedObject->isImperial()) {
 			ghost->increaseFactionStanding("rebel", 30);
@@ -378,15 +362,26 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 			ghost->decreaseFactionStanding("rebel", 45);
 
 			killedGhost->decreaseFactionStanding("rebel", 45);
-
-		} else if (killer->isImperial() && destructedObject->isImperial()) {
-			ghost->decreaseFactionStanding("imperial", 45);
-
-		} else if (killer->isRebel() && destructedObject->isRebel()) {
-			ghost->decreaseFactionStanding("rebel", 45);
-
 		}
 	}
+}
+
+String FactionManager::getFactionHex(CreatureObject* creature) { // Added by Tyclo -- Get hexidecimal colors based on faction for messages
+	if (creature->isRebel())
+		return "\\#EF5350";
+	else if (creature->isImperial())
+		return "\\#29B6F6";
+	else
+		return "\\#beeeef"; // Neutral
+}
+
+String FactionManager::getFactionColorName(CreatureObject* creature) { // Added by Tyclo -- Get hexidecimal colors based on faction for messages
+	if (creature->isRebel())
+		return "\\#EF5350Rebel";
+	else if (creature->isImperial())
+		return "\\#29B6F6Imperial";
+	else
+		return "\\#beeeefCivilian"; // Neutral
 }
 
 String FactionManager::getRankName(int idx) {
