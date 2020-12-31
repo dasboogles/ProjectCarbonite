@@ -42,7 +42,7 @@
 
 
 object_installation_mining_liquid_mining_liquid_harvester_style_3 = object_installation_mining_liquid_shared_mining_liquid_harvester_style_3:new {
-	lotSize = 2,
+	lotSize = 1,
 	baseMaintenanceRate = 90,
 	-- Requires at least one of the following skills to place
 	skillsRequired = {
