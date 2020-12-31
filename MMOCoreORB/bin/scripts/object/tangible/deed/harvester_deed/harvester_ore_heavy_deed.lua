@@ -43,6 +43,7 @@
 
 object_tangible_deed_harvester_deed_harvester_ore_heavy_deed = object_tangible_deed_harvester_deed_shared_harvester_ore_heavy_deed:new {
 	templateType = STRUCTUREDEED,
+	lotSize = 5,
 	placeStructureComponent = "PlaceStructureComponent",
 	generatedObjectTemplate = "object/installation/mining_ore/mining_ore_harvester_heavy.iff",
 

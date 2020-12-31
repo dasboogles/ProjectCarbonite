@@ -313,6 +313,16 @@ void WeaponObjectImplementation::fillAttributeList(AttributeListMessage* alm, Cr
 
 	alm->insertAttribute("damage.wpn_wound_chance", woundsratio);
 
+	// Grab attackspeed so we can calculate Average Weapon DPS
+	float attackSpeed = Math::getPrecision(getAttackSpeed(), 1);
+	float avgDPS = ((minDmg + maxDmg) / 2) / attackSpeed;
+
+	alm->insertAttribute("damage.wpn_average_dps", Math::getPrecision(avgDPS, 1));
+
+	float cappedAvgDPS = ((minDmg + maxDmg) / 2) / 1;
+
+	alm->insertAttribute("damage.wpn_capped_average_dps", Math::getPrecision(cappedAvgDPS, 1));
+
 	//Accuracy Modifiers
 	StringBuffer pblank;
 	if (getPointBlankAccuracy() >= 0)
@@ -350,9 +360,9 @@ void WeaponObjectImplementation::fillAttributeList(AttributeListMessage* alm, Cr
 	// Force Cost
 
 	if (isJediWeapon()) {
-	float roundedForceCost = floor((float)getForceCost()*100 + 0.5)/100;
-	if (roundedForceCost < 5) roundedForceCost = 5;   // 5 Minimum force cost on sabers
-	alm->insertAttribute("forcecost", roundedForceCost);
+		float roundedForceCost = floor((float)getForceCost()*100 + 0.5)/100;
+		if (roundedForceCost < 5) roundedForceCost = 5;   // 5 Minimum force cost on sabers
+		alm->insertAttribute("forcecost", roundedForceCost);
 	}
 
 	for (int i = 0; i < getNumberOfDots(); i++) {

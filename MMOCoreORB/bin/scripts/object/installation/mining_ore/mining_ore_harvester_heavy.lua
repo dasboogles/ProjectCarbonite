@@ -42,7 +42,7 @@
 
 
 object_installation_mining_ore_mining_ore_harvester_heavy = object_installation_mining_ore_shared_mining_ore_harvester_heavy:new {
-	lotSize = 1,
+	lotSize = 2,
 	baseMaintenanceRate = 90,
 	-- Requires at least one of the following skills to place
 	skillsRequired = {

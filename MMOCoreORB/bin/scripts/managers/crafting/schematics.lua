@@ -1841,5 +1841,7 @@ schematics = {
 
 	-- Invis Clothing
 	{path="object/draft_schematic/clothing/clothing_hat_invis.iff"},
+	{path="object/draft_schematic/clothing/clothing_shirt_invis.iff"},
+	{path="object/draft_schematic/clothing/clothing_gloves_invis.iff"},
 	
 };

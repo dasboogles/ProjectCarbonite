@@ -44,10 +44,12 @@
 object_tangible_wearables_armor_ithorian_guardian_ith_armor_s02_helmet = object_tangible_wearables_armor_ithorian_guardian_shared_ith_armor_s02_helmet:new {
 	templateType = ARMOROBJECT,
 	objectMenuComponent = "ArmorObjectMenuComponent",
-	playerRaces = { "object/creature/player/ithorian_male.iff",
-				"object/creature/player/ithorian_female.iff",
-				"object/mobile/vendor/ithorian_female.iff",
-				"object/mobile/vendor/ithorian_male.iff" },
+	playerRaces = { -- Ithorian Armor, Do not Change
+		"object/creature/player/ithorian_male.iff",
+		"object/creature/player/ithorian_female.iff",
+		"object/mobile/vendor/ithorian_female.iff",
+		"object/mobile/vendor/ithorian_male.iff" 
+	},
 
 
 	-- Damage types in WeaponObject

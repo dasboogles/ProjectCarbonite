@@ -40,7 +40,6 @@
 --gives permission to release a modified version without this exception; 
 --this exception also makes it possible to release a modified version 
 
-
 object_draft_schematic_clothing_clothing_gloves_field_14 = object_draft_schematic_clothing_shared_clothing_gloves_field_14:new {
 
    templateType = DRAFTSCHEMATIC,
@@ -73,8 +72,7 @@ object_draft_schematic_clothing_clothing_gloves_field_14 = object_draft_schemati
 
    targetTemplate = "object/tangible/wearables/gloves/gloves_s14.iff",
 
-   additionalTemplates = {
-             }
+   additionalTemplates = {}
 
 }
 ObjectTemplates:addTemplate(object_draft_schematic_clothing_clothing_gloves_field_14, "object/draft_schematic/clothing/clothing_gloves_field_14.iff")

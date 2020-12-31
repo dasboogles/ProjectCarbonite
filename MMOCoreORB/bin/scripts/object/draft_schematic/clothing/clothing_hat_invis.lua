@@ -43,12 +43,14 @@
 
 object_draft_schematic_clothing_clothing_hat_invis = object_draft_schematic_clothing_shared_clothing_hat_invis:new {
 
-
    templateType = DRAFTSCHEMATIC,
+
+   customObjectName = "NanoFiber Hat",
 
    craftingToolTab = 8, -- (See DraftSchematicObjectTemplate.h)
    complexity = 19, 
    size = 3, 
+   factoryCrateType = "object/factory/factory_crate_clothing.iff",
 
    xpType = "crafting_clothing_general", 
    xp = 90, 
@@ -71,8 +73,7 @@ object_draft_schematic_clothing_clothing_hat_invis = object_draft_schematic_clot
 
    targetTemplate = "object/tangible/wearables/hat/hat_invis.iff",
 
-   additionalTemplates = {
-             }
+   additionalTemplates = {}
 
 }
 ObjectTemplates:addTemplate(object_draft_schematic_clothing_clothing_hat_invis, "object/draft_schematic/clothing/clothing_hat_invis.iff")

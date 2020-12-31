@@ -42,7 +42,7 @@
 
 
 object_installation_mining_liquid_mining_liquid_moisture_harvester_medium = object_installation_mining_liquid_shared_mining_liquid_moisture_harvester_medium:new {
-	lotSize = 1,
+	lotSize = 2,
 	baseMaintenanceRate = 60,
 	-- Requires at least one of the following skills to place
 	skillsRequired = {

@@ -1441,7 +1441,7 @@ void GuildManagerImplementation::sponsorPlayer(CreatureObject* player, const Str
 
 	Locker _lock(target, player);
 
-	if (!target->isOnline() || !player->isInRange(target, 32)) {
+	if (!target->isOnline()) {//|| !player->isInRange(target, 32)) { // Making GuildInvites Global
 		player->sendSystemMessage("@guild:sponsor_not_found"); // The specified person to sponsor could not be found nearby.
 		return;
 	}
@@ -1454,12 +1454,18 @@ void GuildManagerImplementation::sponsorPlayer(CreatureObject* player, const Str
 		return;
 	}
 
+	// Prevent harassment/abuse
+	ManagedReference<PlayerObject*> targetGhost = target->getPlayerObject();
+	if (targetGhost->isIgnoring(player->getFirstName().toLowerCase())){ // target->isIgnoring(player->getFirstName().toLowerCase())
+		player->sendSystemMessage("You cannot send a guild sponsorship to someone who is ignoring you!");
+		return;
+	}
+
 	StringIdChatParameter params;
 	params.setStringId("@guild:sponsor_self"); // You sponsor %TU for membership in %TT.
 	params.setTU(target->getObjectID());
 	params.setTT(guild->getGuildName());
 	player->sendSystemMessage(params);
-
 	target->getPlayerObject()->closeSuiWindowType(SuiWindowType::GUILD_SPONSOR_VERIFY);
 
 	ManagedReference<SuiMessageBox*> suiBox = new SuiMessageBox(target, SuiWindowType::GUILD_SPONSOR_VERIFY);
@@ -1472,7 +1478,8 @@ void GuildManagerImplementation::sponsorPlayer(CreatureObject* player, const Str
 
 	suiBox->setPromptText(text.toString());
 	suiBox->setUsingObject(player);
-	suiBox->setForceCloseDistance(32);
+	// suiBox->setForceCloseDistance(32); // Making GuildInvites Global
+	suiBox->setForceCloseDisabled(); // Making GuildInvites Global
 	suiBox->setCancelButton(true, "@no");
 	suiBox->setOkButton(true, "@yes");
 

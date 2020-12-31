@@ -42,7 +42,7 @@
 
 
 object_installation_mining_organic_mining_organic_flora_farm_medium = object_installation_mining_organic_shared_mining_organic_flora_farm_medium:new {
-	lotSize = 1,
+	lotSize = 2,
 	baseMaintenanceRate = 60,
 	-- Requires at least one of the following skills to place
 	skillsRequired = {

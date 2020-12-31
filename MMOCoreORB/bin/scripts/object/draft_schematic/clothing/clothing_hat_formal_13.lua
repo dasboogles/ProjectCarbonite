@@ -73,8 +73,7 @@ object_draft_schematic_clothing_clothing_hat_formal_13 = object_draft_schematic_
 
    targetTemplate = "object/tangible/wearables/hat/hat_s13.iff",
 
-   additionalTemplates = {
-             }
+   additionalTemplates = {}
 
 }
 ObjectTemplates:addTemplate(object_draft_schematic_clothing_clothing_hat_formal_13, "object/draft_schematic/clothing/clothing_hat_formal_13.iff")

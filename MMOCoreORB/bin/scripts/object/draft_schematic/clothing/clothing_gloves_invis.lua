@@ -40,17 +40,16 @@
 --gives permission to release a modified version without this exception; 
 --this exception also makes it possible to release a modified version 
 
-
 object_draft_schematic_clothing_clothing_gloves_invis = object_draft_schematic_clothing_shared_clothing_gloves_invis:new {
-
 
    templateType = DRAFTSCHEMATIC,
 
-   customObjectName = "Cold Weather Gloves",
+   customObjectName = "NanoFiber Gloves",
 
    craftingToolTab = 8, -- (See DraftSchematicObjectTemplate.h)
    complexity = 17, 
    size = 2, 
+   factoryCrateType = "object/factory/factory_crate_clothing.iff",
 
    xpType = "crafting_clothing_general", 
    xp = 165, 
@@ -73,8 +72,7 @@ object_draft_schematic_clothing_clothing_gloves_invis = object_draft_schematic_c
 
    targetTemplate = "object/tangible/wearables/gloves/gloves_invis.iff",
 
-   additionalTemplates = {
-             }
+   additionalTemplates = {}
 
 }
 ObjectTemplates:addTemplate(object_draft_schematic_clothing_clothing_gloves_invis, "object/draft_schematic/clothing/clothing_gloves_invis.iff")

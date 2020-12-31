@@ -65,12 +65,14 @@ public:
 			rangerTrackResults->setPromptTitle("@skl_use:scan_results_t"); // Area Track Results
 			rangerTrackResults->setPromptText("@skl_use:scan_results_d"); // You have examined the tracks and clues in the area for information about what kinds of creatures might be nearby. This is what you have determined.
 			StringBuffer results;
+			// Buffed from 512 -> 2048
+			int trackingRange = 2048;
 
 			bool canGetDirection = player->hasSkill("outdoors_ranger_harvest_01");
 		    bool canGetDistance = player->hasSkill("outdoors_ranger_harvest_03");
 
-			SortedVector<ManagedReference<QuadTreeEntry*> > objects(512, 512);
-			zone->getInRangeObjects(player->getPositionX(), player->getPositionY(), 512, &objects, true);
+			SortedVector<ManagedReference<QuadTreeEntry*> > objects(trackingRange, trackingRange);
+			zone->getInRangeObjects(player->getPositionX(), player->getPositionY(), trackingRange, &objects, true);
 
 			for (int i = 0; i < objects.size(); ++i) {
 				SceneObject* object = static_cast<SceneObject*>(objects.get(i).get());

@@ -149,7 +149,8 @@ lootableArmorAttachmentStatMods = {
 	-- "melee_accuracy",
 	-- "melee_speed",
 	"force_vehicle_control",
-	"force_vehicle_speed"
+	"force_vehicle_speed",
+	"dna_harvesting"
 }
 
 lootableClothingAttachmentStatMods = {
@@ -277,7 +278,8 @@ lootableClothingAttachmentStatMods = {
 	-- "melee_accuracy",
 	-- "melee_speed",
 	"force_vehicle_control",
-	"force_vehicle_speed"
+	"force_vehicle_speed",
+	"dna_harvesting"
 }
 
 lootableArmorStatMods = {
@@ -398,7 +400,8 @@ lootableArmorStatMods = {
 	-- "melee_accuracy",
 	-- "melee_speed",
 	"force_vehicle_control",
-	"force_vehicle_speed"
+	"force_vehicle_speed",
+	"dna_harvesting"
 }
 
 lootableClothingStatMods = {
@@ -519,7 +522,8 @@ lootableClothingStatMods = {
 	-- "melee_accuracy",
 	-- "melee_speed",
 	"force_vehicle_control",
-	"force_vehicle_speed"
+	"force_vehicle_speed",
+	"dna_harvesting"
 }
 
 lootableOneHandedMeleeStatMods = {

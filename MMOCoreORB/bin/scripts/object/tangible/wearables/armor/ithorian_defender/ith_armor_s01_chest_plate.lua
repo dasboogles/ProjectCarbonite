@@ -45,10 +45,12 @@ object_tangible_wearables_armor_ithorian_defender_ith_armor_s01_chest_plate = ob
 
 	templateType = ARMOROBJECT,
 	objectMenuComponent = "ArmorObjectMenuComponent",
-	playerRaces = { "object/creature/player/ithorian_male.iff",
-				"object/creature/player/ithorian_female.iff",
-				"object/mobile/vendor/ithorian_female.iff",
-				"object/mobile/vendor/ithorian_male.iff" },
+	playerRaces = { -- Ithorian Armor, Do not Change
+		"object/creature/player/ithorian_male.iff",
+		"object/creature/player/ithorian_female.iff",
+		"object/mobile/vendor/ithorian_female.iff",
+		"object/mobile/vendor/ithorian_male.iff" 
+	},
 
 	-- Damage types in WeaponObject
 	vulnerability = STUN + LIGHTSABER,

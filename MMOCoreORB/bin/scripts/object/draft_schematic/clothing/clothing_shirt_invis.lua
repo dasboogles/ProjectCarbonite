@@ -45,11 +45,12 @@ object_draft_schematic_clothing_clothing_shirt_invis = object_draft_schematic_cl
 
    templateType = DRAFTSCHEMATIC,
 
-   customObjectName = "Plain Shirt",
+   customObjectName = "NanoFiber Undershirt",
 
    craftingToolTab = 8, -- (See DraftSchematicObjectTemplate.h)
    complexity = 16, 
    size = 3, 
+   factoryCrateType = "object/factory/factory_crate_clothing.iff",
 
    xpType = "crafting_clothing_general", 
    xp = 90, 
