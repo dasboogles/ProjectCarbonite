@@ -31,6 +31,36 @@ nightsister_sentry = Creature:new {
 	lootGroups = {
 		{
 			groups = {
+				{group = "nightsister_common", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
 				{group = "melee_weapons", chance = 10000000}
 			},
 			lootChance = 2500000
@@ -87,25 +117,25 @@ nightsister_sentry = Creature:new {
 			groups = {
 				{group = "wearables_common", chance = 10000000}
 			},
-			lootChance = 4950000
+			lootChance = 3500000
 		},
 		{
 			groups = {
 				{group = "loot_kit_parts", chance = 10000000}
 			},
-			lootChance = 4950000
+			lootChance = 3500000
 		},
 		{
 			groups = {
 				{group = "wearables_common", chance = 10000000}
 			},
-			lootChance = 4950000
+			lootChance = 3500000
 		},
 		{
 			groups = {
 				{group = "loot_kit_parts", chance = 10000000}
 			},
-			lootChance = 4950000
+			lootChance = 3500000
 		},
 	},
 	weapons = {"mixed_force_weapons"},

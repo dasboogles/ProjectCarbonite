@@ -54,30 +54,7 @@ nightsister_slave = Creature:new {
 			},
 			lootChance = 1500000
 		},
-		{
-			groups = {
-				{group = "power_crystals", chance = 10000000}
-			},
-			lootChance = 1000000
-		},
-		{
-			groups = {
-				{group = "color_crystals", chance = 10000000}
-			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
-				{group = "armor_attachments", chance = 10000000}
-			},
-			lootChance = 500000
-		},
-		{
-			groups = {
-				{group = "clothing_attachments", chance = 10000000}
-			},
-			lootChance = 500000
-		},
+		-- Slaves should not drop tapes or crystals!
 		{
 			groups = {
 				{group = "containers", chance = 10000000}

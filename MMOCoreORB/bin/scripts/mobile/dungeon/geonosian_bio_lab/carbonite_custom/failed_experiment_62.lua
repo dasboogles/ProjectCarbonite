@@ -5,12 +5,12 @@ failed_experiment_62 = Creature:new {
 	faction = "",
 	level = 220,
 	chanceHit = 15,
-	damageMin = 1745,
-	damageMax = 2910,
+	damageMin = 2745,
+	damageMax = 3995,
 	baseXp = 25167,
 	baseHAM = 581000,
 	baseHAMmax = 787222,
-    armor = 2,
+    armor = 3,
     -- Put this here to help anyone who needs to know what they're changing on some mob somewhere!
 	-- {Kinetic, Energy, Blast, Heat, Cold, Elec, Acid, Stun, LS}
 	resists = {5,5,5,5,5,5,5,5,-1},
@@ -38,6 +38,19 @@ failed_experiment_62 = Creature:new {
 			lootChance = 250000,
 		},
 		{
+			groups = {
+				{group = "rare_boss_loot_tier1", chance = 10000000},
+			},
+			lootChance = 250000,
+		},
+		{
+            groups = 
+            {
+                {group = "experimental_geo_cubes", chance = 10000000},
+            },
+            lootChance = 2500000,
+		},
+		{
             groups = 
             {
                 {group = "experimental_geo_cubes", chance = 10000000},
@@ -45,6 +58,13 @@ failed_experiment_62 = Creature:new {
             lootChance = 2500000,
         },
         {
+	        groups = 
+			{
+				{group = "carbonite_painting_collectables", chance = 10000000},
+			},
+			lootChance = 2500000,
+		},
+		{
 	        groups = 
 			{
 				{group = "carbonite_painting_collectables", chance = 10000000},
@@ -64,6 +84,24 @@ failed_experiment_62 = Creature:new {
 			lootChance = 5500000,
         },
         {
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 5500000,
+        },
+        {
+	        groups = {
+				{group = "armor_all", chance = 10000000},
+			},
+			lootChance = 5500000,
+		},
+		{
+			groups = {
+				{group = "acklay", chance = 10000000},
+			},
+			lootChance = 1500000,
+		},
+		{
 	        groups = {
 				{group = "weapons_all", chance = 10000000},
 			},

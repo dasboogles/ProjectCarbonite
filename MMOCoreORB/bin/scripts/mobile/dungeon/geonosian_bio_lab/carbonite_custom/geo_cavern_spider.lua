@@ -5,8 +5,8 @@ geo_cavern_spider = Creature:new {
 	faction = "",
 	level = 65,
 	chanceHit = 1.56,
-	damageMin = 550,
-	damageMax = 960,
+	damageMin = 1550,
+	damageMax = 1960,
 	baseXp = 2822,
 	baseHAM = 17700,
 	baseHAMmax = 29400,
@@ -30,6 +30,13 @@ geo_cavern_spider = Creature:new {
 	hues = { 8, 9, 10, 11, 12, 13, 14, 15 },
 	scale = 1.25,
 	lootGroups = {
+		{
+	        groups = 
+			{
+				{group = "fire_breathing_spider", chance = 10000000},
+			},
+			lootChance = 50000,
+		},
 		{
 	        groups = 
 			{

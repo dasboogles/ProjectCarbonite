@@ -7,10 +7,10 @@ failed_ns_clone = Creature:new {
 	level = 225,
 	chanceHit = 17,
 	damageMin = 1645,
-	damageMax = 2710,
+	damageMax = 3710,
 	baseXp = 25167,
-	baseHAM = 101000,
-	baseHAMmax = 122000,
+	baseHAM = 351000,
+	baseHAMmax = 422000,
     armor = 2,
     -- Put this here to help anyone who needs to know what they're changing on some mob somewhere!
 	-- {Kinetic, Energy, Blast, Heat, Cold, Elec, Acid, Stun, LS}
@@ -37,7 +37,20 @@ failed_ns_clone = Creature:new {
 			},
 			lootChance = 250000,
 		},
+		{
+			groups = {
+				{group = "rare_boss_loot_tier1", chance = 10000000},
+			},
+			lootChance = 250000,
+		},
         {
+	        groups = 
+			{
+				{group = "carbonite_painting_collectables", chance = 10000000},
+			},
+			lootChance = 2500000,
+		},
+		{
 	        groups = 
 			{
 				{group = "carbonite_painting_collectables", chance = 10000000},
@@ -61,6 +74,40 @@ failed_ns_clone = Creature:new {
 				{group = "geonosian_common", chance = 10000000},
 			},
 			lootChance = 1500000,
+		},
+		{
+	        groups = {
+				{group = "armor_attachments", chance = 10000000},
+			},
+			lootChance = 1000000,
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 5000000},
+				{group = "nightsister_common", chance = 5000000},
+				
+			},
+			lootChance = 2750000,
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 5000000},
+				{group = "nightsister_common", chance = 5000000},
+				
+			},
+			lootChance = 2750000,
+		},
+		{
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 2500000,
+        },
+        {
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 2500000,
 		},
 		{
 	        groups = {

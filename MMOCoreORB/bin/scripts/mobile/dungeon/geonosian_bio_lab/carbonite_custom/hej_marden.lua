@@ -5,11 +5,11 @@ hej_marden = Creature:new {
 	faction = "",
 	level = 205,
 	chanceHit = 12,
-	damageMin = 1845,
-	damageMax = 3410,
+	damageMin = 2845,
+	damageMax = 4410,
 	baseXp = 25167,
-	baseHAM = 121000,
-	baseHAMmax = 247000,
+	baseHAM = 421000,
+	baseHAMmax = 747000,
     armor = 1,
     -- Put this here to help anyone who needs to know what they're changing on some mob somewhere!
 	-- {Kinetic, Energy, Blast, Heat, Cold, Elec, Acid, Stun, LS}
@@ -37,6 +37,18 @@ hej_marden = Creature:new {
 			lootChance = 250000,
 		},
 		{
+			groups = {
+				{group = "rare_boss_loot_tier1", chance = 10000000},
+			},
+			lootChance = 250000,
+		},
+		{
+			groups = {
+				{group = "rare_boss_loot_tier1", chance = 10000000},
+			},
+			lootChance = 250000,
+		},
+		{
             groups = 
             {
                 {group = "experimental_geo_cubes", chance = 10000000},
@@ -49,8 +61,21 @@ hej_marden = Creature:new {
 				{group = "carbonite_painting_collectables", chance = 10000000},
 			},
 			lootChance = 1500000,
+		},
+		{
+	        groups = 
+			{
+				{group = "carbonite_painting_collectables", chance = 10000000},
+			},
+			lootChance = 1500000,
         },
         {
+            groups = {
+                {group = "geo_custom_schematics", chance = 10000000},
+            },
+            lootChance = 1000000,
+		},
+		{
             groups = {
                 {group = "geo_custom_schematics", chance = 10000000},
             },
@@ -73,6 +98,42 @@ hej_marden = Creature:new {
 				{group = "geonosian_common", chance = 10000000},
 			},
 			lootChance = 1500000,
+		},
+		{
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 2500000,
+        },
+        {
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 2000000,
+        },
+        {
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 2000000,
+        },
+        {
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 2000000,
+        },
+        {
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 2000000,
+        },
+        {
+	        groups = {
+				{group = "weapons_all", chance = 10000000},
+			},
+			lootChance = 2000000,
 		},
 		{
 	        groups = {

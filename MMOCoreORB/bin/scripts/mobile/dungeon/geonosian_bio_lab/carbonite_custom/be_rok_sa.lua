@@ -5,11 +5,11 @@ be_rok_sa = Creature:new {
 	faction = "",
 	level = 215,
 	chanceHit = 10,
-	damageMin = 1845,
-	damageMax = 3010,
+	damageMin = 2845,
+	damageMax = 4010,
 	baseXp = 25167,
-	baseHAM = 131000,
-	baseHAMmax = 177000,
+	baseHAM = 331000,
+	baseHAMmax = 577000,
     armor = 2,
     -- Put this here to help anyone who needs to know what they're changing on some mob somewhere!
 	-- {Kinetic, Energy, Blast, Heat, Cold, Elec, Acid, Stun, LS}
@@ -51,9 +51,29 @@ be_rok_sa = Creature:new {
         {
             groups = 
             {
+                {group = "experimental_geo_cubes", chance = 10000000},
+            },
+            lootChance = 2500000,
+        },
+        {
+            groups = 
+            {
+                {group = "experimental_geo_cubes", chance = 10000000},
+            },
+            lootChance = 2500000,
+        },
+        {
+            groups = 
+            {
                 {group = "carbonite_painting_collectables", chance = 10000000},
             },
             lootChance = 2500000,
+        },
+        {
+            groups = {
+                {group = "geo_custom_schematics", chance = 10000000},
+            },
+            lootChance = 3500000,
         },
         {
             groups = {
@@ -96,6 +116,18 @@ be_rok_sa = Creature:new {
                 {group = "armor_all", chance = 10000000},
             },
             lootChance = 2500000,
+        },
+        {
+            groups = {
+                {group = "clothing_attachments", chance = 10000000},
+            },
+            lootChance = 500000,
+        },
+        {
+            groups = {
+                {group = "armor_attachments", chance = 10000000},
+            },
+            lootChance = 500000,
         },
         {
             groups = {

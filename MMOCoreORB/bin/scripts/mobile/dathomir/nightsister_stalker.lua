@@ -31,6 +31,36 @@ nightsister_stalker = Creature:new {
 	lootGroups = {
 		{
 			groups = {
+				{group = "nightsister_common", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "weapons_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
 				{group = "melee_weapons", chance = 10000000}
 			},
 			lootChance = 3000000
@@ -57,13 +87,13 @@ nightsister_stalker = Creature:new {
 			groups = {
 				{group = "power_crystals", chance = 10000000}
 			},
-			lootChance = 1750000
+			lootChance = 1500000
 		},
 		{
 			groups = {
 				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 2500000
+			lootChance = 1500000
 		},
 		{
 			groups = {
@@ -87,25 +117,25 @@ nightsister_stalker = Creature:new {
 			groups = {
 				{group = "wearables_common", chance = 10000000}
 			},
-			lootChance = 5000000
+			lootChance = 3500000
 		},
 		{
 			groups = {
 				{group = "loot_kit_parts", chance = 10000000}
 			},
-			lootChance = 5000000
+			lootChance = 3500000
 		},
 		{
 			groups = {
 				{group = "wearables_common", chance = 10000000}
 			},
-			lootChance = 5000000
+			lootChance = 3500000
 		},
 		{
 			groups = {
 				{group = "loot_kit_parts", chance = 10000000}
 			},
-			lootChance = 5000000
+			lootChance = 3500000
 		},
 	},
 	weapons = {"mixed_force_weapons"},
