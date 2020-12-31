@@ -1193,6 +1193,18 @@ void SceneObjectImplementation::rotate(int degrees) {
 	direction.rotate(unity, degrees);
 }
 
+// Taken from Flurry, thanks Toxic!! ---v
+void SceneObjectImplementation::rotateXaxis(int degrees) {
+        Vector3 unity(1, 0, 0);
+ 	direction.rotate(unity, degrees);
+}
+
+void SceneObjectImplementation::rotateYaxis(int degrees) {
+        Vector3 unity(0, 0, 1);
+	direction.rotate(unity, degrees);
+}
+// Taken from Flurry, thanks Toxic!! ---^
+
 void SceneObjectImplementation::fillObjectMenuResponse(ObjectMenuResponse* menuResponse, CreatureObject* player) {
 	if (objectMenuComponent == nullptr) {
 		error("no object menu component set for " + templateObject->getTemplateFileName());
