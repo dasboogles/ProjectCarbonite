@@ -17,7 +17,6 @@ WorldBossSpawner = ScreenPlay:new {
 	secondsToRespawn = 86400, -- 24h time to respawn after boss has been killed/despawned
 	maxRadius = 2000, --Maximum distance from spawn point to spawn boss
 	
-	
 	bossMobileTemplates =  {"acklay_boss", "rancor_boss", "wampa_boss", "kkorrwrot_boss", "deathsting_boss"},
 
 	screenplayName = "WorldBossSpawner",
@@ -57,6 +56,14 @@ function WorldBossSpawner:notifyBossDead(pBoss, pKiller)
 
 	createEvent(self.secondsToRespawn * 1000, "WorldBossSpawner", "respawnBoss", pBoss, "")
 	--print("Boss was killed, initiating despawn/respawn.")
+	local bossTemplate = self:getBossTemplate(pBoss)
+	local zone = self:getBossZone(pBoss)
+
+	if (bossTemplate ~= nil and zone ~= nil) then
+		-- print("WhosaWhat: " .. SceneObject(pBoss):getObjectID())
+		CreatureObject(pBoss):broadcastToServer("Incomming Transmission: " .. bossTemplate .. " has been slain on " .. zone) 
+	end
+	
 	return 1
 end
 
@@ -103,7 +110,10 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 
 		if (pBoss ~= nil) then
 			createEvent(10, "WorldBossSpawner", "setupBoss", pBoss, "")
-			print("World Boss: " .. bossTemplate .. " spawned at " .. spawnPoint[1] .. ", " .. spawnPoint[3] .. ", " .. zone) 
+			print("World Boss: " .. bossTemplate .. " spawned at " .. spawnPoint[1] .. ", " .. spawnPoint[3] .. ", " .. zone)
+			-- Save needed information about this Boss for onDespawn() and onDeath() events! 
+			writeStringData(SceneObject(pBoss):getObjectID() .. ":name", bossTemplate)
+			writeStringData(SceneObject(pBoss):getObjectID() .. ":zone", zone)
 			CreatureObject(pBoss):broadcastToServer("Incomming Transmission: " .. bossTemplate .. " has been sighted on " .. zone) 
 		end
 
@@ -122,7 +132,28 @@ function WorldBossSpawner:despawnBoss(pBoss)
 	end
 
 	--print("Boss was not killed, initiating despawn/respawn.")
+	local bossTemplate = self:getBossTemplate(pBoss)
+	local zone = self:getBossZone(pBoss)
+
+	if (bossTemplate ~= nil and zone ~= nil) then
+		CreatureObject(pBoss):broadcastToServer("Incomming Transmission: " .. bossTemplate .. " has gone back into hiding on " .. zone) 
+	end
+
 	SceneObject(pBoss):destroyObjectFromWorld()
 	createEvent(2 * 1000, "WorldBossSpawner", "respawnBoss", pNewBoss, "")
 	return 1
+end
+
+-- We want to get the Boss's template so we can broadcast stuff!
+function WorldBossSpawner:getBossTemplate(pBoss)
+	-- print("Get boss template example: " .. SceneObject(pBoss):getObjectID() .. ":name")
+	local bossName = readStringData(SceneObject(pBoss):getObjectID() .. ":name")
+	-- print("Get boss template name READ: " .. bossName)
+	return bossName
+end
+
+-- We want to get the Boss's zone so we can broadcast stuff!
+function WorldBossSpawner:getBossZone(pBoss)
+	local bossZone = readStringData(SceneObject(pBoss):getObjectID() .. ":zone")
+	return bossZone
 end

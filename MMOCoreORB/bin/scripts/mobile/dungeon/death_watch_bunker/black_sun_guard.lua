@@ -76,7 +76,7 @@ black_sun_guard = Creature:new {
 			groups = {
 				{group = "jetpack_base", chance = 10000000}
 			},
-			lootChance = 4500000
+			lootChance = 1500000
 		},
 		{
 			groups = {

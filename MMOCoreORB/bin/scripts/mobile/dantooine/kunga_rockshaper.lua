@@ -4,15 +4,15 @@ kunga_rockshaper = Creature:new {
 	randomNameTag = true,
 	socialGroup = "kunga_tribe",
 	faction = "kunga_tribe",
-	level = 71,
-	chanceHit = 0.65,
-	damageMin = 470,
-	damageMax = 650,
-	baseXp = 6747,
+	level = 95,
+	chanceHit = 0.87,
+	damageMin = 495,
+	damageMax = 900,
+	baseXp = 6655,
 	baseHAM = 12000,
-	baseHAMmax = 14000,
-	armor = 1,
-	resists = {100,20,100,20,20,100,20,-1,-1},
+	baseHAMmax = 15000,
+	armor = 2,
+	resists = {25,45,-1,45,45,100,45,-1,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -29,18 +29,27 @@ kunga_rockshaper = Creature:new {
 
 	templates = {
 		"object/mobile/dantari_male.iff",
-		"object/mobile/dantari_female.iff"},
+		"object/mobile/dantari_female.iff"
+	},
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 3500000},
-				{group = "loot_kit_parts", chance = 3000000},
-				{group = "armor_attachments", chance = 500000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "wearables_all", chance = 2000000},
-				{group = "power_crystals", chance = 500000}
-			}
-		}
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 500000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 800000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 800000
+		},
 	},
 	weapons = {"primitive_weapons"},
 	conversationTemplate = "",

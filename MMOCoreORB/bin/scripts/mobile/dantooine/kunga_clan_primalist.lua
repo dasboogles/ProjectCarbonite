@@ -4,15 +4,15 @@ kunga_clan_primalist = Creature:new {
 	randomNameTag = true,
 	socialGroup = "kunga_tribe",
 	faction = "kunga_tribe",
-	level = 40,
-	chanceHit = 0.42,
-	damageMin = 360,
-	damageMax = 430,
-	baseXp = 3915,
-	baseHAM = 9000,
-	baseHAMmax = 11000,
-	armor = 0,
-	resists = {25,60,25,-1,-1,60,50,-1,-1},
+	level = 70,
+	chanceHit = 0.87,
+	damageMin = 493,
+	damageMax = 997,
+	baseXp = 960,
+	baseHAM = 9224,
+	baseHAMmax = 13441,
+	armor = 1,
+	resists = {0,15,0,-1,0,0,0,-1,-1},
 	meatType = "",
 	meatAmount = 0,
 	hideType = "",
@@ -23,25 +23,33 @@ kunga_clan_primalist = Creature:new {
 	tamingChance = 0,
 	ferocity = 0,
 	pvpBitmask = ATTACKABLE,
-	creatureBitmask = PACK + HERD,
+	creatureBitmask = PACK + HERD + KILLER,
 	optionsBitmask = AIENABLED,
 	diet = HERBIVORE,
 
 	templates = {
 		"object/mobile/dantari_male.iff",
-		"object/mobile/dantari_female.iff"},
+		"object/mobile/dantari_female.iff"
+	},
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 3500000},
-				{group = "loot_kit_parts", chance = 3000000},
-				{group = "armor_attachments", chance = 500000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "wearables_common", chance = 1000000},
-				{group = "wearables_uncommon", chance = 1000000},
-				{group = "power_crystals", chance = 500000}
-			}
-		}
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 500000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 800000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 800000
+		},
 	},
 	weapons = {"primitive_weapons"},
 	conversationTemplate = "",

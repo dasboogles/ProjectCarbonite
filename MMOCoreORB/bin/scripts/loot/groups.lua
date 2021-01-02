@@ -168,7 +168,7 @@ includeFile("groups/npc/valarian_common.lua")
 includeFile("groups/npc/weequay_common.lua")
 
 -- Custom Stuff Below here
-includeFile("groups/npc/custom_test/janta_TEST.lua")
+-- includeFile("groups/npc/custom_test/janta_TEST.lua")
 -- Custom Stuff Above here
 
 -- task_loot sub-folder
@@ -392,6 +392,10 @@ includeFile("groups/custom/world_boss.lua")
 
 -- Generic Carbonite Loot Groups
 includeFile("groups/custom/rare_boss_loot_tier1.lua")
+-- Dantooine Carbonite
+
+includeFile("groups/custom/dantooine/kunga_pygmy_graul_common.lua")
+includeFile("groups/custom/dantooine/kunga_pygmy_graul_uncommon.lua")
 
 -- Generic Stuff
 includeFile("groups/containers.lua")

@@ -30,10 +30,19 @@ public:
 		if (!checkInvalidLocomotions(creature))
 			return INVALIDLOCOMOTION;
 
-		PlayerObject* ghost = creature->getPlayerObject();
+		ManagedReference<PlayerObject*> ghost = creature->getPlayerObject();
 
-		if (ghost == nullptr)
+		if (ghost == nullptr) {
 			return GENERALERROR;
+		}
+		
+		// Kick back if someone tries to run this without admin level
+		int adminLevelCheck = ghost->getAdminLevel();
+		if (adminLevelCheck != 15){
+			creature->sendSystemMessage("Sorry, /wardev admin commands require administrator privileges.");
+			creature->error("Tried to run Snoop without admin privileges!");
+			return GENERALERROR;
+		}
 
 		StringTokenizer args(arguments.toString());
 		String targetName = "";

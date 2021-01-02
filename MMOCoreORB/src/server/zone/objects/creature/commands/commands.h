@@ -839,6 +839,7 @@
 #include "RequestSpaceTrainerCommand.h"
 // Custom
 #include "custom/WarDevCommand.h"
+#include "custom/RegrantSkillsCommand"
 // Custom
 
 

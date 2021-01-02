@@ -829,4 +829,5 @@ void CommandConfigManager::registerCommands2() {
 	commandFactory.registerCommand<MaxStatsCommand>(String("maxStats").toLowerCase());
 	commandFactory.registerCommand<MedicalForageCommand>(String("medicalForage").toLowerCase());
 	commandFactory.registerCommand<MeditateCommand>(String("meditate").toLowerCase());
+
 }

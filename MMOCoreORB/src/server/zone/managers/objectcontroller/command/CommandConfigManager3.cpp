@@ -300,6 +300,7 @@
 #include "server/zone/objects/creature/commands/SnoopCommand.h"
 // Custom
 #include "server/zone/objects/creature/commands/custom/WarDevCommand.h"
+#include "server/zone/objects/creature/commands/custom/RegrantSkillsCommand.h"
 // Custom
 #include "server/zone/objects/creature/commands/SocialCommand.h"
 #include "server/zone/objects/creature/commands/SocialInternalCommand.h"
@@ -603,6 +604,7 @@ void CommandConfigManager::registerCommands3() {
 	commandFactory.registerCommand<SnoopCommand>(String("snoop").toLowerCase());
 	// Custom
 	commandFactory.registerCommand<WarDevCommand>(String("wardev").toLowerCase());
+	commandFactory.registerCommand<RegrantSkillsCommand>(String("regrantskills").toLowerCase());
 	// Custom
 	commandFactory.registerCommand<SocialCommand>(String("social").toLowerCase());
 	commandFactory.registerCommand<SocialInternalCommand>(String("socialInternal").toLowerCase());

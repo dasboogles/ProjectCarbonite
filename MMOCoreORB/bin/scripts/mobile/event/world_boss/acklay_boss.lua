@@ -2,10 +2,10 @@ acklay_boss = Creature:new {
 	customName = "Corrupted Acklay",
 	socialGroup = "geonosian_creature",
 	faction = "",
-	level = 350,
+	level = 500,
 	chanceHit = 70.0,
-	damageMin = 3570,
-	damageMax = 4950,
+	damageMin = 7570,
+	damageMax = 9950,
 	baseXp = 28549,
 	baseHAM = 1680000,
 	baseHAMmax = 1950000,
@@ -35,11 +35,93 @@ acklay_boss = Creature:new {
 			lootChance = 10000000
 		},
 		{
+	        groups = {
+				{group = "world_boss", chance = 10000000},
+			},
+			lootChance = 7500000
+		},
+		{
+	        groups = {
+				{group = "world_boss", chance = 10000000},
+			},
+			lootChance = 5500000
+		},
+		{
+	        groups = {
+				{group = "world_boss", chance = 10000000},
+			},
+			lootChance = 3500000
+		},
+		{
 			groups = {
 				{group = "clothing_attachments", chance = 5000000},
 				{group = "holocron_dark", chance = 5000000},
 			},
 			lootChance = 10000000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "holocron_dark", chance = 5000000},
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "holocron_dark", chance = 5000000},
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "holocron_dark", chance = 5000000},
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "holocron_dark", chance = 5000000},
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "rancor_common", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "rancor_common", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000}
+			},
+			lootChance = 7500000
 		},
 		{
 			groups = {
