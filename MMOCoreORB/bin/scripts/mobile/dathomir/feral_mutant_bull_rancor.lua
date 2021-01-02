@@ -80,13 +80,13 @@ feral_mutant_bull_rancor = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 7500000
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 7500000
 		},

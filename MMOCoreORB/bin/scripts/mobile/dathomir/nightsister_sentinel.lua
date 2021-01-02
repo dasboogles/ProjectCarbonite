@@ -31,25 +31,13 @@ nightsister_sentinel = Creature:new {
 	lootGroups = {
 		{
 			groups = {
+				{group = "high_end_weapons_all", chance = 10000000}
+			},
+			lootChance = 3000000
+		},
+		{
+			groups = {
 				{group = "melee_weapons", chance = 10000000}
-			},
-			lootChance = 3000000
-		},
-		{
-			groups = {
-				{group = "rifles", chance = 10000000}
-			},
-			lootChance = 3000000
-		},
-		{
-			groups = {
-				{group = "pistols", chance = 10000000}
-			},
-			lootChance = 3000000
-		},
-		{
-			groups = {
-				{group = "carbines", chance = 10000000}
 			},
 			lootChance = 3000000
 		},
@@ -82,18 +70,6 @@ nightsister_sentinel = Creature:new {
 				{group = "containers", chance = 10000000}
 			},
 			lootChance = 950000
-		},
-		{
-			groups = {
-				{group = "wearables_common", chance = 10000000}
-			},
-			lootChance = 5000000
-		},
-		{
-			groups = {
-				{group = "loot_kit_parts", chance = 10000000}
-			},
-			lootChance = 5000000
 		},
 		{
 			groups = {

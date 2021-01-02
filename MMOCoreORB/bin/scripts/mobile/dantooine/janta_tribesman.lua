@@ -4,14 +4,14 @@ janta_tribesman = Creature:new {
 	randomNameTag = true,
 	socialGroup = "janta_tribe",
 	faction = "janta_tribe",
-	level = 20,
-	chanceHit = 0.33,
+	level = 40,
+	chanceHit = 0.63,
 	damageMin = 190,
-	damageMax = 200,
+	damageMax = 600,
 	baseXp = 1803,
 	baseHAM = 5000,
 	baseHAMmax = 6100,
-	armor = 0,
+	armor = 1,
 	resists = {0,15,0,-1,0,0,0,-1,-1},
 	meatType = "",
 	meatAmount = 0,
@@ -33,11 +33,16 @@ janta_tribesman = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 5500000},
-				{group = "janta_common", chance = 1500000},
-				{group = "loot_kit_parts", chance = 3000000}
-			}
-		}
+				{group = "janta_common", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
 	},
 	weapons = {"primitive_weapons"},
 	conversationTemplate = "",

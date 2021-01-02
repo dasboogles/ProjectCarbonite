@@ -4,10 +4,10 @@ janta_shaman = Creature:new {
 	randomNameTag = true,
 	socialGroup = "janta_tribe",
 	faction = "janta_tribe",
-	level = 60,
-	chanceHit = 0.65,
+	level = 85,
+	chanceHit = 0.79,
 	damageMin = 470,
-	damageMax = 650,
+	damageMax = 900,
 	baseXp = 5830,
 	baseHAM = 12000,
 	baseHAMmax = 14000,
@@ -33,11 +33,16 @@ janta_shaman = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 5500000},
-				{group = "janta_common", chance = 1500000},
-				{group = "loot_kit_parts", chance = 3000000}
-			}
-		}
+				{group = "janta_common", chance = 10000000}
+			},
+			lootChance = 4000000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000}
+			},
+			lootChance = 4000000
+		},
 	},
 	weapons = {"primitive_weapons"},
 	conversationTemplate = "",

@@ -63,8 +63,8 @@ skillModLimits = {
 }
 
 disabledWearableSkillMods = {
-	"combat_healing_ability",
-	"healing_ability",
+	-- "combat_healing_ability", 	-- Turn this back on
+	-- "healing_ability",			-- Turn this back on
 	"keep_creature",
 	"stored_pets",
 	"combat_medic_effectiveness",

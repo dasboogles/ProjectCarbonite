@@ -34,7 +34,7 @@ gnarled_rancor = Creature:new {
 			groups = {
 				{group = "rancor_common", chance = 4000000},
 				{group = "armor_all", chance = 2000000},
-				{group = "weapons_all", chance = 2500000},
+				{group = "high_end_weapons_all", chance = 2500000},
 				{group = "wearables_all", chance = 1500000}
 			},
 			lootChance = 1920000

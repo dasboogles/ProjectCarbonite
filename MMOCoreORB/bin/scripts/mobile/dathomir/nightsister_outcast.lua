@@ -31,13 +31,19 @@ nightsister_outcast = Creature:new {
 	lootGroups = {
 		{
 			groups = {
+				{group = "melee_weapons", chance = 10000000}
+			},
+			lootChance = 3000000
+		},
+		{
+			groups = {
 				{group = "nightsister_common", chance = 10000000}
 			},
 			lootChance = 1500000
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 1500000
 		},
@@ -49,37 +55,13 @@ nightsister_outcast = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 1500000
 		},
 		{
 			groups = {
 				{group = "armor_all", chance = 10000000}
-			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
-				{group = "melee_weapons", chance = 10000000}
-			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
-				{group = "rifles", chance = 10000000}
-			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
-				{group = "pistols", chance = 10000000}
-			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
-				{group = "carbines", chance = 10000000}
 			},
 			lootChance = 1500000
 		},
@@ -112,18 +94,6 @@ nightsister_outcast = Creature:new {
 				{group = "containers", chance = 10000000}
 			},
 			lootChance = 500000
-		},
-		{
-			groups = {
-				{group = "wearables_common", chance = 10000000}
-			},
-			lootChance = 2500000
-		},
-		{
-			groups = {
-				{group = "loot_kit_parts", chance = 10000000}
-			},
-			lootChance = 2500000
 		},
 		{
 			groups = {

@@ -34,19 +34,19 @@ hej_marden = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 250000,
+			lootChance = 350000,
 		},
 		{
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 250000,
+			lootChance = 350000,
 		},
 		{
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 250000,
+			lootChance = 350000,
 		},
 		{
             groups = 
@@ -60,26 +60,26 @@ hej_marden = Creature:new {
 			{
 				{group = "carbonite_painting_collectables", chance = 10000000},
 			},
-			lootChance = 1500000,
+			lootChance = 3500000,
 		},
 		{
 	        groups = 
 			{
 				{group = "carbonite_painting_collectables", chance = 10000000},
 			},
-			lootChance = 1500000,
+			lootChance = 3500000,
         },
         {
             groups = {
                 {group = "geo_custom_schematics", chance = 10000000},
             },
-            lootChance = 1000000,
+            lootChance = 3500000,
 		},
 		{
             groups = {
                 {group = "geo_custom_schematics", chance = 10000000},
             },
-            lootChance = 1000000,
+            lootChance = 3500000,
         },
 		{
 	        groups = {
@@ -101,75 +101,75 @@ hej_marden = Creature:new {
 		},
 		{
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
 		},
 		{
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2000000,
+			lootChance = 3500000,
 		},
 	},
 	weapons = {"dark_trooper_weapons"},

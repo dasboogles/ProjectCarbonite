@@ -183,27 +183,7 @@ CityTaxes = {
 	CITY SPECIALIZATIONS
 	====================
 --]]
--- Add These to ALL city types:
--- {"private_spec_cloning", 20}
--- {"private_spec_samplesize", 20},
--- {"private_spec_samplerate", 10}
-
 CitySpecializations = {
-	-- {--Sample Rich
-	-- 	name = "@city/city:city_spec_sample_rich",
-	-- 	cost = 70000,
-	-- 	skillMods = {
-	-- 		{"private_spec_samplesize", 20},
-	-- 		{"private_spec_samplerate", 10}
-	-- 	}
-	-- },
-	-- {--Manufacturing Center
-	-- 	name = "@city/city:city_spec_industry",
-	-- 	cost = 50000,
-	-- 	skillMods = {
-	-- 		{"private_spec_assembly", 10}
-	-- 	}
-	-- },
 	{--Medical Center
 		name = "@city/city:city_spec_doctor",
 		cost = 150000,
@@ -215,13 +195,6 @@ CitySpecializations = {
 			{"private_spec_samplerate", 10}
 		}
 	},
-	-- {--Clone Lab
-	-- 	name = "@city/city:city_spec_cloning",
-	-- 	cost = 80000,
-	-- 	skillMods = {
-	-- 		{"private_spec_cloning", 20}
-	-- 	}
-	-- },
 	{--Research Center
 		name = "@city/city:city_spec_research",
 		cost = 150000,
@@ -244,18 +217,4 @@ CitySpecializations = {
 			{"private_spec_samplerate", 10}
 		}
 	},
-	-- {--Entertainment District
-	-- 	name = "@city/city:city_spec_entertainer",
-	-- 	cost = 80000,
-	-- 	skillMods = {
-	-- 		{"private_spec_entertainer", 10}
-	-- 	}
-	-- },
-	-- {--Stronghold
-	-- 	name = "@city/city:city_spec_stronghold",
-	-- 	cost = 150000,
-	-- 	skillMods = {
-	-- 		{"private_defense", 90}
-	-- 	}
-	-- },
 }

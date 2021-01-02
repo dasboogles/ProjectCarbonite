@@ -35,13 +35,13 @@ failed_ns_clone = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 250000,
+			lootChance = 350000,
 		},
 		{
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 250000,
+			lootChance = 350000,
 		},
         {
 	        groups = 
@@ -79,41 +79,47 @@ failed_ns_clone = Creature:new {
 	        groups = {
 				{group = "armor_attachments", chance = 10000000},
 			},
-			lootChance = 1000000,
-		},
-		{
-			groups = {
-				{group = "power_crystals", chance = 5000000},
-				{group = "nightsister_common", chance = 5000000},
-				
-			},
-			lootChance = 2750000,
-		},
-		{
-			groups = {
-				{group = "power_crystals", chance = 5000000},
-				{group = "nightsister_common", chance = 5000000},
-				
-			},
-			lootChance = 2750000,
+			lootChance = 5500000,
 		},
 		{
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "clothing_attachments", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 5500000,
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 5000000},
+				{group = "nightsister_common", chance = 5000000},
+				
+			},
+			lootChance = 5500000,
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 5000000},
+				{group = "nightsister_common", chance = 5000000},
+				
+			},
+			lootChance = 5500000,
+		},
+		{
+	        groups = {
+				{group = "high_end_weapons_all", chance = 10000000},
+			},
+			lootChance = 5500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 5500000,
 		},
 		{
 	        groups = {
 				{group = "armor_attachments", chance = 10000000},
 			},
-			lootChance = 1000000,
+			lootChance = 5500000,
 		},
 		{
 			groups = {
@@ -121,7 +127,7 @@ failed_ns_clone = Creature:new {
 				{group = "nightsister_common", chance = 5000000},
 				
 			},
-			lootChance = 2750000,
+			lootChance = 5500000,
 		},
 		{
 			groups = {
@@ -129,19 +135,19 @@ failed_ns_clone = Creature:new {
 				{group = "nightsister_common", chance = 5000000},
 				
 			},
-			lootChance = 2750000,
+			lootChance = 5500000,
 		},
 		{
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 5500000,
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 5500000,
 		},
 	},
 	weapons = {"dark_trooper_weapons"},

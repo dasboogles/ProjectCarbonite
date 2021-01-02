@@ -61,15 +61,15 @@ Melee2hArea3Command = {
 		0, 
 		30
 	  ),
-	  StateEffect( 
-		POSTUREDOWN_EFFECT, 
-		{ "postureDownRecovery" }, 
-		{ "posture_change_down_defense" }, 
-		{},
-		100, 
-		0, 
-		0 
-	  )
+	--   StateEffect( 
+	-- 	POSTUREDOWN_EFFECT, 
+	-- 	{ "postureDownRecovery" }, 
+	-- 	{ "posture_change_down_defense" }, 
+	-- 	{},
+	-- 	100, 
+	-- 	0, 
+	-- 	0 
+	--   )
 	},
 
 	areaRange = 16,

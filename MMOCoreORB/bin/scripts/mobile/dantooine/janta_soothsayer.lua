@@ -4,14 +4,14 @@ janta_soothsayer = Creature:new {
 	randomNameTag = true,
 	socialGroup = "janta_tribe",
 	faction = "janta_tribe",
-	level = 60,
-	chanceHit = 0.65,
+	level = 90,
+	chanceHit = 0.85,
 	damageMin = 500,
-	damageMax = 710,
+	damageMax = 910,
 	baseXp = 5738,
 	baseHAM = 12000,
 	baseHAMmax = 14000,
-	armor = 0,
+	armor = 1,
 	resists = {-1,40,-1,0,0,70,0,-1,-1},
 	meatType = "",
 	meatAmount = 0,
@@ -33,11 +33,16 @@ janta_soothsayer = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 5500000},
-				{group = "janta_common", chance = 1500000},
-				{group = "loot_kit_parts", chance = 3000000}
-			}
-		}
+				{group = "janta_common", chance = 10000000}
+			},
+			lootChance = 4000000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000}
+			},
+			lootChance = 4000000
+		},
 	},
 	weapons = {"primitive_weapons"},
 	conversationTemplate = "",

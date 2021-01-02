@@ -46,21 +46,21 @@ be_rok_sa = Creature:new {
             {
                 {group = "experimental_geo_cubes", chance = 10000000},
             },
-            lootChance = 2500000,
+            lootChance = 4500000,
         },
         {
             groups = 
             {
                 {group = "experimental_geo_cubes", chance = 10000000},
             },
-            lootChance = 2500000,
+            lootChance = 4500000,
         },
         {
             groups = 
             {
                 {group = "experimental_geo_cubes", chance = 10000000},
             },
-            lootChance = 2500000,
+            lootChance = 4500000,
         },
         {
             groups = 
@@ -73,13 +73,13 @@ be_rok_sa = Creature:new {
             groups = {
                 {group = "geo_custom_schematics", chance = 10000000},
             },
-            lootChance = 3500000,
+            lootChance = 4500000,
         },
         {
             groups = {
                 {group = "geo_custom_schematics", chance = 10000000},
             },
-            lootChance = 2500000,
+            lootChance = 3500000,
         },
         {
             groups = {
@@ -107,7 +107,7 @@ be_rok_sa = Creature:new {
         },
         {
             groups = {
-                {group = "weapons_all", chance = 10000000},
+                {group = "high_end_weapons_all", chance = 10000000},
             },
             lootChance = 2500000,
         },
@@ -121,25 +121,25 @@ be_rok_sa = Creature:new {
             groups = {
                 {group = "clothing_attachments", chance = 10000000},
             },
-            lootChance = 500000,
+            lootChance = 2500000,
         },
         {
             groups = {
                 {group = "armor_attachments", chance = 10000000},
             },
-            lootChance = 500000,
+            lootChance = 2500000,
         },
         {
             groups = {
                 {group = "clothing_attachments", chance = 10000000},
             },
-            lootChance = 500000,
+            lootChance = 2500000,
         },
         {
             groups = {
                 {group = "armor_attachments", chance = 10000000},
             },
-            lootChance = 500000,
+            lootChance = 2500000,
         },
     },
 	weapons = {"geonosian_weapons"},

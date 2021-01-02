@@ -104,7 +104,7 @@ krayt_dragon_queen = Creature:new {
 		},
 		{
 			groups = {
-				{group = "epic_weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 5500000
 		},
@@ -116,7 +116,7 @@ krayt_dragon_queen = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
@@ -128,7 +128,7 @@ krayt_dragon_queen = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
@@ -140,7 +140,7 @@ krayt_dragon_queen = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
@@ -152,7 +152,7 @@ krayt_dragon_queen = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 10000000
 		}

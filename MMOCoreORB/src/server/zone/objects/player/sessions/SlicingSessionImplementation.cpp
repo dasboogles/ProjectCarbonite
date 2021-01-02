@@ -824,9 +824,17 @@ void SlicingSessionImplementation::handleContainerSlice() {
 
 		TransactionLog trx(TrxCode::SLICECONTAINER, player, container);
 
-		if (System::random(10) != 4) {
-			lootManager->createLoot(trx, container, "looted_container");
-		}
+		// No longer a chance to NOT get loot from sliced open containers
+		// Creates guaranteed 5 loot items per container
+		// Rolls the CL between 100 and 300
+		// if (System::random(10) != 4) {
+		int roll = 300 - System::random(200); // Creates a roll between 100 and 300
+		lootManager->createLoot(trx, container, "looted_container", roll);
+		lootManager->createLoot(trx, container, "looted_container", roll);
+		lootManager->createLoot(trx, container, "looted_container", roll);
+		lootManager->createLoot(trx, container, "looted_container", roll);
+		lootManager->createLoot(trx, container, "looted_container", roll);
+		//}
 
 		inventory->transferObject(container, -1);
 		container->sendTo(player, true);

@@ -35,7 +35,13 @@ alert_droideka = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "geonosian_common", chance = 10000000}
+			},
+			lootChance = 5000000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 2000000
 	    }	

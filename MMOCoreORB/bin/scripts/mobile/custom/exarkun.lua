@@ -44,37 +44,13 @@ exarkun = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 4500000,
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000},
-			},
-			lootChance = 4500000,
-		},
-		{
-			groups = {
-				{group = "armor_all", chance = 10000000},
-			},
-			lootChance = 4500000,
-		},
-		{
-			groups = {
-				{group = "armor_all", chance = 10000000},
-			},
-			lootChance = 4500000,
-		},
-		{
-			groups = {
-				{group = "weapons_all", chance = 10000000},
-			},
-			lootChance = 4500000,
-		},
-		{
-			groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 4500000,
 		},
@@ -92,13 +68,37 @@ exarkun = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 4500000,
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
+			},
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000},
+			},
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000},
+			},
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000},
+			},
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 4500000,
 		},

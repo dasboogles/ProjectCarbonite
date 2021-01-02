@@ -5,8 +5,8 @@ failed_experiment_62 = Creature:new {
 	faction = "",
 	level = 220,
 	chanceHit = 15,
-	damageMin = 2745,
-	damageMax = 3995,
+	damageMin = 3745,
+	damageMax = 4995,
 	baseXp = 25167,
 	baseHAM = 581000,
 	baseHAMmax = 787222,
@@ -35,13 +35,13 @@ failed_experiment_62 = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 250000,
+			lootChance = 350000,
 		},
 		{
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 250000,
+			lootChance = 350000,
 		},
 		{
             groups = 
@@ -85,39 +85,39 @@ failed_experiment_62 = Creature:new {
         },
         {
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 5500000,
+			lootChance = 7500000,
         },
         {
 	        groups = {
 				{group = "armor_all", chance = 10000000},
 			},
-			lootChance = 5500000,
+			lootChance = 7500000,
 		},
 		{
 			groups = {
 				{group = "acklay", chance = 10000000},
 			},
-			lootChance = 1500000,
+			lootChance = 2500000,
 		},
 		{
 	        groups = {
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
-			lootChance = 5500000,
+			lootChance = 7500000,
         },
         {
 	        groups = {
 				{group = "armor_all", chance = 10000000},
 			},
-			lootChance = 5500000,
+			lootChance = 7500000,
 		},
 		{
 			groups = {
 				{group = "acklay", chance = 10000000},
 			},
-			lootChance = 1500000,
+			lootChance = 2500000,
 		},
 	},
 	weapons = {},

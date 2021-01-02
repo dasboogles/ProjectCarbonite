@@ -14,6 +14,9 @@
 #include "server/zone/objects/scene/SceneObject.h"
 #include "server/zone/managers/loot/LootManager.h"
 #include "server/zone/managers/loot/LootGroupMap.h"
+#include "server/zone/objects/player/sui/messagebox/SuiMessageBox.h"
+#include "server/zone/objects/player/sui/callbacks/ConfirmAttachmentConvertCallback.h"
+#include "server/zone/objects/player/sui/callbacks/ConfirmAttachmentCombineCallback.h"
 
 void TangibleObjectMenuComponent::fillObjectMenuResponse(SceneObject* sceneObject, ObjectMenuResponse* menuResponse, CreatureObject* player) const {
 	ObjectMenuComponent::fillObjectMenuResponse(sceneObject, menuResponse, player);
@@ -229,8 +232,8 @@ int TangibleObjectMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject
 			}
 
 			return 0;
-	}	else if (selectedID == 99) { // Combine lesser or equal Attachments together
-			ManagedReference<SceneObject*> newSEA = NULL;
+	}	
+	else if (selectedID == 99) { // Combine lesser or equal Attachments together
 			Attachment* attachment = cast<Attachment*>(sceneObject);
 			
 			if (attachment != NULL){
@@ -330,12 +333,11 @@ int TangibleObjectMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject
 									}
 								}
 							}
-						}
+						} // Done checking inventory for chosenAttachment
+
 						// Make sure the attachment we've picked isn't a bad actor
 						if (chosenAttachment != nullptr) {
 							Locker locker(chosenAttachment);
-							ManagedReference<SceneObject*> combinedSEA = NULL;
-							ManagedReference<LootManager*> lootManager = player->getZoneServer()->getLootManager();
 
 							int combinedValue = 0;
 							combinedValue = attachmentValue + chosenAttachmentValue;
@@ -344,42 +346,19 @@ int TangibleObjectMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject
 							
 							// Make sure the player can afford to combine!
 							if (player->getBankCredits() >= combinationCost) {
-								// Cap combined mods at 25
-								if (combinedValue > 25) {
-									combinedValue = 25;
-								}else if (combinedValue < 1){ // Make sure we can't go below 1! (just in case)
-									combinedValue = 1;
-								}
+								//Send Confirmation to be sure we want to convert!
+								ManagedReference<SuiMessageBox*> sui = new SuiMessageBox(player, 0x00);
+								sui->setCallback(new ConfirmAttachmentCombineCallback(player->getZoneServer(), attachment, chosenAttachment, itemTemplate, combinedValue, attachmentName));
+								sui->setPromptTitle("Combining Attachment");
+								sui->setPromptText("You are about to combine two similar attachments for [" + String::valueOf(combinationCost) + "] credits. Are you sure?");
+								sui->setCancelButton(true, "@cancel");
+								sui->setOkButton(true, "@ui:ok");
 
-								combinedSEA = lootManager->createLootAttachment(itemTemplate, attachmentName, combinedValue); 
-								bool successfulCombination = false;
-								if (combinedSEA != nullptr){
-									Attachment* attachmentToMake = cast<Attachment*>(combinedSEA.get());
+								ManagedReference<PlayerObject*> ghost = player->getPlayerObject();
 
-									if (attachmentToMake != NULL){
-										Locker objLocker(attachmentToMake);
-										if (inventory->transferObject(attachmentToMake, -1, true, true)) { //Transfer tape to player inventory
-											inventory->broadcastObject(attachmentToMake, true);
-											successfulCombination = true;
-										} else {
-											attachmentToMake->destroyObjectFromDatabase(true);
-											error("Unable to place Skill Attachment in player's inventory!");
-											return false;
-										}
-									}
-								}
-
-								// Get rid of combined attachments
-								if (successfulCombination){
-									attachment->destroyObjectFromWorld(true);
-									attachment->destroyObjectFromDatabase(true);
-									chosenAttachment->destroyObjectFromWorld(true);
-									chosenAttachment->destroyObjectFromDatabase(true);
-									player->subtractBankCredits(combinationCost);
-									player->sendSystemMessage("++++++++++++++++++++");
-									player->sendSystemMessage("Successfully combined selected SEA with an equal or lesser SEA from your inventory!");
-									player->sendSystemMessage("The [Galactic Civil Authority] has removed " + String::valueOf(combinationCost) + " credits from your bank for this service.");
-									player->sendSystemMessage("++++++++++++++++++++");
+								if (ghost != nullptr) {
+									ghost->addSuiBox(sui);
+									player->sendMessage(sui->generateMessage());
 								}
 							} else {
 								player->sendSystemMessage("You must have " + String::valueOf(combinationCost) + " in your bank to combine the chosen Attachments!");
@@ -397,89 +376,43 @@ int TangibleObjectMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject
 
 			// Finish up and return
 			return 0;
-	 }	else if (selectedID == 109) { // Convert Attachments from one type to another
-		ManagedReference<SceneObject*> newSEA = NULL;
+	 }
+	 else if (selectedID == 109) { // Convert Attachments from one type to another
 		Attachment* attachment = cast<Attachment*>(sceneObject);
 		
 		if (attachment != NULL){
-			Locker currentAttachmentLocker(attachment);
+			// Get the value of our attachment
 			HashTable<String, int>* attachmentMods = attachment->getSkillMods();
-			LootGroupMap* lootGroupMap = LootGroupMap::instance();
-			Reference<const LootItemTemplate*> itemTemplate = NULL;
+			HashTableIterator<String, int> iterator = attachmentMods->iterator();
+			String statName = "";
+			int statValue = 0;
+			int attachmentValue = 0;
+			int flipCost = 0;
 
-			// If one type then set our new attachment to be generated to the other type.
-			if (attachment->isArmorAttachment()){
-				itemTemplate = lootGroupMap->getLootItemTemplate("attachment_clothing");
-			}
-			else if (attachment->isClothingAttachment()){
-				itemTemplate = lootGroupMap->getLootItemTemplate("attachment_armor");
-			}
-
-			// So long as our attachment has 1 mod then we continue to try and flip the attachment type
-			if (attachmentMods->size() > 0) {
-				HashTableIterator<String, int> iterator = attachmentMods->iterator();
-				String statName = "";
-				String attachmentName = "";
-				int statValue = 0;
-				int attachmentValue = 0;
-
-				// Find highest value mod on the attachment to use for creating an opposite type of attachment from
-				for (int x=0; x < attachmentMods->size(); x++){
-					iterator.getNextKeyAndValue(statName, statValue);
-					if (statValue > attachmentValue){
-						attachmentName = statName; 
-						attachmentValue = statValue;
-					}
+			// Find highest value mod on the attachment
+			for (int x=0; x < attachmentMods->size(); x++){
+				iterator.getNextKeyAndValue(statName, statValue);
+				if (statValue > attachmentValue){
+					attachmentValue = statValue;
 				}
+			}
 
-				// Get player's inventory
-				ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
+			// Calculate cost of attachment conversion
+			flipCost = attachmentValue * 7500; // 7500 credits per point to convert
 
-				// Make sure the attachment we've picked isn't a bad actor
-				if (attachment != nullptr) {
-					Locker locker(attachment);
-					ManagedReference<SceneObject*> flippedSEA = NULL;
-					ManagedReference<LootManager*> lootManager = player->getZoneServer()->getLootManager();
-					int flipCost = 0;
-					flipCost = attachmentValue * 7500; // 7500 credits per point to convert
-					
-					// Make sure the player can afford to combine!
-					if (player->getBankCredits() >= flipCost) {
+			//Send Confirmation to be sure we want to convert!
+			ManagedReference<SuiMessageBox*> sui = new SuiMessageBox(player, 0x00);
+			sui->setCallback(new ConfirmAttachmentConvertCallback(player->getZoneServer(), attachment));
+			sui->setPromptTitle("Converting Attachment");
+			sui->setPromptText("You are about to convert an attachment for [" + String::valueOf(flipCost) + "] credits. Are you sure?");
+			sui->setCancelButton(true, "@cancel");
+			sui->setOkButton(true, "@ui:ok");
 
-						flippedSEA = lootManager->createLootAttachment(itemTemplate, attachmentName, attachmentValue); 
-						bool successfulCombination = false;
+			ManagedReference<PlayerObject*> ghost = player->getPlayerObject();
 
-						if (flippedSEA != nullptr){
-							Attachment* attachmentToMake = cast<Attachment*>(flippedSEA.get());
-
-							if (attachmentToMake != NULL){
-								Locker objLocker(attachmentToMake);
-								if (inventory->transferObject(attachmentToMake, -1, true, true)) { //Transfer tape to player inventory
-									inventory->broadcastObject(attachmentToMake, true);
-									successfulCombination = true;
-								} else {
-									attachmentToMake->destroyObjectFromDatabase(true);
-									error("Unable to place Skill Attachment in player's inventory!");
-									return false;
-								}
-							}
-						}
-
-						// Get rid of combined attachments
-						if (successfulCombination){
-							attachment->destroyObjectFromWorld(true);
-							attachment->destroyObjectFromDatabase(true);
-							player->subtractBankCredits(flipCost);
-							player->sendSystemMessage("++++++++++++++++++++");
-							player->sendSystemMessage("Successfully converted the selected Attachment to the opposite type!");
-							player->sendSystemMessage("The [Galactic Civil Authority] has removed " + String::valueOf(flipCost) + " credits from your bank for this service.");
-							player->sendSystemMessage("++++++++++++++++++++");
-						}
-					} else {
-						player->sendSystemMessage("You must have " + String::valueOf(flipCost) + " in your bank to convert the chosen Attachment to another type!");
-						warning("Player: " + player->getDisplayedName() + " has tried and failed to convert an attachment due to a lack of credits!");
-					}
-				}
+			if (ghost != nullptr) {
+				ghost->addSuiBox(sui);
+				player->sendMessage(sui->generateMessage());
 			}
 		}
 

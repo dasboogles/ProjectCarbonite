@@ -35,14 +35,14 @@ geo_cavern_spider = Creature:new {
 			{
 				{group = "fire_breathing_spider", chance = 10000000},
 			},
-			lootChance = 50000,
+			lootChance = 500000,
 		},
 		{
 	        groups = 
 			{
 				{group = "fire_breathing_spider", chance = 10000000},
 			},
-			lootChance = 50000,
+			lootChance = 500000,
         },
 	},
 	weapons = {},

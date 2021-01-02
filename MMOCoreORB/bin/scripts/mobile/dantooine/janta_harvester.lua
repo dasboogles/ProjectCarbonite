@@ -4,14 +4,14 @@ janta_harvester = Creature:new {
 	randomNameTag = true,
 	socialGroup = "janta_tribe",
 	faction = "janta_tribe",
-	level = 40,
-	chanceHit = 0.44,
+	level = 55,
+	chanceHit = 0.74,
 	damageMin = 345,
-	damageMax = 400,
+	damageMax = 700,
 	baseXp = 3915,
 	baseHAM = 9300,
 	baseHAMmax = 11300,
-	armor = 0,
+	armor = 1,
 	resists = {0,0,-1,0,0,60,0,0,-1},
 	meatType = "",
 	meatAmount = 0,
@@ -33,11 +33,16 @@ janta_harvester = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 5500000},
-				{group = "janta_common", chance = 1500000},
-				{group = "loot_kit_parts", chance = 3000000}
-			}
-		}
+				{group = "janta_common", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
 	},
 	weapons = {"primitive_weapons"},
 	conversationTemplate = "",

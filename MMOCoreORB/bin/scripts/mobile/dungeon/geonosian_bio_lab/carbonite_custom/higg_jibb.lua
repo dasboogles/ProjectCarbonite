@@ -48,7 +48,7 @@ higg_jibb = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 4500000,
 		},
 		{
             groups = 
@@ -69,21 +69,21 @@ higg_jibb = Creature:new {
 			{
 				{group = "experimental_components", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 5500000,
 		},
 		{
 	        groups = 
 			{
 				{group = "experimental_components", chance = 10000000},
 			},
-			lootChance = 1500000,
+			lootChance = 4500000,
         },
 		{
 	        groups = 
 			{
 				{group = "experimental_components", chance = 10000000},
 			},
-			lootChance = 1000000,
+			lootChance = 3500000,
 		},
 	
 		-- Collectables Loot Section
@@ -105,70 +105,70 @@ higg_jibb = Creature:new {
         {
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
 		},
 		{
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
 		},
 		{
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
 		},
 		{
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
         },
         {
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
 		},
 		{
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
 		},
 		{
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
 		},
 		{
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
 		},
 		{
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
         },
         {
 	        groups = 
 			{
-				{group = "weapons_all", chance = 10000000},
+				{group = "high_end_weapons_all", chance = 10000000},
 			},
 			lootChance = 10000000,
         },
@@ -270,21 +270,21 @@ higg_jibb = Creature:new {
 			{
 				{group = "power_crystals", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 3500000,
 		},
 		{
 			groups = 
 			{
 				{group = "power_crystals", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 3500000,
 		},	
 		{
 			groups = 
 			{
 				{group = "power_crystals", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 3500000,
         },		
         ------------------------
 	},

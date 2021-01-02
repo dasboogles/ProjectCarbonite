@@ -37,19 +37,52 @@ rebel_surface_marshall = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 3200000},
-				{group = "holocron_dark", chance = 450000},
-				{group = "holocron_light", chance = 450000},
-				{group = "rifles", chance = 1180000},
-				{group = "pistols", chance = 1180000},
-				{group = "carbines", chance = 1180000},
-				{group = "melee_weapons", chance = 930000},
-				{group = "clothing_attachments", chance = 240000},
-				{group = "armor_attachments", chance = 240000},
-				{group = "rebel_officer_common", chance = 450000},
-				{group = "wearables_common", chance = 500000}
-			}
-		}
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 100000
+		},
+		{
+			groups = {
+				{group = "holocron_dark", chance = 10000000}
+			},
+			lootChance = 100000
+		},
+		{
+			groups = {
+				{group = "holocron_light", chance = 10000000}
+			},
+			lootChance = 100000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 100000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 100000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "themepark_specific_loot", chance = 10000000}
+			},
+			lootChance = 250000
+		},
 	},
 	weapons = {"rebel_weapons_heavy"},
 	conversationTemplate = "",

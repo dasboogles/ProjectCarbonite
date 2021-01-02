@@ -383,9 +383,10 @@ includeFile("groups/custom/carbonite_painting_collectables.lua")
 includeFile("groups/custom/geo_custom_schematics.lua")
 includeFile("groups/custom/experimental_components.lua")
 includeFile("groups/custom/experimental_geo_cubes.lua")
+includeFile("groups/custom/themepark_specific_loot.lua")
 
 -- Epic Loot Groups (look into SRC changes needed to make this work)
-includeFile("groups/weapon/epic_weapons_all.lua")
+includeFile("groups/weapon/high_end_weapons_all.lua")
 includeFile("groups/armor/epic_armor_all.lua")
 includeFile("groups/custom/world_boss.lua")
 

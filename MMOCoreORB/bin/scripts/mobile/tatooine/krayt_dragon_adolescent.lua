@@ -73,7 +73,7 @@ krayt_dragon_adolescent = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 3500000
 		},
@@ -85,7 +85,7 @@ krayt_dragon_adolescent = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 3500000
 		},
@@ -97,7 +97,7 @@ krayt_dragon_adolescent = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 3500000
 		},
@@ -109,7 +109,7 @@ krayt_dragon_adolescent = Creature:new {
 		},
 		{
 			groups = {
-				{group = "weapons_all", chance = 10000000}
+				{group = "high_end_weapons_all", chance = 10000000}
 			},
 			lootChance = 3500000
 		}

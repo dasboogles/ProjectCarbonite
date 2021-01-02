@@ -1300,8 +1300,8 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 		}
 
 		Locker plocker(psg);
-
-		psg->inflictDamage(psg, 0, damage * 0.2, true, true);
+		// damage taken to psg from 0.2 -> 0.05
+		psg->inflictDamage(psg, 0, (damage * 0.05), true, true);
 
 	}
 

@@ -7,7 +7,7 @@ enhanced_rancor = Creature:new {
 	level = 235,
     chanceHit = 18.5,
     -- Super Spikey Damage!
-	damageMin = 2152, 
+	damageMin = 3152, 
     damageMax = 7782,
     -- Super Spikey Damage!
 	baseXp = 79336,
@@ -36,13 +36,20 @@ enhanced_rancor = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 3500000,
 		},
 		{
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 1500000,
+			lootChance = 2500000,
+		},
+		{
+	        groups = 
+			{
+				{group = "rancor_common", chance = 10000000},
+			},
+			lootChance = 10000000,
 		},
 		{
 	        groups = 
@@ -56,14 +63,7 @@ enhanced_rancor = Creature:new {
 			{
 				{group = "rancor_common", chance = 10000000},
 			},
-			lootChance = 6500000,
-		},
-		{
-	        groups = 
-			{
-				{group = "rancor_common", chance = 10000000},
-			},
-			lootChance = 4500000,
+			lootChance = 5500000,
 		},
 		{
 	        groups = 
@@ -72,13 +72,6 @@ enhanced_rancor = Creature:new {
 			},
 			lootChance = 2500000,
 		},
-		{
-	        groups = 
-			{
-				{group = "rancor_common", chance = 10000000},
-			},
-			lootChance = 1000000,
-        },
         {
 	        groups = 
 			{
@@ -90,19 +83,13 @@ enhanced_rancor = Creature:new {
 	        groups = {
 				{group = "armor_attachments", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 3500000,
 		},
 		{
 	        groups = {
 				{group = "armor_attachments", chance = 10000000},
 			},
-			lootChance = 1500000,
-		},
-		{
-	        groups = {
-				{group = "armor_attachments", chance = 10000000},
-			},
-			lootChance = 1000000,
+			lootChance = 3500000,
 		},
 		{
 			groups = {

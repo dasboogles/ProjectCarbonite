@@ -37,24 +37,6 @@ nightsister_rancor_tamer = Creature:new {
 		},
 		{
 			groups = {
-				{group = "rifles", chance = 10000000}
-			},
-			lootChance = 3000000
-		},
-		{
-			groups = {
-				{group = "pistols", chance = 10000000}
-			},
-			lootChance = 3000000
-		},
-		{
-			groups = {
-				{group = "carbines", chance = 10000000}
-			},
-			lootChance = 3000000
-		},
-		{
-			groups = {
 				{group = "power_crystals", chance = 10000000}
 			},
 			lootChance = 1750000
@@ -98,12 +80,6 @@ nightsister_rancor_tamer = Creature:new {
 		{
 			groups = {
 				{group = "wearables_common", chance = 10000000}
-			},
-			lootChance = 5000000
-		},
-		{
-			groups = {
-				{group = "loot_kit_parts", chance = 10000000}
 			},
 			lootChance = 5000000
 		},

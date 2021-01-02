@@ -56,4 +56,4 @@ includeFile("outfits/serverobjects.lua")
 includeFile("../custom_scripts/mobile/serverobjects.lua")
 
 -- TestServer NPCs
--- includeFile("TEST_NPCS/serverobjects.lua")
+includeFile("TEST_NPCS/serverobjects.lua")

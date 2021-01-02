@@ -4,7 +4,7 @@ dark_trooper = Creature:new {
 	randomNameTag = false,
 	socialGroup = "imperial",
 	faction = "imperial",
-	level = 50,
+	level = 80,
 	chanceHit = 2.5,
 	damageMin = 505,
 	damageMax = 610,
@@ -32,18 +32,52 @@ dark_trooper = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "color_crystals", chance = 300000},
-				{group = "junk", chance = 6300000},
-				{group = "rifles", chance = 600000},
-				{group = "holocron_dark", chance = 150000},
-				{group = "holocron_light", chance = 150000},
-				{group = "carbines", chance = 600000},
-				{group = "pistols", chance = 600000},
-				{group = "clothing_attachments", chance = 150000},
-				{group = "armor_attachments", chance = 150000},
-				{group = "grenades_looted", chance = 1000000}
-			}
-		}
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 500000
+		},
+		{
+			groups = {
+				{group = "holocron_dark", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "holocron_light", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "armor_attachments", chance = 10000000}
+			},
+			lootChance = 250000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "themepark_specific_loot", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
 	},
 	weapons = {"dark_trooper_weapons"},
 	conversationTemplate = "",

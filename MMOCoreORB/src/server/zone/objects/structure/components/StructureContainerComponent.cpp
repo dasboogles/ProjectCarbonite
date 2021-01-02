@@ -14,8 +14,13 @@ bool StructureContainerComponent::checkContainerPermission(SceneObject* sceneObj
 
 	if (building != nullptr) {
 		if (permission == ContainerPermissions::MOVEVENDOR) {
-			if (building->isPublicStructure() && (building->isOnPermissionList("VENDOR", creature) || building->isOnAdminList(creature)))
+			//if (building->isPublicStructure() && (building->isOnPermissionList("VENDOR", creature) || building->isOnAdminList(creature)))
+			// *******************************************
+			// Taken from Flurry code-base, Thanks Toxic!*
+			// *******************************************
+			if (building->isOnPermissionList("VENDOR", creature) || building->isOnAdminList(creature)) { // <=====
 				return true;
+			}
 			else {
 				if (building->isPrivateStructure())
 					creature->sendSystemMessage("@player_structure:vendor_public_only"); //

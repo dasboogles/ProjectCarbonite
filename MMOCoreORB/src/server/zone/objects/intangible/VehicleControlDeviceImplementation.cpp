@@ -17,6 +17,7 @@
 #include "server/zone/objects/region/CityRegion.h"
 #include "server/zone/objects/player/sessions/TradeSession.h"
 #include "server/zone/managers/player/PlayerManager.h"
+#include "server/zone/objects/player/PlayerObject.h"
 
 void VehicleControlDeviceImplementation::generateObject(CreatureObject* player) {
 	if (player->isDead() || player->isIncapacitated())
@@ -179,14 +180,24 @@ void VehicleControlDeviceImplementation::cancelSpawnObject(CreatureObject* playe
 void VehicleControlDeviceImplementation::storeObject(CreatureObject* player, bool force) {
 	ManagedReference<TangibleObject*> controlledObject = this->controlledObject.get();
 
-	if (controlledObject == nullptr)
+	if (controlledObject == nullptr) {
 		return;
+	}
 
-	/*if (!controlledObject->isInQuadTree())
-		return;*/
-
-	if (!force && (player->isInCombat() || player->isDead()))
+	// Cannot store while dead
+	if (!force && player->isDead()) {
+		player->sendSystemMessage("You cannot store your vehicle while dead!");
 		return;
+	}
+
+	// Get our playerObject so we can check TEF
+	PlayerObject* ghost = player->getPlayerObject().get();
+
+	// Cannot store in PVP
+	if (!force && (ghost->hasTef() && player->isInCombat())) {
+		player->sendSystemMessage("You cannot store your vehicle in PVP!");
+		return;
+	}
 
 	// Added a Call/Store cooldown
 	if( !player->getCooldownTimerMap()->isPast("vehicleCallOrStoreCooldown") ){

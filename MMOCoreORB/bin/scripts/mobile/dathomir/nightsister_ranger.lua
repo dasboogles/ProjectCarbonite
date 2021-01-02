@@ -37,24 +37,6 @@ nightsister_ranger = Creature:new {
 		},
 		{
 			groups = {
-				{group = "rifles", chance = 10000000}
-			},
-			lootChance = 3000000
-		},
-		{
-			groups = {
-				{group = "pistols", chance = 10000000}
-			},
-			lootChance = 3000000
-		},
-		{
-			groups = {
-				{group = "carbines", chance = 10000000}
-			},
-			lootChance = 3000000
-		},
-		{
-			groups = {
 				{group = "power_crystals", chance = 10000000}
 			},
 			lootChance = 1750000
