@@ -4,9 +4,9 @@ kunga_clan_leader = Creature:new {
 	randomNameTag = true,
 	socialGroup = "kunga_tribe",
 	faction = "kunga_tribe",
-	level = 125,
-	chanceHit = 0.95,
-	damageMin = 720,
+	level = 95,
+	chanceHit = 1.15,
+	damageMin = 820,
 	damageMax = 1550,
 	baseXp = 7207,
 	baseHAM = 12000,
@@ -33,19 +33,19 @@ kunga_clan_leader = Creature:new {
 			groups = {
 				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 500000
+			lootChance = 400000
 		},
 		{
 			groups = {
 				{group = "armor_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 	},
 	weapons = {"primitive_weapons"},

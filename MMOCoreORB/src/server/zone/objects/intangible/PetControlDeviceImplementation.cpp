@@ -28,7 +28,12 @@
 #include "server/zone/managers/frs/FrsManager.h"
 
 void PetControlDeviceImplementation::callObject(CreatureObject* player) {
-	if (player->isInCombat() || player->isDead() || player->isIncapacitated() || player->getPendingTask("tame_pet") != nullptr) {
+	// if (player->isInCombat() || player->isDead() || player->isIncapacitated() || player->getPendingTask("tame_pet") != nullptr) {
+	// 	player->sendSystemMessage("@pet/pet_menu:cant_call"); // You cannot call this pet right now.
+	// 	return;
+	// }
+
+	if (player->isDead() || player->isIncapacitated() || player->getPendingTask("tame_pet") != nullptr) {
 		player->sendSystemMessage("@pet/pet_menu:cant_call"); // You cannot call this pet right now.
 		return;
 	}
@@ -45,8 +50,15 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 		if (strongRef != nullptr)
 			building = strongRef.castTo<BuildingObject*>();
 
-		if (building == nullptr || building->isPrivateStructure()) {
-			player->sendSystemMessage("@pet/pet_menu:private_house"); // You cannot call pets in a private building.
+		// Allow pulling a pet anywhere
+		// if (building == nullptr || building->isPrivateStructure()) {
+		// 	player->sendSystemMessage("@pet/pet_menu:private_house"); // You cannot call pets in a private building.
+		// 	return;
+		// }
+
+		// Allow pulling a pet anywhere
+		if (building == nullptr) {
+			player->sendSystemMessage("Haven't a clue why you can't call this pet right now. Are you inside something?"); // You cannot call pets in a private building.
 			return;
 		}
 	}

@@ -316,10 +316,16 @@ void WeaponObjectImplementation::fillAttributeList(AttributeListMessage* alm, Cr
 	// Grab attackspeed so we can calculate Average Weapon DPS
 	float attackSpeed = Math::getPrecision(getAttackSpeed(), 1);
 	float avgDPS = ((minDmg + maxDmg) / 2) / attackSpeed;
+	float cappedAvgDPS = ((minDmg + maxDmg) / 2) / 1;
+
+	// Respect the 1second attack speed cap on all weapons
+	if (attackSpeed < 1) {
+		avgDPS = cappedAvgDPS;
+	}
 
 	alm->insertAttribute("damage.wpn_average_dps", Math::getPrecision(avgDPS, 1));
 
-	float cappedAvgDPS = ((minDmg + maxDmg) / 2) / 1;
+	
 
 	alm->insertAttribute("damage.wpn_capped_average_dps", Math::getPrecision(cappedAvgDPS, 1));
 

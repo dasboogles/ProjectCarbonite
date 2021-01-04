@@ -64,8 +64,12 @@ public:
 		int cl = creature->getLevel();
 		switch(currentPhase) {
 		case BEGIN:
+			// No need to continue on if the creature is too high a CL anyways to sample from!
+			if (cl > 170) { 
+				player->sendSystemMessage("This creature is too powerful for you to sample from!");
+			}
 			// We should be good to go now and try the sample
-			if (player->getHAM(CreatureAttribute::MIND) < mindCost) {
+			else if (player->getHAM(CreatureAttribute::MIND) < mindCost) {
 				player->sendSystemMessage("@bio_engineer:harvest_dna_attrib_too_low");
 			} else {
 				prepareCreatureForSampling();
@@ -80,7 +84,7 @@ public:
 			}
 			break;
 		case SAMPLING:
-			if (waitCount == 9) {
+			if (waitCount == 3) { // From 9 -> 3, faster sampling!!!
 				currentPhase = END;
 			}else {
 				waitCount++;
@@ -109,14 +113,20 @@ public:
 			// If 5, then inc count on creature. When it maxes for your skill it dies.
 			// Higher skill, lower chance of aggro
 			int sampleRoll = System::random(100);
-			sampleRoll += System::random(player->getSkillMod("luck") + player->getSkillMod("force_luck"));
+			// sampleRoll += System::random(player->getSkillMod("luck") + player->getSkillMod("force_luck"));
+
 			// need to revist master against CL70 i.e. ((100-70)/70) + (100-70) = 0 + (30) = 30/2 = ( roll mod is 15)
 			// need to revist master against CL2 i.e. ((100-2)/2) + (100-2) = 49 + (98) = 147/2 = ( roll mod is 73)
 			// so with no luck you need 95 or better roll for amazing
 			float rollMod = (((skillMod-cl)/cl))  + (skillMod-cl);
+			int luckMod = 0; 
+			luckMod += System::random(player->getSkillMod("luck") + player->getSkillMod("force_luck"));
+			// Moved this here because before we were actually hurting our BE if they had any form of luck on them!
+			rollMod += luckMod;
 			rollMod /= 2;
 			// We have the players roll. NOW to determine if success of failure;
-			if (sampleRoll > 75) { // adjust great success ot 75% and above
+			// Added more benefit from luck
+			if (sampleRoll > (75 - luckMod)) { // adjust great success ot 75% and above
 				int maxSamples = (int) ceil((float) skillMod / 25.f);
 				if (creature->getDnaSampleCount() > maxSamples ){
 					creature->setDnaState(CreatureManager::DNASAMPLED);
@@ -142,7 +152,8 @@ public:
 					// did we aggro?
 					int aggroChance = System::random(100);
 					int aggroMod = (creature->getDnaSampleCount() * 5);
-					if ( (aggroChance+aggroMod) > (sampleRoll+rollMod) || aggroChance <= 5)  // aggro
+					// More luck!
+					if ( (aggroChance+aggroMod) > (sampleRoll+rollMod+luckMod) || aggroChance <= 5)  // aggro
 						result = 3;
 					else { // it didnt care and we didnt kill it
 						result = 5;
@@ -171,7 +182,7 @@ public:
 				default:
 					break;
 			}
-			if (success && cl <= 75) {
+			if (success) { //&& cl <= 170) { // From 75 -> 170, keep an eye on this!
 				player->sendSystemMessage("@bio_engineer:harvest_dna_succeed");
 				creature->incDnaSampleCount();
 				award(cl,rollMod,skillMod);

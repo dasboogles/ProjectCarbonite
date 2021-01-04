@@ -269,7 +269,7 @@ bool CreatureImplementation::canHarvestMe(CreatureObject* player) {
 bool CreatureImplementation::canDroidHarvestMe(CreatureObject* player,CreatureObject* droid) {
 
 	// droid should be able to harvest if in range, with current AI
-	if(!droid->isInRange(_this.getReferenceUnsafeStaticCast(), (10.0f + droid->getTemplateRadius() + getTemplateRadius())) || droid->isInCombat() || !player->hasSkill("outdoors_scout_novice")
+	if(!droid->isInRange(_this.getReferenceUnsafeStaticCast(), (24.0f + droid->getTemplateRadius() + getTemplateRadius())) || droid->isInCombat() || !player->hasSkill("outdoors_scout_novice")
 			|| droid->isDead() || droid->isIncapacitated() || isPet()) {
 		return false;
 	}
@@ -376,7 +376,7 @@ bool CreatureImplementation::hasSkillToSampleMe(CreatureObject* player) {
 	int skillMod = player->getSkillMod("dna_harvesting");
 	int cl = _this.getReferenceUnsafeStaticCast()->getLevel();
 	// Skill Mod Check, you need atleast x skill points to be able to sample x level unless creature > 13k ham or CL 75 (we only generated values to 75)
-	if (skillMod < 1 || cl > skillMod + 15)
+	if (skillMod < 1 || cl > skillMod + 45) // max of 170
 		return false;
 
 	if (dnaState == CreatureManager::DNASAMPLED)

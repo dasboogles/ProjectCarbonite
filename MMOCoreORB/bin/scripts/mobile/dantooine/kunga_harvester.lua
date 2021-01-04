@@ -4,9 +4,9 @@ kunga_harvester = Creature:new {
 	randomNameTag = true,
 	socialGroup = "kunga_tribe",
 	faction = "kunga_tribe",
-	level = 58,
-	chanceHit = 0.82,
-	damageMin = 380,
+	level = 48,
+	chanceHit = 0.90,
+	damageMin = 480,
 	damageMax = 891,
 	baseXp = 960,
 	baseHAM = 7924,
@@ -36,19 +36,19 @@ kunga_harvester = Creature:new {
 			groups = {
 				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 500000
+			lootChance = 400000
 		},
 		{
 			groups = {
 				{group = "armor_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 	},
 	weapons = {"primitive_weapons"},

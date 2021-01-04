@@ -4,9 +4,9 @@ kunga_clan_primalist = Creature:new {
 	randomNameTag = true,
 	socialGroup = "kunga_tribe",
 	faction = "kunga_tribe",
-	level = 70,
-	chanceHit = 0.87,
-	damageMin = 493,
+	level = 60,
+	chanceHit = 0.95,
+	damageMin = 593,
 	damageMax = 997,
 	baseXp = 960,
 	baseHAM = 9224,
@@ -36,19 +36,19 @@ kunga_clan_primalist = Creature:new {
 			groups = {
 				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 500000
+			lootChance = 400000
 		},
 		{
 			groups = {
 				{group = "armor_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 	},
 	weapons = {"primitive_weapons"},

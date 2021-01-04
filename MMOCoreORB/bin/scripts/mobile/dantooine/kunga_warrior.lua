@@ -4,9 +4,9 @@ kunga_warrior = Creature:new {
 	randomNameTag = true,
 	socialGroup = "kunga_tribe",
 	faction = "kunga_tribe",
-	level = 95,
-	chanceHit = 0.90,
-	damageMin = 583,
+	level = 70,
+	chanceHit = 1.05,
+	damageMin = 683,
 	damageMax = 1377,
 	baseXp = 960,
 	baseHAM = 9724,
@@ -36,19 +36,19 @@ kunga_warrior = Creature:new {
 			groups = {
 				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 500000
+			lootChance = 400000
 		},
 		{
 			groups = {
 				{group = "armor_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 	},
 	weapons = {"primitive_weapons"},

@@ -62,7 +62,7 @@ function KraytGraveyardScreenPlay:spawnMobiles()
 	spawnMobile("tatooine", "krayt_dragon_adolescent", 900, 7426.1, 5.61664, 4682.08, 170, 0)
 
 	-- Queen
-	spawnMobile("tatooine", "krayt_dragon_queen", 1800, 7530.68, 7.32994, 4788.27, 191, 0)
+	spawnMobile("tatooine", "krayt_dragon_queen", 3600, 7530.68, 7.32994, 4788.27, 191, 0)
 
 	-- Queen Guards
 	spawnMobile("tatooine", "krayt_dragon_grand", 900, 7599.91, 25.459, 4825.1, 179, 0)

@@ -35,31 +35,37 @@ nightsister_elder = Creature:new {
 			groups = {
 				{group = "nightsister_common", chance = 10000000}
 			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "nightsister_common", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "nightsister_common", chance = 10000000}
+			},
 			lootChance = 3500000
 		},
 		{
 			groups = {
 				{group = "high_end_weapons_all", chance = 10000000}
 			},
-			lootChance = 1500000
+			lootChance = 7500000
 		},
 		{
 			groups = {
 				{group = "armor_all", chance = 10000000}
 			},
-			lootChance = 1500000
+			lootChance = 7500000
 		},
 		{
 			groups = {
-				{group = "high_end_weapons_all", chance = 10000000}
+				{group = "power_crystals", chance = 10000000}
 			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
-				{group = "armor_all", chance = 10000000}
-			},
-			lootChance = 1500000
+			lootChance = 4500000
 		},
 		{
 			groups = {
@@ -69,69 +75,45 @@ nightsister_elder = Creature:new {
 		},
 		{
 			groups = {
-				{group = "power_crystals", chance = 10000000}
+				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 2500000
+			lootChance = 5500000
 		},
 		{
 			groups = {
 				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 4000000
+			lootChance = 4500000
 		},
 		{
 			groups = {
 				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 2500000
-		},
-		{
-			groups = {
-				{group = "color_crystals", chance = 10000000}
-			},
-			lootChance = 1500000
+			lootChance = 3500000
 		},
 		{
 			groups = {
 				{group = "armor_attachments", chance = 10000000}
 			},
-			lootChance = 3500000
+			lootChance = 4500000
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 10000000}
 			},
-			lootChance = 3500000
+			lootChance = 4500000
 		},
 		{
 			groups = {
 				{group = "containers", chance = 10000000}
 			},
-			lootChance = 2000000
+			lootChance = 4500000
 		},
 		{
 			groups = {
 				{group = "wearables_scarce", chance = 10000000}
 			},
-			lootChance = 3500000
-		},
-		{
-			groups = {
-				{group = "loot_kit_parts", chance = 10000000}
-			},
-			lootChance = 3500000
-		},
-		{
-			groups = {
-				{group = "wearables_scarce", chance = 10000000}
-			},
-			lootChance = 3500000
-		},
-		{
-			groups = {
-				{group = "loot_kit_parts", chance = 10000000}
-			},
-			lootChance = 3500000
+			lootChance = 4500000
 		},
 	},
 	weapons = {"mixed_force_weapons"},

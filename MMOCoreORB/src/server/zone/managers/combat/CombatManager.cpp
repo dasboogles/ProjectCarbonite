@@ -824,6 +824,11 @@ int CombatManager::getAttackerAccuracyBonus(CreatureObject* attacker, WeaponObje
 	if (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK)
 		bonus += attacker->getSkillMod("private_ranged_accuracy_bonus");
 
+	// Enabling HeavyWeapon tapes for HeavyWeapons (makes sense, right?)
+	if (weapon->getWeaponType() == "heavyweapon") {
+		bonus += attacker->getSkillMod("heavyweapon_accuracy");
+	}
+
 	return bonus;
 }
 
@@ -1056,6 +1061,11 @@ int CombatManager::getSpeedModifier(CreatureObject* attacker, WeaponObject* weap
 	} else if (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK) {
 		speedMods += attacker->getSkillMod("private_ranged_speed_bonus");
 		speedMods += attacker->getSkillMod("ranged_speed");
+	}
+
+	// Enabling HeavyWeapon tapes for HeavyWeapons (makes sense, right?)
+	if (weapon->getWeaponType() == "heavyweapon") {
+		speedMods += attacker->getSkillMod("heavyweapon_speed");
 	}
 
 	return speedMods;
@@ -1768,15 +1778,21 @@ int CombatManager::getHitChance(TangibleObject* attacker, CreatureObject* target
 	float totalAccuracy = (attackerAccuracy + weaponAccuracy + accuracyBonus + postureAccuracy + bonusAccuracy);
 	float totalAccuracyWithoutBonus = (attackerAccuracy + weaponAccuracy + accuracyBonus + postureAccuracy);
 
-	// targetCreature->sendSystemMessage("Attacker's Accuracy is: " + String::valueOf(totalAccuracy));
-	// targetCreature->sendSystemMessage("Attacker's Accuracy without Bonus is: " + String::valueOf(totalAccuracyWithoutBonus));
-	// targetCreature->sendSystemMessage("Attacker's BonusAccuracy is: " + String::valueOf(bonusAccuracy));
+	// creoAttacker->sendSystemMessage("Attacker's TotalAccuracy is: " + String::valueOf(totalAccuracy));
+	// creoAttacker->sendSystemMessage("Attacker's TotalAccuracyWithoutBonus is: " + String::valueOf(totalAccuracyWithoutBonus));
+	// creoAttacker->sendSystemMessage("Attacker's BonusAccuracy is: " + String::valueOf(bonusAccuracy));
+	// creoAttacker->sendSystemMessage("Attacker's AccuracyBonus is: " + String::valueOf(accuracyBonus));
+	// creoAttacker->sendSystemMessage("Attacker's AttackerAccuracy is: " + String::valueOf(attackerAccuracy));
+	// creoAttacker->sendSystemMessage("Attacker's WeaponAccuracy is: " + String::valueOf(weaponAccuracy));
+	
 
 
 	// TODO (dannuic): add the trapmods in here somewhere (defense down trapmods)
 	float accTotal = hitChanceEquation(attackerAccuracy + weaponAccuracy + accuracyBonus + postureAccuracy + bonusAccuracy, attackerRoll, targetDefense + postureDefense, defenderRoll);
 
 	debug() << "Final hit chance is " << accTotal;
+
+	// creoAttacker->sendSystemMessage("Attacker's accTotal is: " + String::valueOf(accTotal));
 
 	if (System::random(100) > accTotal){ // miss, just return MISS
 		return MISS;

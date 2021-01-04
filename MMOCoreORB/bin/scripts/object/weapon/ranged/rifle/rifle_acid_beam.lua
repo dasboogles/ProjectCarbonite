@@ -125,17 +125,16 @@ object_weapon_ranged_rifle_rifle_acid_beam = object_weapon_ranged_rifle_shared_r
 
 	-- See http://www.ocdsoft.com/files/certifications.xls
 	certificationsRequired = { "cert_rifle_acid_beam" },
-	-- See http://www.ocdsoft.com/files/accuracy.xls
-	creatureAccuracyModifiers = { "heavy_rifle_acid_accuracy" },
+
+	-- Heavy Weapon tapes now work with this weapon
+	creatureAccuracyModifiers = { "heavyweapon_accuracy" },
+	speedModifiers = { "heavyweapon_speed" },
 
 	-- See http://www.ocdsoft.com/files/defense.xls
 	defenderDefenseModifiers = { "ranged_defense" },
 
 	-- Leave as "dodge" for now, may have additions later
 	defenderSecondaryDefenseModifiers = { "block" },
-
-	-- See http://www.ocdsoft.com/files/speed.xls
-	speedModifiers = { "heavy_rifle_acid_speed" },
 
 	-- Leave blank for now
 	damageModifiers = {  },

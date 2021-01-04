@@ -73,12 +73,6 @@ nightsister_sentinel = Creature:new {
 		},
 		{
 			groups = {
-				{group = "wearables_common", chance = 10000000}
-			},
-			lootChance = 5000000
-		},
-		{
-			groups = {
 				{group = "loot_kit_parts", chance = 10000000}
 			},
 			lootChance = 5000000

@@ -39,17 +39,11 @@ nightsister_outcast = Creature:new {
 			groups = {
 				{group = "nightsister_common", chance = 10000000}
 			},
-			lootChance = 1500000
+			lootChance = 2500000
 		},
 		{
 			groups = {
-				{group = "high_end_weapons_all", chance = 10000000}
-			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
-				{group = "armor_all", chance = 10000000}
+				{group = "nightsister_common", chance = 10000000}
 			},
 			lootChance = 1500000
 		},
@@ -94,12 +88,6 @@ nightsister_outcast = Creature:new {
 				{group = "containers", chance = 10000000}
 			},
 			lootChance = 500000
-		},
-		{
-			groups = {
-				{group = "wearables_common", chance = 10000000}
-			},
-			lootChance = 2500000
 		},
 		{
 			groups = {

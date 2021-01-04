@@ -49,18 +49,6 @@ nightsister_protector = Creature:new {
 		},
 		{
 			groups = {
-				{group = "high_end_weapons_all", chance = 10000000}
-			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
-				{group = "armor_all", chance = 10000000}
-			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
 				{group = "nightsister_common", chance = 10000000}
 			},
 			lootChance = 2500000
@@ -94,18 +82,6 @@ nightsister_protector = Creature:new {
 				{group = "containers", chance = 10000000}
 			},
 			lootChance = 1000000
-		},
-		{
-			groups = {
-				{group = "wearables_scarce", chance = 10000000}
-			},
-			lootChance = 4500000
-		},
-		{
-			groups = {
-				{group = "loot_kit_parts", chance = 10000000}
-			},
-			lootChance = 4500000
 		},
 		{
 			groups = {

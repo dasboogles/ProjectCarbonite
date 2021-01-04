@@ -4,9 +4,9 @@ kunga_loreweaver = Creature:new {
 	randomNameTag = true,
 	socialGroup = "kunga_tribe",
 	faction = "kunga_tribe",
-	level = 85,
-	chanceHit = 0.87,
-	damageMin = 593,
+	level = 65,
+	chanceHit = 1.0,
+	damageMin = 693,
 	damageMax = 1077,
 	baseXp = 960,
 	baseHAM = 9624,
@@ -36,19 +36,19 @@ kunga_loreweaver = Creature:new {
 			groups = {
 				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 500000
+			lootChance = 400000
 		},
 		{
 			groups = {
 				{group = "armor_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 	},
 	weapons = {"primitive_weapons"},

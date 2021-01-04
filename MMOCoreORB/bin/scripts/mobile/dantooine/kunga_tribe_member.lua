@@ -5,8 +5,8 @@ kunga_tribe_member = Creature:new {
 	socialGroup = "kunga_tribe",
 	faction = "kunga_tribe",
 	level = 35,
-	chanceHit = 0.70,
-	damageMin = 180,
+	chanceHit = 0.85,
+	damageMin = 380,
 	damageMax = 721,
 	baseXp = 960,
 	baseHAM = 5500,
@@ -36,19 +36,19 @@ kunga_tribe_member = Creature:new {
 			groups = {
 				{group = "color_crystals", chance = 10000000}
 			},
-			lootChance = 500000
+			lootChance = 400000
 		},
 		{
 			groups = {
 				{group = "armor_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 10000000}
 			},
-			lootChance = 800000
+			lootChance = 600000
 		},
 	},
 	weapons = {"primitive_weapons"},

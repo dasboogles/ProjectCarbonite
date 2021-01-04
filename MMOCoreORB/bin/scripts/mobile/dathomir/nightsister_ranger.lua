@@ -77,18 +77,6 @@ nightsister_ranger = Creature:new {
 			},
 			lootChance = 5000000
 		},
-		{
-			groups = {
-				{group = "wearables_common", chance = 10000000}
-			},
-			lootChance = 5000000
-		},
-		{
-			groups = {
-				{group = "loot_kit_parts", chance = 10000000}
-			},
-			lootChance = 5000000
-		},
 	},
 	weapons = {"mixed_force_weapons"},
 	conversationTemplate = "",
