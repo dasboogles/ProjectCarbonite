@@ -34,19 +34,7 @@ hej_marden = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 350000,
-		},
-		{
-			groups = {
-				{group = "rare_boss_loot_tier1", chance = 10000000},
-			},
-			lootChance = 350000,
-		},
-		{
-			groups = {
-				{group = "rare_boss_loot_tier1", chance = 10000000},
-			},
-			lootChance = 350000,
+			lootChance = 500000,
 		},
 		{
             groups = 

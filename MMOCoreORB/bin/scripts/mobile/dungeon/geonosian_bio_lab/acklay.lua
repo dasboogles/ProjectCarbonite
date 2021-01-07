@@ -36,7 +36,7 @@ acklay = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 4500000,
+			lootChance = 1500000,
 		},
 		{
 	        groups = 

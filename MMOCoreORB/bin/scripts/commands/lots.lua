@@ -1,5 +1,4 @@
---Copyright (C) 2010 <SWGEmu>
-
+--Copyright (C) 2007 <SWGEmu>
 
 --This File is part of Core3.
 
@@ -39,40 +38,12 @@
 --it is their choice whether to do so. The GNU Lesser General Public License
 --gives permission to release a modified version without this exception;
 --this exception also makes it possible to release a modified version
+--which carries forward this exception.
+--true = 1, false = 0
 
-
-object_tangible_powerup_weapon_melee_generic = object_tangible_powerup_weapon_shared_melee_generic:new {
-
-	templateType = POWERUP,
-
-	pupType = "Melee",
-
-	baseName = "Melee Powerup",
-
-	primary = {
-		{"idealRange", "Ideal Range", "cat_pup.pup_wpn_range_mid"},
-		-- {"healthAttackCost", "Balancing", "cat_pup.pup_wpn_attack_cost_health"},
-  		-- {"mindAttackCost", "Compensating", "cat_pup.pup_wpn_attack_cost_mind"},
-		{"pointBlankAccuracy", "Precision", "cat_pup.pup_wpn_range_attack_mod_zero"}
-	},
-
-	secondary = {
-		{"idealAccuracy", "Accuracy", "cat_pup.pup_wpn_range_attack_mod_mid"},
-		{"attackSpeed", "Control Enhancement", "cat_pup.pup_wpn_attack_speed"},
-		{"woundsRatio", "Wounding", "cat_pup.pup_wpn_wound_chance"},
-		{"minDamage", "Precision", "cat_pup.pup_wpn_damage_min"},
-		{"maxDamage", "Refining", "cat_pup.pup_wpn_damage_max"}
-	},
-
-	numberExperimentalProperties = {1, 1, 1, 1},
-	experimentalProperties = {"XX", "XX", "XX", "OQ"},
-	experimentalWeights = {1, 1, 1, 1},
-	experimentalGroupTitles = {"null", "null", "null", "exp_effectiveness"},
-	experimentalSubGroupTitles = {"null", "null", "hitpoints", "effect"},
-	experimentalMin = {0, 0, 1000, 1},
-	experimentalMax = {0, 0, 1000, 100},
-	experimentalPrecision = {0, 0, 0, 0},
-	experimentalCombineType = {0, 0, 4, 1},
+LotsCommand = {
+    name = "lots",
 }
 
-ObjectTemplates:addTemplate(object_tangible_powerup_weapon_melee_generic, "object/tangible/powerup/weapon/melee_generic.iff")
+AddCommand(LotsCommand)
+

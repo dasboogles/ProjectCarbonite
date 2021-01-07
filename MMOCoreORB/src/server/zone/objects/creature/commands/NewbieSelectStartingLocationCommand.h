@@ -8,6 +8,8 @@
 #include "server/zone/objects/scene/SceneObject.h"
 #include "server/zone/managers/player/StartingLocation.h"
 #include "server/zone/objects/player/PlayerObject.h"
+#include "server/zone/ZoneServer.h"
+#include "server/chat/ChatManager.h"
 
 class NewbieSelectStartingLocationCommand : public QueueCommand {
 public:
@@ -70,8 +72,19 @@ public:
 		}
 
 
-		if (tutorial != nullptr)
+		if (tutorial != nullptr) {
 			StructureManager::instance()->destroyStructure(tutorial->asBuildingObject(), false);
+		}
+
+		ManagedReference<ZoneServer*> zoneServer;
+		if (player != nullptr) {
+			// Broadcast that a new player has started!
+			String notifyNewPlayer = "\\#ff982b " + player->getFirstName() + " " + player->getLastName() + "\\#ffffff, has entered the galaxy for the first time!";
+			zoneServer = server->getZoneServer();
+			zoneServer->getChatManager()->broadcastGalaxy(nullptr, notifyNewPlayer);
+		} else {
+			zoneServer->getChatManager()->broadcastGalaxy(nullptr, "A new player joined the world!");
+		}
 
 		return SUCCESS;
 	}

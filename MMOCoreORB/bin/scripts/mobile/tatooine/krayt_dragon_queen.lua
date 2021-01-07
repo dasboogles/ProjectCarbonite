@@ -34,7 +34,7 @@ krayt_dragon_queen = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000}
 			},
-			lootChance = 10000000
+			lootChance = 2500000
 		},
 		{
 			groups = {

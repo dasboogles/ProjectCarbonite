@@ -116,7 +116,9 @@ void PowerupObjectImplementation::updateCraftingValues(CraftingValues* values, b
 
 			PowerupStat stat = pup->getRandomSecondaryAttribute();
 
-			if(System::random(3) == 1) {
+			// Changed from a 1/4 to a 3/4 chance of getting a stat on a pup experimentation!
+			int rolledValue = System::random(3);
+			if(rolledValue != 1) {
 				for(int i = 0; i < modifiers.size(); ++i) {
 					if(stat == modifiers.get(i))  {
 						return;

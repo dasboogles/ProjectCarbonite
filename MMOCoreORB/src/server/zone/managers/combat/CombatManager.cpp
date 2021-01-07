@@ -1310,8 +1310,16 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 		}
 
 		Locker plocker(psg);
-		// damage taken to psg from 0.2 -> 0.05
-		psg->inflictDamage(psg, 0, (damage * 0.05), true, true);
+		
+		// Reduce PSG durability loss a LOT if in PVE
+		if (attacker->isAiAgent() && defender->isPlayerObject()) {
+			// If we're fighting in PVE even further reduce durability loss to 1/20th what BAS has for decay
+			psg->inflictDamage(psg, 0, (damage * 0.01), true, true);
+		} else {
+			// damage taken to psg from 0.2 -> 0.05
+			psg->inflictDamage(psg, 0, (damage * 0.04), true, true);
+		}
+		
 
 	}
 

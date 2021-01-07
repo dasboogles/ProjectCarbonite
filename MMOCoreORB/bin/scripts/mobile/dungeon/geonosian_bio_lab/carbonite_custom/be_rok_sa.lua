@@ -39,7 +39,7 @@ be_rok_sa = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 250000,
+			lootChance = 100000,
 		},
         {
             groups = 

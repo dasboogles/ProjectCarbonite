@@ -152,3 +152,4 @@ includeFile("tangible/loot/loot_schematic/armor_mandalorian_rebel_helmet_schemat
 includeFile("tangible/loot/loot_schematic/armor_mandalorian_rebel_gloves_schematic.lua")
 includeFile("tangible/loot/loot_schematic/armor_mandalorian_rebel_leggings_schematic.lua")
 includeFile("tangible/loot/loot_schematic/universal_loot_schematic.lua")
+-- includeFile("tangible/loot/loot_schematic/carbonite_custom/nyms_slugthrower_schematic.lua")

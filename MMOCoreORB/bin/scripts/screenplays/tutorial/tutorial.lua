@@ -178,7 +178,8 @@ function TutorialScreenPlay:spawnObjects(pPlayer)
 
 			writeData(playerID .. ":tutorial:roomTwoDrum", SceneObject(pDrum):getObjectID())
 			writeData(SceneObject(pDrum):getObjectID() .. ":playerOwnerID", playerID)
-			addStartingItemsInto(pPlayer, pDrum)
+			-- Just give them all their items at creation
+			-- addStartingItemsInto(pPlayer, pDrum)
 		end
 	end
 

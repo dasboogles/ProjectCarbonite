@@ -127,8 +127,8 @@ public:
 			// We have the players roll. NOW to determine if success of failure;
 			// Added more benefit from luck
 			if (sampleRoll > (75 - luckMod)) { // adjust great success ot 75% and above
-				int maxSamples = (int) ceil((float) skillMod / 25.f);
-				if (creature->getDnaSampleCount() > maxSamples ){
+				// int maxSamples = (int) ceil((float) skillMod / 25.f);
+				if (creature->getDnaSampleCount() > 4 ){
 					creature->setDnaState(CreatureManager::DNASAMPLED);
 					// We took the max samples the shock it too much and kils the creature.
 					result = 4;
@@ -143,8 +143,8 @@ public:
 			} else if ( (35 + rollMod) < sampleRoll) { // failure your roll < 50%
 				result = 2;
 			} else { // success
-				int maxSamples = (int)(ceil((double)skillMod / (double)25));
-				if (creature->getDnaSampleCount() > maxSamples ){
+				// int maxSamples = (int)(ceil((double)skillMod / (double)25));
+				if (creature->getDnaSampleCount() > 4 ){
 					creature->setDnaState(CreatureManager::DNASAMPLED);
 					// We took the max samples the shock it too much and kils the creature.
 					result = 4;

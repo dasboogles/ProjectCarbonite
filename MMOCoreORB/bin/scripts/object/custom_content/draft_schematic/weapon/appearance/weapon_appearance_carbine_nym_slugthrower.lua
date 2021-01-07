@@ -30,8 +30,7 @@ object_draft_schematic_weapon_appearance_weapon_appearance_carbine_nym_slugthrow
 
    targetTemplate = "object/weapon/ranged/carbine/carbine_nym_slugthrower.iff",
 
-   additionalTemplates = {
-             }
+   additionalTemplates = {}
 
 }
 

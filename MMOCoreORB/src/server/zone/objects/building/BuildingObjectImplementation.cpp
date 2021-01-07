@@ -902,8 +902,9 @@ void BuildingObjectImplementation::onExit(CreatureObject* player, uint64 parenti
 }
 
 uint32 BuildingObjectImplementation::getMaximumNumberOfPlayerItems() {
-	if (isCivicStructure() )
-		return 250;
+	// GH are considered "Civic"
+	// if (isCivicStructure() )
+	// 	return 250;
 
 	SharedStructureObjectTemplate* ssot = dynamic_cast<SharedStructureObjectTemplate*> (templateObject.get());
 
@@ -921,7 +922,7 @@ uint32 BuildingObjectImplementation::getMaximumNumberOfPlayerItems() {
 
 	auto maxItems = MAXPLAYERITEMS;
 
-	// If a building as 4 lots then it'd be 1200
+	// If a building as 4 lots then it'd be 1200, but we don't want to go above 1000 for safety reasons
 	return Math::min(maxItems, lots * 300);
 }
 

@@ -429,24 +429,23 @@ bool PlayerCreationManager::createCharacter(ClientCreateCharacterCallback* callb
 		ghost->setStarterProfession(profession);
 	}
 
-	addCustomization(playerCreature, customization,
-			playerTemplate->getAppearanceFilename());
+	addCustomization(playerCreature, customization, playerTemplate->getAppearanceFilename());
 	addHair(playerCreature, hairTemplate, hairCustomization);
-	if (!doTutorial) {
-		addProfessionStartingItems(playerCreature, profession, clientTemplate,
-				false);
-		addStartingItems(playerCreature, clientTemplate, false);
-		addRacialMods(playerCreature, fileName,
-				&playerTemplate->getStartingSkills(),
-				&playerTemplate->getStartingItems(), false);
-	} else {
-		addProfessionStartingItems(playerCreature, profession, clientTemplate,
-				true);
-		addStartingItems(playerCreature, clientTemplate, true);
-		addRacialMods(playerCreature, fileName,
-				&playerTemplate->getStartingSkills(),
-				&playerTemplate->getStartingItems(), true);
-	}
+
+	// Just give them everything regardless of Tutorial or not. Items in the Tutorial container are removed!
+	addProfessionStartingItems(playerCreature, profession, clientTemplate, false);
+	addStartingItems(playerCreature, clientTemplate, false);
+	addRacialMods(playerCreature, fileName, &playerTemplate->getStartingSkills(), &playerTemplate->getStartingItems(), false);
+	
+	// if (!doTutorial) {
+	// 	addProfessionStartingItems(playerCreature, profession, clientTemplate, false);
+	// 	addStartingItems(playerCreature, clientTemplate, false);
+	// 	addRacialMods(playerCreature, fileName, &playerTemplate->getStartingSkills(), &playerTemplate->getStartingItems(), false);
+	// } else {
+	// 	addProfessionStartingItems(playerCreature, profession, clientTemplate, true);
+	// 	addStartingItems(playerCreature, clientTemplate, true);
+	// 	addRacialMods(playerCreature, fileName, &playerTemplate->getStartingSkills(), &playerTemplate->getStartingItems(), true);
+	// }
 
 	if (ghost != nullptr) {
 		int accID = client->getAccountID();
@@ -573,8 +572,12 @@ bool PlayerCreationManager::createCharacter(ClientCreateCharacterCallback* callb
 
 	chatManager->sendMail("system", "@newbie_tutorial/newbie_mail:welcome_subject", "@newbie_tutorial/newbie_mail:welcome_body", playerCreature->getFirstName());
 
-	//Join auction chat room
+	// Join auction chat room
 	ghost->addChatRoom(chatManager->getAuctionRoom()->getRoomID());
+
+	// Join Carbonite chat room
+	// Do here
+	ghost->addChatRoom(chatManager->getGeneralRoom()->getRoomID());
 
 	ManagedReference<SuiMessageBox*> box = new SuiMessageBox(playerCreature, SuiWindowType::NONE);
 	box->setPromptTitle("PLEASE NOTE");

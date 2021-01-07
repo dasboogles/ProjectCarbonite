@@ -55,7 +55,9 @@ class BuildingObject extends StructureObject {
 
 	public boolean publicStructure;
 
-	public static final int MAXPLAYERITEMS = 400;
+	// Going above 1000 supposedly makes items randomly vanish from the DB.
+	// Don't go above 1000!
+	public static final int MAXPLAYERITEMS = 1000;
 
 	protected unicode signName;
 
