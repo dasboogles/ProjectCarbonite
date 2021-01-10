@@ -56,3 +56,36 @@ BossSpawnPoint = {
 	{planetName = "yavin4", xPos = 466, yPos = -693}, --Woolamander Palace
 	{planetName = "yavin4", xPos = -3150, yPos = -3050}, --Massassi Temple
 }
+
+-- come back to this tomorrow!
+-- BigGameHunterSpawns = {
+-- 	--Corellia SP
+-- 	{"corellia", "big_game_hunter", 0, -128.21, 28, -4758.9, 282, 0},
+
+-- 	--Naboo SP
+-- 	{"naboo", "big_game_hunter", 0, -4876.47, 6.42773, 4190.98, 177, 0},
+
+-- 	--Tatooine SP
+-- 	{"tatooine", "big_game_hunter", 0, 3517.26, 5, -4799.64, 144, 0},
+
+-- 	--Lok SP
+-- 	{"lok", "big_game_hunter", 0, 438.818, 8.72217, 5505.23, 103, 0},
+
+-- 	--Dantooine SP
+-- 	{"dantooine", "big_game_hunter", 0, -657.838, 3, 2472.76, 60, 0},
+
+-- 	--Dathomir SP
+-- 	{"dathomir", "big_game_hunter", 0, 595.538, 6, 3106.55, 236, 0},
+
+-- 	--Endor SP
+-- 	{"endor", "big_game_hunter", 0, 3228.4, 24, -3500.69, 43, 0},
+
+-- 	--Rori SP
+-- 	{"rori", "big_game_hunter", 0, -5302.11, 80.0358, -2197.98, 102, 0},
+
+-- 	--Talus SP
+-- 	{"talus", "big_game_hunter", 0, 320.404, 6, -2908.43, 61, 0},
+
+-- 	--Yavin SP
+-- 	{"yavin4", "big_game_hunter", 0, -6928.55, 73, -5686.36, 183, 0},
+-- }

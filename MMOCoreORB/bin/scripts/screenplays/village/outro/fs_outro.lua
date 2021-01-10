@@ -8,7 +8,7 @@ FsOutro = ScreenPlay:new {
 	FORCESHRINE = 4,
 
 	stepDelay = {
-		[1] = { 15600, 86400 }, -- Old man visit, 1 hour to 1 day
+		[1] = { 2700, 3600 }, -- Old man visit, 1 hour to 1 day, [CHANGED]: to 45minutes -> 1hour
 	}
 }
 
@@ -145,5 +145,8 @@ function FsOutro:completeVillageOutroFrog(pPlayer)
 
 	VillageJediManagerCommon.setJediProgressionScreenPlayState(pPlayer, VILLAGE_JEDI_PROGRESSION_DEFEATED_MELLIACHAE)
 
+	-- Give player their own Shrine
+	giveItem(pInventory, "object/tangible/jedi/force_shrine_stone.iff", -1)
+	
 	PadawanTrials:doPadawanTrialsSetup(pPlayer)
 end

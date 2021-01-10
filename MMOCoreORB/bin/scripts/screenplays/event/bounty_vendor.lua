@@ -12,11 +12,11 @@ bounty_vendor = ScreenPlay:new {
    states = {}, 
 }
 
-registerScreenPlay("bounty_vendor", true)
+-- Disable it for now
+-- registerScreenPlay("bounty_vendor", true)
 
 function bounty_vendor:start() 
    local pMerchant = spawnMobile("corellia", "bounty_vendor", 1, -157.57, 28, -4703.94, 90, 0 )
-
 end
 
 bounty_vendor_handler = Object:new {

@@ -375,6 +375,42 @@ void CreatureObjectImplementation::sendBaselinesTo(SceneObject* player) {
 	sendPvpStatusTo(playerCreature);
 }
 
+bool CreatureObjectImplementation::hasSeaRemovalTool(CreatureObject* player, bool removeItem) {
+
+	if (player == NULL){
+		return 0;
+	}
+
+	uint32 crc;
+	ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
+
+	if (inventory == nullptr){
+		return false;
+	}
+
+	Locker inventoryLocker(inventory);
+
+	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
+		ManagedReference<SceneObject*> sceno = inventory->getContainerObject(i);
+
+		crc = sceno->getServerObjectCRC();
+		if (String::valueOf(crc) == "3905622464") { //Sea Removal Tool
+
+			if (sceno != nullptr) {
+				if (removeItem) {
+					Locker locker(sceno);
+					sceno->destroyObjectFromWorld(true);
+					sceno->destroyObjectFromDatabase(true);
+				}
+
+				return true;
+			}
+		}
+	}
+
+	return 0;
+}
+
 void CreatureObjectImplementation::sendSlottedObjectsTo(SceneObject* player) {
 	SortedVector<SceneObject*> objects(getSlottedObjectsSize(),
 			getSlottedObjectsSize());
@@ -3038,6 +3074,7 @@ bool CreatureObjectImplementation::isAggressiveTo(CreatureObject* object) {
 	if ((pvpStatusBitmask & CreatureFlag::OVERT) && (object->getPvpStatusBitmask() & CreatureFlag::OVERT) && object->getFaction() != getFaction())
 		return true;
 
+	// Replace with "CanBeHunted()"
 	if (ghost->hasBhTef() && (hasBountyMissionFor(object) || object->hasBountyMissionFor(asCreatureObject()))) {
 		return true;
 	}

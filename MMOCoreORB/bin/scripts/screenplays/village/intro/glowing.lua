@@ -7,10 +7,16 @@ Glowing = ScreenPlay:new {
 		{ type = "exploration_dangerous", amount = 2 },
 		{ type = "exploration_easy", amount = 5 },
 		{ type = "master", amount = 1 },
-		{ type = "content", amount = 5 },
+		{ type = "content", amount = 3 }, -- From 5 -> 3
+	},
+	requiredCrafterBadges = {
+		{ type = "exploration_jedi", amount = 3 },			-- 3 'Easy' Exploration Badges
+		{ type = "exploration_dangerous", amount = 3 },		-- 3 of 5 'Dangerous' Exploration Badges
+		{ type = "exploration_easy", amount = 25 },			-- 25 of 37 'Easy' Exploration Badges
+		{ type = "master", amount = 1 }, 					-- One Mastered Prof
 	}
 }
-
+-- For combat toons to get glow
 function Glowing:getCompletedBadgeTypeCount(pPlayer)
 	local pGhost = CreatureObject(pPlayer):getPlayerObject()
 
@@ -41,8 +47,49 @@ function Glowing:getCompletedBadgeTypeCount(pPlayer)
 	return typesCompleted
 end
 
+-- For crafter toons to get glowy
+function Glowing:getCompletedCrafterBadgeTypeCount(pPlayer)
+	local pGhost = CreatureObject(pPlayer):getPlayerObject()
+
+	if (pGhost == nil) then
+		return 0
+	end
+
+	local typesCompleted = 0
+	
+	for i = 1, #self.requiredCrafterBadges, 1 do
+		local type = self.requiredCrafterBadges[i].type
+		local requiredAmount = self.requiredCrafterBadges[i].amount
+
+		local badgeListByType = getBadgeListByType(type)
+		local badgeCount = 0
+
+		for j = 1, #badgeListByType, 1 do
+			if PlayerObject(pGhost):hasBadge(badgeListByType[j]) then
+				badgeCount = badgeCount + 1
+			end
+		end
+
+		if badgeCount >= requiredAmount then
+			typesCompleted = typesCompleted + 1
+		end
+	end
+
+	return typesCompleted
+end
+
 function Glowing:hasRequiredBadgeCount(pPlayer)
-	return self:getCompletedBadgeTypeCount(pPlayer) == #self.requiredBadges
+	local hasRequiredBadges = false
+
+	-- If the player has the needed combat badges then return true
+	if (self:getCompletedBadgeTypeCount(pPlayer) == #self.requiredBadges) then
+		hasRequiredBadges = true
+	-- If the player has the needed crafter badges then return true
+	elseif (self:getCompletedCrafterBadgeTypeCount(pPlayer) == #self.requiredCrafterBadges) then
+		hasRequiredBadges = true
+	end
+
+	return hasRequiredBadges
 end
 
 -- Check if the player is glowing or not.

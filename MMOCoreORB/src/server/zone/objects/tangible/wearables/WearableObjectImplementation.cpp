@@ -84,41 +84,41 @@ void WearableObjectImplementation::fillAttributeList(AttributeListMessage* alm,
 
 }
 
-bool WearableObjectImplementation::hasSeaRemovalTool(CreatureObject* player, bool removeItem) {
+// bool WearableObjectImplementation::hasSeaRemovalTool(CreatureObject* player, bool removeItem) {
 
-	if (player == NULL){
-		return 0;
-	}
+// 	if (player == NULL){
+// 		return 0;
+// 	}
 
-	uint32 crc;
-	ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
+// 	uint32 crc;
+// 	ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
 
-	if (inventory == nullptr){
-		return false;
-	}
+// 	if (inventory == nullptr){
+// 		return false;
+// 	}
 
-	Locker inventoryLocker(inventory);
+// 	Locker inventoryLocker(inventory);
 
-	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
-		ManagedReference<SceneObject*> sceno = inventory->getContainerObject(i);
+// 	for (int i = 0; i < inventory->getContainerObjectsSize(); ++i) {
+// 		ManagedReference<SceneObject*> sceno = inventory->getContainerObject(i);
 
-		crc = sceno->getServerObjectCRC();
-		if (String::valueOf(crc) == "3905622464") { //Sea Removal Tool
+// 		crc = sceno->getServerObjectCRC();
+// 		if (String::valueOf(crc) == "3905622464") { //Sea Removal Tool
 
-			if (sceno != nullptr) {
-				if (removeItem) {
-					Locker locker(sceno);
-					sceno->destroyObjectFromWorld(true);
-					sceno->destroyObjectFromDatabase(true);
-				}
+// 			if (sceno != nullptr) {
+// 				if (removeItem) {
+// 					Locker locker(sceno);
+// 					sceno->destroyObjectFromWorld(true);
+// 					sceno->destroyObjectFromDatabase(true);
+// 				}
 
-				return true;
-			}
-		}
-	}
+// 				return true;
+// 			}
+// 		}
+// 	}
 
-	return 0;
-}
+// 	return 0;
+// }
 
 void WearableObjectImplementation::updateCraftingValues(CraftingValues* values, bool initialUpdate) {
 	/*

@@ -34,6 +34,7 @@
 #include "server/zone/managers/stringid/StringIdManager.h"
 #include "server/zone/objects/player/FactionStatus.h"
 #include "server/zone/managers/visibility/VisibilityManager.h"
+#include "server/zone/objects/building/BuildingObject.h"
 
 void MissionManagerImplementation::loadLuaSettings() {
 	try {
@@ -2074,8 +2075,10 @@ bool MissionManagerImplementation::isBountyValidForPlayer(CreatureObject* player
 	if (!bounty->isOnline())
 		return false;
 
-	if (bounty->numberOfActiveMissions() >= 5)
-		return false;
+	// Unlimited bounties taken per target.
+	// WIP: Limit # of BH that can engage same target at once based on target's Jedi/FRS level
+	// if (bounty->numberOfActiveMissions() >= 5)
+	// 	return false;
 
 	uint64 targetId = bounty->getTargetPlayerID();
 	uint64 playerId = player->getObjectID();
@@ -2096,8 +2099,22 @@ bool MissionManagerImplementation::isBountyValidForPlayer(CreatureObject* player
 
 	ManagedReference<CreatureObject*> creature = server->getObject(targetId).castTo<CreatureObject*>();
 
-	if (creature == nullptr)
+	if (creature == nullptr) {
 		return false;
+	}
+
+	// If Jedi is in a private house, don't show them on the terminals!
+	ManagedReference<SceneObject*> parent = creature->getParent().get();
+	if (parent != nullptr && parent->isCellObject()){
+		ManagedReference<CellObject*> cell = cast<CellObject*>(parent.get());
+		if (cell != nullptr){
+			ManagedReference<BuildingObject*> building = cell->getParent().get().castTo<BuildingObject*>();
+			if (building != nullptr){
+				if (building->isPrivateStructure())
+					return false;
+			}
+		}
+	}
 
 	auto targetGhost = creature->getPlayerObject();
 	float terminalVisibilityThreshold = VisibilityManager::instance()->getTerminalVisThreshold();

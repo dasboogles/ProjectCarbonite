@@ -21,14 +21,14 @@ VillageRaids = ScreenPlay:new {
 
 	-- Number of players needed near village to move up a wave size
 	playerWaveSizeThresholds = {
-		medium = 10,
-		large = 20,
-		mega = 35
+		medium = 2, -- from 10 -> 2
+		large = 5, -- from 20 -> 5
+		mega = 10 -- from 35 to 10
 	},
 
 	enemyData = {
-		minSpawnPulse = 5000 * 1000,
-		maxSpawnPulse = 7000 * 1000,
+		minSpawnPulse = 900 * 1000, -- from 5000 -> 900
+		maxSpawnPulse = 1500 * 1000, -- from 7000 -> 1500
 		minDistance = 25, -- Min distance from center of spawn loc
 		maxDistance = 50 -- Max distance from center of spawn loc
 	},
@@ -58,8 +58,8 @@ VillageRaids = ScreenPlay:new {
 	-- Victim wave data
 	victimWaveDataTable = {
 		spawnerPulse = 180 * 1000, -- Time between spawn pulses
-		maxSpawn = 100, -- Max waves of mobiles to spawn over the entire lifetime of the spawner
-		maxPopulation = 2, -- Max mobs to have up at any one time
+		maxSpawn = 150, -- Max waves of mobiles to spawn over the entire lifetime of the spawner
+		maxPopulation = 4, -- Max mobs to have up at any one time
 		mobileLifespan = 20 * 60 * 1000, -- Time until spawned mobs should be destroyed
 		expireTime = 2500 * 1000, -- Time until spawner should expire
 		aiHandlerFunc = "" -- Name of function that should setup a defender after it's spawned

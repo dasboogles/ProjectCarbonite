@@ -278,6 +278,16 @@ class CreatureObject extends TangibleObject {
 	@preLocked
 	public native void clearQueueActions(boolean combatOnly = true);
 
+
+	/**
+	 * Check if CREO has a SeaRemovalTool in their inventory
+	 * @pre { this object is locked }
+	 * @post { this object is locked, server checks player's inventory for a SEARemovalTool }
+	 * @param player SceneObject that will be checked
+	 */
+	@dirty
+	public native boolean hasSeaRemovalTool(CreatureObject player, boolean removeItem);
+
 	/**
 	 * Sends the CREO baseline messages of this object to the specified player
 	 * @pre { this object is locked }

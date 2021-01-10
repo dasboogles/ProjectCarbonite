@@ -5523,7 +5523,15 @@ bool PlayerManagerImplementation::doBurstRun(CreatureObject* player, float hamMo
 		return false;
 	}
 
-	if (player->hasBuff(STRING_HASHCODE("gallop")) || player->hasBuff(STRING_HASHCODE("burstrun")) || player->hasBuff(STRING_HASHCODE("retreat"))) {
+	if (player->hasBuff(STRING_HASHCODE("burstrun"))) {
+		StringIdChatParameter stringId;
+		const Time* cdTime = player->getCooldownTime("burstrun");
+		int timeLeft = floor((float)cdTime->miliDifference() / 1000) *-1;
+		player->sendSystemMessage("You cannot burst run for another " + String::valueOf(timeLeft) + " seconds!");
+		return false;
+	}
+
+	if (player->hasBuff(STRING_HASHCODE("gallop")) || player->hasBuff(STRING_HASHCODE("retreat"))) {
 		player->sendSystemMessage("@combat_effects:burst_run_no"); // You cannot burst run right now.
 		return false;
 	}

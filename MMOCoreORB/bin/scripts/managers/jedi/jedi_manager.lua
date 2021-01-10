@@ -12,8 +12,8 @@ if _TEST then
 end
 
 -- Disabling jedi for launch, come back to this immediately post-launch bug fixes!
-jediProgressionType = NOJEDIPROGRESSION
--- jediProgressionType = VILLAGEJEDIPROGRESSION
+-- jediProgressionType = NOJEDIPROGRESSION
+jediProgressionType = VILLAGEJEDIPROGRESSION
 
 jediManagerName = "JediManager"
 

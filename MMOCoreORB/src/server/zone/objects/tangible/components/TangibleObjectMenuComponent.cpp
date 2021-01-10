@@ -70,7 +70,7 @@ void TangibleObjectMenuComponent::fillObjectMenuResponse(SceneObject* sceneObjec
 	// So long as we actually have a wearable to mess with...
 	if (wearable != NULL) {
 		// Only add radial menu item IF we actually have a tool in our inventory!
-		if (wearable->hasSeaRemovalTool(player, false) ==  true){
+		if (player->hasSeaRemovalTool(player, false) ==  true){
 			// If the interactable is a piece of clothing OR armor then...
 			if (wearable->isWearableObject() || wearable->isArmorObject()){
 				VectorMap<String, int>* mods = wearable->getWearableSkillMods();
@@ -147,7 +147,7 @@ int TangibleObjectMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject
 			ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
 			if (wearable != nullptr && inventory != nullptr) { //safety Checks
 
-				if (wearable->hasSeaRemovalTool(player, false) ==  false){ //They need the tool
+				if (player->hasSeaRemovalTool(player, false) ==  false){ //They need the tool
 					player->sendSystemMessage("This requires a specialzied skill enhancing attachment removal tool.");
 					return 0;
 				}
@@ -217,7 +217,7 @@ int TangibleObjectMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject
 						}
 
 						//Destroy item now that tapes have been generated
-						if (wearable->hasSeaRemovalTool(player,true) ==  true){
+						if (player->hasSeaRemovalTool(player,true) ==  true){
 							player->sendSystemMessage("Successfully extracted skill attachments! Your SEA Tool was destroyed in the process.");
 						}
 

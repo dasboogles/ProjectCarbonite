@@ -7,6 +7,7 @@ includeFile("event/life_day/tebeurra.lua")
 
 --Carbonite custom
 includeFile("event/custom/bounty_vendor.lua")
+includeFile("event/custom/big_game_hunter.lua")
 
 -- World boss
 includeFile("event/world_boss/deathsting_boss.lua")

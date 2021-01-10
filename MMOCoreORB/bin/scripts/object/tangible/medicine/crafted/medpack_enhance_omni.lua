@@ -1,7 +1,7 @@
 object_tangible_medicine_crafted_medpack_enhance_omni = object_tangible_medicine_crafted_shared_medpack_enhance_omni:new {
 	gameObjectType = 8238,
 	templateType = ENHANCEPACK,
-	useCount = 30,
+	useCount = 10, -- Moved from 30 -> 10
 	medicineUse = 0,
 	effectiveness = 1000,
 	duration = 12600,

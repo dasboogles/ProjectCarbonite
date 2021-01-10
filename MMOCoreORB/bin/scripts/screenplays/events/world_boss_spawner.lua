@@ -13,8 +13,8 @@ WorldBossSpawner = ScreenPlay:new {
 	bossesToSpawn = 3, --Number of bosses to spawn
 	numBosses = 5, --Number of boss mobile templates declared in table below
 	numReferencePoints = 29, --Number of reference points from world_boss_spt.lua
-	secondsToDespawn = 57600, --Boss will despawn after 16h if not killed
-	secondsToRespawn = 86400, -- 24h time to respawn after boss has been killed/despawned
+	secondsToDespawn = 18000, --Boss will despawn after 16h if not killed -- [CHANGED]: from 57600 -> 18000 (5hrs)
+	secondsToRespawn = 21600, -- 24h time to respawn after boss has been killed/despawned -- [CHANGED]: from 86400 -> 21600 (6hrs) 
 	maxRadius = 2000, --Maximum distance from spawn point to spawn boss
 	
 	bossMobileTemplates =  {"acklay_boss", "rancor_boss", "wampa_boss", "kkorrwrot_boss", "deathsting_boss"},
@@ -26,7 +26,8 @@ WorldBossSpawner = ScreenPlay:new {
 registerScreenPlay("WorldBossSpawner", true)
 
 function WorldBossSpawner:start()
-		self:spawnMobiles()
+	createEvent(1800 * 1000, "WorldBossSpawner", "spawnMobiles", pBoss, "") -- waits 30minutes before running Spawner on server up
+	-- self:spawnMobiles()
 end
 
 function WorldBossSpawner:spawnMobiles()
@@ -110,10 +111,20 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 
 		if (pBoss ~= nil) then
 			createEvent(10, "WorldBossSpawner", "setupBoss", pBoss, "")
+			-- -- Spawn BigGameHunterForBossHere
+			-- self:spawnBigGameHunter(pBoss, zone)
+
+			-- -- Write what Boss belongs to what planet
+			-- writeData(planet .. ":WorldBoss", pBoss:getObjectID())
+
+			-- Tell the server the WorldBoss Spawned
 			print("World Boss: " .. bossTemplate .. " spawned at " .. spawnPoint[1] .. ", " .. spawnPoint[3] .. ", " .. zone)
+
 			-- Save needed information about this Boss for onDespawn() and onDeath() events! 
 			writeStringData(SceneObject(pBoss):getObjectID() .. ":name", bossTemplate)
 			writeStringData(SceneObject(pBoss):getObjectID() .. ":zone", zone)
+
+			-- Tell the world a WorldBoss Spawned
 			CreatureObject(pBoss):broadcastToServer("Incomming Transmission: " .. bossTemplate .. " has been sighted on " .. zone) 
 		end
 
@@ -157,3 +168,21 @@ function WorldBossSpawner:getBossZone(pBoss)
 	local bossZone = readStringData(SceneObject(pBoss):getObjectID() .. ":zone")
 	return bossZone
 end
+
+-- -- Spawn our BigGameHunters on their respective planets
+-- function WorldBossSpawner:spawnBigGameHunter(pBoss, planet) {
+-- 	if (pBoss ~= nil or CreatureObject(pBoss):isDead() == false) then
+-- 		for i = 1, #BigGameHunterSpawns, 1 do
+-- 			local bghSpawn = BigGameHunterSpawns[i]
+-- 			if (bghSpawn[1] == planet) {
+-- 				local pBGH = spawnMobile(bghSpawn[1], bghSpawn[2], bghSpawn[3], spawnPoint[1], spawnPoint[2], spawnPoint[3], spawnPoint[4], spawnPoint[5], spawnPoint[6], spawnPoint[7], spawnPoint[8])
+-- 				-- Write the unique object ID of our planet's BGA
+-- 				-- We will be able to get this unique BGA based on the known planet of our current boss
+-- 				writeData(planet .. ":bigGameHunter", pBGH:getObjectID())
+-- 			}
+-- 		end
+-- 	end
+-- }
+
+-- function WorldBossSpawner:despawnBigGameHunter(pBGH)
+-- end

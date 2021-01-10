@@ -16,7 +16,9 @@ int FsBuffItemImplementation::handleObjectMenuSelect(CreatureObject* player, byt
 		return 0;
 
 	if (selectedID == 68) {
-		uint32 buffCRC = getBuffCRC();
+		// uint32 buffCRC = getBuffCRC();
+		// FS_VILLAGE_CRYSTAL_BUFF
+		uint32 buffCRC = BuffCRC::JEDI_FS_VILLAGE_CRYSTAL_BUFF; // custom FS Village Crystal Buff
 
 		if (player->hasBuff(buffCRC)) {
 			player->sendSystemMessage("@quest/force_sensitive/utils:have_buff");
@@ -28,11 +30,14 @@ int FsBuffItemImplementation::handleObjectMenuSelect(CreatureObject* player, byt
 			return 0;
 		}
 
-		Reference<Buff*> buff = new Buff(player, buffCRC, buffDuration, BuffType::MEDICAL);
+		Reference<Buff*> buff = new Buff(player, buffCRC, buffDuration, BuffType::JEDI);
 
 		Locker locker(buff);
 
-		buff->setAttributeModifier(buffAttribute, buffValue);
+		// buff->setAttributeModifier(buffAttribute, buffValue);
+		buff->setAttributeModifier(0, buffValue); // Health
+		buff->setAttributeModifier(3, buffValue); // Action
+		buff->setAttributeModifier(6, buffValue); // Mind
 
 		player->addBuff(buff);
 
@@ -52,7 +57,7 @@ void FsBuffItemImplementation::fillAttributeList(AttributeListMessage* alm, Crea
 		alm->insertAttribute("reuse_time", "0");
 	}
 
-	alm->insertAttribute("examine_dot_attribute", BuffAttribute::getName(buffAttribute, true));
+	alm->insertAttribute("examine_dot_attribute", "Health, Action, Mind");
 	alm->insertAttribute("potency", buffValue);
 	alm->insertAttribute("duration", getTimeString(buffDuration * 1000));
 }

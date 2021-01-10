@@ -172,15 +172,16 @@ class FindTargetTask : public Task, public Logger {
 
 	int calculateTime(CreatureObject* player) {
 		String skillToUse = "droid_find_speed";
-		int maximumSkillMod = 115;
+		int maximumSkillMod = 130; // from 115 -> 130
 		if (track) {
 			skillToUse = "droid_track_speed";
-			maximumSkillMod = 105;
+			maximumSkillMod = 130; // from 105 -> 130
 		}
 
 		long long skillMod = player->getSkillMod(skillToUse) + player->getSkillModFromBuffs(skillToUse);
 
-		int checkedSkillMod = skillMod;
+		// Passive +25 buff to tracking speed of droids
+		int checkedSkillMod = skillMod + 25;
 		if (checkedSkillMod < 0) {
 			checkedSkillMod = 0;
 		} else if (checkedSkillMod > maximumSkillMod) {

@@ -8,8 +8,8 @@ require("utils.helpers")
 VillageJediManagerTownship = ScreenPlay:new {
 	VILLAGE_TOTAL_NUMBER_OF_PHASES = 4,
 	phaseChangeTimeOfDay = { hour = 18, min = 0 }, -- Hour of day, server military time, to change the phase. Comment out to disable
-
-	VILLAGE_PHASE_DURATION = 3 * 7 * 24 * 60 * 60 * 1000 -- 3 weeks
+	VILLAGE_PHASE_DURATION = 240 * 60 * 1000 -- from 3 weeks -> 4 hours
+	--VILLAGE_PHASE_DURATION = 3 * 7 * 24 * 60 * 60 * 1000 -- 3 weeks
 }
 
 -- Set the current Village Phase for the first time.
