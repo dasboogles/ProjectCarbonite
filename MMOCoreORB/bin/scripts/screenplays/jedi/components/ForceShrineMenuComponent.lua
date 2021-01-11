@@ -11,6 +11,10 @@ function ForceShrineMenuComponent:fillObjectMenuResponse(pSceneObject, pMenuResp
 		menuResponse:addRadialMenuItem(121, 3, "@force_rank:recover_jedi_items") -- Recover Jedi Items
 	end
 
+	if (CreatureObject(pPlayer):hasSkill("force_title_jedi_novice")) then
+		menuResponse:addRadialMenuItem(122, 3, "Retrieve Force Shrine") -- Recover Force Shrine for Trials
+	end
+
 end
 
 function ForceShrineMenuComponent:handleObjectMenuSelect(pObject, pPlayer, selectedID)
@@ -26,6 +30,8 @@ function ForceShrineMenuComponent:handleObjectMenuSelect(pObject, pPlayer, selec
 		end
 	elseif (selectedID == 121 and CreatureObject(pPlayer):hasSkill("force_title_jedi_rank_02")) then
 		self:recoverRobe(pPlayer)
+	elseif (selectedID == 122 and CreatureObject(pPlayer):hasSkill("force_title_jedi_novice")) then
+		self:recoverShrine(pPlayer)
 	end
 
 	return 0
@@ -106,4 +112,24 @@ function ForceShrineMenuComponent:recoverRobe(pPlayer)
 
 	giveItem(pInventory, robeTemplate, -1)
 	CreatureObject(pPlayer):sendSystemMessage("@force_rank:items_recovered")
+end
+
+function ForceShrineMenuComponent:recoverShrine(pPlayer)
+	-- Give player their own Shrine
+	local pInventory = CreatureObject(pPlayer):getSlottedObject("inventory")
+	if (pInventory ~= nil) then
+		local SHRINE_OBJECT = "object/tangible/jedi/force_shrine_stone.iff"
+		local pItem = getContainerObjectByTemplate(pInventory, SHRINE_OBJECT, true)
+		if (pItem == nil) then
+			if (SceneObject(pInventory):isContainerFullRecursive()) then
+				CreatureObject(pPlayer):sendSystemMessage("@error_message:inv_full")
+			else
+				pItem = giveItem(pInventory, SHRINE_OBJECT, -1)
+
+				if (pItem == nil) then
+					CreatureObject(pPlayer):sendSystemMessage("Error: Unable to generate item.")
+				end
+			end
+		end
+	end
 end

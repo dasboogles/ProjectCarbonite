@@ -24,7 +24,8 @@ FsSad2Theater1 = GoToTheater:new {
 		{ template = "sith_shadow_outlaw", minimumDistance = 7, maximumDistance = 12, referencePoint = 0 },
 		{ template = "sith_shadow_outlaw", minimumDistance = 7, maximumDistance = 12, referencePoint = 0 }
 	},
-	createWaypoint = false,
+	createWaypoint = true,
+	waypointDescription = "Search And Destroy 1/8",
 	activeAreaRadius = 16,
 	flattenLayer = true
 }

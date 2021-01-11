@@ -121,4 +121,17 @@ function DathomirStaticSpawnsNwScreenPlay:spawnMobiles()
 	spawnMobile("dathomir", "spiderclan_sentinel", 420, -7126.9, 366.6, 2940.5, 135, 0)
 	spawnMobile("dathomir", "spiderclan_stalker", 420, -7131.1, 367.3, 2929.5, 75, 0)
 
+	spawnMobile("dathomir", "sith_shadow_thug", 180, -4.9034, 0.624999, -5.41538, 30, 2835552)
+	spawnMobile("dathomir", "sith_shadow_pirate", 180, -4.83195, 0.624998, -2.61328, 316, 2835552)
+	spawnMobile("dathomir", "sith_shadow_outlaw", 180, -2.09254, 0.624997, -5.93029, 152, 2835552)
+	spawnMobile("dathomir", "sith_shadow_thug", 180, 0.541599, 0.624995, -5.49775, 176, 2835552)
+	spawnMobile("dathomir", "sith_shadow_outlaw", 180, 2.91325, 0.624993, -5.99015, 356, 2835552)
+	spawnMobile("dathomir", "sith_shadow_pirate", 180, -2.22401, 0.624995, -1.34957, 0, 2835552)
+	spawnMobile("dathomir", "sith_shadow_thug", 180, -0.835395, 0.624994, -0.909669, 23, 2835552)
+	spawnMobile("dathomir", "sith_shadow_outlaw", 180, 0.405644, 0.624993, -1.11833, 323, 2835552)
+	spawnMobile("dathomir", "sith_shadow_thug", 180, 5.04042, 0.624991, -4.3813, 80, 2835552)
+	spawnMobile("dathomir", "sith_shadow_outlaw", 180, 5.05618, 0.62499, -3.00575, 108, 2835552)
+	spawnMobile("dathomir", "sith_shadow_pirate", 180, -3.46073, 0.624997, -3.89446, 77, 2835552)
+	spawnMobile("dathomir", "sith_shadow_pirate", 180, -1.8863, 0.624996, -3.58423, 253, 2835552)
+
 end

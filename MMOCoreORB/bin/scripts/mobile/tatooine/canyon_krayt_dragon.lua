@@ -33,17 +33,23 @@ canyon_krayt_dragon = Creature:new {
 			groups = {
 				{group = "krayt_tissue_rare", chance = 10000000}
 			},
-			lootChance = 500000
+			lootChance = 1500000
 		},
 		{
 			groups = {
 				{group = "krayt_tissue_uncommon", chance = 10000000}
 			},
-			lootChance = 1500000
+			lootChance = 2500000
 		},
 		{
 			groups = {
 				{group = "krayt_tissue_common", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "krayt_dragon_common", chance = 10000000}
 			},
 			lootChance = 2500000
 		},
@@ -51,19 +57,13 @@ canyon_krayt_dragon = Creature:new {
 			groups = {
 				{group = "krayt_dragon_common", chance = 10000000}
 			},
-			lootChance = 1500000
-		},
-		{
-			groups = {
-				{group = "krayt_dragon_common", chance = 10000000}
-			},
-			lootChance = 1500000
+			lootChance = 2500000
 		},
 		{
 			groups = {
 				{group = "krayt_pearls", chance = 10000000}
 			},
-			lootChance = 500000
+			lootChance = 1500000
 		},
 		{
 			groups = {

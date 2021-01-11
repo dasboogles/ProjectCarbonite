@@ -26,7 +26,8 @@ FsSad1Theater6 = GoToTheater:new {
 		{ template = "sith_shadow_pirate", minimumDistance = 7, maximumDistance = 12, referencePoint = 0 },
 		{ template = "sith_shadow_pirate", minimumDistance = 7, maximumDistance = 12, referencePoint = 0 }
 	},
-	createWaypoint = false,
+	createWaypoint = true,
+	waypointDescription = "Search And Destroy 6/8",
 	activeAreaRadius = 16,
 	flattenLayer = true
 }

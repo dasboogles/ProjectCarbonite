@@ -90,6 +90,19 @@ function FsCsCommander:captureCommander(pCommander, pPlayer)
 		errorLog = errorLog .. " 3: " .. tostring(QuestManager.hasActiveQuest(pPlayer, QuestManager.quests.FS_CS_ENSURE_CAPTURE)) .. ". "
 		printLuaError(errorLog)
 	end
+
+	-- After 30 seconds teleport the commander to the turnin point
+	createEvent(30*1000, "FsCsCommander", "teleportCommanderToArea", pCommander, "")
+end
+
+function FsCsCommander:teleportCommanderToArea(pCommander)
+	if (pCommander ~= nil) then
+		-- TurnIn WP
+		local areaX = 5315
+		local areaZ = 78
+		local areaY = -4136
+		CreatureObject(pCommander):teleport(areaX, areaZ, areaY, 0)
+	end
 end
 
 function FsCsCommander:setPlayerAsEscorter(pCommander, pPlayer)

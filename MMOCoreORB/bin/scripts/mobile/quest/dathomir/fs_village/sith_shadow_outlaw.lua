@@ -27,16 +27,28 @@ sith_shadow_outlaw = Creature:new {
 
 	templates = { "sith_shadow" },
 	lootGroups = {
+		-- {
+		-- 	groups = {
+		-- 		{group = "junk", chance = 4000000},
+		-- 		{group = "tailor_components", chance = 1500000},
+		-- 		{group = "loot_kit_parts", chance = 1500000},
+		-- 		{group = "printer_parts", chance = 1000000},
+		-- 		{group = "wearables_common", chance = 1000000},
+		-- 		{group = "clothing_attachments", chance = 500000},
+		-- 		{group = "armor_attachments", chance = 500000},
+		-- 	},
+		-- },
 		{
 			groups = {
-				{group = "junk", chance = 4000000},
-				{group = "tailor_components", chance = 1500000},
-				{group = "loot_kit_parts", chance = 1500000},
-				{group = "printer_parts", chance = 1000000},
-				{group = "wearables_common", chance = 1000000},
-				{group = "clothing_attachments", chance = 500000},
-				{group = "armor_attachments", chance = 500000},
+				{group = "village_resources", chance =  10000000}
 			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "village_resources", chance =  10000000}
+			},
+			lootChance = 7500000
 		},
 		{
 			groups = {

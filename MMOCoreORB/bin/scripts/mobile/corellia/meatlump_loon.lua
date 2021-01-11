@@ -42,7 +42,19 @@ meatlump_loon = Creature:new {
 				{group = "tailor_components", chance = 500000},
 				{group = "meatlump_common", chance = 5000000}
 			}
-		}
+		},
+		{
+			groups = {
+				{group = "meatlump_common", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "meatlump_common", chance = 10000000}
+			},
+			lootChance = 3500000
+		},
 	},
 	weapons = {"pirate_weapons_light"},
 	reactionStf = "@npc_reaction/slang",

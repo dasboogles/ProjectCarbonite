@@ -144,9 +144,6 @@ function FsOutro:completeVillageOutroFrog(pPlayer)
 	QuestManager.completeQuest(pPlayer, QuestManager.quests.FS_THEATER_FINAL)
 
 	VillageJediManagerCommon.setJediProgressionScreenPlayState(pPlayer, VILLAGE_JEDI_PROGRESSION_DEFEATED_MELLIACHAE)
-
-	-- Give player their own Shrine
-	giveItem(pInventory, "object/tangible/jedi/force_shrine_stone.iff", -1)
 	
 	PadawanTrials:doPadawanTrialsSetup(pPlayer)
 end
