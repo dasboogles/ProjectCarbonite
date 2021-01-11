@@ -9,18 +9,16 @@ includeFile("events/world_boss_spt.lua")
 WorldBossSpawner = ScreenPlay:new {
 
 	numberOfActs = 1,
-	
 	bossesToSpawn = 3, --Number of bosses to spawn
 	numBosses = 5, --Number of boss mobile templates declared in table below
 	numReferencePoints = 29, --Number of reference points from world_boss_spt.lua
-	secondsToDespawn = 18000, --Boss will despawn after 16h if not killed -- [CHANGED]: from 57600 -> 18000 (5hrs)
-	secondsToRespawn = 21600, -- 24h time to respawn after boss has been killed/despawned -- [CHANGED]: from 86400 -> 21600 (6hrs) 
+	secondsToDespawn = 25200, --Boss will despawn after 16h if not killed -- [CHANGED]: from 57600 -> 18000 (7hrs)
+	secondsToRespawn = 28800, -- 24h time to respawn after boss has been killed/despawned -- [CHANGED]: from 86400 -> 28800 (8hrs) 
 	maxRadius = 2000, --Maximum distance from spawn point to spawn boss
 	
 	bossMobileTemplates =  {"acklay_boss", "rancor_boss", "wampa_boss", "kkorrwrot_boss", "deathsting_boss"},
 
 	screenplayName = "WorldBossSpawner",
-	
 }
 
 registerScreenPlay("WorldBossSpawner", true)
@@ -43,7 +41,8 @@ end
 
 function WorldBossSpawner:setupBoss(pBoss)
 	createObserver(OBJECTDESTRUCTION, "WorldBossSpawner", "notifyBossDead", pBoss)
-	createEvent(self.secondsToDespawn * 1000, "WorldBossSpawner", "despawnBoss", pBoss, "")
+	-- Randomize despawn timer anywhere between +/- 30minutes
+	createEvent(getRandomNumber(self.secondsToDespawn-1800, self.secondsToDespawn+1800) * 1000, "WorldBossSpawner", "despawnBoss", pBoss, "")
 end
 
 function WorldBossSpawner:notifyBossDead(pBoss, pKiller)
@@ -54,8 +53,8 @@ function WorldBossSpawner:notifyBossDead(pBoss, pKiller)
 	if (pKiller == nil) then
 		return 1
 	end
-
-	createEvent(self.secondsToRespawn * 1000, "WorldBossSpawner", "respawnBoss", pBoss, "")
+	-- Randomize despawn timer anywhere between +/- 30minutes
+	createEvent(getRandomNumber(self.secondsToRespawn-1800, self.secondsToRespawn+1800) * 1000, "WorldBossSpawner", "respawnBoss", pBoss, "")
 	--print("Boss was killed, initiating despawn/respawn.")
 	local bossTemplate = self:getBossTemplate(pBoss)
 	local zone = self:getBossZone(pBoss)
@@ -137,7 +136,7 @@ function WorldBossSpawner:despawnBoss(pBoss)
 	end
 
 	if (CreatureObject(pBoss):isInCombat()) then
-		createEvent(self.secondsToDespawn * 1000, "WorldBossSpawner", "despawnBoss", pBoss, "")
+		createEvent(getRandomNumber(self.secondsToDespawn-1800, self.secondsToDespawn+1800) * 1000, "WorldBossSpawner", "despawnBoss", pBoss, "")
 		--print ("Boss was in combat, rescheduling despawn.")
 		return		
 	end
