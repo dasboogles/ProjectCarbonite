@@ -34,3 +34,5 @@ includeFile("mission/bh_tusken_warlord.lua")
 includeFile("mission/bh_untrained_wielder_of_the_dark_side.lua")
 includeFile("mission/deliver_npc.lua")
 includeFile("mission/informant_npc.lua")
+-- Carbonite Custom
+includeFile("mission/custom/bh_dark_knight.lua")

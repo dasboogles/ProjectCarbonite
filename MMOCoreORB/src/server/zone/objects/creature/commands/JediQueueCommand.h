@@ -228,8 +228,9 @@ public:
 	int getFrsModifiedForceCost(CreatureObject* creature) const {
 		ManagedReference<PlayerObject*> ghost = creature->getPlayerObject();
 
-		if (ghost == nullptr)
+		if (ghost == nullptr) {
 			return forceCost;
+		}
 
 		Locker locker(creature);
 

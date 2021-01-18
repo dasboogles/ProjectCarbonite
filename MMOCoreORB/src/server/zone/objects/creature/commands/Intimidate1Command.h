@@ -23,6 +23,12 @@ public:
 		if (!checkInvalidLocomotions(creature))
 			return INVALIDLOCOMOTION;
 
+		// Disallow hybrids from using intim1
+		if (creature->hasJediSkills()) {
+			creature->sendSystemMessage("You are not allowed to use this ability due to your attunement with the Force.");
+			return INVALIDTARGET;
+		}
+
 		Reference<TangibleObject*> targetObject = server->getZoneServer()->getObject(target).castTo<TangibleObject*>();
 
 		if (targetObject == nullptr || !targetObject->isCreatureObject())

@@ -22,8 +22,8 @@ VillageRaids = ScreenPlay:new {
 	-- Number of players needed near village to move up a wave size
 	playerWaveSizeThresholds = {
 		medium = 2, -- from 10 -> 2
-		large = 5, -- from 20 -> 5
-		mega = 10 -- from 35 to 10
+		large = 7, -- from 20 -> 5 -> 7
+		mega = 15 -- from 35 to 10 -> 15
 	},
 
 	enemyData = {

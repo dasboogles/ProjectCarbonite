@@ -157,7 +157,8 @@ class FindTargetTask : public Task, public Logger {
 			successChance = maximumSkillMod;
 		}
 
-		successChance -= ((getTargetLevel(player, objective)) / 3);
+		// Modified to take into consideration new CL level of BH targets
+		successChance -= ((getTargetLevel(player, objective)) / 7);
 
 		if (successChance < 5) {
 			successChance = 5;
@@ -188,9 +189,9 @@ class FindTargetTask : public Task, public Logger {
 			checkedSkillMod = maximumSkillMod;
 		}
 
-		int time = 150 - checkedSkillMod;
-
-		return time + System::random(time / 2);
+		int time = 140 - checkedSkillMod; // with +25 tapes this turns into 10 seconds
+		time += System::random(time / 2); // with +25 tapes this is [10 seconds + RNG(10/2)] ...so a MAX of 15 seconds down from 50 something
+		return time;
 	}
 
 	int getTargetLevel(CreatureObject* player, BountyMissionObjective* objective) {
@@ -288,7 +289,7 @@ public:
 
 		trackingsLeft = 0;
 		if (track) {
-			trackingsLeft = player->getSkillMod("droid_tracks");
+			trackingsLeft = (player->getSkillMod("droid_tracks") * 2); // double total tracks per droid
 		}
 	}
 

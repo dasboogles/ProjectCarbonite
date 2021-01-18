@@ -656,7 +656,8 @@ includeFile("tools/MagicEightBallMenuComponent.lua")
 includeFile("dungeon/exar_encounter.lua")
 includeFile("event/bounty_vendor.lua")
 includeFile("events/world_boss_spawner.lua")
--- includeFile("custom_screenplays/custom_carbonite_global/tatooine_containment_breach.lua")
+includeFile("events/custom_events/poisonCloudMechanic.lua")
+includeFile("events/custom_events/coldFieldMechanic.lua")
 
 --Treasure Maps
 includeFile("treasure_map/EncodedDiskMenuComponent.lua")

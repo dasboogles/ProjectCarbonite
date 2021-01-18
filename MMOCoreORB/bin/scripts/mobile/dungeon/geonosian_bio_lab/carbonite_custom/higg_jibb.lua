@@ -34,6 +34,24 @@ higg_jibb = Creature:new {
 		------------------------
 		{
 			groups = {
+				{group = "jedi_clothing_attachments", chance = 10000000},
+			},
+			lootChance = 7500000,
+		},
+		{
+			groups = {
+				{group = "jedi_clothing_attachments", chance = 10000000},
+			},
+			lootChance = 6500000,
+		},
+		{
+			groups = {
+				{group = "jedi_clothing_attachments", chance = 10000000},
+			},
+			lootChance = 5500000,
+		},
+		{
+			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
 			lootChance = 7500000,

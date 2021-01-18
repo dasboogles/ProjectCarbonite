@@ -29,18 +29,36 @@ exarkun = Creature:new {
 	templates = {
 		"object/mobile/exar_kun.iff"},
 	lootGroups = {
+		{
+			groups = {
+				{group = "jedi_clothing_attachments", chance = 10000000}
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "jedi_clothing_attachments", chance = 10000000}
+			},
+			lootChance = 6500000
+		},
+		{
+			groups = {
+				{group = "jedi_clothing_attachments", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
 		-- rare_boss_loot_tier1
 		{
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 4500000,
+			lootChance = 7500000,
 		},
 		{
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 5500000,
 		},
 		{
 			groups = {
@@ -118,105 +136,105 @@ exarkun = Creature:new {
 			groups = {
 				{group = "power_crystals", chance = 10000000},
 			},
-			lootChance = 4500000,
+			lootChance = 7500000,
 		},
 		{
 			groups = {
 				{group = "power_crystals", chance = 10000000},
 			},
-			lootChance = 4500000,
+			lootChance = 6500000,
 		},
 		{
 			groups = {
 				{group = "power_crystals", chance = 10000000},
 			},
-			lootChance = 4500000,
+			lootChance = 5500000,
 		},
 		{
 			groups = {
 				{group = "color_crystals", chance = 10000000},
 			},
-			lootChance = 4500000,
+			lootChance = 7500000,
 		},
 		{
 			groups = {
 				{group = "color_crystals", chance = 10000000},
 			},
-			lootChance = 4500000,
+			lootChance = 6500000,
 		},
 		{
 			groups = {
 				{group = "color_crystals", chance = 10000000},
 			},
-			lootChance = 4500000,
+			lootChance = 5500000,
 		},
 		{
 			groups = {
 				{group = "krayt_tissue_rare", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 7500000,
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 5000000},
 				{group = "holocron_dark", chance = 5000000},
 			},
-			lootChance = 2500000,
+			lootChance = 7500000,
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 5000000},
 				{group = "holocron_dark", chance = 5000000},
 			},
-			lootChance = 2500000,
+			lootChance = 6500000,
 		},
 		{
 			groups = {
 				{group = "holocron_dark", chance = 5000000},
 				{group = "armor_attachments", chance = 5000000},
 			},
-			lootChance = 2500000,
+			lootChance = 5500000,
 		},
 		{
 			groups = {
 				{group = "holocron_dark", chance = 5000000},
 				{group = "armor_attachments", chance = 5000000},
 			},
-			lootChance = 2500000,
+			lootChance = 5500000,
 		},
 		{
 			groups = {
 				{group = "krayt_tissue_rare", chance = 10000000},
 			},
-			lootChance = 2500000,
+			lootChance = 6500000,
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 5000000},
 				{group = "holocron_dark", chance = 5000000},
 			},
-			lootChance = 2500000,
+			lootChance = 5500000,
 		},
 		{
 			groups = {
 				{group = "clothing_attachments", chance = 5000000},
 				{group = "holocron_dark", chance = 5000000},
 			},
-			lootChance = 2500000,
+			lootChance = 4500000,
 		},
 		{
 			groups = {
 				{group = "holocron_dark", chance = 5000000},
 				{group = "armor_attachments", chance = 5000000},
 			},
-			lootChance = 2500000,
+			lootChance = 4500000,
 		},
 		{
 			groups = {
 				{group = "holocron_dark", chance = 5000000},
 				{group = "armor_attachments", chance = 5000000},
 			},
-			lootChance = 2500000,
+			lootChance = 3500000,
 		},
 		-- look for some unique furniture to have drop too
 	},

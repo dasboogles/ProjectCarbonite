@@ -63,13 +63,13 @@ object_draft_schematic_weapon_lance_vibro = object_draft_schematic_weapon_shared
    customizationStringNames = {},
    customizationDefaults = {},
 
-   ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
-   ingredientTitleNames = {"lance_shaft", "vibro_unit_and_power_cell_brackets", "grip", "vibration_generator"},
-   ingredientSlotType = {0, 0, 0, 1},
+   ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
+   ingredientTitleNames = {"lance_shaft", "vibro_unit_and_power_cell_brackets", "grip", "vibration_generator", "shaft"},
+   ingredientSlotType = {0, 0, 0, 1, 1},
    -- resourceTypes = {"steel_ditanium", "copper_polysteel", "metal", "object/tangible/component/weapon/shared_vibro_unit.iff"},
-   resourceTypes = {"steel", "copper", "metal", "object/tangible/component/weapon/shared_vibro_unit.iff"},
-   resourceQuantities = {38, 17, 6, 2},
-   contribution = {100, 100, 100, 100},
+   resourceTypes = {"steel", "copper", "metal", "object/tangible/component/weapon/shared_vibro_unit.iff", "object/tangible/component/weapon/shared_vibro_unit.iff"},
+   resourceQuantities = {38, 17, 6, 1, 1},
+   contribution = {100, 100, 100, 100, 100},
 
 
    targetTemplate = "object/weapon/melee/polearm/lance_vibrolance.iff",

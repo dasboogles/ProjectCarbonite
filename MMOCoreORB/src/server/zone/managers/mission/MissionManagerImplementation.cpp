@@ -1124,7 +1124,8 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 			}
 
 			mission->setMissionTargetName(name);
-			mission->setMissionDifficulty(75);
+			// Calculate difficulty based on where they are in the FRS, eventually
+			mission->setMissionDifficulty(1000); // Player Bounty Difficulty, doesn't reflect really anything
 			mission->setRewardCredits(getRealBountyReward(creature, target));
 
 			// Set the Title, Creator, and Description of the mission.
@@ -1169,12 +1170,16 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 		mission->setEndPosition(endPos.getX(), endPos.getY(), planet, true);
 
 		String targetTemplate = bhTargetsAtMissionLevel.get((unsigned int)level).get(System::random(bhTargetsAtMissionLevel.get((unsigned int)level).size() - 1));
+		
+		
+		
 		mission->setTargetOptionalTemplate(targetTemplate);
 
 		CreatureTemplate* creoTemplate = CreatureTemplateManager::instance()->getTemplate(mission->getTargetOptionalTemplate());
 
 		int reward = 1000;
 		int creoLevel = 1;
+		float rewardBonus = 1.25f;
 
 		if (creoTemplate != nullptr) {
 			creoLevel = creoTemplate->getLevel();
@@ -1187,6 +1192,9 @@ void MissionManagerImplementation::randomizeGenericBountyMission(CreatureObject*
 		} else if (level == 3) {
 			reward = creoLevel * (300 + System::random(300));
 		}
+
+		// BH payout bonus to make it competitive with normal mission spamming on Dant/Dath
+		reward *= rewardBonus;
 
 		mission->setRewardCredits(reward);
 

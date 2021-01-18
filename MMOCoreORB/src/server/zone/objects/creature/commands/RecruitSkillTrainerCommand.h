@@ -80,6 +80,9 @@ public:
 		suiTrainerType->addMenuItem("@city/city:st_tailor", 30);
 		suiTrainerType->addMenuItem("@city/city:st_unarmed", 31);
 		suiTrainerType->addMenuItem("@city/city:st_weaponsmith", 32);
+		suiTrainerType->addMenuItem("Informant lvl 1", 33);
+		suiTrainerType->addMenuItem("Informant lvl 2", 34);
+		suiTrainerType->addMenuItem("Informant lvl 3", 35);
 
 		ghost->addSuiBox(suiTrainerType);
 		creature->sendMessage(suiTrainerType->generateMessage());

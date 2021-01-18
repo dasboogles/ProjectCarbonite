@@ -4,7 +4,7 @@ bh_pirate_leader = Creature:new {
 	randomNameTag = true,
 	socialGroup = "pirate",
 	faction = "pirate",
-	level = 17,
+	level = 40,
 	chanceHit = 0.320000,
 	damageMin = 160,
 	damageMax = 170,
@@ -30,21 +30,46 @@ bh_pirate_leader = Creature:new {
 		"object/mobile/dressed_criminal_assassin_human_female_01.iff",
 		"object/mobile/dressed_criminal_smuggler_human_male_01.iff"
 	},
+	-- Revamped BH Loot Pass #1
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "loot_kit_parts", chance = 10000000},
 			},
-			lootChance = 3340000
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 5000000},
+				{group = "power_crystals", chance = 5000000},
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 1000000},
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 1000000},
+			},
+			lootChance = 4500000
 		}
 	},
 	weapons = {"pirate_weapons_heavy"},

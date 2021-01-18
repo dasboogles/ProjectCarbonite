@@ -1776,7 +1776,7 @@ void PlayerManagerImplementation::disseminateExperience(TangibleObject* destruct
 				if (xpType != "jedi_general")
 					combatXp += xpAmount;
 				else
-					xpAmount *= 0.2f;
+					xpAmount *= 0.3f; // from 0.2 -> 0.3
 
 				//Award individual expType
 				awardExperience(attacker, xpType, xpAmount);
@@ -2714,7 +2714,19 @@ void PlayerManagerImplementation::sendBattleFatigueMessage(CreatureObject* playe
 
 int PlayerManagerImplementation::healEnhance(CreatureObject* enhancer, CreatureObject* patient, byte attribute, int buffvalue, float duration, int absorption) {
 	String buffname = "medical_enhance_" + BuffAttribute::getName(attribute);
+	
+	
 	uint32 buffcrc = buffname.hashCode();
+	
+	// CRC hash code
+	// patient->sendSystemMessage("/////////////////////");
+	// String buffNameToHash = "jedi.force_makashi"; // Change this to generate a CRC for a given buff string
+	// uint32 buffToCrc = buffNameToHash.hashCode();
+	// patient->sendSystemMessage("BuffNAME: " + buffNameToHash);
+	// patient->sendSystemMessage("FakeBuffCRC: " + String::valueOf(buffToCrc));
+	// patient->sendSystemMessage("/////////////////////");
+	// CRC hash code
+
 	uint32 buffdiff = buffvalue;
 
 	//If a stronger buff already exists, then we don't buff the patient.

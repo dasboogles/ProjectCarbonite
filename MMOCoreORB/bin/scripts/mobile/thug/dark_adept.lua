@@ -6,11 +6,11 @@ dark_adept = Creature:new {
 	faction = "",
 	level = 140,
 	chanceHit = 4.75,
-	damageMin = 945,
-	damageMax = 1600,
+	damageMin = 1145,
+	damageMax = 1950,
 	baseXp = 13178,
-	baseHAM = 50000,
-	baseHAMmax = 61000,
+	baseHAM = 150000,
+	baseHAMmax = 161000,
 	armor = 2,
 	resists = {80,80,80,80,80,80,80,80,-1},
 	meatType = "",
@@ -31,19 +31,46 @@ dark_adept = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "holocron_dark", chance = 400000},
-				{group = "holocron_light", chance = 400000},
-				{group = "power_crystals", chance = 400000},
-				{group = "color_crystals", chance = 1000000},
-				{group = "rifles", chance = 1300000},
-				{group = "pistols", chance = 1300000},
-				{group = "melee_weapons", chance = 1300000},
-				{group = "armor_attachments", chance = 900000},
-				{group = "clothing_attachments", chance = 900000},
-				{group = "carbines", chance = 1300000},
-				{group = "wearables_rare", chance = 800000}
-			}
-		}
+				{group = "jedi_clothing_attachments", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "dark_jedi_common", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "dark_jedi_common", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "holocron_dark", chance = 10000000}
+			},
+			lootChance = 500000
+		},
+		{
+			groups = {
+				{group = "holocron_light", chance = 10000000}
+			},
+			lootChance = 500000
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
 	},
 	weapons = {"dark_jedi_weapons_gen2"},
 	conversationTemplate = "",

@@ -63,12 +63,12 @@ object_draft_schematic_weapon_axe_vibro = object_draft_schematic_weapon_shared_a
    customizationStringNames = {},
    customizationDefaults = {},
 
-   ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
-   ingredientTitleNames = {"vibro_unit_and_power_cell_brackets", "axe_base", "vibration_generator"},
-   ingredientSlotType = {0, 0, 1},
-   resourceTypes = {"steel_ditanium", "copper", "object/tangible/component/weapon/shared_vibro_unit.iff"},
-   resourceQuantities = {38, 24, 2},
-   contribution = {100, 100, 100},
+   ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
+   ingredientTitleNames = {"vibro_unit_and_power_cell_brackets", "axe_base", "vibration_generator", "shaft"},
+   ingredientSlotType = {0, 0, 1, 1},
+   resourceTypes = {"steel", "copper", "object/tangible/component/weapon/shared_vibro_unit.iff", "object/tangible/component/weapon/shared_vibro_unit.iff"},
+   resourceQuantities = {38, 24, 1, 1},
+   contribution = {100, 100, 100, 100},
 
 
    targetTemplate = "object/weapon/melee/axe/axe_vibroaxe.iff",

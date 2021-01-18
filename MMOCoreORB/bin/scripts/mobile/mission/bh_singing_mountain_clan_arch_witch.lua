@@ -4,7 +4,7 @@ bh_singing_mountain_clan_arch_witch = Creature:new {
 	randomNameTag = true,
 	socialGroup = "mtn_clan",
 	faction = "mtn_clan",
-	level = 107,
+	level = 214,
 	chanceHit = 1,
 	damageMin = 645,
 	damageMax = 1000,
@@ -28,51 +28,60 @@ bh_singing_mountain_clan_arch_witch = Creature:new {
 	diet = HERBIVORE,
 
 	templates = {"object/mobile/dressed_dathomir_sing_mt_clan_arch_witch.iff"},
+	-- Revamped BH Loot Pass #1
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "loot_kit_parts", chance = 10000000},
 			},
-			lootChance = 5140000
+			lootChance = 5500000
 		},
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "color_crystals", chance = 5000000},
+				{group = "power_crystals", chance = 5000000},
 			},
-			lootChance = 5140000
+			lootChance = 3500000
 		},
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "color_crystals", chance = 5000000},
+				{group = "power_crystals", chance = 5000000},
 			},
-			lootChance = 5140000
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 5000000},
+				{group = "power_crystals", chance = 5000000},
+			},
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
+			},
+			lootChance = 6500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
+			},
+			lootChance = 6500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 1000000},
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 1000000},
+			},
+			lootChance = 7500000
 		}
 	},
 	weapons = {"mixed_force_weapons"},

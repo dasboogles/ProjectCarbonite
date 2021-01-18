@@ -5090,7 +5090,7 @@ object_tangible_loot_loot_schematic_shared_universal_loot_schematic = SharedTang
 ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_universal_loot_schematic, "object/tangible/loot/loot_schematic/shared_universal_loot_schematic.iff")
 
 -- Weapons
--- object_tangible_loot_loot_schematic_shared_weapon_carbine_nym_slugthrower_schematic = SharedTangibleObjectTemplate:new {
--- 	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_universal_loot_schematic.iff"
--- }
--- ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_weapon_carbine_nym_slugthrower_schematic, "object/tangible/loot/loot_schematic/weapon_carbine_nym_slugthrower_schematic.iff")
+object_tangible_loot_loot_schematic_shared_weapon_carbine_nym_slugthrower_schematic = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/loot_schematic/shared_universal_loot_schematic.iff"
+}
+ObjectTemplates:addClientTemplate(object_tangible_loot_loot_schematic_shared_weapon_carbine_nym_slugthrower_schematic, "object/tangible/loot/loot_schematic/weapon_carbine_nym_slugthrower_schematic.iff")

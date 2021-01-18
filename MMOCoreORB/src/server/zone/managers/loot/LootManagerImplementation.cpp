@@ -41,6 +41,7 @@ void LootManagerImplementation::initialize() {
 	info("Loaded " + String::valueOf(lootableCarbineMods.size()) + " lootable carbine stat mods.");
 	info("Loaded " + String::valueOf(lootablePolearmMods.size()) + " lootable polearm stat mods.");
 	info("Loaded " + String::valueOf(lootableHeavyWeaponMods.size()) + " lootable heavy weapon stat mods.");
+	info("Loaded " + String::valueOf(lootableJediMods.size()) + " lootable jedi stat mods."); // Taken from my old code I did on Infinity
 	info("Loaded " + String::valueOf(lootGroupMap->countLootItemTemplates()) + " loot items.");
 	info("Loaded " + String::valueOf(lootGroupMap->countLootGroupTemplates()) + " loot groups.");
 
@@ -157,6 +158,10 @@ bool LootManagerImplementation::loadConfigData() {
 
 	modsTable = lua->getGlobalObject("lootableHeavyWeaponStatMods");
 	loadLootableMods( &modsTable, &lootableHeavyWeaponMods );
+
+	// Custom attachments
+	modsTable = lua->getGlobalObject("lootableJediStatMods");
+	loadLootableMods( &modsTable, &lootableJediMods );
 
 	LuaObject luaObject = lua->getGlobalObject("jediCrystalStats");
 	LuaObject crystalTable = luaObject.getObjectField("lightsaber_module_force_crystal");
@@ -562,19 +567,31 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 	}
 
 	// Update the Tano with new values
-	prototype->updateCraftingValues(craftingValues, true);
+	if(!prototype->isAttachment()){
+		prototype->updateCraftingValues(craftingValues, true);
+	}
 
 	//add some condition damage where appropriate
-	if (!maxCondition)
+	if (!maxCondition) {
 		addConditionDamage(prototype, craftingValues);
+	}
 
-	delete craftingValues;
+	if(!prototype->isAttachment()){
+		delete craftingValues;
+	}
 
 	// Boink
 	// --CREDIT--: TCW Source (Heavily modified by Boogles)
 	// Update object name with mod stat if is attachment
 	if(prototype->isAttachment()){
 		Attachment* attachment = cast<Attachment*>( prototype.get());
+
+		// We want to override the UpdateCraftingValues here for Attachments to enable us
+		// to create new specific loot groups for attachments! --Boogles
+		attachment->updateCraftingValues(craftingValues, true, templateObject->getTemplateName());
+		delete craftingValues;
+
+		// Setup custom attachment naming scheme here
 		HashTable<String, int>* mods = attachment->getSkillMods();
 		HashTableIterator<String, int> iterator = mods->iterator();
 		StringId attachmentName;
@@ -774,7 +791,7 @@ void LootManagerImplementation::setSkillMods(TangibleObject* object, const LootI
 				mod = 1;
 			}
 
-			String modName = getRandomLootableMod( object->getGameObjectType() );
+			String modName = getRandomLootableMod(object->getGameObjectType(), templateObject->getTemplateName());
 			if( !modName.isEmpty() ){
 				additionalMods.put(modName, mod);
 			}
@@ -800,12 +817,19 @@ void LootManagerImplementation::setSkillMods(TangibleObject* object, const LootI
 		object->addMagicBit(false);
 }
 
-String LootManagerImplementation::getRandomLootableMod( unsigned int sceneObjectType ) {
+// String LootManagerImplementation::getRandomLootableMod( unsigned int sceneObjectType ) {
+String LootManagerImplementation::getRandomLootableMod( unsigned int sceneObjectType, const String& lootTemplateName) {
+
 	if( sceneObjectType == SceneObjectType::ARMORATTACHMENT ){
 		return lootableArmorAttachmentMods.get(System::random(lootableArmorAttachmentMods.size() - 1));
 	}
-	else if( sceneObjectType == SceneObjectType::CLOTHINGATTACHMENT ){
+
+	else if( sceneObjectType == SceneObjectType::CLOTHINGATTACHMENT && lootTemplateName == "attachment_clothing"){
 		return lootableClothingAttachmentMods.get(System::random(lootableClothingAttachmentMods.size() - 1));
+	}
+	// Custom Jedi CA extension that I wrote on Infinity years ago
+	else if( sceneObjectType == SceneObjectType::CLOTHINGATTACHMENT && lootTemplateName == "attachment_jedi_clothing"){
+		return lootableJediMods.get(System::random(lootableJediMods.size() - 1));
 	}
 	else if( sceneObjectType == SceneObjectType::ARMOR || sceneObjectType == SceneObjectType::BODYARMOR ||
 			 sceneObjectType == SceneObjectType::HEADARMOR || sceneObjectType == SceneObjectType::MISCARMOR ||

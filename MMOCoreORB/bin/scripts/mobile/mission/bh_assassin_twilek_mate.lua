@@ -4,7 +4,7 @@ bh_assassin_twilek_mate = Creature:new {
 	randomNameTag = true,
 	socialGroup = "thug",
 	faction = "thug",
-	level = 18,
+	level = 45,
 	chanceHit = 0.32,
 	damageMin = 170,
 	damageMax = 180,
@@ -28,21 +28,46 @@ bh_assassin_twilek_mate = Creature:new {
 	diet = HERBIVORE,
 
 	templates = {"object/mobile/dressed_cobral_assassin_twk_male_01.iff"},
+	-- Revamped BH Loot Pass #1
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "loot_kit_parts", chance = 10000000},
 			},
-			lootChance = 3360000
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 5000000},
+				{group = "power_crystals", chance = 5000000},
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 1000000},
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 1000000},
+			},
+			lootChance = 4500000
 		}
 	},
 	weapons = {"pirate_weapons_heavy"},

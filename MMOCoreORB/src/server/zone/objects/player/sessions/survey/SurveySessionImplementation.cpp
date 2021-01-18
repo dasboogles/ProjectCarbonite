@@ -116,7 +116,7 @@ void SurveySessionImplementation::startSurvey(const String& resname) {
 		return;
 	}
 
-	if (spawn->getSurveyToolType() != activeSurveyTool->getToolType() && !(activeSurveyTool->getToolType() == SurveyTool::INORGANIC && spawn->isType("inorganic"))) {
+	if (spawn->getSurveyToolType() != activeSurveyTool->getToolType() && !((activeSurveyTool->getToolType() == SurveyTool::INORGANIC && spawn->isType("inorganic")) || (activeSurveyTool->getToolType() == SurveyTool::ORGANIC && spawn->isType("organic")))) {
 		StringIdChatParameter message("@survey:wrong_tool"); // %TO resources cannot be located with this tool
 		message.setTO(spawn->getFinalClass());
 		surveyer->sendSystemMessage(message);
@@ -191,6 +191,12 @@ void SurveySessionImplementation::startSample(const String& resname) {
 		return;
 	}
 
+	// Do NOT let people sample from the ground for ORGANICs
+	if (activeSurveyTool->getToolType() == SurveyTool::ORGANIC && resourceSpawn->isType("organic") ) {
+		surveyer->sendSystemMessage("You cannot sample this resource from the ground. You'll need to hire a Ranger or place down a Harvester.");
+		return;
+	}
+
 	//Get actual cost based upon player's Quickness
 	int actionCost = 124 - (int)(surveyer->getHAM(CreatureAttribute::QUICKNESS)/12.5f);
 
@@ -200,7 +206,7 @@ void SurveySessionImplementation::startSample(const String& resname) {
 		return;
 	}
 
-	if (resourceSpawn->getSurveyToolType() != activeSurveyTool->getToolType() && !(activeSurveyTool->getToolType() == SurveyTool::INORGANIC && resourceSpawn->isType("inorganic"))) {
+	if (resourceSpawn->getSurveyToolType() != activeSurveyTool->getToolType() && !((activeSurveyTool->getToolType() == SurveyTool::INORGANIC && resourceSpawn->isType("inorganic")) || (activeSurveyTool->getToolType() == SurveyTool::ORGANIC && resourceSpawn->isType("organic")))) {
 		StringIdChatParameter message("@survey:wrong_tool"); // %TO resources cannot be located with this tool
 		message.setTO(resourceSpawn->getFinalClass());
 		surveyer->sendSystemMessage(message);

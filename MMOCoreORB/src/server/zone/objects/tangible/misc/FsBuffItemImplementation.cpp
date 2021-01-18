@@ -6,6 +6,8 @@
 #include "server/zone/objects/creature/BuffAttribute.h"
 #include "server/zone/Zone.h"
 #include "server/zone/ZoneServer.h"
+#include "server/zone/objects/creature/buffs/PrivateBuff.h"
+#include "server/zone/objects/creature/buffs/PrivateSkillMultiplierBuff.h"
 
 void FsBuffItemImplementation::fillObjectMenuResponse(ObjectMenuResponse* menuResponse, CreatureObject* player) {
 	menuResponse->addRadialMenuItem(68, 3, "@quest/force_sensitive/utils:use_special_effect");
@@ -18,7 +20,7 @@ int FsBuffItemImplementation::handleObjectMenuSelect(CreatureObject* player, byt
 	if (selectedID == 68) {
 		// uint32 buffCRC = getBuffCRC();
 		// FS_VILLAGE_CRYSTAL_BUFF
-		uint32 buffCRC = BuffCRC::JEDI_FS_VILLAGE_CRYSTAL_BUFF; // custom FS Village Crystal Buff
+		uint32 buffCRC = 0x3F499FBC; // custom FS Village Crystal Buff
 
 		if (player->hasBuff(buffCRC)) {
 			player->sendSystemMessage("@quest/force_sensitive/utils:have_buff");

@@ -15,6 +15,15 @@ function ForceShrineMenuComponent:fillObjectMenuResponse(pSceneObject, pMenuResp
 		menuResponse:addRadialMenuItem(122, 3, "Retrieve Force Shrine") -- Recover Force Shrine for Trials
 	end
 
+	-- Enable PickUp for Shrines
+	local parent = SceneObject(pSceneObject):getParent()
+	local playerCell = SceneObject(pPlayer):getParent()
+	if (parent ~= nil and playerCell ~= nil) then
+		-- If the Cell_ID is the same as the Shrine's Cell_ID then we show the pickup entry
+		if (LuaCellObject(parent):getCellNumber() == LuaCellObject(playerCell):getCellNumber()) then
+			menuResponse:addRadialMenuItem(10, 3, "@ui_radial:item_pickup"); -- Pick up
+		end
+	end
 end
 
 function ForceShrineMenuComponent:handleObjectMenuSelect(pObject, pPlayer, selectedID)

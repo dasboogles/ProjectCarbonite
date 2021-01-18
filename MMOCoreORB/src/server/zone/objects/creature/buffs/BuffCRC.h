@@ -106,7 +106,13 @@ public:
 		JEDI_AVOID_INCAPACITATION_3 = 0xA9F58647,
 		JEDI_AVOID_INCAPACITATION_4 = 0xB7B2D642,
 		JEDI_AVOID_INCAPACITATION_5 = 0xB373CBF5,
-		JEDI_FS_VILLAGE_CRYSTAL_BUFF = 0x6DD54898
+	};
+
+	// Custom Carbonite JEDI
+	enum {
+		JEDI_FS_VILLAGE_CRYSTAL_BUFF = 0x3F499FBC, // jedi.fs_village_crystal_buff
+		JEDI_FORCE_MAKASHI = 0x5AC540E1, // Master Enhancer SelfBuff
+		JEDI_FORCE_SORESU = 0xEAC45379 // Master Defender SelfBuff
 	};
 
 
@@ -214,6 +220,7 @@ public:
 		FOOD_DRINK_VERONIAN_BERRY_WINE          = 0xABA01703
 	};
 
+	// FOOD_DRINK_VASARIAN_BRANDY              = 0x292DD6D3,
 
 	uint32 static getMedicalBuff(uint8 attribute) {
 		uint32 buffCRC = 0;

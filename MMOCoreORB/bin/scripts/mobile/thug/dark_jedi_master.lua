@@ -4,13 +4,13 @@ dark_jedi_master = Creature:new {
 	randomNameTag = true,
 	socialGroup = "dark_jedi",
 	faction = "",
-	level = 291,
+	level = 300,
 	chanceHit = 27.25,
 	damageMin = 1800,
 	damageMax = 3310,
 	baseXp = 27849,
 	baseHAM = 321000,
-	baseHAMmax = 392000,
+	baseHAMmax = 492000,
 	armor = 3,
 	resists = {90,90,90,90,90,90,90,90,-1},
 	meatType = "",
@@ -31,18 +31,58 @@ dark_jedi_master = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "holocron_dark", chance = 600000},
-				{group = "holocron_light", chance = 600000},
-				{group = "power_crystals", chance = 600000},
-				{group = "rifles", chance = 1300000},
-				{group = "pistols", chance = 1300000},
-				{group = "melee_weapons", chance = 1300000},
-				{group = "armor_attachments", chance = 1100000},
-				{group = "clothing_attachments", chance = 1100000},
-				{group = "carbines", chance = 1300000},
-				{group = "dark_jedi_common", chance = 800000}
-			}
-		}
+				{group = "jedi_clothing_attachments", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "jedi_clothing_attachments", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "dark_jedi_common", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "dark_jedi_common", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "holocron_dark", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "holocron_light", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "power_crystals", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
 	},
 	weapons = {"dark_jedi_weapons_gen4"},
 	conversationTemplate = "",

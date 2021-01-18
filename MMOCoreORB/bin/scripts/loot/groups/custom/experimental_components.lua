@@ -5,7 +5,6 @@ experimental_components = {
 	lootItems = {
         {itemTemplate = "overclocked_sword_core", weight = 7500000},
         {itemTemplate = "experimental_nightsister_vibro_unit", weight = 2500000},
-        
 	}
 }
 

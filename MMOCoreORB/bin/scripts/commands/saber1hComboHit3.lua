@@ -55,18 +55,6 @@ Saber1hComboHit3Command = {
 	animation = "showoff_1", 
 	animType = GENERATE_INTENSITY,
 
-	stateEffects = {
-	  StateEffect( 
-		POSTUREDOWN_EFFECT, 
-		{ "postureDownRecovery" }, 
-		{ "posture_change_down_defense" }, 
-		{},
-		40, 
-		0, 
-		0 
-	  )
-	},
-
 	combatSpam = "saber1hcombohit3",
 
 	poolsToDamage = HEALTH_ATTRIBUTE + ACTION_ATTRIBUTE + MIND_ATTRIBUTE,

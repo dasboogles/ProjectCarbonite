@@ -195,9 +195,9 @@ lootableClothingAttachmentStatMods = {
 	"food_experimentation",
 	-- "foraging",
 	"general_assembly",
-	-- "general_experimentation",
+	"general_experimentation",
 	-- "grenade_assembly",
-	"grenade_experimentation",
+	-- "grenade_experimentation",
 	"group_slope_move",
 	"healing_ability",
 	"healing_dance_mind",
@@ -328,9 +328,9 @@ lootableArmorStatMods = {
 	"food_experimentation",
 	-- "foraging",
 	"general_assembly",
-	-- "general_experimentation",
+	"general_experimentation",
 	-- "grenade_assembly",
-	"grenade_experimentation",
+	-- "grenade_experimentation",
 	"group_slope_move",
 	"healing_dance_mind",
 	"healing_dance_shock",
@@ -450,9 +450,9 @@ lootableClothingStatMods = {
 	"food_experimentation",
 	-- "foraging",
 	"general_assembly",
-	-- "general_experimentation",
+	"general_experimentation",
 	-- "grenade_assembly",
-	"grenade_experimentation",
+	-- "grenade_experimentation",
 	"group_slope_move",
 	"healing_dance_mind",
 	"healing_dance_shock",
@@ -858,6 +858,13 @@ lootableHeavyWeaponStatMods = {
 	"thrown_accuracy",
 	"thrown_speed",
 	-- "volley"
+}
+
+lootableJediStatMods = {
+	"jedi_force_power_regen",
+	"lightsaber_accuracy",
+	"lightsaber_speed",
+	"force_powers_accuracy"
 }
 
 -- Values used to generate lightsaber crystal stats

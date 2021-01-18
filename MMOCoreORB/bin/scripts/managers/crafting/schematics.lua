@@ -184,6 +184,7 @@ schematics = {
 	{path="object/draft_schematic/item/item_survey_tool_gas.iff"},
 	{path="object/draft_schematic/item/item_survey_tool_liquid.iff"},
 	{path="object/draft_schematic/item/item_survey_tool_mineral.iff"},
+	{path="object/draft_schematic/item/item_survey_tool_organic.iff"},
 	{path="object/draft_schematic/item/item_survey_tool_moisture.iff"},
 	{path="object/draft_schematic/item/item_survey_tool_flora.iff"},
 	{path="object/draft_schematic/item/item_survey_tool_solar.iff"},
@@ -1839,9 +1840,11 @@ schematics = {
 	-- Custom SEA Removal
 	{path="object/draft_schematic/item/clothing_sea_removal_tool.iff"},
 
-	-- Invis Clothing
+	-- Custom Invis Clothing
 	{path="object/draft_schematic/clothing/clothing_hat_invis.iff"},
 	{path="object/draft_schematic/clothing/clothing_shirt_invis.iff"},
 	{path="object/draft_schematic/clothing/clothing_gloves_invis.iff"},
 	
+	-- Custom Weapons
+	{path="object/draft_schematic/weapon/appearance/weapon_appearance_carbine_nym_slugthrower.iff"},
 };

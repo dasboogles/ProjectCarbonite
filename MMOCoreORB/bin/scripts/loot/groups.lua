@@ -384,6 +384,7 @@ includeFile("groups/custom/geo_custom_schematics.lua")
 includeFile("groups/custom/experimental_components.lua")
 includeFile("groups/custom/experimental_geo_cubes.lua")
 includeFile("groups/custom/themepark_specific_loot.lua")
+includeFile("groups/custom/jedi_clothing_attachments.lua")
 
 -- Epic Loot Groups (look into SRC changes needed to make this work)
 includeFile("groups/weapon/high_end_weapons_all.lua")

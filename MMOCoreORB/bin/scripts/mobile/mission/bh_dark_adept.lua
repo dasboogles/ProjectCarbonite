@@ -4,7 +4,7 @@ bh_dark_adept = Creature:new {
 	randomNameTag = true,
 	socialGroup = "dark_jedi",
 	faction = "",
-	level = 120,
+	level = 240,
 	chanceHit = 4.75,
 	damageMin = 945,
 	damageMax = 1600,
@@ -31,50 +31,81 @@ bh_dark_adept = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "themepark_specific_loot", chance = 10000000},
 			},
-			lootChance = 5400000
+			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "themepark_specific_loot", chance = 10000000},
 			},
-			lootChance = 5400000
+			lootChance = 7500000
 		},
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000},
-				{group = "power_crystals", chance = 500000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "themepark_specific_loot", chance = 10000000},
 			},
-			lootChance = 5400000
+			lootChance = 4500000
 		},
+		{
+			groups = {
+				{group = "experimental_components", chance = 10000000},
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "loot_kit_parts", chance = 10000000},
+			},
+			lootChance = 10000000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 5000000},
+				{group = "power_crystals", chance = 5000000},
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 5000000},
+				{group = "power_crystals", chance = 5000000},
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "color_crystals", chance = 5000000},
+				{group = "power_crystals", chance = 5000000},
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
+			},
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 1000000},
+			},
+			lootChance = 10000000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 1000000},
+			},
+			lootChance = 10000000
+		}
 	},
 	weapons = {"dark_jedi_weapons_gen2"},
 	conversationTemplate = "",

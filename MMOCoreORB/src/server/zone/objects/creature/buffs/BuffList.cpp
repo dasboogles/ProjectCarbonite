@@ -84,9 +84,9 @@ void BuffList::addBuff(Buff* buff) {
 	uint32 buffcrc = buff->getBuffCRC();
 
 	//Remove the old buff if it exists. (Exists checked in removeBuff)
-	if ((buff->getBuffType() == BuffType::FOOD && !buff->isAttributeBuff())
-			|| (buff->getBuffType() != BuffType::FOOD))
+	if ((buff->getBuffType() == BuffType::FOOD && !buff->isAttributeBuff()) || (buff->getBuffType() != BuffType::FOOD)) {
 		removeBuff(buffcrc);
+	}
 
 	if (!buff->isPersistent())
 		ObjectManager::instance()->persistObject(buff, 1, "buffs");

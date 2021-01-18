@@ -63,12 +63,12 @@ object_draft_schematic_weapon_lance_vibro_controller_fp = object_draft_schematic
    customizationStringNames = {},
    customizationDefaults = {},
 
-   ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
-   ingredientTitleNames = {"staff_shaft", "vibro_unit_and_power_cell_brackets", "power_circuits", "vibration_generator"},
-   ingredientSlotType = {0, 0, 1, 1},
-   resourceTypes = {"metal_ferrous", "metal", "object/tangible/component/item/shared_electronic_control_unit.iff", "object/tangible/component/weapon/shared_vibro_unit.iff"},
-   resourceQuantities = {17, 27, 1, 1},
-   contribution = {100, 100, 100, 100},
+   ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
+   ingredientTitleNames = {"staff_shaft", "vibro_unit_and_power_cell_brackets", "power_circuits", "vibration_generator", "shaft"},
+   ingredientSlotType = {0, 0, 1, 1, 1},
+   resourceTypes = {"metal_ferrous", "metal", "object/tangible/component/item/shared_electronic_control_unit.iff", "object/tangible/component/weapon/shared_vibro_unit.iff", "object/tangible/component/weapon/shared_vibro_unit.iff"},
+   resourceQuantities = {17, 27, 1, 1, 1},
+   contribution = {100, 100, 100, 100, 100},
 
 
    targetTemplate = "object/weapon/melee/polearm/lance_controllerfp.iff",

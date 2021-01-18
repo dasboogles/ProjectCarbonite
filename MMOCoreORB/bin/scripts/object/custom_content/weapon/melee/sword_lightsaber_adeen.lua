@@ -82,7 +82,7 @@ object_weapon_melee_sword_sword_lightsaber_adeen = object_weapon_melee_sword_sha
 	-- See http://www.ocdsoft.com/files/certifications.xls
 	certificationsRequired = { "cert_onehandlightsaber_gen4" },
 	-- See http://www.ocdsoft.com/files/accuracy.xls
-	creatureAccuracyModifiers = { "onehandlightsaber_accuracy" },
+	creatureAccuracyModifiers = { "lightsaber_accuracy" },
 
 	-- See http://www.ocdsoft.com/files/defense.xls
 	defenderDefenseModifiers = { "melee_defense" },

@@ -1267,6 +1267,12 @@ class CreatureObject extends TangibleObject {
 		return !super.getPendingTask("conditionTreatment");
 	}
 
+	@preLocked
+	public native boolean isWearingArmor();
+
+	@preLocked
+	public native boolean hasJediSkills();
+
 	@reference
 	@dirty
 	public native PlayerObject getPlayerObject();

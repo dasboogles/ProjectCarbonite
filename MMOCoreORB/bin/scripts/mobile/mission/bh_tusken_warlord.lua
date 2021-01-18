@@ -2,7 +2,7 @@ bh_tusken_warlord = Creature:new {
 	objectName = "@mob/creature_names:tusken_warlord",
 	socialGroup = "tusken_raider",
 	faction = "tusken_raider",
-	level = 62,
+	level = 120,
 	chanceHit = 0.62,
 	damageMin = 455,
 	damageMax = 620,
@@ -26,51 +26,46 @@ bh_tusken_warlord = Creature:new {
 	diet = HERBIVORE,
 
 	templates = {"object/mobile/tusken_raider.iff"},
+	-- Revamped BH Loot Pass #1
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "loot_kit_parts", chance = 10000000},
 			},
-			lootChance = 4220000
+			lootChance = 5500000
 		},
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "color_crystals", chance = 5000000},
+				{group = "power_crystals", chance = 5000000},
 			},
-			lootChance = 4220000
+			lootChance = 2500000
 		},
 		{
 			groups = {
-				{group = "junk", chance = 2500000},
-				{group = "tailor_components", chance = 500000},
-				{group = "loot_kit_parts", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "power_crystals", chance = 1000000},
-				{group = "wearables_all", chance = 1000000},
-				{group = "weapons_all", chance = 1000000},
-				{group = "armor_all", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000}
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
 			},
-			lootChance = 4220000
+			lootChance = 6500000
+		},
+		{
+			groups = {
+				{group = "clothing_attachments", chance = 5000000},
+				{group = "armor_attachments", chance = 5000000}
+			},
+			lootChance = 6500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 1000000},
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 1000000},
+			},
+			lootChance = 7500000
 		}
 	},
 	weapons = {"tusken_weapons"},

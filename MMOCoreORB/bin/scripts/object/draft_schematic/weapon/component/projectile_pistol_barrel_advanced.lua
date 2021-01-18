@@ -66,7 +66,7 @@ object_draft_schematic_weapon_component_projectile_pistol_barrel_advanced = obje
    ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
    ingredientTitleNames = {"lining", "bore"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel_duralloy", "iron_plumbum"},
+   resourceTypes = {"steel", "iron"},
    resourceQuantities = {29, 17},
    contribution = {100, 100},
 

@@ -166,7 +166,7 @@ acklay_boss = Creature:new {
 	attacks = {
 		{"creatureareacombo","stateAccuracyBonus=100"},
 		{"creatureareaknockdown","stateAccuracyBonus=100"},
-		{"strongpoison",""}
+		{"creatureareapoison","stateAccuracyBonus=90"}
 	}
 }
 

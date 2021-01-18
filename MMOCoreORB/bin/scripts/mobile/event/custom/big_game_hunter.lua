@@ -29,7 +29,8 @@ big_game_hunter = Creature:new {
  
     templates = {"object/mobile/dressed_death_watch_silver.iff"},
     lootGroups = {},
-    weapons = {},
+    weapons = {"imperial_weapons_heavy"},
+    -- conversationTemplate = "bghConvoTemplate", -- Broken, come back to this!
     conversationTemplate = {},
     attacks = {}
  }

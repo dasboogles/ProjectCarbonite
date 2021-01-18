@@ -166,7 +166,8 @@ rancor_boss = Creature:new {
 	attacks = {
 		{"creatureareacombo","stateAccuracyBonus=100"},
 		{"creatureareaknockdown","stateAccuracyBonus=100"},
-		{"creatureareadisease","stateAccuracyBonus=100"}
+		{"creatureareadisease","stateAccuracyBonus=90"},
+		{"strongdisease",""}
 	}
 }
 

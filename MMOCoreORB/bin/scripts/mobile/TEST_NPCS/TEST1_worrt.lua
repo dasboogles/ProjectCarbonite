@@ -33,61 +33,61 @@ TEST1_worrt = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		},
 		{
 			groups = {
-				{group = "clothing_attachments", chance = 10000000}
+				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 10000000
 		}

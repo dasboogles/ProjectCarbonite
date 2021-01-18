@@ -841,6 +841,9 @@
 #include "custom/WarDevCommand.h"
 #include "custom/RegrantSkillsCommand"
 #include "custom/LotsCommand.h"
+// Jedi Custom
+#include "custom/jedi/ForceSoresuCommand.h"
+#include "custom/jedi/ForceMakashiCommand.h"
 // Custom
 
 

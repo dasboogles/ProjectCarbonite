@@ -42,7 +42,7 @@
 
 
 object_mobile_dressed_hutt_informant_quest = object_mobile_shared_dressed_hutt_informant_quest:new {
-
+    objectMenuComponent = "TrainerMenuComponent"
 }
 
 ObjectTemplates:addTemplate(object_mobile_dressed_hutt_informant_quest, "object/mobile/dressed_hutt_informant_quest.iff")

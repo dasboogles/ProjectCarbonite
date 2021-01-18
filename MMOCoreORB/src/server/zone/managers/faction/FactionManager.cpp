@@ -221,8 +221,8 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 				BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
 				pvpNotificationChat->broadcastMessage(msg);
 			}
-		//Grouped Fight clubbing
-		// only check members in Xp range of 128m		
+			//Grouped Fight clubbing
+			// only check members in Xp range of 128m		
 			const float Range = 128.0f;		
 			int groupMembersInRange = 1; // includes the original killer
 
@@ -236,8 +236,9 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 					ManagedReference<CreatureObject*> groupMember = group->getGroupMember(i);
 
 					// skip the killer passed in
-					if (killerCreature->getObjectID() == groupMember->getObjectID())
+					if (killerCreature->getObjectID() == groupMember->getObjectID()) {
 						continue;
+					}
 
 					// if the group member is in range...
 					if (killerCreature->isInRange(groupMember, Range)) {
@@ -248,21 +249,16 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 
 						killerNames += " " + getFactionHex(groupMemberCreature) + groupMemberCreature->getFirstName();
 
-						if (!groupMemberCreature->isPlayerCreature())
+						if (!groupMemberCreature->isPlayerCreature()) {
 							continue;
+						}
 
-					// if the group member is in range...
+						// if the group member is in range...
 						if (killerCreature->isInRange(groupMember, Range)) {
-					
-					// increment group counter
+							// increment group counter
 							groupMembersInRange++;
-					
-
-						ManagedReference<PlayerObject*> groupMemberGhost = groupMemberCreature->getPlayerObject();
-
-						const bool isFightClubbing = groupMemberGhost->getAccountID() == killedGhost->getAccountID();
-						
-
+							ManagedReference<PlayerObject*> groupMemberGhost = groupMemberCreature->getPlayerObject();
+							const bool isFightClubbing = groupMemberGhost->getAccountID() == killedGhost->getAccountID();
 							if (isFightClubbing) {
 								killerCreature->sendSystemMessage(fightClubMessage);
 							
@@ -277,13 +273,13 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 					}
 				}
 			}
-	// all kills
-			
+
+			// all kills
 			killer->playEffect("clienteffect/holoemote_rebel.cef", "head");
 			PlayMusicMessage* pmm = new PlayMusicMessage("sound/music_themequest_victory_imperial.snd");
  			killer->sendMessage(pmm);
 			
-			killedGhost->addExperience("gcw_skill_xp", -2000, true); // remove target xp
+			// killedGhost->addExperience("gcw_skill_xp", -2000, true); // remove target xp
 
 			UnicodeString message;
 			
@@ -313,7 +309,7 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 				pvpNotificationChat->broadcastMessage(msg);
 			}
 		
-		// Group kill split GCW	
+			// Group kill split GCW	
 			group = killerCreature->getGroup();
 			Vector<ManagedReference<CreatureObject*> > players;
 			int playerCount = 1;
@@ -332,24 +328,31 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 				players.add(killerCreature);
 			}
 
-			if (players.size() == 0)
+			if (players.size() == 0) {
 				players.add(killerCreature);
+			}
 
 			if (playerCount > players.size())
 				killerCreature->sendSystemMessage(" \\#f0f497[GCW] \\#ffffffSome players were too far away from the kill!"); // Mission Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.
 
 			int dividedKill = 5000 / players.size();//award gcw xp for group 
-			if (players.size() == 1)
+
+			if (players.size() == 1) {
 				dividedKill = 5000;//award gcw xp for solo
-			if (dividedKill < 1000)
-				dividedKill = 1000;
-			for (int i = 0; i < players.size(); i++){
-				ManagedReference<CreatureObject*> player = players.get(i);
-				ManagedReference<PlayerManager*> groupPlayerManager = player->getZoneServer()->getPlayerManager();
-				groupPlayerManager->awardExperience(player, "gcw_skill_xp", dividedKill);
-				StringBuffer sysMessage;
-				sysMessage << " \\#f0f497[GCW] \\#ffffffYou have received \\#41f4d9" << dividedKill << " GCW XP \\#fffffffor your kill participation!";
 			}
+
+			if (dividedKill < 1000) {
+				dividedKill = 1000;
+			}
+
+			// Disable for now until GCW iteration
+			// for (int i = 0; i < players.size(); i++) {
+			// 	ManagedReference<CreatureObject*> player = players.get(i);
+			// 	ManagedReference<PlayerManager*> groupPlayerManager = player->getZoneServer()->getPlayerManager();
+			// 	groupPlayerManager->awardExperience(player, "gcw_skill_xp", dividedKill);
+			// 	StringBuffer sysMessage;
+			// 	sysMessage << " \\#f0f497[GCW] \\#ffffffYou have received \\#41f4d9" << dividedKill << " GCW XP \\#fffffffor your kill participation!";
+			// }
 		}
 		// Faction gain
 		if (killer->isRebel() && destructedObject->isImperial()) {

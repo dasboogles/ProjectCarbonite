@@ -42,7 +42,7 @@
 
 
 object_tangible_jedi_shared_force_shrine_stone = SharedTangibleObjectTemplate:new {
-	clientTemplateFileName = "object/tangible/jedi/shared_force_shrine_stone.iff"
+	clientTemplateFileName = "object/tangible/jedi/shared_force_shrine_stone.iff",
 	--Data below here is deprecated and loaded from the tres, keeping for easy lookups
 --[[
 	appearanceFilename = "appearance/thm_dant_jedi_temple_pillar_sm.apt",

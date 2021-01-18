@@ -300,4 +300,5 @@ includeFile("custom_content/conversations.lua")
 
 ---Carbonite Custom
 includeFile("conversations/events/bounty_vendor.lua")
+includeFile("conversations/custom/bgh_conv.lua")
 

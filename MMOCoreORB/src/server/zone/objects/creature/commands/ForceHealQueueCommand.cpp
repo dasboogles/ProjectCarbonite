@@ -55,6 +55,15 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 	int totalCost = forceCost;
 	bool healPerformed = false;
 
+	// Healing Mod
+	float healingMod = creature->getSkillMod("jedi_force_healing_mod");
+	// Investment Mod
+	float investmentMod = (100 - healingMod) / 100;
+	// Apply our investment modifier to totalCost
+	totalCost *= investmentMod;
+	// Apply our investment modifier to forceCostMultiplier (reduce the forceCostMultiplier)
+	float modifiedForceCostMultiplier = forceCostMultiplier * investmentMod;
+
 	// Attribute Wound Healing
 	for (int i = 0; i < 3; i++) {
 		// Attrib Values: Health = 1, Action = 2, Mind = 4
@@ -67,12 +76,12 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 					if (healWoundAmount > 0 && woundAmount > healWoundAmount)
 						woundAmount = healWoundAmount;
 
-					totalCost += woundAmount * forceCostMultiplier;
+					totalCost += woundAmount * modifiedForceCostMultiplier;
 
 					if (totalCost > currentForce) {
 						int forceDiff = totalCost - currentForce;
 						totalCost -= forceDiff;
-						woundAmount -= forceDiff / forceCostMultiplier;
+						woundAmount -= forceDiff / modifiedForceCostMultiplier;
 					}
 
 					if (woundAmount > 0) {
@@ -98,15 +107,18 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 				if (healAmount > 0 && amtToHeal > healAmount)
 					amtToHeal = healAmount;
 
-				totalCost += amtToHeal * forceCostMultiplier;
+				totalCost += amtToHeal * modifiedForceCostMultiplier;
 
 				if (totalCost > currentForce) {
 					int forceDiff = totalCost - currentForce;
 					totalCost -= forceDiff;
-					amtToHeal -= forceDiff / forceCostMultiplier;
+					amtToHeal -= forceDiff / modifiedForceCostMultiplier;
 				}
 
 				if (amtToHeal > 0) {
+					// creature->sendSystemMessage("Pre-HealingBonus: " + String::valueOf(amtToHeal));
+					amtToHeal *= (healingMod / 100) + 1;
+					// creature->sendSystemMessage("Post-HealingBonus: " + String::valueOf(amtToHeal));
 					targetCreature->healDamage(creature, attrib, amtToHeal, true);
 					healPerformed = true;
 					sendHealMessage(creature, targetCreature, HEAL_DAMAGE, attrib, amtToHeal);
@@ -122,12 +134,12 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 		if (healBattleFatigue > 0 && battleFatigue > healBattleFatigue)
 			battleFatigue = healBattleFatigue;
 
-		totalCost += battleFatigue * forceCostMultiplier;
+		totalCost += battleFatigue * modifiedForceCostMultiplier;
 
 		if (totalCost > currentForce) {
 			int forceDiff = totalCost - currentForce;
 			totalCost -= forceDiff;
-			battleFatigue -= forceDiff / forceCostMultiplier;
+			battleFatigue -= forceDiff / modifiedForceCostMultiplier;
 		}
 
 		if (battleFatigue > 0) {
@@ -146,7 +158,7 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 
 			if ((statesToHeal & state) && targetCreature->hasState(state)) {
 				totalStates++;
-				int newTotal = totalCost + healStateCost;
+				int newTotal = totalCost + (healStateCost * investmentMod);
 
 				if (newTotal < currentForce) {
 					targetCreature->removeStateBuff(state);
@@ -168,7 +180,7 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 
 		while (!result && (totalCost + healBleedingCost < currentForce) && (bleedHealIterations == -1 || iteration <= bleedHealIterations)) {
 			result = targetCreature->healDot(CreatureState::BLEEDING, 250, false);
-			totalCost += healBleedingCost;
+			totalCost += (healBleedingCost * investmentMod);
 			iteration++;
 		}
 
@@ -188,7 +200,7 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 
 		while (!result && (totalCost + healPoisonCost < currentForce) && (poisonHealIterations == -1 || iteration <= poisonHealIterations)) {
 			result = targetCreature->healDot(CreatureState::POISONED, 250, false);
-			totalCost += healPoisonCost;
+			totalCost += (healPoisonCost * investmentMod);
 			iteration++;
 		}
 
@@ -208,7 +220,7 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 
 		while (!result && (totalCost + healDiseaseCost < currentForce) && (diseaseHealIterations == -1 || iteration <= diseaseHealIterations)) {
 			result = targetCreature->healDot(CreatureState::DISEASED, 200, false);
-			totalCost += healDiseaseCost;
+			totalCost += (healDiseaseCost * investmentMod);
 			iteration++;
 		}
 
@@ -228,7 +240,7 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 
 		while (!result && (totalCost + healFireCost < currentForce) && (fireHealIterations == -1 || iteration <= fireHealIterations)) {
 			result = targetCreature->healDot(CreatureState::ONFIRE, 500, false);
-			totalCost += healFireCost;
+			totalCost += (healFireCost * investmentMod);
 			iteration++;
 		}
 
@@ -253,6 +265,8 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 			playerObject->setForcePower(0);
 			creature->error("Did not have enough force to pay for the healing he did. Total cost of command: " + String::valueOf(totalCost) + ", player's current force: " + String::valueOf(currentForce));
 		} else {
+			// Do PrintOut here of final cost
+			creature->sendSystemMessage("Final Cost of heal: " + String::valueOf(totalCost));
 			playerObject->setForcePower(currentForce - totalCost);
 		}
 

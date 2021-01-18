@@ -4054,3 +4054,32 @@ void CreatureObjectImplementation::setHue(int hueIndex) {
 void CreatureObjectImplementation::setClient(ZoneClientSession* cli) {
 	owner = cli;
 }
+
+// Copied from QueueCommand.h so we can use it in other areas of the server
+bool CreatureObjectImplementation::isWearingArmor() {
+	ManagedReference<CreatureObject*> creo = asCreatureObject();
+
+	// Loop through all current slots of the creature
+	for (int i = 0; i < creo->getSlottedObjectsSize(); ++i) {
+		SceneObject* item = creo->getSlottedObject(i);
+		if (item != nullptr && item->isArmorObject()) {
+			return true;
+		}
+	}
+	// No not wearing armor
+	return false;
+}
+
+// This will check whether or not the selected creature/player has ANY jedi skills
+// Used in anti-hybrid checks
+bool CreatureObjectImplementation::hasJediSkills() {
+	ManagedReference<CreatureObject*> creo = asCreatureObject();
+	// Check for novice boxes in Jedi
+	if (creo != nullptr) {
+		if (creo->hasSkill("force_discipline_light_saber_novice") || creo->hasSkill("force_discipline_enhancements_novice") || creo->hasSkill("force_discipline_healing_novice") || creo->hasSkill("force_discipline_powers_novice")) {
+			return true;
+		}
+	}
+
+	return false;
+}

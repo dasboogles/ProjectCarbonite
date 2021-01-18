@@ -198,7 +198,7 @@ int TangibleObjectMenuComponent::handleObjectMenuSelect(SceneObject* sceneObject
 								modValue = 1;
 							}
 
-							sea = lootManager->createLootAttachment(itemTemplate,modKey, modValue); 
+							sea = lootManager->createLootAttachment(itemTemplate, modKey, modValue); 
 
 							if (sea != nullptr){
 								Attachment* attachment = cast<Attachment*>(sea.get());
