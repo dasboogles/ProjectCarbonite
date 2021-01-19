@@ -33,13 +33,13 @@ dark_jedi_master = Creature:new {
 			groups = {
 				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
-			lootChance = 5500000
+			lootChance = 7500000
 		},
 		{
 			groups = {
 				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
-			lootChance = 2500000
+			lootChance = 6500000
 		},
 		{
 			groups = {
@@ -69,19 +69,19 @@ dark_jedi_master = Creature:new {
 			groups = {
 				{group = "power_crystals", chance = 10000000}
 			},
-			lootChance = 2500000
+			lootChance = 6500000
 		},
 		{
 			groups = {
 				{group = "power_crystals", chance = 10000000}
 			},
-			lootChance = 2500000
+			lootChance = 5500000
 		},
 		{
 			groups = {
 				{group = "power_crystals", chance = 10000000}
 			},
-			lootChance = 2500000
+			lootChance = 4500000
 		},
 	},
 	weapons = {"dark_jedi_weapons_gen4"},

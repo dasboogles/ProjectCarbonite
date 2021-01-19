@@ -33,7 +33,7 @@ dark_jedi_knight = Creature:new {
 			groups = {
 				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
-			lootChance = 3500000
+			lootChance = 5500000
 		},
 		{
 			groups = {
@@ -63,13 +63,13 @@ dark_jedi_knight = Creature:new {
 			groups = {
 				{group = "power_crystals", chance = 10000000}
 			},
-			lootChance = 2000000
+			lootChance = 4000000
 		},
 		{
 			groups = {
 				{group = "power_crystals", chance = 10000000}
 			},
-			lootChance = 2000000
+			lootChance = 4000000
 		},
 	},
 	weapons = {"dark_jedi_weapons_gen3"},
