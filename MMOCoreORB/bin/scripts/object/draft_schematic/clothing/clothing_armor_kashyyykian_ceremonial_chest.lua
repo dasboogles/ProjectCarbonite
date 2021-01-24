@@ -63,7 +63,18 @@ object_draft_schematic_clothing_clothing_armor_kashyyykian_ceremonial_chest = ob
    customizationStringNames = {},
    customizationDefaults = {},
 
-   ingredientTemplateNames = {"craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n"},
+   ingredientTemplateNames = {
+                              "craft_clothing_ingredients_n", 
+                              "craft_clothing_ingredients_n", 
+                              "craft_clothing_ingredients_n", 
+                              "craft_clothing_ingredients_n", 
+                              "craft_clothing_ingredients_n", 
+                              "craft_clothing_ingredients_n", 
+                              "craft_clothing_ingredients_n", 
+                              "craft_clothing_ingredients_n", 
+                              "craft_clothing_ingredients_n"
+                           },
+   
    ingredientTitleNames = {"auxilary_coverage", "body", "liner", "hardware_and_attachments", "binding_and_reinforcement", "padding", "armor", "load_bearing_harness", "reinforcement"},
    ingredientSlotType = {0, 0, 0, 0, 0, 0, 1, 1, 1},
    resourceTypes = {"wood", "hide_leathery", "hide_wooly", "copper", "petrochem_inert_polymer", "hide", "object/tangible/component/armor/shared_armor_segment_composite.iff", "object/tangible/component/clothing/shared_synthetic_cloth.iff", "object/tangible/component/clothing/shared_reinforced_fiber_panels.iff"},

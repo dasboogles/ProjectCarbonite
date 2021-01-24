@@ -709,6 +709,7 @@ RunSlashCommandsFile("snoop.lua")
 -- Custom
 RunSlashCommandsFile("wardev.lua")
 RunSlashCommandsFile("regrantskills.lua")
+RunSlashCommandsFile("village.lua")
 -- Custom Jedi
 RunSlashCommandsFile("forceSoresu.lua")
 RunSlashCommandsFile("forceMakashi.lua")

@@ -10,11 +10,12 @@ WorldBossSpawner = ScreenPlay:new {
 
 	numberOfActs = 1,
 	bossesToSpawn = 3, --Number of bosses to spawn
+	initSpawnTimer = 900, -- Default spawn time on server-up // Default is 900
 	numReferencePoints = 29, --Number of reference points from world_boss_spt.lua
 	secondsToDespawn = 18000, --25200, --Boss will despawn after 16h if not killed -- [CHANGED]: from 57600 -> 18000 (5hrs)
 	secondsToRespawn = 21600, -- 24h time to respawn after boss has been killed/despawned -- [CHANGED]: from 86400 -> 21600 (6hrs) 
 	maxRadius = 2000, --Maximum distance from spawn point to spawn boss
-	randomVariance = 1800, -- +/- 1 hour onto despawn and respawn timers
+	randomVariance = 1800, -- +/- 1 hour onto despawn and respawn timers // 1800 is default
 	-- Acklay has a AreaPoison
 	-- Rancor has a AreaDisease
 	-- Wampa, Kkorrwrot, and DeathString now have unique mechanics
@@ -32,7 +33,7 @@ WorldBossSpawner = ScreenPlay:new {
 registerScreenPlay("WorldBossSpawner", true)
 
 function WorldBossSpawner:start()
-	createEvent(900 * 1000, "WorldBossSpawner", "spawnMobiles", pBoss, "") -- waits 15minutes before running Spawner on server up
+	createEvent(self.initSpawnTimer * 1000, "WorldBossSpawner", "spawnMobiles", pBoss, "") -- waits 15minutes before running Spawner on server up
 end
 
 function WorldBossSpawner:spawnMobiles()

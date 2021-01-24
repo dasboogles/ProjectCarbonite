@@ -481,6 +481,12 @@ object_tangible_loot_creature_loot_generic_shared_bh_skull = SharedTangibleObjec
 
 ObjectTemplates:addClientTemplate(object_tangible_loot_creature_loot_generic_shared_bh_skull, "object/tangible/loot/creature_loot/generic/shared_bh_skull.iff")
 ------------------------------------------------------------------------------------------------------------------------------------
+object_tangible_loot_creature_loot_generic_shared_jedi_defense_holo = SharedTangibleObjectTemplate:new {
+	clientTemplateFileName = "object/tangible/loot/creature_loot/generic/shared_jedi_defense_holo.iff"
+}
+
+ObjectTemplates:addClientTemplate(object_tangible_loot_creature_loot_generic_shared_jedi_defense_holo, "object/tangible/loot/creature_loot/generic/shared_jedi_defense_holo.iff")
+------------------------------------------------------------------------------------------------------------------------------------
 
 object_tangible_loot_creature_loot_generic_shared_jaw_bone = SharedTangibleObjectTemplate:new {
 	clientTemplateFileName = "object/tangible/loot/creature_loot/generic/shared_jaw_bone.iff"

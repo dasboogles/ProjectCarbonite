@@ -2,13 +2,13 @@
 
 experimental_nightsister_vibro_unit = {
 	minimumLevel = 0,
-	maximumLevel = -1,
+	maximumLevel = 999,
 	customObjectName = "Experimental Nightsister Vibro Unit",
 	directObjectTemplate = "object/tangible/component/weapon/vibro_unit_nightsister.iff",
 	craftingValues = {
         -- 25% Better, with minor downsides, over normal ns_vibro_units
         {"mindamage",43,94,0},
-		{"mindamage",43,94,0},
+		{"maxdamage",43,94,0},
 		{"attackspeed",1.2,-2,1},
 		{"woundchance",20,35,0},
 		{"hitpoints",200,700,0},

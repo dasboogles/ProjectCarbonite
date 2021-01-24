@@ -1202,7 +1202,11 @@ includeFile("items/wearables/wookiee/wke_skirt_s03.lua")
 includeFile("items/wearables/wookiee/wke_skirt_s04.lua")
 --------------------------------------------------
 -------------- Custom for Carbonite
-includeFile("items/custom/bh_skull.lua")
+----------------------------------------------------------------------------
+-- Yes, I'm aware these names are ass-backwards, fight me
+includeFile("items/custom/bh_skull.lua") -- reward for a BH killing a jedi
+includeFile("items/custom/jedi_defense_holo.lua") -- reward for a Jedi killing a BH
+----------------------------------------------------------------------------
 includeFile("items/custom/rare_spider_fang.lua")
 -- GeoCave 3.0
 includeFile("items/custom/geo_cave/overclocked_sword_core.lua")

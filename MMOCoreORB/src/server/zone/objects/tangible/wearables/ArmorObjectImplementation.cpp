@@ -266,30 +266,45 @@ bool ArmorObjectImplementation::isVulnerable(int type) const {
 float ArmorObjectImplementation::getTypeValue(int type, float value) const {
 	int newValue = 0;
 
-	if (vulnerabilites & type)
+	// Vulnerabilities are always set
+	if (vulnerabilites & type) {
 		newValue = value;
-
+	}
+	// If SpecialType
 	else if (isSpecial(type)) {
 		newValue = specialProtection + value;
 
 		if (newValue > 70)
 			newValue = 70;
-	} else {
+	} 
+	// Everything Else
+	else {
 		newValue = baseProtection + value;
 
 		// Protect LightSaber resist from Slices
 		if (type != SharedWeaponObjectTemplate::LIGHTSABER) {
 			newValue *= effectivenessSlice;
 
+			// Sliced Effectiveness is capped at 80% on player armor
 			if(sliced && effectivenessSlice > 1) {
-				if(newValue > 80)
+				if(newValue > 80) {
 					newValue = 80;
-			} else {
-				if(newValue > 70)
+				}
+			}
+			// Unsliced Effectiveness is capped at 70% on player armor 
+			else {
+				if(newValue > 70) {
 					newValue = 70;
+				}
+			}
+		} 
+		// Cap Lightsaber on all armor to 45%
+		// Can't detect if this is armor or a PSG unfortunately
+		else {
+			if(newValue > 45) {
+				newValue = 45;
 			}
 		}
-		
 	}
 
 	return newValue;

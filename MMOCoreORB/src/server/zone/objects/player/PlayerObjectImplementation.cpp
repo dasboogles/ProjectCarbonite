@@ -2382,9 +2382,11 @@ Time PlayerObjectImplementation::getLastGcwCrackdownCombatActionTimestamp() cons
 void PlayerObjectImplementation::updateLastCombatActionTimestamp(bool updateGcwCrackdownAction, bool updateGcwAction, bool updateBhAction) {
 	ManagedReference<CreatureObject*> parent = getParent().get().castTo<CreatureObject*>();
 
-	if (parent == nullptr)
+	if (parent == nullptr) {
 		return;
+	}
 
+	CreatureObject* creature = cast<CreatureObject*>(getParent().get().get());
 	bool alreadyHasTef = hasTef();
 
 	if (updateGcwCrackdownAction) {
@@ -2397,8 +2399,11 @@ void PlayerObjectImplementation::updateLastCombatActionTimestamp(bool updateGcwC
 		lastBhPvpCombatActionTimestamp.updateToCurrentTime();
 		lastBhPvpCombatActionTimestamp.addMiliTime(FactionManager::TEFTIMER);
 
-		if (!alreadyHasBhTef)
+		if (!alreadyHasBhTef) {
+			// ADDING BH TEF HERE IF NONE IS HAD
+			creature->addToHuntersList();
 			parent->notifyObservers(ObserverEventType::BHTEFCHANGED);
+		}
 	}
 
 	if (updateGcwAction) {

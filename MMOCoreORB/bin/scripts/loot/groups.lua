@@ -376,6 +376,7 @@ includeFile("groups/wearables/wearables_uncommon.lua")
 ------------ Custom For Carbonite
 -- BH Stuff
 includeFile("groups/custom/bh_trophy.lua")
+includeFile("groups/custom/jedi_trophy.lua")
 includeFile("groups/custom/rancor_boss.lua")
 
 -- Carbonite Loots

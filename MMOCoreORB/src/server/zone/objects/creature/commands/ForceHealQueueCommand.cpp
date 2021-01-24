@@ -57,10 +57,13 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 
 	// Healing Mod
 	float healingMod = creature->getSkillMod("jedi_force_healing_mod");
+
 	// Investment Mod
 	float investmentMod = (100 - healingMod) / 100;
+
 	// Apply our investment modifier to totalCost
 	totalCost *= investmentMod;
+
 	// Apply our investment modifier to forceCostMultiplier (reduce the forceCostMultiplier)
 	float modifiedForceCostMultiplier = forceCostMultiplier * investmentMod;
 

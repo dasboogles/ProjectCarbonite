@@ -76,9 +76,9 @@ end
 function poisonGasCloudMechanic:inflictPoisonDamage(pPlayer)
     if (pPlayer ~= nil) then
         CreatureObject(pPlayer):playEffect("clienteffect/dot_poisoned.cef", "")
-        CreatureObject(pPlayer):inflictDamage(pPlayer, 0, 250, 1)
-        CreatureObject(pPlayer):inflictDamage(pPlayer, 3, 250, 1)
-        CreatureObject(pPlayer):inflictDamage(pPlayer, 6, 100, 1)
+        CreatureObject(pPlayer):inflictDamage(pPlayer, 0, 350, 1)
+        CreatureObject(pPlayer):inflictDamage(pPlayer, 3, 350, 1)
+        CreatureObject(pPlayer):inflictDamage(pPlayer, 6, 150, 1)
     end
 end
 ---------------------------------------------------------------------------------------------

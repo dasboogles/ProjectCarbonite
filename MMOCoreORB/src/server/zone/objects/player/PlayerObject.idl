@@ -277,6 +277,10 @@ class PlayerObject extends IntangibleObject {
 	@weakReference
 	protected transient SceneObject currentClientPathWaypoint;
 
+	// Keeping track of currently engaged Hunters on a Target
+	@dereferenced
+    protected transient SynchronizedSortedVector<CreatureObject> activeHuntersList;
+
 	/**
 	 * the key is the quest.hashCode()
 	 */
@@ -403,6 +407,9 @@ class PlayerObject extends IntangibleObject {
 		miliSecsPlayed = 0;
 
 		Logger.setLoggingName("PlayerObjectBase");
+
+		// Make sure we can't have the same BH in the Hunters list more than once at any given time
+		activeHuntersList.setNoDuplicateInsertPlan();
 	}
 
 	public void finalize() {
@@ -2013,4 +2020,43 @@ class PlayerObject extends IntangibleObject {
 
 	@read
 	public native string getPlayedTimeString(boolean verbose = false);
+
+		// ------------------------------------------------------------
+	// Active BH limiting part of our code
+	// ------------------------------------------------------------
+	// Add to the list
+	public void addToActiveHuntersList(CreatureObject targetPlayer) {
+    	activeHuntersList.put(targetPlayer);
+	}
+
+	// Remove from the list
+	public void removeFromActiveHuntersList(CreatureObject targetPlayer) {
+    	activeHuntersList.drop(targetPlayer);
+	}
+
+	// Is our given hunter in the list?
+	@read
+	public boolean isInActiveHuntersList(CreatureObject targetPlayer) {
+		return activeHuntersList.contains(targetPlayer);
+	}
+
+	// Get the total number of currently active hunters
+	@read
+	public int getActiveHuntersListSize() {
+		return activeHuntersList.size();
+	}
+
+	// Remove all hunters from the list (most likely used when a target dies)
+	public void resetActiveHuntersList() {
+		activeHuntersList.removeAll();
+	}
+
+	// Is our hunters list empty? (useful for default acceptance states)
+	@read
+	public boolean isActiveHuntersListEmpty() {
+		return activeHuntersList.isEmpty();
+	}
+	// ------------------------------------------------------------
+	// Active BH limiting part of our code
+	// ------------------------------------------------------------
 }

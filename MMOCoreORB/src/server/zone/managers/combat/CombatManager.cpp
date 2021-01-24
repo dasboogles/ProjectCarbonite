@@ -251,6 +251,7 @@ int CombatManager::doCombatAction(CreatureObject* attacker, WeaponObject* weapon
 
 			if (ghost != nullptr) {
 				Locker olocker(attackingCreature, attacker);
+				// Checking to see if they need a TEF based on combat action
 				ghost->updateLastCombatActionTimestamp(shouldGcwCrackdownTef, shouldGcwTef, shouldBhTef);
 			}
 		}
@@ -1091,7 +1092,7 @@ int CombatManager::getSpeedModifier(CreatureObject* attacker, WeaponObject* weap
 	// Condensing Lightsaber speeds into one
 	if (weapon->getDamageType() ==  SharedWeaponObjectTemplate::LIGHTSABER) {
 		speedMods += attacker->getSkillMod("lightsaber_speed");
-	} 
+	}
 
 	return speedMods;
 }
@@ -1274,7 +1275,17 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 
 		int forceArmor = defender->getSkillMod("force_armor");
 		if (forceArmor > 0) {
-			float dmgAbsorbed = rawDamage - (damage *= 1.f - (forceArmor / 100.f));
+
+			// Get EnhancerMod, if any
+			float enhancerMod = defender->getSkillMod("jedi_force_enhancement_mod");
+
+			// New EnhancerMod for Armor
+			enhancerMod = enhancerMod / 2;
+
+			// Do ForceArmor absorbed modifier
+			int armorMod = ceil(forceArmor+enhancerMod);
+			// defender->sendSystemMessage("Armor Mod: [\\#ff0000"+ String::valueOf(armorMod)+"\\#ffffff]");
+			float dmgAbsorbed = rawDamage - (damage *= 1.f - (armorMod / 100.f));
 			defender->notifyObservers(ObserverEventType::FORCEARMOR, attacker, dmgAbsorbed);
 			sendMitigationCombatSpam(defender, nullptr, (int)dmgAbsorbed, FORCEARMOR);
 		}
@@ -1285,7 +1296,17 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 		// Force Shield
 		int forceShield = defender->getSkillMod("force_shield");
 		if (forceShield > 0) {
-			jediBuffDamage = rawDamage - (damage *= 1.f - (forceShield / 100.f));
+
+			// Get EnhancerMod, if any
+			float enhancerMod = defender->getSkillMod("jedi_force_enhancement_mod");
+
+			// New EnhancerMod for Armor
+			enhancerMod = enhancerMod / 2;
+
+			// Do ForceArmor absorbed modifier
+			int armorMod = ceil(forceShield+enhancerMod);
+			// defender->sendSystemMessage("Shield Mod: [\\#ff0000"+ String::valueOf(armorMod)+"\\#ffffff]");
+			jediBuffDamage = rawDamage - (damage *= 1.f - (armorMod / 100.f));
 			defender->notifyObservers(ObserverEventType::FORCESHIELD, attacker, jediBuffDamage);
 			sendMitigationCombatSpam(defender, nullptr, (int)jediBuffDamage, FORCESHIELD);
 		}
@@ -1928,36 +1949,33 @@ int CombatManager::getHitChance(TangibleObject* attacker, CreatureObject* target
 		ManagedReference<WeaponObject*> targetWeapon = targetCreature->getWeapon();
 		const auto defenseAccMods = targetWeapon->getDefenderSecondaryDefenseModifiers();
 		const String& def = defenseAccMods->get(0); // FIXME: this is hacky, but a lot faster than using contains()
-		
-		// // ---------------------------------------------------------------------------
-		// // Do Custom Jedi Buffs here
-		// if (creoAttacker != nullptr && targetCreature != nullptr) {
-		// 	// Defender gets struck by another creature with Force Soresu
-		// 	int jediCounterIntim = targetCreature->getSkillMod("force_soresu");
-
-		// 	// Make sure we're not bypassing the droid immunity to being intimidated
-		// 	if (jediCounterIntim > 0 && !creoAttacker->isDroidSpecies()) {
-		// 		if (!creoAttacker->isIntimidated()) {
-		// 			creoAttacker->setIntimidatedState(10); // Intimidate for 10 seconds
-		// 		}
-		// 	}
-
-		// 	// Attacker strikes another creature with Force Makashi
-		// 	int jediStrikeIntim = creoAttacker->getSkillMod("force_makashi");
-		// 	// Make sure we're not bypassing the droid immunity to being intimidated
-		// 	if (jediStrikeIntim > 0 && !targetCreature->isDroidSpecies()) {
-		// 		if (!targetCreature->isIntimidated()) {
-		// 			targetCreature->setIntimidatedState(10); // Intimidate for 10 seconds
-		// 		}
-		// 	}
-		// }
-		// // ---------------------------------------------------------------------------
 
 		// saber block is special because it's just a % chance to block based on the skillmod
 		if (def == "saber_block") {
-			if (!(attacker->isTurret() || weapon->isThrownWeapon()) && ((weapon->isHeavyWeapon() || weapon->isSpecialHeavyWeapon() || (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK)) && ((System::random(100)) < targetCreature->getSkillMod(def))))
-				return RICOCHET;
-			else return HIT;
+			// If a player tries to LD in the water to avoid being hunted/killed then SB no longer works at all
+			PlayerObject* player = targetCreature->getPlayerObject();
+			if (targetCreature->isSwimming() && player->isLinkDead()) {
+				creoAttacker->sendSystemMessage("Your target is Linkdead AND Swimming, no saberblock!");
+			} else {
+				int saberBlockMod = targetCreature->getSkillMod(def);
+
+				// -- BH SaberPierce Block, Block
+				// This SaberBlock code only runs IF you have a mission for your target, normal PVP the SB Pierce does not function!
+				// This is because we cannot control the engagement # in normal pvp where SB is needed at 100%.
+				if (creoAttacker->hasBountyMissionFor(targetCreature)){
+					float keenEyeMod = 100 - creoAttacker->getSkillMod("bh_keen_eye");
+					keenEyeMod = keenEyeMod / 100;
+					saberBlockMod *= keenEyeMod;
+				}
+				// -- BH SaberPierce Block, Block
+
+				if (!(attacker->isTurret() || weapon->isThrownWeapon()) && ((weapon->isHeavyWeapon() || weapon->isSpecialHeavyWeapon() || (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK)) && ((System::random(100)) < saberBlockMod))) {
+					return RICOCHET;
+				}
+				else { 
+					return HIT;
+				}
+			}
 		}
 
 		targetDefense = getDefenderSecondaryDefenseModifier(targetCreature);

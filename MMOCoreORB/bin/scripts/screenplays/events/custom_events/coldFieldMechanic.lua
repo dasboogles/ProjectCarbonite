@@ -20,7 +20,7 @@ end
 
 -- Do AOE Ice Field Damage Ticks on everyone within 70m of boss
 function coldFieldMechanic:pulseColdCloudDamage(pObject)
-    if (pObject ~= nil and not CreatureObject(pObject):isDead()) then
+    if (pObject ~= nil and not CreatureObject(pObject):isDead() and CreatureObject(pObject):isInCombat()) then
         local playerTable = SceneObject(pObject):getPlayersInRange(70)
 		if playerTable == nil then
 			-- Pulses damage every 3 seconds
@@ -42,9 +42,9 @@ end
 function coldFieldMechanic:inflictcoldDamage(pPlayer)
     if (pPlayer ~= nil) then
         CreatureObject(pPlayer):playEffect("clienteffect/droid_effect_dry_ice.cef", "")
-        CreatureObject(pPlayer):inflictDamage(pPlayer, 0, 75, 1) -- Health
-        CreatureObject(pPlayer):inflictDamage(pPlayer, 3, 75, 1) -- Action
-        CreatureObject(pPlayer):inflictDamage(pPlayer, 6, 45, 1) -- Mind
+        CreatureObject(pPlayer):inflictDamage(pPlayer, 0, 125, 1) -- Health
+        CreatureObject(pPlayer):inflictDamage(pPlayer, 3, 125, 1) -- Action
+        CreatureObject(pPlayer):inflictDamage(pPlayer, 6, 75, 1) -- Mind
         CreatureObject(pPlayer):sendSystemMessage("You're freezing!!!")
     end
 end
@@ -55,7 +55,7 @@ end
 --------------------------------------------------------------------
 ------------------------ OTHER EFFECTS WORK ------------------------
 function coldFieldMechanic:loopEffect(pObject)
-    if (pObject ~= nil and not CreatureObject(pObject):isDead()) then
+    if (pObject ~= nil and not CreatureObject(pObject):isDead() and CreatureObject(pObject):isInCombat()) then
         -- Really cool lightning effect, use this for something mechanical later?
         SceneObject(pObject):playEffect("clienteffect/combat_pt_electricalfield.cef", "")
         createEvent(9 * 1000, "coldFieldMechanic", "loopEffect", pObject, "")

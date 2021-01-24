@@ -41,13 +41,16 @@ public:
 			rescheduleTime = gcwCrackdownTefMs < rescheduleTime ? gcwCrackdownTefMs : rescheduleTime;
 			this->reschedule(llabs(rescheduleTime));
 		} else {
+			// If we're losing our BH TEF then remove ourselves as hunter from current mission!
 			ghost->updateInRangeBuildingPermissions();
 			ghost->setCrackdownTefTowards(0, false);
 			player->clearPvpStatusBit(CreatureFlag::TEF);
 		}
 
-		if (!ghost->hasBhTef())
+		if (!ghost->hasBhTef()) {
+			player->removeFromHuntersList(); // If they were a hunter in a BH mission this will remove their hunting status
 			player->notifyObservers(ObserverEventType::BHTEFCHANGED);
+		}
 	}
 };
 

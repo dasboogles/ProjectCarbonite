@@ -21,8 +21,8 @@ ExperienceConverter = ScreenPlay:new {
 			{ "combat_rangedspecialize_heavy", 30 },
 			{ "combat_rangedspecialize_pistol", 30 },
 			{ "combat_rangedspecialize_rifle", 30 },
-			{ "squadleader", 90 },
-			{ "jedi_general", 30 }
+			{ "squadleader", 30 },
+			{ "jedi_general", 15 }
 		},
 		senses = {
 			{ "bio_engineer_dna_harvesting", 3 },
@@ -39,7 +39,7 @@ ExperienceConverter = ScreenPlay:new {
 			{ "scout", 8 },
 			{ "slicing", 3 },
 			{ "trapping", 25 },
-			{ "jedi_general", 30 }
+			{ "jedi_general", 15 }
 		},
 		reflex = {
 			{ "bountyhunter", 5 },
@@ -53,7 +53,7 @@ ExperienceConverter = ScreenPlay:new {
 			{ "combat_rangedspecialize_pistol", 30 },
 			{ "combat_rangedspecialize_rifle", 30 },
 			{ "squadleader", 90 },
-			{ "jedi_general", 30 }
+			{ "jedi_general", 15 }
 		},
 		crafting = {
 			{ "crafting_bio_engineer_creature", 2 },
@@ -66,7 +66,7 @@ ExperienceConverter = ScreenPlay:new {
 			{ "crafting_spice", 1 },
 			{ "crafting_structure_general", 5 },
 			{ "crafting_weapons_general", 2 },
-			{ "jedi_general", 30 }
+			{ "jedi_general", 15 }
 		}
 	}
 }

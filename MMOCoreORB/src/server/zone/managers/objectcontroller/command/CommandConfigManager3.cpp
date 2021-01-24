@@ -302,6 +302,7 @@
 #include "server/zone/objects/creature/commands/custom/WarDevCommand.h"
 #include "server/zone/objects/creature/commands/custom/RegrantSkillsCommand.h"
 #include "server/zone/objects/creature/commands/custom/LotsCommand.h"
+#include "server/zone/objects/creature/commands/custom/VillageCommand.h"
 // Jedi Custom
 #include "server/zone/objects/creature/commands/custom/jedi/ForceSoresuCommand.h"
 #include "server/zone/objects/creature/commands/custom/jedi/ForceMakashiCommand.h"
@@ -611,6 +612,7 @@ void CommandConfigManager::registerCommands3() {
 	commandFactory.registerCommand<WarDevCommand>(String("wardev").toLowerCase());
 	commandFactory.registerCommand<RegrantSkillsCommand>(String("regrantskills").toLowerCase());
 	commandFactory.registerCommand<LotsCommand>(String("lots").toLowerCase());
+	commandFactory.registerCommand<VillageCommand>(String("village").toLowerCase());
 	// Custom Jedi Skills
 	commandFactory.registerCommand<ForceSoresuCommand>(String("forceSoresu").toLowerCase());
 	commandFactory.registerCommand<ForceMakashiCommand>(String("forceMakashi").toLowerCase());

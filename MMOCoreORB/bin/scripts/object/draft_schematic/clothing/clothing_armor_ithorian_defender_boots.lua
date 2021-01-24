@@ -73,8 +73,7 @@ object_draft_schematic_clothing_clothing_armor_ithorian_defender_boots = object_
 
    targetTemplate = "object/tangible/wearables/armor/ithorian_defender/ith_armor_s01_boots.iff",
 
-   additionalTemplates = {
-             }
+   additionalTemplates = {}
 
 }
 ObjectTemplates:addTemplate(object_draft_schematic_clothing_clothing_armor_ithorian_defender_boots, "object/draft_schematic/clothing/clothing_armor_ithorian_defender_boots.iff")

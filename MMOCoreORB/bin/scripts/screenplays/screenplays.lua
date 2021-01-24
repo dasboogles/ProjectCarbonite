@@ -161,6 +161,9 @@ includeFile("dungeon/corellian_corvette/ticket_takers/lt_lance.lua")
 -- Village
 includeFile("village/village_community_crafting.lua")
 includeFile("village/village_gm_sui.lua")
+-- Carbonite Custom
+includeFile("village/village_sui.lua")
+-- Carbonite Custom
 includeFile("village/village_jedi_manager_common.lua")
 includeFile("village/village_jedi_manager_holocron.lua")
 includeFile("village/village_jedi_manager_township.lua")

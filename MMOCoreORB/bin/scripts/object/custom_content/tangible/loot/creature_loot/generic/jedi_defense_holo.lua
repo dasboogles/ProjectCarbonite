@@ -1,0 +1,5 @@
+object_tangible_loot_creature_loot_generic_jedi_defense_holo = object_tangible_loot_creature_loot_generic_shared_jedi_defense_holo:new {
+
+}
+
+ObjectTemplates:addTemplate(object_tangible_loot_creature_loot_generic_jedi_defense_holo, "object/tangible/loot/creature/loot/generic/jedi_defense_holo.iff")

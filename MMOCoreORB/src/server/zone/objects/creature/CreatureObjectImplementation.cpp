@@ -3074,7 +3074,6 @@ bool CreatureObjectImplementation::isAggressiveTo(CreatureObject* object) {
 	if ((pvpStatusBitmask & CreatureFlag::OVERT) && (object->getPvpStatusBitmask() & CreatureFlag::OVERT) && object->getFaction() != getFaction())
 		return true;
 
-	// Replace with "CanBeHunted()"
 	if (ghost->hasBhTef() && (hasBountyMissionFor(object) || object->hasBountyMissionFor(asCreatureObject()))) {
 		return true;
 	}
@@ -3138,14 +3137,20 @@ bool CreatureObjectImplementation::isAttackableBy(CreatureObject* object) {
 }
 
 bool CreatureObjectImplementation::isAttackableBy(CreatureObject* object, bool bypassDeadCheck) {
-	if (object == asCreatureObject())
+	// If object is the same as the defender, then no, you can't hit yourself!
+	if (object == asCreatureObject()) {
 		return false;
+	}
 
-	if ((!bypassDeadCheck && isDead()) || isInvisible())
+	// If the defender is dead, or invisible, then no!
+	if ((!bypassDeadCheck && isDead()) || isInvisible()) {
 		return false;
+	}
 
-	if (object->getZoneUnsafe() != getZoneUnsafe())
+	// If the attacker's zone is not the same zone as the defender's
+	if (object->getZoneUnsafe() != getZoneUnsafe()) {
 		return false;
+	}
 
 	if (isPlayerCreature()) {
 		PlayerObject* ghost = getPlayerObject();
@@ -3161,6 +3166,7 @@ bool CreatureObjectImplementation::isAttackableBy(CreatureObject* object, bool b
 		}
 	}
 
+	// This part handles AI attacking the defender ("defender" is THIS, in current context)
 	if (object->isAiAgent()) {
 
 		if (object->isPet()) {
@@ -3188,22 +3194,34 @@ bool CreatureObjectImplementation::isAttackableBy(CreatureObject* object, bool b
 		return true;
 	}
 
+	// Grab PlayerObjects of both defender and attacker for some more in-depth checks for Attackability below here...
 	PlayerObject* ghost = getPlayerObject();
 	PlayerObject* targetGhost = object->getPlayerObject();
 
-	if (ghost == nullptr || targetGhost == nullptr)
+	if (ghost == nullptr || targetGhost == nullptr) {
 		return false;
+	}
 
-	if (hasPersonalEnemyFlag(object) && object->hasPersonalEnemyFlag(asCreatureObject()))
+	if (hasPersonalEnemyFlag(object) && object->hasPersonalEnemyFlag(asCreatureObject())) {
 		return true;
+	}
 
 	bool areInDuel = (ghost->requestedDuelTo(object) && targetGhost->requestedDuelTo(asCreatureObject()));
 
-	if (areInDuel)
+	if (areInDuel) {
 		return true;
+	}
 
-	if (object->hasBountyMissionFor(asCreatureObject()) || (ghost->hasBhTef() && hasBountyMissionFor(object)))
+	// This will ALWAYS return NULL for a Jedi
+	if (object->hasBountyMissionFor(asCreatureObject()) || (ghost->hasBhTef() && hasBountyMissionFor(object))) {
+		// auto creo1 = object->asCreatureObject(); // Is the BH, weird!
+		// auto creo2 = asCreatureObject(); // Is the Jedi because they're checking as the defender
+		// creo1->sendSystemMessage("creo1:isAttackableBy:Is attackable by you because you have their mission!");
+		// creo2->sendSystemMessage("creo2:isAttackableBy:Is attackable by you because you have their mission!");
+		
+		// Check to see if the object (BH) is in the hunters list already, or can be added to the hunters list (checking max size vs defender's skilled boxes)
 		return true;
+	}
 
 	if (getGroupID() != 0 && getGroupID() == object->getGroupID())
 		return false;
@@ -3216,6 +3234,99 @@ bool CreatureObjectImplementation::isAttackableBy(CreatureObject* object, bool b
 		return true;
 
 	return false;
+}
+
+
+void CreatureObjectImplementation::addToHuntersList() {
+	
+	// Grab the current mission
+	ZoneServer* zoneServer = asCreatureObject()->getZoneServer();
+	// Make sure our zoneServer isn't bad
+	if (zoneServer == nullptr) {
+		return;
+	}
+
+	// Grabbing our missionManager
+	MissionManager* missionManager = zoneServer->getMissionManager();
+	// Make sure our missionManager isn't bad
+	if (missionManager == nullptr) {
+		return;
+	}
+
+	// Got our mission, let's check some hunters!
+	// ManagedReference<MissionObject*> mission = missionManager->getBountyHunterMission(object->asCreatureObject());
+	ManagedReference<MissionObject*> mission = missionManager->getBountyHunterMission(asCreatureObject());
+	
+	if (mission == nullptr) {
+		// error("/////////////////////////////");
+		// error(getFirstName() + " does NOT have a BH Mission.");
+		// error("/////////////////////////////");
+		return;
+	}
+
+	// This is where we check if the target is a Paddy or FRS Knight
+	ManagedReference<CreatureObject*> targetcreo = zoneServer->getObject(mission->getTargetObjectId()).castTo<CreatureObject*>();
+	PlayerObject* targetghost = targetcreo->getPlayerObject();
+	int maxAllowedHunters = 1; // When FRS is enabled we'll need to change this dynamically based on the target's FRS ranks
+
+	// Add as a hunter if the mission has room and hunter is not already in the list
+	if (targetghost->getActiveHuntersListSize() < maxAllowedHunters && !targetghost->isInActiveHuntersList(asCreatureObject())) {
+		targetghost->addToActiveHuntersList(asCreatureObject());
+		// error("/////////////////////////////");
+		// error(getFirstName() + " added to their current BH Mission as a hunter for target " + targetcreo->getFirstName());
+		// error("Total number of hunters after " + targetcreo->getFirstName() + " is currently: " + String::valueOf(targetghost->getActiveHuntersListSize()));
+		// error("/////////////////////////////");
+		return;
+	} else if (targetghost->isInActiveHuntersList(asCreatureObject())) {
+		// error("/////////////////////////////");
+		// error(getFirstName() + " is already a hunter going after " + targetcreo->getFirstName());
+		// error("Total number of hunters after " + targetcreo->getFirstName() + " is currently: " + String::valueOf(targetghost->getActiveHuntersListSize()));
+		// error("/////////////////////////////");
+		return;
+	}
+
+	// Otherwise exit if nothing was done
+	return;
+}
+
+void CreatureObjectImplementation::removeFromHuntersList() {
+	
+	// Grab the current mission
+	ZoneServer* zoneServer = asCreatureObject()->getZoneServer();
+	// Make sure our zoneServer isn't bad
+	if (zoneServer == nullptr) {
+		return;
+	}
+
+	// Grabbing our missionManager
+	MissionManager* missionManager = zoneServer->getMissionManager();
+	// Make sure our missionManager isn't bad
+	if (missionManager == nullptr) {
+		return;
+	}
+
+	// Got our mission, let's check some hunters!
+	ManagedReference<MissionObject*> mission = missionManager->getBountyHunterMission(asCreatureObject());
+	
+	if (mission == nullptr) {
+		return;
+	}
+
+	// This is where we check if the target is a Paddy or FRS Knight
+	ManagedReference<CreatureObject*> targetcreo = zoneServer->getObject(mission->getTargetObjectId()).castTo<CreatureObject*>();
+	PlayerObject* targetghost = targetcreo->getPlayerObject();
+
+	// Remove as a hunter if the hunter is already in the list
+	if (targetghost->isInActiveHuntersList(asCreatureObject())) {
+		targetghost->removeFromActiveHuntersList(asCreatureObject());
+		// error("/////////////////////////////");
+		// error(getFirstName() + " removed as a BH hunter for target " + targetcreo->getFirstName());
+		// error("Total number of hunters after " + targetcreo->getFirstName() + " is currently: " + String::valueOf(targetghost->getActiveHuntersListSize()));
+		// error("/////////////////////////////");
+	}
+
+	// Return when we're done
+	return;
 }
 
 bool CreatureObjectImplementation::isHealableBy(CreatureObject* object) {
@@ -3274,25 +3385,46 @@ bool CreatureObjectImplementation::isInvulnerable()  {
 }
 
 bool CreatureObjectImplementation::hasBountyMissionFor(CreatureObject* target) {
-	if (target == nullptr)
+	if (target == nullptr) {
 		return false;
+	}
 
 	ZoneServer* zoneServer = asCreatureObject()->getZoneServer();
 
-	if (zoneServer == nullptr)
+	if (zoneServer == nullptr) {
 		return false;
+	}
 
 	MissionManager* missionManager = zoneServer->getMissionManager();
 
-	if (missionManager == nullptr)
+	if (missionManager == nullptr) {
 		return false;
+	}
 
 	ManagedReference<MissionObject*> mission = missionManager->getBountyHunterMission(asCreatureObject());
-
-	if (mission == nullptr)
+	if (mission == nullptr) {
 		return false;
+	}
 
-	return mission->getTargetObjectId() == target->getObjectID();
+	// Do custom BH-engagement checks here
+	if (mission->getTargetObjectId() == target->getObjectID()){
+		ManagedReference<CreatureObject*> targetcreo = zoneServer->getObject(mission->getTargetObjectId()).castTo<CreatureObject*>();
+		PlayerObject* targetghost = targetcreo->getPlayerObject();
+		int maxHunters = 1;
+		// If active hunters list is less than max size, or we're already in the HuntersList, then we allow them to attack
+		if (targetghost->getActiveHuntersListSize() < maxHunters || targetghost->isInActiveHuntersList(asCreatureObject())) {
+			// error(getFirstName() + " has a valid Mission for " + target->getFirstName());
+			return true;
+		} else // Else return false
+		{
+			//error(getFirstName() + " does NOT have a valid Mission for " + target->getFirstName());
+			auto creo = asCreatureObject(); // Is the Jedi because they're checking as the defender
+			creo->sendSystemMessage("Engaging this target now would put you at odds with another BountyHunter.");
+			return false;
+		}
+	}
+
+	return false;
 }
 
 int CreatureObjectImplementation::notifyObjectDestructionObservers(TangibleObject* attacker, int condition, bool isCombatAction) {

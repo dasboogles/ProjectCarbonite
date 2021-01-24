@@ -576,8 +576,6 @@ void BountyMissionObjectiveImplementation::handlePlayerKilled(ManagedObject* arg
 
 	ManagedReference<MissionObject* > mission = this->mission.get();
 	ManagedReference<CreatureObject*> owner = getPlayerOwner();
-	ManagedReference<SceneObject*> inventory = killer->getSlottedObject("inventory");
-	ManagedReference<LootManager*> lootManager = killer->getZoneServer()->getLootManager();
 
 	if(mission == nullptr)
 		return;
@@ -603,8 +601,8 @@ void BountyMissionObjectiveImplementation::handlePlayerKilled(ManagedObject* arg
 
 					// Handle Jedi XP stuff here
 					if (target->hasSkill("force_title_jedi_rank_01")){
-					int minXpLoss = -50000;
-					int maxXpLoss = -500000;
+					int minXpLoss = -10000; // changed from 50k -> 10k because x4 server mod is affecting this
+					int maxXpLoss = -125000; // changed from 500k -> 125k because x4 server mod is affecting this
 
 					VisibilityManager::instance()->clearVisibility(target);
 					int xpLoss = mission->getRewardCredits() * -1;
@@ -619,10 +617,11 @@ void BountyMissionObjectiveImplementation::handlePlayerKilled(ManagedObject* arg
 					message.setDI(xpLoss * -1);
 					message.setTO("exp_n", "jedi_general");
 					target->sendSystemMessage(message);
-					String victimName = "Skull of " + target->getFirstName();
 
-					// TransactionLog trx(TrxCode::NPCLOOT, destructedObject);
-					// TransactionLog trx(TrxCode::FORAGED, owner);
+					// Setup to create custom trophy
+					ManagedReference<SceneObject*> inventory = killer->getSlottedObject("inventory");
+					ManagedReference<LootManager*> lootManager = killer->getZoneServer()->getLootManager();
+					String victimName = "Skull of " + target->getFirstName();
 					TransactionLog trx(TrxCode::BOUNTYSYSTEM, owner);
 					lootManager->createNamedLoot(trx, inventory, "bh_trophy", victimName, 300);//, victimName);
 				}
@@ -630,20 +629,26 @@ void BountyMissionObjectiveImplementation::handlePlayerKilled(ManagedObject* arg
 
 			complete();
 			}
-		} else if (mission->getTargetObjectId() == killer->getObjectID() ||
-				(npcTarget != nullptr && npcTarget->getObjectID() == killer->getObjectID())) {
-
+		} else if (mission->getTargetObjectId() == killer->getObjectID() || (npcTarget != nullptr && npcTarget->getObjectID() == killer->getObjectID())) {
 			// Get Bounty Hunter's Name
 			String hunterName = owner->getFirstName();
 			String huntedName = killer->getFirstName();
 
 			owner->sendSystemMessage("@mission/mission_generic:failed"); // Mission failed
-			//killer->sendSystemMessage("You have defeated a bounty hunter, ruining his mission against you!");
-			killer->sendSystemMessage("\\#ff005d An Unknown Transmission: \\#e66300 Well done putting that Bounty Hunter in their place! Don't let your guard down!");
+			owner->removeFromHuntersList(); // Remove the dead BH from the hunter's list so others can hunt the same jedi!
+			killer->sendSystemMessage("\\#ff005d <An Unknown Transmission> \\#e66300 Well done putting that Bounty Hunter in their place! Don't let your guard down!");
+
+			// Create Loot for the Jedi
+			// Setup to create custom trophy
+			ManagedReference<SceneObject*> inventory = killer->getSlottedObject("inventory");
+			ManagedReference<LootManager*> lootManager = killer->getZoneServer()->getLootManager();
+			String victimName = "Record of " + owner->getFirstName() + "'s death";
+			TransactionLog trx(TrxCode::BOUNTYSYSTEM, killer);
+			lootManager->createNamedLoot(trx, inventory, "jedi_trophy", victimName, 300);//, victimName);
 
 			// Death Broadcast
 			StringBuffer zBroadcast;
-			zBroadcast << "\\#ff005d Intercepted Spynet Transmission: \\#ffffff A marked target by the name of < \\#ffd700" << huntedName << "\\#ffffff > has defeated a Bounty Hunter named < \\#ff0000" << hunterName << "\\#ffffff >!";
+			zBroadcast << "\\#ff005d <Intercepted Spynet Transmission> \\#ffffff A marked target by the name of < \\#ffd700" << huntedName << "\\#ffffff > has defeated a Bounty Hunter named < \\#ff0000" << hunterName << "\\#ffffff >!";
 			killer->getZoneServer()->getChatManager()->broadcastGalaxy(NULL, zBroadcast.toString());
 
 			// Setup music to play for the player upon victory!
