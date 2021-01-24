@@ -28,10 +28,10 @@ public:
 
 		Lua* lua = DirectorManager::instance()->getLuaInstance();
 
-		Reference<LuaFunction*> luaVillageGmCmd = lua->createFunction("VillageSui", "showMainPage", 0);
-		*luaVillageGmCmd << creature;
+		Reference<LuaFunction*> luaVillageCmd = lua->createFunction("VillageSui", "showMainPage", 0);
+		*luaVillageCmd << creature;
 
-		luaVillageGmCmd->callFunction();
+		luaVillageCmd->callFunction();
 
 		return SUCCESS;
 	}

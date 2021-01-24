@@ -3314,15 +3314,17 @@ void CreatureObjectImplementation::removeFromHuntersList() {
 
 	// This is where we check if the target is a Paddy or FRS Knight
 	ManagedReference<CreatureObject*> targetcreo = zoneServer->getObject(mission->getTargetObjectId()).castTo<CreatureObject*>();
-	PlayerObject* targetghost = targetcreo->getPlayerObject();
+	if (targetcreo != nullptr) {
+		PlayerObject* targetghost = targetcreo->getPlayerObject();
 
-	// Remove as a hunter if the hunter is already in the list
-	if (targetghost->isInActiveHuntersList(asCreatureObject())) {
-		targetghost->removeFromActiveHuntersList(asCreatureObject());
-		// error("/////////////////////////////");
-		// error(getFirstName() + " removed as a BH hunter for target " + targetcreo->getFirstName());
-		// error("Total number of hunters after " + targetcreo->getFirstName() + " is currently: " + String::valueOf(targetghost->getActiveHuntersListSize()));
-		// error("/////////////////////////////");
+		// Remove as a hunter if the hunter is already in the list
+		if (targetghost != nullptr && targetghost->isInActiveHuntersList(asCreatureObject())) {
+			targetghost->removeFromActiveHuntersList(asCreatureObject());
+			// error("/////////////////////////////");
+			// error(getFirstName() + " removed as a BH hunter for target " + targetcreo->getFirstName());
+			// error("Total number of hunters after " + targetcreo->getFirstName() + " is currently: " + String::valueOf(targetghost->getActiveHuntersListSize()));
+			// error("/////////////////////////////");
+		}
 	}
 
 	// Return when we're done
