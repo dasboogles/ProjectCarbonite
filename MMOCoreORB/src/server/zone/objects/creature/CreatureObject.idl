@@ -1101,6 +1101,9 @@ class CreatureObject extends TangibleObject {
 	public native void removeFromHuntersList();
 
 	@dirty
+	public native void resetActiveHuntersList();
+
+	@dirty
 	public native boolean isInvulnerable();
 
 	/**

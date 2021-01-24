@@ -617,6 +617,7 @@ void BountyMissionObjectiveImplementation::handlePlayerKilled(ManagedObject* arg
 					message.setDI(xpLoss * -1);
 					message.setTO("exp_n", "jedi_general");
 					target->sendSystemMessage(message);
+					target->resetActiveHuntersList();
 
 					// Setup to create custom trophy
 					ManagedReference<SceneObject*> inventory = killer->getSlottedObject("inventory");

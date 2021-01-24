@@ -3265,24 +3265,32 @@ void CreatureObjectImplementation::addToHuntersList() {
 	}
 
 	// This is where we check if the target is a Paddy or FRS Knight
-	ManagedReference<CreatureObject*> targetcreo = zoneServer->getObject(mission->getTargetObjectId()).castTo<CreatureObject*>();
-	PlayerObject* targetghost = targetcreo->getPlayerObject();
-	int maxAllowedHunters = 1; // When FRS is enabled we'll need to change this dynamically based on the target's FRS ranks
+	if (zoneServer != nullptr) {
+		ManagedReference<CreatureObject*> targetcreo = zoneServer->getObject(mission->getTargetObjectId()).castTo<CreatureObject*>();
 
-	// Add as a hunter if the mission has room and hunter is not already in the list
-	if (targetghost->getActiveHuntersListSize() < maxAllowedHunters && !targetghost->isInActiveHuntersList(asCreatureObject())) {
-		targetghost->addToActiveHuntersList(asCreatureObject());
-		// error("/////////////////////////////");
-		// error(getFirstName() + " added to their current BH Mission as a hunter for target " + targetcreo->getFirstName());
-		// error("Total number of hunters after " + targetcreo->getFirstName() + " is currently: " + String::valueOf(targetghost->getActiveHuntersListSize()));
-		// error("/////////////////////////////");
-		return;
-	} else if (targetghost->isInActiveHuntersList(asCreatureObject())) {
-		// error("/////////////////////////////");
-		// error(getFirstName() + " is already a hunter going after " + targetcreo->getFirstName());
-		// error("Total number of hunters after " + targetcreo->getFirstName() + " is currently: " + String::valueOf(targetghost->getActiveHuntersListSize()));
-		// error("/////////////////////////////");
-		return;
+		if (targetcreo != nullptr) {
+			PlayerObject* targetghost = targetcreo->getPlayerObject();
+
+			if (targetghost != nullptr) {
+				int maxAllowedHunters = 1; // When FRS is enabled we'll need to change this dynamically based on the target's FRS ranks
+
+				// Add as a hunter if the mission has room and hunter is not already in the list
+				if (targetghost->getActiveHuntersListSize() < maxAllowedHunters && !targetghost->isInActiveHuntersList(asCreatureObject())) {
+					targetghost->addToActiveHuntersList(asCreatureObject());
+					// error("/////////////////////////////");
+					// error(getFirstName() + " added to their current BH Mission as a hunter for target " + targetcreo->getFirstName());
+					// error("Total number of hunters after " + targetcreo->getFirstName() + " is currently: " + String::valueOf(targetghost->getActiveHuntersListSize()));
+					// error("/////////////////////////////");
+					return;
+				} else if (targetghost->isInActiveHuntersList(asCreatureObject())) {
+					// error("/////////////////////////////");
+					// error(getFirstName() + " is already a hunter going after " + targetcreo->getFirstName());
+					// error("Total number of hunters after " + targetcreo->getFirstName() + " is currently: " + String::valueOf(targetghost->getActiveHuntersListSize()));
+					// error("/////////////////////////////");
+					return;
+				}
+			}
+		}
 	}
 
 	// Otherwise exit if nothing was done
@@ -3329,6 +3337,13 @@ void CreatureObjectImplementation::removeFromHuntersList() {
 
 	// Return when we're done
 	return;
+}
+
+void CreatureObjectImplementation::resetActiveHuntersList() {
+	PlayerObject* playerGhost = getPlayerObject();
+	if (playerGhost != nullptr) {
+		playerGhost->resetActiveHuntersList();
+	}
 }
 
 bool CreatureObjectImplementation::isHealableBy(CreatureObject* object) {
