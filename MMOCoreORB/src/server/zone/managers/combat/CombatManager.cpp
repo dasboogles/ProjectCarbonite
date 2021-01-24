@@ -1959,21 +1959,26 @@ int CombatManager::getHitChance(TangibleObject* attacker, CreatureObject* target
 			} else {
 				int saberBlockMod = targetCreature->getSkillMod(def);
 
-				// -- BH SaberPierce Block, Block
-				// This SaberBlock code only runs IF you have a mission for your target, normal PVP the SB Pierce does not function!
-				// This is because we cannot control the engagement # in normal pvp where SB is needed at 100%.
-				if (creoAttacker->hasBountyMissionFor(targetCreature)){
-					float keenEyeMod = 100 - creoAttacker->getSkillMod("bh_keen_eye");
-					keenEyeMod = keenEyeMod / 100;
-					saberBlockMod *= keenEyeMod;
-				}
-				// -- BH SaberPierce Block, Block
+				if (saberBlockMod > 0) {
+					// -- BH SaberPierce Block, Block
+					// This SaberBlock code only runs IF you have a mission for your target, normal PVP the SB Pierce does not function!
+					// This is because we cannot control the engagement # in normal pvp where SB is needed at 100%.
+					if (creoAttacker->hasBountyMissionFor(targetCreature)){
+						int keenEyeVal = creoAttacker->getSkillMod("bh_keen_eye");
+						float keenEyeMod = 100 - keenEyeVal;
+						keenEyeMod = keenEyeMod / 100;
+						saberBlockMod *= keenEyeMod;
+					}
+					// -- BH SaberPierce Block, Block
 
-				if (!(attacker->isTurret() || weapon->isThrownWeapon()) && ((weapon->isHeavyWeapon() || weapon->isSpecialHeavyWeapon() || (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK)) && ((System::random(100)) < saberBlockMod))) {
-					return RICOCHET;
-				}
-				else { 
-					return HIT;
+					creoAttacker->sendSystemMessage("SaberBlock of target is: " + String::valueOf(saberBlockMod));
+
+					if (!(attacker->isTurret() || weapon->isThrownWeapon()) && ((weapon->isHeavyWeapon() || weapon->isSpecialHeavyWeapon() || (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK)) && ((System::random(100)) < saberBlockMod))) {
+						return RICOCHET;
+					}
+					else { 
+						return HIT;
+					}
 				}
 			}
 		}
