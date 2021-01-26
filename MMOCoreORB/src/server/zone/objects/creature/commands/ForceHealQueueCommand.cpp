@@ -269,7 +269,7 @@ int ForceHealQueueCommand::runCommand(CreatureObject* creature, CreatureObject* 
 			creature->error("Did not have enough force to pay for the healing he did. Total cost of command: " + String::valueOf(totalCost) + ", player's current force: " + String::valueOf(currentForce));
 		} else {
 			// Do PrintOut here of final cost
-			creature->sendSystemMessage("Final Cost of heal: " + String::valueOf(totalCost));
+			// creature->sendSystemMessage("Final Cost of heal: " + String::valueOf(totalCost));
 			playerObject->setForcePower(currentForce - totalCost);
 		}
 

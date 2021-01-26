@@ -354,8 +354,9 @@ int CombatManager::doTargetCombatAction(CreatureObject* attacker, WeaponObject* 
 	// need to calculate damage here to get proper client spam
 	int damage = 0;
 
-	if (damageMultiplier != 0)
+	if (damageMultiplier != 0) {
 		damage = calculateDamage(attacker, weapon, defender, data) * damageMultiplier;
+	}
 
 	damageMultiplier = 1.0f;
 
@@ -419,6 +420,13 @@ int CombatManager::doTargetCombatAction(CreatureObject* attacker, WeaponObject* 
 	broadcastCombatAction(attacker, defender, weapon, data, damage, hitVal, hitLocation);
 
 	checkForTefs(attacker, defender, shouldGcwCrackdownTef, shouldGcwTef, shouldBhTef);
+	
+	// Do special state logic for Jedi Reactive/Active buffs here
+	// We don't want to intim someone if we SaberBlock damage that the defender would have otherwise taken
+	if (attacker->isPlayerCreature() && hitVal != 7) {
+		doActiveBuffs(attacker, defender, damage);
+	}
+	// Do special state logic for Jedi Reactive/Active buffs here
 
 	return damage;
 }
@@ -919,10 +927,12 @@ float CombatManager::getDefenderToughnessModifier(CreatureObject* defender, int 
 	if (jediToughness > 0 && damType != SharedWeaponObjectTemplate::LIGHTSABER) {
 		if (!defender->hasSkill("combat_brawler_novice") && !defender->hasSkill("combat_marksman_novice")){
 			damage *= 1.f - (jediToughness / 100.f);
-		} else { // Inform the player that stacking Jedi Toughness is not allowed
-			defender->sendSystemMessage("Your Jedi Toughness is not functioning because you have normal profession boxes you shouldn't have!");
-			warning("Player: " + defender->getFirstName() + " is trying to stack Jedi Toughness with normie skills!");
 		}
+		// Disabling this because it's too chatty and causing overhead on the server
+		// else { // Inform the player that stacking Jedi Toughness is not allowed
+		// 	defender->sendSystemMessage("Your Jedi Toughness is not functioning because you have normal profession boxes you shouldn't have!");
+		// 	warning("Player: " + defender->getFirstName() + " is trying to stack Jedi Toughness with normie skills!");
+		// }
 	}
 
 	return damage < 0 ? 0 : damage;
@@ -1725,29 +1735,29 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 		}
 	}
 
-	// ---------------------------------------------------------------------------
-	// Do Custom Jedi Buffs here
-	if (attacker != nullptr && defender != nullptr) {
-		// Defender gets struck by another creature with Force Soresu
-		int jediCounterIntim = defender->getSkillMod("force_soresu");
+	// // ---------------------------------------------------------------------------
+	// // Do Custom Jedi Buffs here
+	// if (attacker != nullptr && defender != nullptr) {
+	// 	// Defender gets struck by another creature with Force Soresu
+	// 	int jediCounterIntim = defender->getSkillMod("force_soresu");
 
-		// Make sure we're not bypassing the droid immunity to being intimidated
-		if (jediCounterIntim > 0 && !attacker->isDroidSpecies()) {
-			if (!attacker->isIntimidated()) {
-				attacker->setIntimidatedState(10); // Intimidate for 10 seconds
-			}
-		}
+	// 	// Make sure we're not bypassing the droid immunity to being intimidated
+	// 	if (jediCounterIntim > 0 && !attacker->isDroidSpecies()) {
+	// 		if (!attacker->isIntimidated()) {
+	// 			attacker->setIntimidatedState(10); // Intimidate for 10 seconds
+	// 		}
+	// 	}
 
-		// Attacker strikes another creature with Force Makashi
-		int jediStrikeIntim = attacker->getSkillMod("force_makashi");
-		// Make sure we're not bypassing the droid immunity to being intimidated
-		if (jediStrikeIntim > 0 && !defender->isDroidSpecies()) {
-			if (!defender->isIntimidated()) {
-				defender->setIntimidatedState(10); // Intimidate for 10 seconds
-			}
-		}
-	}
-	// ---------------------------------------------------------------------------
+	// 	// Attacker strikes another creature with Force Makashi
+	// 	int jediStrikeIntim = attacker->getSkillMod("force_makashi");
+	// 	// Make sure we're not bypassing the droid immunity to being intimidated
+	// 	if (jediStrikeIntim > 0 && !defender->isDroidSpecies()) {
+	// 		if (!defender->isIntimidated()) {
+	// 			defender->setIntimidatedState(10); // Intimidate for 10 seconds
+	// 		}
+	// 	}
+	// }
+	// // ---------------------------------------------------------------------------
 
 	if (!data.isForceAttack() && weapon->getAttackType() == SharedWeaponObjectTemplate::MELEEATTACK)
 		damage *= 1.25;
@@ -1971,7 +1981,8 @@ int CombatManager::getHitChance(TangibleObject* attacker, CreatureObject* target
 					}
 					// -- BH SaberPierce Block, Block
 
-					creoAttacker->sendSystemMessage("SaberBlock of target is: " + String::valueOf(saberBlockMod));
+					// DEBUG for saberblock against a ranged weapon
+					// creoAttacker->sendSystemMessage("SaberBlock of target is: " + String::valueOf(saberBlockMod));
 
 					if (!(attacker->isTurret() || weapon->isThrownWeapon()) && ((weapon->isHeavyWeapon() || weapon->isSpecialHeavyWeapon() || (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK)) && ((System::random(100)) < saberBlockMod))) {
 						return RICOCHET;
@@ -3309,4 +3320,30 @@ void CombatManager::checkForTefs(CreatureObject* attacker, CreatureObject* defen
 			}
 		}
 	}
+}
+
+void CombatManager::doActiveBuffs(CreatureObject* attacker, CreatureObject* defender, int damage) const {
+	// ---------------------------------------------------------------------------
+	// Do Custom Jedi Buffs here
+	if (damage > 0 && attacker != nullptr && defender != nullptr) {
+		// Defender gets struck by another creature with Force Soresu
+		int jediCounterIntim = defender->getSkillMod("force_soresu");
+
+		// Make sure we're not bypassing the droid immunity to being intimidated
+		if (jediCounterIntim > 0 && !attacker->isDroidSpecies()) {
+			if (!attacker->isIntimidated()) {
+				attacker->setIntimidatedState(7); // Intimidate for 10 seconds
+			}
+		}
+
+		// Attacker strikes another creature with Force Makashi
+		int jediStrikeIntim = attacker->getSkillMod("force_makashi");
+		// Make sure we're not bypassing the droid immunity to being intimidated
+		if (jediStrikeIntim > 0 && !defender->isDroidSpecies()) {
+			if (!defender->isIntimidated()) {
+				defender->setIntimidatedState(10); // Intimidate for 10 seconds
+			}
+		}
+	}
+	// ---------------------------------------------------------------------------
 }

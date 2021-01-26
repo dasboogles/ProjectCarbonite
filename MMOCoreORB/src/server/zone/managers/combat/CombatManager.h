@@ -163,6 +163,9 @@ public:
 	float doDroidDetonation(CreatureObject* droid, CreatureObject* defender, float damage) const;
 
 	void checkForTefs(CreatureObject* attacker, CreatureObject* defender, bool* shouldGcwCrackdownTef, bool* shouldGcwTef, bool* shouldBhTef) const;
+	// Custom Carbonite
+	void doActiveBuffs(CreatureObject* attacker, CreatureObject* defender, int damage) const;
+	// Custom Carbonite
 	void getFrsModifiedForceAttackDamage(CreatureObject* attacker, float& minDmg, float& maxDmg, const CreatureAttackData& data) const;
 	int getArmorObjectReduction(ArmorObject* armor, int damageType) const;
 
