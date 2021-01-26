@@ -423,8 +423,10 @@ int CombatManager::doTargetCombatAction(CreatureObject* attacker, WeaponObject* 
 	
 	// Do special state logic for Jedi Reactive/Active buffs here
 	// We don't want to intim someone if we SaberBlock damage that the defender would have otherwise taken
-	if (attacker->isPlayerCreature() && hitVal != 7) {
-		doActiveBuffs(attacker, defender, damage);
+	if (attacker != nullptr) {
+		if (attacker->isPlayerCreature() && hitVal != 7) {
+			doActiveBuffs(attacker, defender, damage);
+		}
 	}
 	// Do special state logic for Jedi Reactive/Active buffs here
 
@@ -1967,28 +1969,31 @@ int CombatManager::getHitChance(TangibleObject* attacker, CreatureObject* target
 			if (targetCreature->isSwimming() && player->isLinkDead()) {
 				creoAttacker->sendSystemMessage("Your target is Linkdead AND Swimming, no saberblock!");
 			} else {
-				int saberBlockMod = targetCreature->getSkillMod(def);
+				if (creoAttacker != nullptr && targetCreature != nullptr) {
+					int saberBlockMod = targetCreature->getSkillMod(def);
+					if (saberBlockMod > 0) {
+						// -- BH SaberPierce Block, Block
+						// This SaberBlock code only runs IF you have a mission for your target, normal PVP the SB Pierce does not function!
+						// This is because we cannot control the engagement # in normal pvp where SB is needed at 100%.
+						if (creoAttacker->isPlayerCreature() && targetCreature->isPlayerCreature()) {
+							if (creoAttacker->hasBountyMissionFor(targetCreature)) {
+								int keenEyeVal = creoAttacker->getSkillMod("bh_keen_eye");
+								float keenEyeMod = 100 - keenEyeVal;
+								keenEyeMod = keenEyeMod / 100;
+								saberBlockMod *= keenEyeMod;
+							}
+						}
+						// -- BH SaberPierce Block, Block
 
-				if (saberBlockMod > 0) {
-					// -- BH SaberPierce Block, Block
-					// This SaberBlock code only runs IF you have a mission for your target, normal PVP the SB Pierce does not function!
-					// This is because we cannot control the engagement # in normal pvp where SB is needed at 100%.
-					if (creoAttacker->hasBountyMissionFor(targetCreature)){
-						int keenEyeVal = creoAttacker->getSkillMod("bh_keen_eye");
-						float keenEyeMod = 100 - keenEyeVal;
-						keenEyeMod = keenEyeMod / 100;
-						saberBlockMod *= keenEyeMod;
-					}
-					// -- BH SaberPierce Block, Block
+						// DEBUG for saberblock against a ranged weapon
+						// creoAttacker->sendSystemMessage("SaberBlock of target is: " + String::valueOf(saberBlockMod));
 
-					// DEBUG for saberblock against a ranged weapon
-					// creoAttacker->sendSystemMessage("SaberBlock of target is: " + String::valueOf(saberBlockMod));
-
-					if (!(attacker->isTurret() || weapon->isThrownWeapon()) && ((weapon->isHeavyWeapon() || weapon->isSpecialHeavyWeapon() || (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK)) && ((System::random(100)) < saberBlockMod))) {
-						return RICOCHET;
-					}
-					else { 
-						return HIT;
+						if (!(attacker->isTurret() || weapon->isThrownWeapon()) && ((weapon->isHeavyWeapon() || weapon->isSpecialHeavyWeapon() || (weapon->getAttackType() == SharedWeaponObjectTemplate::RANGEDATTACK)) && ((System::random(100)) < saberBlockMod))) {
+							return RICOCHET;
+						}
+						else { 
+							return HIT;
+						}
 					}
 				}
 			}
