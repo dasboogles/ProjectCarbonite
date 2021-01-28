@@ -65,7 +65,7 @@ object_draft_schematic_community_crafting_component_lightweight_turret_hardware 
 	ingredientTitleNames = {"endrine"},
 	ingredientSlotType = {2},
 	resourceTypes = {"object/tangible/loot/quest/shared_endrine.iff"},
-	resourceQuantities = {5},
+	resourceQuantities = {1},
 	contribution = {100},
 
 	targetTemplate = "object/tangible/component/structure/lightweight_turret_hardware.iff",

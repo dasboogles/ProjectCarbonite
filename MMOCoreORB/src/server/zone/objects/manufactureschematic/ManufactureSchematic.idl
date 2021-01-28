@@ -101,7 +101,7 @@ class ManufactureSchematic extends IntangibleObject {
 
 		possibleSyncIssue = false;
 
-		manufactureLimit = 1000;
+		manufactureLimit = 10000;
 
 		ContainerPermissions permissions = super.getContainerPermissionsForUpdate();
 		permissions.setInheritPermissionsFromParent(true);
@@ -292,12 +292,14 @@ class ManufactureSchematic extends IntangibleObject {
 
 	@preLocked
 	public void setManufactureLimit(int limit) {
-		manufactureLimit = limit;
+		// manufactureLimit = limit;
+		manufactureLimit = 10000;
 	}
 
 	@read
 	public int getManufactureLimit() {
-		return manufactureLimit;
+		// return manufactureLimit;
+		return 10000;
 	}
 
 	public native void setPrototype(TangibleObject tano);

@@ -73,8 +73,8 @@ enable_factional_entertainer_missions = "true"
 
 enable_same_account_bounty_missions = "false"
 
--- Default is 30 minutes
-playerBountyKillBuffer = 30 * 60 * 1000 -- Buffer before player bounty can be put back on terminal after target is killed, set 0 to disable
+-- Default is 30 minutes // changed to 3hours
+playerBountyKillBuffer = 3 * 60 * 60 * 1000 -- Buffer before player bounty can be put back on terminal after target is killed, set 0 to disable
 
 -- From 3 days -> 3 hours
 playerBountyDebuffLength = 3 * 60 * 60 * 1000 -- Time before their bounty resets from the minimum amount

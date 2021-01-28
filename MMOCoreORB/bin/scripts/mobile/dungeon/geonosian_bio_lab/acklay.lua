@@ -82,6 +82,12 @@ acklay = Creature:new {
 	        groups = {
 				{group = "acklay", chance = 10000000},
 			},
+			lootChance = 7500000,
+		},
+		{
+	        groups = {
+				{group = "acklay", chance = 10000000},
+			},
 			lootChance = 6500000,
 		},
 		{
@@ -89,12 +95,6 @@ acklay = Creature:new {
 				{group = "acklay", chance = 10000000},
 			},
 			lootChance = 5500000,
-		},
-		{
-	        groups = {
-				{group = "acklay", chance = 10000000},
-			},
-			lootChance = 4500000,
 		},
 		---------------------------------
 	},

@@ -413,9 +413,9 @@ void GroupObjectImplementation::calcGroupLevel() {
 	for (int i = 0; i < getGroupSize(); i++) {
 		Reference<CreatureObject*> member = getGroupMember(i);
 
+		// Enhance group level calculations
 		if (member->isPet()) {
-			groupLevel += member->getLevel() / 5;
-
+			groupLevel += member->getLevel() / 2; // from 5 -> 2
 		} else if (member->isPlayerCreature()) {
 			int memberLevel = member->getLevel();
 
@@ -423,7 +423,7 @@ void GroupObjectImplementation::calcGroupLevel() {
 				groupLevel += (memberLevel - highestPlayer + (highestPlayer / 5));
 				highestPlayer = memberLevel;
 			} else {
-				groupLevel += memberLevel / 5;
+				groupLevel += memberLevel / 4; // from 5 -> 4
 			}
 		}
 	}

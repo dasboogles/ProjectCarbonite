@@ -43,7 +43,7 @@ public:
 		int skillMod = player->getSkillMod("dna_harvesting");
 		int cl = deed->getLevel();
 
-		if (skillMod < 1 || cl > skillMod + 45){ // max of 170
+		if (skillMod < 1 || cl > skillMod + 50){ // max of 175
 			player->sendSystemMessage("@bio_engineer:harvest_dna_skill_too_low");
 			return;
 		}

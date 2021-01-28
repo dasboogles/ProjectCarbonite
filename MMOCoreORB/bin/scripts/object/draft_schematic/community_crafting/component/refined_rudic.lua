@@ -65,7 +65,7 @@ object_draft_schematic_community_crafting_component_refined_rudic = object_draft
 	ingredientTitleNames = {"raw_materials"},
 	ingredientSlotType = {2},
 	resourceTypes = {"object/tangible/loot/quest/shared_rudic.iff"},
-	resourceQuantities = {20},
+	resourceQuantities = {4},
 	contribution = {100},
 
 

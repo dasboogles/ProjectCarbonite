@@ -149,7 +149,7 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 	int currentlySpawned = 0;
 	int spawnedLevel = 0;
 	int maxPets = 1;
-	int maxLevelofPets = 10;
+	int maxLevelofPets = 25; // from 10
 	int level = pet->getLevel();
 
 	if (pet->getCreatureTemplate() == nullptr) {
@@ -167,6 +167,16 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 		if (ch) {
 			maxPets = player->getSkillMod("keep_creature");
 			maxLevelofPets = player->getSkillMod("tame_level");
+			if (maxLevelofPets < 25) {
+				maxLevelofPets = 25;
+			}
+		}
+
+		// Buff creature pet runspeed
+		float petCurRunspeed = creaturePet->getRunSpeed();
+		if (petCurRunspeed > 0 ) {
+			petCurRunspeed = 14; // normalized runspeed, SludgePanthers are 13.72
+			creaturePet->setRunSpeed(petCurRunspeed);
 		}
 
 		if (creaturePet->getAdultLevel() > maxLevelofPets) {

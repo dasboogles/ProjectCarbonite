@@ -423,8 +423,8 @@ int CombatManager::doTargetCombatAction(CreatureObject* attacker, WeaponObject* 
 	
 	// Do special state logic for Jedi Reactive/Active buffs here
 	// We don't want to intim someone if we SaberBlock damage that the defender would have otherwise taken
-	if (attacker != nullptr) {
-		if (attacker->isPlayerCreature() && hitVal != 7) {
+	if (attacker != nullptr && defender != nullptr) {
+		if (defender->isPlayerCreature() && hitVal != 7) {
 			doActiveBuffs(attacker, defender, damage);
 		}
 	}
@@ -434,7 +434,6 @@ int CombatManager::doTargetCombatAction(CreatureObject* attacker, WeaponObject* 
 }
 
 int CombatManager::doTargetCombatAction(TangibleObject* attacker, WeaponObject* weapon, TangibleObject* tano, const CreatureAttackData& data) const {
-
 	int damage = 0;
 
 	Locker clocker(tano, attacker);
@@ -1427,7 +1426,7 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 
 	// Punish hybrids for wearing PSGs
 	if (!shouldBeWearingArmor && (armor != nullptr || psg != nullptr)) {
-		defender->sendSystemMessage("You shouldn't be wearing armor with any Jedi skills. You're taking critical damage!");
+		// defender->sendSystemMessage("You shouldn't be wearing armor with any Jedi skills. You're taking critical damage!");
 		damage = damage * 10; // x10 damage taken because armor is still playing a factor here, foods, toughness, etc
 	}
 

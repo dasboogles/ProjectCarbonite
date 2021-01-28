@@ -9,7 +9,6 @@ FsReflex1Escort = Escort:new {
 	waypointDescription = "@quest/quest_journal/fs_quests_reflex1:s_04",
 	returnPoint = { x = 5283, y = -4226 },
 	returnPlanet = "dathomir",
-
 	areaRadius = 16,
 }
 

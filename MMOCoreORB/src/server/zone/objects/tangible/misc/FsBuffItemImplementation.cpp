@@ -10,13 +10,16 @@
 #include "server/zone/objects/creature/buffs/PrivateSkillMultiplierBuff.h"
 
 void FsBuffItemImplementation::fillObjectMenuResponse(ObjectMenuResponse* menuResponse, CreatureObject* player) {
-	menuResponse->addRadialMenuItem(68, 3, "@quest/force_sensitive/utils:use_special_effect");
+	menuResponse->addRadialMenuItem(68, 3, "Reinforcement");
+	menuResponse->addRadialMenuItem(101, 3, "Focus Thoughts");
 }
 
 int FsBuffItemImplementation::handleObjectMenuSelect(CreatureObject* player, byte selectedID) {
-	if (!isASubChildOf(player))
+	if (!isASubChildOf(player)) {
 		return 0;
+	}
 
+	// Handle HAM buff
 	if (selectedID == 68) {
 		// uint32 buffCRC = getBuffCRC();
 		// FS_VILLAGE_CRYSTAL_BUFF
@@ -32,18 +35,51 @@ int FsBuffItemImplementation::handleObjectMenuSelect(CreatureObject* player, byt
 			return 0;
 		}
 
-		Reference<Buff*> buff = new Buff(player, buffCRC, buffDuration, BuffType::JEDI);
+		// Overwriting the Duration to 1hour no matter what
+		Reference<Buff*> buff = new Buff(player, buffCRC, 3600, BuffType::JEDI);
 
 		Locker locker(buff);
 
 		// buff->setAttributeModifier(buffAttribute, buffValue);
-		buff->setAttributeModifier(0, buffValue); // Health
-		buff->setAttributeModifier(3, buffValue); // Action
-		buff->setAttributeModifier(6, buffValue); // Mind
+		// Overwriting these values so we're not relying on village quests to set attributes
+		buff->setAttributeModifier(0, 1500); // Health
+		buff->setAttributeModifier(3, 1500); // Action
+		buff->setAttributeModifier(6, 1500); // Mind
 
 		player->addBuff(buff);
 
-		player->sendSystemMessage("@quest/force_sensitive/utils:buff_applied");
+		player->sendSystemMessage("Your body feels infused with the crystal's energies.");
+
+		player->addCooldown("fs_buff_item_" + BuffAttribute::getName(buffAttribute), reuseTime);
+	} else if (selectedID == 101) { // Handle Mind Buff
+		// uint32 buffCRC = getBuffCRC();
+		// FS_VILLAGE_CRYSTAL_BUFF
+		uint32 buffCRC = 0x3F499FBC; // custom FS Village Crystal Buff
+
+		if (player->hasBuff(buffCRC)) {
+			player->sendSystemMessage("@quest/force_sensitive/utils:have_buff");
+			return 0;
+		}
+
+		if (!player->checkCooldownRecovery("fs_buff_item_" + BuffAttribute::getName(buffAttribute))) {
+			player->sendSystemMessage("@quest/force_sensitive/utils:timer_not_up");
+			return 0;
+		}
+
+		// Overwriting the Duration to 1hour no matter what
+		Reference<Buff*> buff = new Buff(player, buffCRC, 3600, BuffType::JEDI);
+
+		Locker locker(buff);
+
+		// buff->setAttributeModifier(buffAttribute, buffValue);
+		// Overwriting these values so we're not relying on village quests to set attributes
+		buff->setAttributeModifier(6, 1000); // Health
+		buff->setAttributeModifier(7, 1000); // Action
+		buff->setAttributeModifier(8, 1000); // Mind
+
+		player->addBuff(buff);
+
+		player->sendSystemMessage("Your mind feels infused with the crystal's energies.");
 
 		player->addCooldown("fs_buff_item_" + BuffAttribute::getName(buffAttribute), reuseTime);
 	}
@@ -59,8 +95,8 @@ void FsBuffItemImplementation::fillAttributeList(AttributeListMessage* alm, Crea
 		alm->insertAttribute("reuse_time", "0");
 	}
 
-	alm->insertAttribute("examine_dot_attribute", "Health, Action, Mind");
-	alm->insertAttribute("potency", buffValue);
+	alm->insertAttribute("examine_dot_attribute", "HAM or Mind");
+	alm->insertAttribute("potency", "1500 or 1000");
 	alm->insertAttribute("duration", getTimeString(buffDuration * 1000));
 }
 

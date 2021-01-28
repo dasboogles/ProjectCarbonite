@@ -93,6 +93,18 @@ failed_experiment_62 = Creature:new {
 			groups = {
 				{group = "acklay", chance = 10000000},
 			},
+			lootChance = 4500000,
+		},
+		{
+			groups = {
+				{group = "acklay", chance = 10000000},
+			},
+			lootChance = 3500000,
+		},
+		{
+			groups = {
+				{group = "acklay", chance = 10000000},
+			},
 			lootChance = 2500000,
 		},
 		{
@@ -106,12 +118,6 @@ failed_experiment_62 = Creature:new {
 				{group = "armor_all", chance = 10000000},
 			},
 			lootChance = 7500000,
-		},
-		{
-			groups = {
-				{group = "acklay", chance = 10000000},
-			},
-			lootChance = 2500000,
 		},
 	},
 	weapons = {},

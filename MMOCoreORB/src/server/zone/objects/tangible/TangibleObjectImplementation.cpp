@@ -915,7 +915,8 @@ Reference<FactoryCrate*> TangibleObjectImplementation::createFactoryCrate(int ma
 
 	Locker locker(crate);
 
-	crate->setMaxCapacity(maxSize);
+	// crate->setMaxCapacity(maxSize);
+	crate->setMaxCapacity(10000); // 10k factory runs overriding the LUA defs
 
 
 	if (insertSelf) {

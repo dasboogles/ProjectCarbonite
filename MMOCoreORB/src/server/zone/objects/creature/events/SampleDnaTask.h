@@ -65,7 +65,7 @@ public:
 		switch(currentPhase) {
 		case BEGIN:
 			// No need to continue on if the creature is too high a CL anyways to sample from!
-			if (cl > 170) { 
+			if (cl > 175) { 
 				player->sendSystemMessage("This creature is too powerful for you to sample from!");
 			}
 			// We should be good to go now and try the sample
@@ -170,7 +170,7 @@ public:
 					break;
 				case 3:
 					success = true;
-					aggro = true;
+					aggro = false; // remove chance of aggro on any kind of success
 					break;
 				case 4:
 					success = true;
@@ -182,7 +182,7 @@ public:
 				default:
 					break;
 			}
-			if (success) { //&& cl <= 170) { // From 75 -> 170, keep an eye on this!
+			if (success) { //&& cl <= 170) { // From 75 -> 175, keep an eye on this!
 				player->sendSystemMessage("@bio_engineer:harvest_dna_succeed");
 				creature->incDnaSampleCount();
 				award(cl,rollMod,skillMod);

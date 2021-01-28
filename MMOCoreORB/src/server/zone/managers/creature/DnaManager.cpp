@@ -172,26 +172,26 @@ void DnaManager::generationalSample(PetDeed* deed, CreatureObject* player,int qu
 	}
 
 }
-void DnaManager::generateSample(Creature* creature, CreatureObject* player,int quality){
+void DnaManager::generateSample(Creature* creature, CreatureObject* player,int quality) {
 	if (quality < 0 || quality > 7) {
 		return;
 	}
 
 	Locker lock(creature, player);
 	auto creatureTemplate = dynamic_cast<const CreatureTemplate*>(creature->getCreatureTemplate());
-
+	float samplingBonus = 1.25f; // 25% bonus
 	int ferocity = creatureTemplate->getFerocity();
 	int cl = creature->getLevel();
-	int cle = Genetics::hitChanceToValue(creature->getChanceHit(),quality);
-	int cou = Genetics::meatTypeToValue(creature->getMeatType(),quality);
-	int dep = Genetics::dietToValue(creature->getDiet(),quality);
-	int dex = Genetics::hamToValue(creature->getMaxHAM(3),quality);
-	int end = Genetics::accelerationToValue(creature->getWalkAcceleration(),quality);
-	int fie = Genetics::ferocityToValue(ferocity,quality);
-	int frt = Genetics::resistanceToValue(creature->getEffectiveResist(),creature->getArmor(),quality);
-	int har = Genetics::hamToValue(creature->getMaxHAM(0),quality);
-	int ite = Genetics::hamToValue(creature->getMaxHAM(6),quality);
-	int pow = Genetics::damageToValue((creature->getDamageMax() + creature->getDamageMin())/2,quality);
+	int cle = Genetics::hitChanceToValue(creature->getChanceHit(),quality) * samplingBonus;
+	int cou = Genetics::meatTypeToValue(creature->getMeatType(),quality) * samplingBonus;
+	int dep = Genetics::dietToValue(creature->getDiet(),quality) * samplingBonus;
+	int dex = Genetics::hamToValue(creature->getMaxHAM(3),quality) * samplingBonus;
+	int end = Genetics::accelerationToValue(creature->getWalkAcceleration(),quality) * samplingBonus;
+	int fie = Genetics::ferocityToValue(ferocity,quality) * samplingBonus;
+	int frt = Genetics::resistanceToValue(creature->getEffectiveResist(),creature->getArmor(),quality) * samplingBonus;
+	int har = Genetics::hamToValue(creature->getMaxHAM(0),quality) * samplingBonus;
+	int ite = Genetics::hamToValue(creature->getMaxHAM(6),quality) * samplingBonus;
+	int pow = Genetics::damageToValue((creature->getDamageMax() + creature->getDamageMin())/2,quality) * samplingBonus;
 
 	ManagedReference<SceneObject*> inventory = player->getSlottedObject("inventory");
 
@@ -260,10 +260,30 @@ void DnaManager::generateSample(Creature* creature, CreatureObject* player,int q
 	}
 
 	Locker locker(inventory);
-	if (inventory->transferObject(prototype, -1, true, false)) {
-		inventory->broadcastObject(prototype, true);
-	} else {
-		prototype->destroyObjectFromDatabase(true);
+	
+	// Give 3 copies of the same geneticSample when sampling DNA
+	if (prototype != nullptr && inventory != nullptr) {
+		ObjectManager* objectManager = ObjectManager::instance();
+		if (objectManager != nullptr) {
+			int sampleCount = 3; // changed from single sample to now a for-loop that produces 3 copies
+			for (int x=0; x < sampleCount; x++) {
+				// Copy
+				ManagedReference<DnaComponent*> copiedSamplePrototype = cast<DnaComponent*>(objectManager->cloneObject(prototype));
+				if (copiedSamplePrototype != nullptr) {
+					if (inventory->transferObject(copiedSamplePrototype, -1, true, false)) {
+						inventory->broadcastObject(copiedSamplePrototype, true);
+					} else {
+						error("Failed to generate protoype for dna harvesting!");
+						copiedSamplePrototype->destroyObjectFromDatabase(true);
+					}
+				}
+			}
+			// Super paranoia, gooooo!
+			if (prototype != nullptr) {
+				// Clean up after we're done
+				prototype->destroyObjectFromDatabase(true);
+			}
+		}
 	}
 }
 float DnaManager::valueForLevel(int type, int level) {
