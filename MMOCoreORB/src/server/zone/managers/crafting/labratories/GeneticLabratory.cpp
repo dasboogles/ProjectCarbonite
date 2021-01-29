@@ -203,39 +203,39 @@ void GeneticLabratory::setInitialCraftingValues(TangibleObject* prototype, Manuf
 	// lets clear the special bit if it moved to effective range.
 	if (saberMax == 0) {
 		spSaber = false;
-		saberMax = 100;
+		saberMax = 80;
 	}
 	if (blastMax == 0) {
 		spBlast = false;
-		blastMax = 100;
+		blastMax = 80;
 	}
 	if (kineticMax == 0) {
 		spKinetic = false;
-		kineticMax = 60;
+		kineticMax = 80;
 	}
 	if (energyMax == 0) {
 		spEnergy = false;
-		energyMax = 60;
+		energyMax = 80;
 	}
 	if (heatMax == 0) {
 		spHeat = false;
-		heatMax = 100;
+		heatMax = 80;
 	}
 	if (coldMax == 0) {
 		spCold = false;
-		coldMax = 100;
+		coldMax = 80;
 	}
 	if (electricMax == 0) {
 		spElectric = false;
-		electricMax = 100;
+		electricMax = 80;
 	}
 	if (acidMax == 0) {
 		spAcid = false;
-		acidMax = 100;
+		acidMax = 80;
 	}
 	if (stunMax == 0) {
 		spStun = false;
-		stunMax = 100;
+		stunMax = 80;
 	}
 
 	// Step 2. At this point we know the max values for all stats and we have calculated any armor specials needed
@@ -400,8 +400,17 @@ void GeneticLabratory::experimentRow(CraftingValues* craftingValues,int rowEffec
 
 	craftingValues->recalculateValues(false);
 	float currentFort = craftingValues->getCurrentValue("fortitude");
-	int armorValue = currentFort/500;
+
+	// Perma-uses 1 as the armorValue as sampling/BE stats were buffed and this is breaking resists
+	int armorValue = 1;//currentFort/500;
+	
 	float currentEffective = (int)(((currentFort - (armorValue * 500)) / 50) * 5);
+
+	// Buff effectiveness of pets by 25%, and cap them at 80%
+	currentEffective = currentEffective * 1.25f; 
+	if (currentEffective > 80) {
+		currentEffective = 80;
+	}
 
 	for (int i = 0; i < craftingValues->getExperimentalPropertySubtitleSize(); ++i) {
 		subtitlesTitle = craftingValues->getExperimentalPropertySubtitlesTitle(i);

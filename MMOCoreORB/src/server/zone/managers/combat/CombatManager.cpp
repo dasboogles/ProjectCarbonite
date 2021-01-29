@@ -424,7 +424,7 @@ int CombatManager::doTargetCombatAction(CreatureObject* attacker, WeaponObject* 
 	// Do special state logic for Jedi Reactive/Active buffs here
 	// We don't want to intim someone if we SaberBlock damage that the defender would have otherwise taken
 	if (attacker != nullptr && defender != nullptr) {
-		if (defender->isPlayerCreature() && hitVal != 7) {
+		if (hitVal != 7) {
 			doActiveBuffs(attacker, defender, damage);
 		}
 	}

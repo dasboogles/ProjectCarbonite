@@ -40,10 +40,10 @@ public:
 		}
 
 		int mindCost = player->calculateCostAdjustment(CreatureAttribute::FOCUS, 200);
-		int skillMod = player->getSkillMod("dna_harvesting");
+		int skillMod = player->getSkillMod("dna_harvesting") + 50; // max of 175
 		int cl = deed->getLevel();
 
-		if (skillMod < 1 || cl > skillMod + 50){ // max of 175
+		if (skillMod < 1 || cl > skillMod) { 
 			player->sendSystemMessage("@bio_engineer:harvest_dna_skill_too_low");
 			return;
 		}

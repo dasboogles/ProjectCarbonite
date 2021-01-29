@@ -327,8 +327,8 @@ int PetDeedImplementation::handleObjectMenuSelect(CreatureObject* player, byte s
 			player->sendSystemMessage("@bio_engineer:harvest_dna_already_harvesting");
 			return 1;
 		}
-		int skillMod = player->getSkillMod("dna_harvesting");
-		if (skillMod < 1 || level > skillMod + 15) {
+		int skillMod = player->getSkillMod("dna_harvesting") + 50; // max of 175
+		if (skillMod < 1 || level > skillMod) {
 			player->sendSystemMessage("@bio_engineer:harvest_dna_skill_too_low");
 			return 1;
 		}

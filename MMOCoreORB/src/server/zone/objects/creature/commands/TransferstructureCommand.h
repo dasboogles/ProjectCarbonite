@@ -97,7 +97,11 @@ public:
 			return GENERALERROR;
 		}
 
+		// Paranoid checks
 		CreatureObject* targetCreature = cast<CreatureObject*>( targetObject.get());
+		if (targetCreature == nullptr) {
+			return GENERALERROR;
+		}
 
 		if (structure->isOnBanList(targetCreature)) {
 			creature->sendSystemMessage("@player_structure:no_banned_player"); //You cannot transfer ownership to a banend player.
@@ -107,6 +111,11 @@ public:
 		Reference<SharedStructureObjectTemplate*> tmpl = cast<SharedStructureObjectTemplate*>(obj->getObjectTemplate());
 
 		PlayerObject* ghost = targetCreature->getPlayerObject();
+
+		// Paranoid checks
+		if (ghost == nullptr) {
+			return GENERALERROR;
+		}
 
 		const String& abilityRequired = tmpl->getAbilityRequired();
 
@@ -127,7 +136,7 @@ public:
 				const String& skill = skillsRequired.get(i);
 				// creature->sendSystemMessage("Checking for Required Skill: " + skill);
 
-				if (!skill.isEmpty() && creature->hasSkill(skill)) {
+				if (!skill.isEmpty() && targetCreature->hasSkill(skill)) {
 					hasSkill = true;
 					break;
 				}

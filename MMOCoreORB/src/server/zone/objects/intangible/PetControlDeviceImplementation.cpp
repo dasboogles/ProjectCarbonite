@@ -797,7 +797,7 @@ bool PetControlDeviceImplementation::canBeTradedTo(CreatureObject* player, Creat
 
 		int numberStored = numberInTrade;
 		int maxStoredPets = playerManager->getBaseStoredCreaturePets();
-		int maxLevelofPets = 10;
+		int maxLevelofPets = 25; // from 10 -> 25
 		int level = pet->getAdultLevel();
 		bool ch = receiver->hasSkill("outdoors_creaturehandler_novice");
 

@@ -1123,6 +1123,7 @@ void CreatureManagerImplementation::sample(Creature* creature, CreatureObject* p
 		return;
 	}
 	if (!creature->hasSkillToSampleMe(player)){
+		int skillMod = player->getSkillMod("dna_harvesting");
 		player->sendSystemMessage("@bio_engineer:harvest_dna_skill_too_low");
 		return;
 	}
