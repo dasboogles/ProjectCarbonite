@@ -33,8 +33,14 @@ peko_peko_albatross = Creature:new {
 			groups = {
 				{group = "peko_albatross", chance = 10000000}
 			},
-			lootChance = 4100000
-		}
+			lootChance = 5500000
+		},
+		{
+			groups = {
+				{group = "peko_albatross", chance = 10000000}
+			},
+			lootChance = 5500000
+		},
 	},
 	weapons = {},
 	conversationTemplate = "",

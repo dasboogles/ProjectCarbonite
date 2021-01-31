@@ -50,10 +50,10 @@ StrongDiseaseCommand = {
 		{ "resistance_disease", "poison_disease_resist" },
 		ATTACK_POOL,
 		true,
-		0,
-		60,
-		80, 
-		405,
+		0,		-- Potency? Doesn't really matter, DotChance takes the place of Potency?
+		35,		-- DotChance, creatures (player/npc) must roll a 1 -> 100 vs this value to beat it
+		45, 	-- DotStrength, this is only used when AI vs Player
+		405,	-- Duration
 		45
 	  )
 	}

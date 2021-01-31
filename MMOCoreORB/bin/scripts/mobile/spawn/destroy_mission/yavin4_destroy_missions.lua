@@ -104,11 +104,12 @@ yavin4_destroy_missions = {
 			maxDifficulty = 37,
 			size = 25,
 		},
+		-- This is for the 3rd Jedi Knight Trial
 		{
 			lairTemplateName = "yavin4_stintaril_prowler_neutral_none",
-			minDifficulty = 23,
-			maxDifficulty = 26,
-			size = 35,
+			minDifficulty = 85,
+			maxDifficulty = 95,
+			size = 25,
 		},
 	}
 }

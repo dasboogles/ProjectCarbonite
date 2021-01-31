@@ -63,12 +63,12 @@ object_draft_schematic_clothing_clothing_armor_ris_bracer_r = object_draft_schem
    customizationStringNames = {},
    customizationDefaults = {},
 
-   ingredientTemplateNames = {"craft_clothing_ingredients_n", "craft_clothing_ingredients_n"},
-   ingredientTitleNames = {"auxilary_coverage", "body"},
-   ingredientSlotType = {0, 0},
-   resourceTypes = {"hide", "metal"},
-   resourceQuantities = {150, 150},
-   contribution = {100, 100},
+   ingredientTemplateNames = {"craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n"},
+   ingredientTitleNames = {"auxilary_coverage", "body", "reinforcement_matrix", "flexor_matrix"},
+   ingredientSlotType = {0, 0, 1, 1},
+   resourceTypes = {"hide", "metal", "object/tangible/component/armor/shared_hide_gurk_king.iff", "object/tangible/component/armor/shared_bone_fragment_woolamander_harrower.iff"},
+   resourceQuantities = {150, 150, 1, 1},
+   contribution = {100, 100, 100, 100},
 
 
    targetTemplate = "object/tangible/wearables/armor/ris/armor_ris_bracer_r.iff",

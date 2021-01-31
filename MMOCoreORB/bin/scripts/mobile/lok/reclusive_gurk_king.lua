@@ -29,11 +29,17 @@ reclusive_gurk_king = Creature:new {
 	hues = { 16, 17, 18, 19, 20, 21, 22, 23 },
 	scale = 1.4,
 	lootGroups = {
-	 {
+	 	{
 	        groups = {
 				{group = "gurk_king_common", chance = 10000000}
 			},
-			lootChance = 1900000
+			lootChance = 7500000
+		},
+		{
+	        groups = {
+				{group = "gurk_king_common", chance = 10000000}
+			},
+			lootChance = 7500000
 		}
 	},
 	weapons = {},

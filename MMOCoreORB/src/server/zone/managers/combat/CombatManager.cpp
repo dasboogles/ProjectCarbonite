@@ -1799,9 +1799,9 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 		if (petOwner != nullptr && petOwner->isPlayerCreature()) {
 			// If in PVP we want pets to gain their parent's dmg reduction
 			if (attacker->isPlayerCreature()){
-				damage *= 0.25;
+				damage *= 0.35;
 			} else {
-				damage *= 0.75; // If a player's pet is taking damage in PVE then just reduce incoming dmg by 25%
+				damage *= 0.85; // If a player's pet is taking damage in PVE then just reduce incoming dmg by 25%
 			}
 		}
 	}
