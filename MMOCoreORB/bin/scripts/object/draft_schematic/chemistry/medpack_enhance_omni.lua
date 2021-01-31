@@ -7,7 +7,7 @@ object_draft_schematic_chemistry_medpack_enhance_omni = object_draft_schematic_c
 	craftingToolTab = 64, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 22,
 	size = 3,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 
 	xpType = "crafting_medicine_general",
 	xp = 60,

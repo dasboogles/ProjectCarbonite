@@ -66,7 +66,7 @@ object_draft_schematic_space_droid_interface_droid_brain_upgrade_mk1 = object_dr
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"casing", "droid_interface_electronics"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "copper_borocarbitic"},
+   resourceTypes = {"steel", "copper"},
    resourceQuantities = {75, 25},
    contribution = {100, 100},
 

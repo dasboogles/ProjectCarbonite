@@ -66,7 +66,7 @@ object_draft_schematic_space_armor_mass_reduction_kit_mk4 = object_draft_schemat
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"lighter_ship_materials", "ultralight_alloy"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"aluminum", "aluminum_perovskitic"},
+   resourceTypes = {"aluminum", "aluminum"},
    resourceQuantities = {850, 400},
    contribution = {100, 100},
 

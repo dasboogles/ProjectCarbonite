@@ -66,7 +66,7 @@ object_draft_schematic_space_weapon_max_damage_intensifier_mk1 = object_draft_sc
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"damage_enhancer", "casing"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"gas_reactive_organometallic", "steel"},
+   resourceTypes = {"gas_reactive", "steel"},
    resourceQuantities = {25, 75},
    contribution = {100, 100},
 

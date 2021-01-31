@@ -50,7 +50,7 @@ object_draft_schematic_droid_droid_wound_repair_kit_d = object_draft_schematic_d
 	craftingToolTab = 32, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 32,
 	size = 1,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "crafting_droid_general",
@@ -67,7 +67,7 @@ object_draft_schematic_droid_droid_wound_repair_kit_d = object_draft_schematic_d
 	ingredientTemplateNames = {"craft_droid_ingredients_n", "craft_droid_ingredients_n", "craft_droid_ingredients_n", "craft_droid_ingredients_n", "craft_droid_ingredients_n"},
 	ingredientTitleNames = {"reconstructive_rigging", "insulated_cement", "diagnostic_circuit", "backup_power_supply", "unit_casing"},
 	ingredientSlotType = {0, 0, 1, 1, 1},
-	resourceTypes = {"copper_beyrllius", "armophous_plexite", "object/tangible/component/droid/repair/shared_diagnostic_circuit.iff", "object/tangible/component/droid/repair/shared_power_supply_redundant.iff", "object/tangible/component/droid/repair/shared_repair_unit_casing.iff"},
+	resourceTypes = {"copper", "armophous_plexite", "object/tangible/component/droid/repair/shared_diagnostic_circuit.iff", "object/tangible/component/droid/repair/shared_power_supply_redundant.iff", "object/tangible/component/droid/repair/shared_repair_unit_casing.iff"},
 	resourceQuantities = {35, 30, 1, 1, 1},
 	contribution = {100, 100, 100, 100, 100},
 

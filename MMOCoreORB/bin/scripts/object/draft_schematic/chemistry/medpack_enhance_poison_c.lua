@@ -50,7 +50,7 @@ object_draft_schematic_chemistry_medpack_enhance_poison_c = object_draft_schemat
 	craftingToolTab = 64, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 37,
 	size = 3,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_chemicals.iff",
 
 	xpType = "crafting_medicine_general",
@@ -67,7 +67,7 @@ object_draft_schematic_chemistry_medpack_enhance_poison_c = object_draft_schemat
 	ingredientTemplateNames = {"craft_chemical_ingredients_n", "craft_chemical_ingredients_n", "craft_chemical_ingredients_n", "craft_chemical_ingredients_n", "craft_chemical_ingredients_n", "craft_chemical_ingredients_n", "craft_chemical_ingredients_n"},
 	ingredientTitleNames = {"first_organic_element", "second_organic_element", "first_inorganic_element", "second_inorganic_element", "delivery_medium", "drug_duration_compound", "drug_strength_compound"},
 	ingredientSlotType = {0, 0, 0, 0, 1, 1, 1},
-	resourceTypes = {"meat_herbivore_tatooine", "vegetable_beans", "petrochem_inert_polymer", "ore_intrusive_dylinium", "object/tangible/component/chemistry/shared_solid_delivery_shell.iff", "object/tangible/component/chemistry/shared_release_mechanism_duration.iff", "object/tangible/component/chemistry/shared_biologic_effect_controller.iff"},
+	resourceTypes = {"meat_herbivore_tatooine", "vegetable_beans", "petrochem_inert_polymer", "ore_intrusive", "object/tangible/component/chemistry/shared_solid_delivery_shell.iff", "object/tangible/component/chemistry/shared_release_mechanism_duration.iff", "object/tangible/component/chemistry/shared_biologic_effect_controller.iff"},
 	resourceQuantities = {12, 12, 12, 12, 1, 2, 4},
 	contribution = {100, 100, 100, 100, 50, 50, 50},
 

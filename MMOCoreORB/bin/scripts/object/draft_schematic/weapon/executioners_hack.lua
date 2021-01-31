@@ -66,7 +66,7 @@ object_draft_schematic_weapon_executioners_hack = object_draft_schematic_weapon_
    ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
    ingredientTitleNames = {"sword_core_jacket", "grip", "omnipotent_sword_core"},
    ingredientSlotType = {0, 0, 1},
-   resourceTypes = {"steel_carbonite", "aluminum_phrik", "object/tangible/component/weapon/shared_geonosian_sword_core.iff"},
+   resourceTypes = {"steel", "aluminum", "object/tangible/component/weapon/shared_geonosian_sword_core.iff"},
    resourceQuantities = {60, 30, 2},
    contribution = {100, 100, 100},
 

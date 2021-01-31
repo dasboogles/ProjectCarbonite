@@ -292,14 +292,17 @@ class ManufactureSchematic extends IntangibleObject {
 
 	@preLocked
 	public void setManufactureLimit(int limit) {
-		// manufactureLimit = limit;
-		manufactureLimit = 10000;
+		// Override 1000 -> 10000
+		if (limit == 1000) {
+			manufactureLimit = 10000;
+		} else {
+			manufactureLimit = limit;
+		}
 	}
 
 	@read
 	public int getManufactureLimit() {
-		// return manufactureLimit;
-		return 10000;
+		return manufactureLimit;
 	}
 
 	public native void setPrototype(TangibleObject tano);

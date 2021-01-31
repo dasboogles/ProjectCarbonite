@@ -50,7 +50,7 @@ object_draft_schematic_armor_component_armor_layer_stun = object_draft_schematic
 	craftingToolTab = 2, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 40,
 	size = 3,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_generic_items.iff",
 
 	xpType = "crafting_clothing_armor",
@@ -67,7 +67,7 @@ object_draft_schematic_armor_component_armor_layer_stun = object_draft_schematic
 	ingredientTemplateNames = {"craft_armor_ingredients_n", "craft_armor_ingredients_n", "craft_armor_ingredients_n"},
 	ingredientTitleNames = {"armor_layer_frame", "multi_frequency_shock_absorbtion_media", "multi_frequency_shock_absorbtion_media_2"},
 	ingredientSlotType = {0, 0, 0},
-	resourceTypes = {"metal_ferrous", "crystalline_vertex", "ore_siliclastic_crism"},
+	resourceTypes = {"metal_ferrous", "gemstone_crystalline", "ore_siliclastic"},
 	resourceQuantities = {25, 10, 12},
 	contribution = {100, 100, 100},
 

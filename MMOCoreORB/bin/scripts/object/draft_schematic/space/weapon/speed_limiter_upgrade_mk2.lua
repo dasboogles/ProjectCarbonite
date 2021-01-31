@@ -66,7 +66,7 @@ object_draft_schematic_space_weapon_speed_limiter_upgrade_mk2 = object_draft_sch
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"casing", "limiting_mechanism"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "ore_siliclastic_fermionic"},
+   resourceTypes = {"steel", "ore_siliclastic"},
    resourceQuantities = {200, 50},
    contribution = {100, 100},
 

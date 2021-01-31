@@ -66,7 +66,7 @@ object_draft_schematic_space_booster_extended_life_fuel_cell_mk1 = object_draft_
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"fuel_cell_core", "adv_fuel_cell_enhancer"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "radioactive_polymetric"},
+   resourceTypes = {"steel", "radioactive"},
    resourceQuantities = {75, 25},
    contribution = {100, 100},
 

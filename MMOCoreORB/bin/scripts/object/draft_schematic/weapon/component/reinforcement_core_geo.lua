@@ -66,7 +66,7 @@ object_draft_schematic_weapon_component_reinforcement_core_geo = object_draft_sc
    ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
    ingredientTitleNames = {"reinforcement_core", "power_supply", "core_enhancement"},
    ingredientSlotType = {0, 1, 3},
-   resourceTypes = {"steel_ditanium", "object/tangible/component/weapon/shared_geonosian_power_cube_base.iff", "object/tangible/component/weapon/shared_geonosian_solidifying_agent.iff"},
+   resourceTypes = {"steel", "object/tangible/component/weapon/shared_geonosian_power_cube_base.iff", "object/tangible/component/weapon/shared_geonosian_solidifying_agent.iff"},
    resourceQuantities = {50, 1, 1},
    contribution = {100, 100, 100},
 

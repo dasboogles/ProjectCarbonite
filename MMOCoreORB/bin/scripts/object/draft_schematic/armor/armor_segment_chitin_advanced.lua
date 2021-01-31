@@ -50,7 +50,7 @@ object_draft_schematic_armor_armor_segment_chitin_advanced = object_draft_schema
 	craftingToolTab = 2, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 15,
 	size = 4,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_armor.iff",
 
 	xpType = "crafting_clothing_armor",
@@ -67,7 +67,7 @@ object_draft_schematic_armor_armor_segment_chitin_advanced = object_draft_schema
 	ingredientTemplateNames = {"craft_armor_ingredients_n", "craft_armor_ingredients_n", "craft_armor_ingredients_n"},
 	ingredientTitleNames = {"armor_segment_chitin", "segment_mounting_tabs", "segment_enhancement"},
 	ingredientSlotType = {0, 0, 3},
-	resourceTypes = {"bone_mammal_dantooine", "iron_doonium", "object/tangible/component/armor/shared_base_armor_segment_enhancement.iff"},
+	resourceTypes = {"bone_mammal_dantooine", "iron", "object/tangible/component/armor/shared_base_armor_segment_enhancement.iff"},
 	resourceQuantities = {25, 8, 1},
 	contribution = {100, 100, 100},
 

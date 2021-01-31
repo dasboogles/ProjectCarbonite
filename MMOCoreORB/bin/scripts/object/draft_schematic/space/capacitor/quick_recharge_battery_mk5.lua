@@ -66,7 +66,7 @@ object_draft_schematic_space_capacitor_quick_recharge_battery_mk5 = object_draft
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"battery_casing", "enhanced_battery_core"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "copper_borocarbitic"},
+   resourceTypes = {"steel", "copper"},
    resourceQuantities = {2000, 500},
    contribution = {100, 100},
 

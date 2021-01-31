@@ -50,7 +50,7 @@ object_draft_schematic_furniture_furniture_chair_elegant = object_draft_schemati
 	craftingToolTab = 512, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 39,
 	size = 3,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_furniture.iff",
    
 	xpType = "crafting_structure_general",
@@ -67,7 +67,7 @@ object_draft_schematic_furniture_furniture_chair_elegant = object_draft_schemati
 	ingredientTemplateNames = {"craft_furniture_ingredients_n", "craft_furniture_ingredients_n"},
 	ingredientTitleNames = {"frame", "upholstery"},
 	ingredientSlotType = {0, 1},
-	resourceTypes = {"copper_thallium", "object/tangible/component/clothing/shared_synthetic_cloth.iff"},
+	resourceTypes = {"copper", "object/tangible/component/clothing/shared_synthetic_cloth.iff"},
 	resourceQuantities = {150, 8},
 	contribution = {100, 100},
 

@@ -50,7 +50,7 @@ object_draft_schematic_droid_component_capacitor_high_discharge = object_draft_s
 	craftingToolTab = 32, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 15,
 	size = 1,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "crafting_droid_general",
@@ -67,7 +67,7 @@ object_draft_schematic_droid_component_capacitor_high_discharge = object_draft_s
 	ingredientTemplateNames = {"craft_droid_ingredients_n", "craft_droid_ingredients_n", "craft_droid_ingredients_n"},
 	ingredientTitleNames = {"conductive_surface", "core_plates", "resistor_material"},
 	ingredientSlotType = {0, 0, 0},
-	resourceTypes = {"aluminum_agrinium", "fuel_petrochem_solid_known", "ore_extrusive_pholokite"},
+	resourceTypes = {"aluminum", "fuel_petrochem_solid_known", "ore_extrusive"},
 	resourceQuantities = {10, 10, 10},
 	contribution = {100, 100, 100},
 

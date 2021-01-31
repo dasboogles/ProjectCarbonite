@@ -66,7 +66,7 @@ object_draft_schematic_weapon_component_sword_core_advanced = object_draft_schem
    ingredientTemplateNames = {"craft_weapon_ingredients_n"},
    ingredientTitleNames = {"sword_core"},
    ingredientSlotType = {0},
-   resourceTypes = {"iron_dolovite"},
+   resourceTypes = {"iron"},
    resourceQuantities = {25},
    contribution = {100},
 

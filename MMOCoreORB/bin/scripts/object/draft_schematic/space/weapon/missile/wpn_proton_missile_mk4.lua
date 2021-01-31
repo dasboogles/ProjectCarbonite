@@ -66,7 +66,7 @@ object_draft_schematic_space_weapon_missile_wpn_proton_missile_mk4 = object_draf
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"casing", "warhead"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "radioactive_polymetric"},
+   resourceTypes = {"steel", "radioactive"},
    resourceQuantities = {2000, 500},
    contribution = {100, 100},
 

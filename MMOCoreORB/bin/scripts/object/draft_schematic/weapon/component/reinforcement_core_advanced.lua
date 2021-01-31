@@ -66,7 +66,7 @@ object_draft_schematic_weapon_component_reinforcement_core_advanced = object_dra
    ingredientTemplateNames = {"craft_weapon_ingredients_n"},
    ingredientTitleNames = {"sword_core"},
    ingredientSlotType = {0},
-   resourceTypes = {"steel_ditanium"},
+   resourceTypes = {"steel"},
    resourceQuantities = {25},
    contribution = {100},
 

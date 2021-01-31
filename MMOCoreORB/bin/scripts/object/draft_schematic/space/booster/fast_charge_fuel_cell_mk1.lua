@@ -66,7 +66,7 @@ object_draft_schematic_space_booster_fast_charge_fuel_cell_mk1 = object_draft_sc
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"fuel_cell_core", "adv_fuel_cell_enhancer"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "gas_reactive_organometallic"},
+   resourceTypes = {"steel", "gas_reactive"},
    resourceQuantities = {75, 25},
    contribution = {100, 100},
 

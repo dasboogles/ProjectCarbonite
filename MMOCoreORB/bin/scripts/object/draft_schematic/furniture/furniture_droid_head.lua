@@ -67,7 +67,7 @@ object_draft_schematic_furniture_furniture_droid_head = object_draft_schematic_f
 	ingredientTemplateNames = {"craft_furniture_ingredients_n", "craft_furniture_ingredients_n"},
 	ingredientTitleNames = {"head_base", "head_interior"},
 	ingredientSlotType = {0, 0},
-	resourceTypes = {"metal", "aluminum_titanium"},
+	resourceTypes = {"metal", "aluminum"},
 	resourceQuantities = {90, 80},
 	contribution = {100, 100},
 

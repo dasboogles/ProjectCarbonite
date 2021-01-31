@@ -66,7 +66,7 @@ object_draft_schematic_space_engine_engine_limiter_mk2 = object_draft_schematic_
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"casing", "speed_limiting_mechanism"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "ore_siliclastic_fermionic"},
+   resourceTypes = {"steel", "ore_siliclastic"},
    resourceQuantities = {200, 50},
    contribution = {100, 100},
 

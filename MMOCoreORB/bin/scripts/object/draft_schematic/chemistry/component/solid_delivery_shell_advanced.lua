@@ -50,7 +50,7 @@ object_draft_schematic_chemistry_component_solid_delivery_shell_advanced = objec
 	craftingToolTab = 64, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 18,
 	size = 3,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_chemicals.iff",
 
 	xpType = "crafting_medicine_general",
@@ -67,7 +67,7 @@ object_draft_schematic_chemistry_component_solid_delivery_shell_advanced = objec
 	ingredientTemplateNames = {"craft_chemical_ingredients_n", "craft_chemical_ingredients_n"},
 	ingredientTitleNames = {"purified_organic_element", "shell_material_seed_matrix"},
 	ingredientSlotType = {0, 0},
-	resourceTypes = {"oats_domesticated", "iron_dolovite"},
+	resourceTypes = {"oats_domesticated", "iron"},
 	resourceQuantities = {16, 16},
 	contribution = {100, 100},
 

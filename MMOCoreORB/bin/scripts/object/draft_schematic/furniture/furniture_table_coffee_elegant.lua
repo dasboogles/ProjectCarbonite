@@ -50,7 +50,7 @@ object_draft_schematic_furniture_furniture_table_coffee_elegant = object_draft_s
 	craftingToolTab = 512, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 34,
 	size = 3,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_furniture.iff",
    
 	xpType = "crafting_structure_general",
@@ -67,7 +67,7 @@ object_draft_schematic_furniture_furniture_table_coffee_elegant = object_draft_s
 	ingredientTemplateNames = {"craft_furniture_ingredients_n", "craft_furniture_ingredients_n"},
 	ingredientTitleNames = {"frame", "table_top"},
 	ingredientSlotType = {0, 0},
-	resourceTypes = {"aluminum", "ore_extrusive_pholokite"},
+	resourceTypes = {"aluminum", "ore_extrusive"},
 	resourceQuantities = {100, 75},
 	contribution = {100, 100},
 

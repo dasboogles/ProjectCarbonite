@@ -50,7 +50,7 @@ object_draft_schematic_chemistry_component_release_mechanism_duration_advanced =
 	craftingToolTab = 64, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 17,
 	size = 4,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_chemicals.iff",
 
 	xpType = "crafting_medicine_general",
@@ -67,7 +67,7 @@ object_draft_schematic_chemistry_component_release_mechanism_duration_advanced =
 	ingredientTemplateNames = {"craft_chemical_ingredients_n", "craft_chemical_ingredients_n"},
 	ingredientTitleNames = {"organic_element", "chemical_element"},
 	ingredientSlotType = {0, 0},
-	resourceTypes = {"meat_herbivore", "petrochem_fuel_liquid_type4"},
+	resourceTypes = {"meat_herbivore", "fuel_petrochem_liquid"},
 	resourceQuantities = {16, 16},
 	contribution = {100, 100},
 

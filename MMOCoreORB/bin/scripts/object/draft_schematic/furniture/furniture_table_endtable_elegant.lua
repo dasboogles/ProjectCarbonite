@@ -50,7 +50,7 @@ object_draft_schematic_furniture_furniture_table_endtable_elegant = object_draft
 	craftingToolTab = 512, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 29,
 	size = 3,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_furniture.iff",
    
 	xpType = "crafting_structure_general",
@@ -67,7 +67,7 @@ object_draft_schematic_furniture_furniture_table_endtable_elegant = object_draft
 	ingredientTemplateNames = {"craft_furniture_ingredients_n", "craft_furniture_ingredients_n"},
 	ingredientTitleNames = {"frame", "table_top"},
 	ingredientSlotType = {0, 0},
-	resourceTypes = {"aluminum", "ore_intrusive_ionite"},
+	resourceTypes = {"aluminum", "ore_intrusive"},
 	resourceQuantities = {75, 50},
 	contribution = {100, 100},
 

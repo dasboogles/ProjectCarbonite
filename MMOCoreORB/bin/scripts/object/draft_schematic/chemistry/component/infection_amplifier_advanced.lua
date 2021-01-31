@@ -50,7 +50,7 @@ object_draft_schematic_chemistry_component_infection_amplifier_advanced = object
 	craftingToolTab = 64, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 15,
 	size = 2,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_chemicals.iff",
 
 	xpType = "crafting_medicine_general",
@@ -67,7 +67,7 @@ object_draft_schematic_chemistry_component_infection_amplifier_advanced = object
 	ingredientTemplateNames = {"craft_chemical_ingredients_n", "craft_chemical_ingredients_n"},
 	ingredientTitleNames = {"delivery_medium", "body_shell"},
 	ingredientSlotType = {0, 0},
-	resourceTypes = {"gas_reactive_eleton", "aluminum_titanium"},
+	resourceTypes = {"gas_reactive", "aluminum"},
 	resourceQuantities = {28, 28},
 	contribution = {100, 100},
 

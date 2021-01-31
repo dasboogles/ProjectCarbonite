@@ -66,7 +66,7 @@ object_draft_schematic_space_booster_heavy_fuel_cell_mk3 = object_draft_schemati
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"fuel_cell_core", "adv_fuel_cell_enhancer"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "gas_reactive_organometallic"},
+   resourceTypes = {"steel", "gas_reactive"},
    resourceQuantities = {350, 150},
    contribution = {100, 100},
 

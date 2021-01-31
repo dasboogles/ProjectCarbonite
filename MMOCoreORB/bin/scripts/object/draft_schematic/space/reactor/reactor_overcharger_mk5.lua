@@ -66,7 +66,7 @@ object_draft_schematic_space_reactor_reactor_overcharger_mk5 = object_draft_sche
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"casing", "reactor_overcharging_mechanism"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "radioactive_polymetric"},
+   resourceTypes = {"steel", "radioactive"},
    resourceQuantities = {2000, 500},
    contribution = {100, 100},
 

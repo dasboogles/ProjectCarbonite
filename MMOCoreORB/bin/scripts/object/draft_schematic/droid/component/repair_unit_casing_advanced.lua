@@ -50,7 +50,7 @@ object_draft_schematic_droid_component_repair_unit_casing_advanced = object_draf
 	craftingToolTab = 32, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 15,
 	size = 1,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "crafting_droid_general",
@@ -67,7 +67,7 @@ object_draft_schematic_droid_component_repair_unit_casing_advanced = object_draf
 	ingredientTemplateNames = {"craft_droid_ingredients_n", "craft_droid_ingredients_n"},
 	ingredientTitleNames = {"main_unit_housing", "fiber_unit_housing"},
 	ingredientSlotType = {0, 0},
-	resourceTypes = {"steel_neutronium", "fiberplast_rori"},
+	resourceTypes = {"steel", "fiberplast_rori"},
 	resourceQuantities = {15, 10},
 	contribution = {100, 100},
 

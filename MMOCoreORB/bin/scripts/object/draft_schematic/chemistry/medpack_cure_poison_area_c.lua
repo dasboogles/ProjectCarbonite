@@ -50,7 +50,7 @@ object_draft_schematic_chemistry_medpack_cure_poison_area_c = object_draft_schem
 	craftingToolTab = 64, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 15,
 	size = 1,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_chemicals.iff",
 
 	xpType = "crafting_medicine_general",
@@ -67,7 +67,7 @@ object_draft_schematic_chemistry_medpack_cure_poison_area_c = object_draft_schem
 	ingredientTemplateNames = {"craft_chemical_ingredients_n", "craft_chemical_ingredients_n", "craft_chemical_ingredients_n", "craft_chemical_ingredients_n", "craft_chemical_ingredients_n"},
 	ingredientTitleNames = {"organic_element", "inorganic_element", "delivery_medium", "dispersal_mechanism", "drug_strength_compound"},
 	ingredientSlotType = {0, 0, 1, 1, 1},
-	resourceTypes = {"meat_domesticated", "gas_inert_rethin", "object/tangible/component/chemistry/shared_liquid_delivery_suspension.iff", "object/tangible/component/chemistry/shared_dispersal_mechanism.iff", "object/tangible/component/chemistry/shared_biologic_effect_controller.iff"},
+	resourceTypes = {"meat_domesticated", "gas_inert", "object/tangible/component/chemistry/shared_liquid_delivery_suspension.iff", "object/tangible/component/chemistry/shared_dispersal_mechanism.iff", "object/tangible/component/chemistry/shared_biologic_effect_controller.iff"},
 	resourceQuantities = {25, 25, 2, 4, 2},
 	contribution = {100, 100, 100, 100, 100},
 

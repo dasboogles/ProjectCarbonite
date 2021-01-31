@@ -50,7 +50,7 @@ object_draft_schematic_droid_droid_damage_repair_kit_d = object_draft_schematic_
 	craftingToolTab = 32, -- (See DraftSchematicObjectTemplate.h)
 	complexity = 32,
 	size = 1,
-	factoryCrateSize = 1000,
+	factoryCrateSize = 10000,
 	factoryCrateType = "object/factory/factory_crate_electronics.iff",
 
 	xpType = "crafting_droid_general",
@@ -67,7 +67,7 @@ object_draft_schematic_droid_droid_damage_repair_kit_d = object_draft_schematic_
 	ingredientTemplateNames = {"craft_droid_ingredients_n", "craft_droid_ingredients_n", "craft_droid_ingredients_n", "craft_droid_ingredients_n", "craft_droid_ingredients_n"},
 	ingredientTitleNames = {"electronics_patch_assembly", "electronic_sealant_light", "diagnostic_circuit", "capacitor_discharge_unit", "delivery_cartridge"},
 	ingredientSlotType = {0, 0, 1, 1, 1},
-	resourceTypes = {"aluminum_titanium", "armophous_vendusii", "object/tangible/component/droid/repair/shared_diagnostic_circuit.iff", "object/tangible/component/droid/repair/shared_capacitor_high_discharge.iff", "object/tangible/component/droid/repair/shared_unit_delivery_cartridge.iff"},
+	resourceTypes = {"aluminum", "armophous_vendusii", "object/tangible/component/droid/repair/shared_diagnostic_circuit.iff", "object/tangible/component/droid/repair/shared_capacitor_high_discharge.iff", "object/tangible/component/droid/repair/shared_unit_delivery_cartridge.iff"},
 	resourceQuantities = {35, 30, 1, 1, 1},
 	contribution = {100, 100, 100, 100, 100},
 

@@ -66,7 +66,7 @@ object_draft_schematic_space_booster_booster_overdriver_mk2 = object_draft_schem
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"overdriver_components", "special_fuel_enhancer"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "radioactive_polymetric"},
+   resourceTypes = {"steel", "radioactive"},
    resourceQuantities = {175, 75},
    contribution = {100, 100},
 

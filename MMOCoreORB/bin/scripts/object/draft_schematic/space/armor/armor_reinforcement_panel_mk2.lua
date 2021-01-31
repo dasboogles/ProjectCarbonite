@@ -66,7 +66,7 @@ object_draft_schematic_space_armor_armor_reinforcement_panel_mk2 = object_draft_
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"reinforcing_ship_materials", "strong_alloy"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "steel_bicorbantium"},
+   resourceTypes = {"steel", "steel"},
    resourceQuantities = {175, 75},
    contribution = {100, 100},
 

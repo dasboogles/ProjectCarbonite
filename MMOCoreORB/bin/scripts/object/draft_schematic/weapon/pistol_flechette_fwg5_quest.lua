@@ -66,7 +66,7 @@ object_draft_schematic_weapon_pistol_flechette_fwg5_quest = object_draft_schemat
    ingredientTemplateNames = {"craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n", "craft_weapon_ingredients_n"},
    ingredientTitleNames = {"frame_assembly", "receiver_assembly", "grip_assembly", "cartridge_feed_unit", "barrel", "scope"},
    ingredientSlotType = {0, 0, 0, 1, 1, 3},
-   resourceTypes = {"iron_axidite", "steel_ditanium", "aluminum_linksteel", "object/tangible/component/weapon/shared_projectile_feed_mechanism.iff", "object/tangible/component/weapon/shared_projectile_pistol_barrel.iff", "object/tangible/component/weapon/shared_scope_weapon.iff"},
+   resourceTypes = {"iron", "steel", "aluminum", "object/tangible/component/weapon/shared_projectile_feed_mechanism.iff", "object/tangible/component/weapon/shared_projectile_pistol_barrel.iff", "object/tangible/component/weapon/shared_scope_weapon.iff"},
    resourceQuantities = {25, 10, 5, 1, 1, 1},
    contribution = {100, 100, 100, 100, 100, 100},
 

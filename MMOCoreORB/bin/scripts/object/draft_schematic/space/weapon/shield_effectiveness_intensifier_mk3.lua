@@ -66,7 +66,7 @@ object_draft_schematic_space_weapon_shield_effectiveness_intensifier_mk3 = objec
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"casing", "effectiveness_enhancer"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "radioactive_polymetric"},
+   resourceTypes = {"steel", "radioactive"},
    resourceQuantities = {350, 150},
    contribution = {100, 100},
 

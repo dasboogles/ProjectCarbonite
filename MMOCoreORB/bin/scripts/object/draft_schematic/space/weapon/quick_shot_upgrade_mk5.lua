@@ -66,7 +66,7 @@ object_draft_schematic_space_weapon_quick_shot_upgrade_mk5 = object_draft_schema
    ingredientTemplateNames = {"craft_item_ingredients_n", "craft_item_ingredients_n"},
    ingredientTitleNames = {"casing", "speed_enhancer"},
    ingredientSlotType = {0, 0},
-   resourceTypes = {"steel", "ore_siliclastic_fermionic"},
+   resourceTypes = {"steel", "ore_siliclastic"},
    resourceQuantities = {2000, 500},
    contribution = {100, 100},
 
