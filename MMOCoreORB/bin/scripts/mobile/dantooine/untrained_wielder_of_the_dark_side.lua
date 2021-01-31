@@ -4,8 +4,8 @@ untrained_wielder_of_the_dark_side = Creature:new {
 	randomNameTag = true,
 	socialGroup = "kun",
 	faction = "",
-	level = 65,
-	chanceHit = 0.6,
+	level = 75,
+	chanceHit = 1.25,
 	damageMin = 545,
 	damageMax = 800,
 	baseXp = 6288,
@@ -31,18 +31,22 @@ untrained_wielder_of_the_dark_side = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 3500000},
-				{group = "power_crystals", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "holocron_dark", chance = 500000},
-				{group = "holocron_light", chance = 500000},
-				{group = "melee_weapons", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "wearables_uncommon", chance = 750000},
-				{group = "wearables_common", chance = 750000}
-			}
-		}
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 1500000
+		},
+		{
+			groups = {
+				{group = "holocron_dark", chance = 10000000}
+			},
+			lootChance = 150000
+		},
+		{
+			groups = {
+				{group = "holocron_light", chance = 10000000}
+			},
+			lootChance = 150000
+		},
 	},
 	weapons = {"mixed_force_weapons"},
 	conversationTemplate = "",

@@ -4,8 +4,8 @@ force_sensitive_crypt_crawler = Creature:new {
 	randomNameTag = true,
 	socialGroup = "kun",
 	faction = "",
-	level = 95,
-	chanceHit = 0.9,
+	level = 105,
+	chanceHit = 1.4,
 	damageMin = 685,
 	damageMax = 1080,
 	baseXp = 9057,
@@ -31,18 +31,22 @@ force_sensitive_crypt_crawler = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "junk", chance = 3500000},
-				{group = "power_crystals", chance = 500000},
-				{group = "color_crystals", chance = 500000},
-				{group = "holocron_dark", chance = 500000},
-				{group = "holocron_light", chance = 500000},
-				{group = "melee_weapons", chance = 1000000},
-				{group = "armor_attachments", chance = 1000000},
-				{group = "clothing_attachments", chance = 1000000},
-				{group = "wearables_common", chance = 750000},
-				{group = "wearables_uncommon", chance = 750000}
-			}
-		}
+				{group = "color_crystals", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "holocron_dark", chance = 10000000}
+			},
+			lootChance = 150000
+		},
+		{
+			groups = {
+				{group = "holocron_light", chance = 10000000}
+			},
+			lootChance = 150000
+		},
 	},
 	weapons = {"mixed_force_weapons"},
 	conversationTemplate = "",

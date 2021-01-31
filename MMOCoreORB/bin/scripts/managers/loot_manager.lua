@@ -864,7 +864,9 @@ lootableJediStatMods = {
 	"jedi_force_power_regen",
 	"lightsaber_accuracy",
 	"lightsaber_speed",
-	"force_powers_accuracy"
+	"force_powers_accuracy",
+	"jedi_saber_assembly",
+	"jedi_saber_experimentation"
 }
 
 -- Values used to generate lightsaber crystal stats
