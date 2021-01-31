@@ -1,7 +1,7 @@
 local ObjectManager = require("managers.object.object_manager")
 
 USEDHOLOCRON = "used_holocron"
-HOLOCRONCOOLDOWNTIME = 24 * 60 * 60 * 1000 -- 24 hours
+HOLOCRONCOOLDOWNTIME = 60 * 60 * 1000 -- 1 hour
 
 VillageJediManagerHolocron = ScreenPlay:new {}
 
@@ -45,6 +45,9 @@ function VillageJediManagerHolocron.useTheHolocron(pSceneObject, pPlayer)
 	CreatureObject(pPlayer):sendSystemMessage("@jedi_spam:holocron_force_replenish")
 	PlayerObject(pGhost):setForcePower(PlayerObject(pGhost):getForcePowerMax());
 	CreatureObject(pPlayer):addCooldown(USEDHOLOCRON, HOLOCRONCOOLDOWNTIME)
+
+	-- Play Effect Here when using a Holocron
+	CreatureObject(pPlayer):playEffect("clienteffect/pl_force_channel_self.cef", "")
 
 	SceneObject(pSceneObject):destroyObjectFromWorld()
 	SceneObject(pSceneObject):destroyObjectFromDatabase()
