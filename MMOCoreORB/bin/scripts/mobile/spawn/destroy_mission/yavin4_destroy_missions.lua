@@ -104,6 +104,12 @@ yavin4_destroy_missions = {
 			maxDifficulty = 37,
 			size = 25,
 		},
+		{
+			lairTemplateName = "yavin4_stintaril_prowler_neutral_none",
+			minDifficulty = 23,
+			maxDifficulty = 26,
+			size = 35,
+		},
 	}
 }
 

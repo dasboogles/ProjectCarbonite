@@ -36,7 +36,7 @@ function DathomirSarlaccScreenPlay:spawnMobiles()
 
 	spawnMobile("dathomir", "monstrous_brute", 600, -2038.7, 32.7, 3310.1, 3, 0)
 	spawnMobile("dathomir", "monstrous_brute", 600, -1923.2, 46.8, 3226.5, 43, 0)
-	spawnMobile("dathomir", "ancient_bull_rancor", 600, -2210.3, 32.1, 3039.9, 0, 0)
+	spawnMobile("dathomir", "ancient_bull_rancor", 180, -2210.3, 32.1, 3039.9, 0, 0)
 
 	spawnMobile("dathomir", "mutant_baz_nitch", 600, -2132.8, 26.7, 3280.0, 76, 0)
 	spawnMobile("dathomir", "mutant_baz_nitch", 600, -2128.8, 26.8, 3286.6, -176, 0)
