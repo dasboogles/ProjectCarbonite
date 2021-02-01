@@ -66,7 +66,7 @@ object_draft_schematic_clothing_clothing_hat_twilek_formal_03 = object_draft_sch
    ingredientTemplateNames = {"craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n", "craft_clothing_ingredients_n"},
    ingredientTitleNames = {"shell", "binding_and_weatherproofing", "liner", "green_diamond_crusting", "green_diamond_support"},
    ingredientSlotType = {1, 0, 1, 0, 0},
-   resourceTypes = {"object/tangible/component/clothing/shared_synthetic_cloth.iff", "petrochem_inert", "object/tangible/component/clothing/shared_synthetic_cloth.iff", "gemstone_crystalline", "armophous_plexite"},
+   resourceTypes = {"object/tangible/component/clothing/shared_synthetic_cloth.iff", "petrochem_inert", "object/tangible/component/clothing/shared_synthetic_cloth.iff", "gemstone_crystalline", "gemstone_armophous"},
    resourceQuantities = {3, 20, 3, 10, 10},
    contribution = {100, 100, 100, 100, 100},
 

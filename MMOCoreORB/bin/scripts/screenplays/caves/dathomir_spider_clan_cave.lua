@@ -370,13 +370,10 @@ function SpiderClanCaveScreenPlay:spawnMobiles()
 
 	-- Re-written KiinDray Respawn
 	self:respawnKiinDray()
-
-	-- local pQueen = spawnMobile("dathomir", "reclusive_cavern_spider_queen", 1800, -26.6, -80.0, -149.5, 0, 3695711)
-	-- createObserver(OBJECTDESTRUCTION, "SpiderClanCaveScreenPlay", "notifyQueenDead", pQueen)
 end
 
 function SpiderClanCaveScreenPlay:respawnKiinDray()
-	local pKiinDray = spawnMobile("dathomir", "reclusive_cavern_spider_queen", 0, -89.6619, -100.955, -102.623, 172, 3695712)
+	local pKiinDray = spawnMobile("dathomir", "kiin_dray", 0, -89.6619, -100.955, -102.623, 172, 3695712)
 
 	if (pKiinDray ~= nil) then
 		createObserver(STARTCOMBAT, "SpiderClanCaveScreenPlay", "spawnGuards", pKiinDray)
@@ -414,18 +411,3 @@ function SpiderClanCaveScreenPlay:spawnGuards(pKiinDray)
 
 	return 1
 end
--- function SpiderClanCaveScreenPlay:notifyQueenDead(pQueen, pKiller)
--- 	if (readData("spiderclancave:kiindray") == 0) then
--- 		local pKiinDray = spawnMobile("dathomir", "kiin_dray", 0, -87.7, -100.8, -103.4, 174, 3695712)
--- 		createObserver(OBJECTDESTRUCTION, "SpiderClanCaveScreenPlay", "notifyKiinDrayDead", pKiinDray)
--- 		writeData("spiderclancave:kiindray", 1)
--- 	end
-
--- 	return 0
--- end
-
--- function SpiderClanCaveScreenPlay:notifyKiinDrayDead(pKiinDray, pKiller)
--- 	deleteData("spiderclancave:kiindray")
-
--- 	return 1
--- end
