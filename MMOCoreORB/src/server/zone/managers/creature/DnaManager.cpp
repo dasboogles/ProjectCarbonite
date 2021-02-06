@@ -261,11 +261,11 @@ void DnaManager::generateSample(Creature* creature, CreatureObject* player,int q
 
 	Locker locker(inventory);
 	
-	// Give 3 copies of the same geneticSample when sampling DNA
+	// Give 5 copies of the same geneticSample when sampling DNA
 	if (prototype != nullptr && inventory != nullptr) {
 		ObjectManager* objectManager = ObjectManager::instance();
 		if (objectManager != nullptr) {
-			int sampleCount = 3; // changed from single sample to now a for-loop that produces 3 copies
+			int sampleCount = 5; // changed from single sample to now a for-loop that produces 5 copies
 			for (int x=0; x < sampleCount; x++) {
 				// Copy
 				ManagedReference<DnaComponent*> copiedSamplePrototype = cast<DnaComponent*>(objectManager->cloneObject(prototype));

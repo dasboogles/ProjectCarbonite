@@ -283,6 +283,7 @@ void GeneticLabratory::setInitialCraftingValues(TangibleObject* prototype, Manuf
 
 	int armorValue = armorBase/500;
 	effectiveness = (int)(((armorBase - (armorValue * 500)) / 50) * 5);
+	// effectiveness = (int)(((armorBase) / 50) * 5);
 
 	// Store off armor data
 	craftingValues->addExperimentalProperty("resists", "dna_comp_armor_kinetic", spKinetic ? kineticMax : kineticMax < 0 ? -1 : effectiveness, kineticMax, 0, true, ValuesMap::OVERRIDECOMBINE);
@@ -391,8 +392,9 @@ void GeneticLabratory::experimentRow(CraftingValues* craftingValues,int rowEffec
 			if (newValue > craftingValues->getMaxPercentage(subtitle))
 				newValue = craftingValues->getMaxPercentage(subtitle);
 
-			if (newValue < 0)
+			if (newValue < 0) {
 				newValue = 0;
+			}
 
 			craftingValues->setCurrentPercentage(subtitle, newValue);
 		}
@@ -402,9 +404,10 @@ void GeneticLabratory::experimentRow(CraftingValues* craftingValues,int rowEffec
 	float currentFort = craftingValues->getCurrentValue("fortitude");
 
 	// Perma-uses 1 as the armorValue as sampling/BE stats were buffed and this is breaking resists
-	int armorValue = 1;//currentFort/500;
+	// int armorValue = currentFort / 500;
 	
-	float currentEffective = (int)(((currentFort - (armorValue * 500)) / 50) * 5);
+	// float currentEffective = (int)(((currentFort - (armorValue * 500)) / 50) * 5);
+	float currentEffective = (int)(((currentFort) / 50) * 5);
 
 	// Buff effectiveness of pets by 25%, and cap them at 80%
 	currentEffective = currentEffective * 1.25f; 

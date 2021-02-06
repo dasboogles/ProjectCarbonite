@@ -137,9 +137,9 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 		box->setCallback(new PetFixSuiCallback(player->getZoneServer(), _this.getReferenceUnsafeStaticCast()));
 		box->setPromptText("@bio_engineer:pet_sui_text");
 		box->setPromptTitle("@bio_engineer:pet_sui_title");
-		box->setOkButton(true,"@bio_engineer:pet_sui_fix_stats");
+		box->setOkButton(true,"@bio_engineer:pet_sui_fix_level");
 		box->setCancelButton(true,"@bio_engineer:pet_sui_abort");
-		box->setOtherButton(true,"@bio_engineer:pet_sui_fix_level");
+		// box->setOtherButton(true,"@bio_engineer:pet_sui_fix_level");
 		box->setUsingObject(_this.getReferenceUnsafeStaticCast());
 		player->getPlayerObject()->addSuiBox(box);
 		player->sendMessage(box->generateMessage());
@@ -1237,16 +1237,32 @@ PatrolPoint PetControlDeviceImplementation::getPatrolPoint(int idx) {
 }
 
 bool PetControlDeviceImplementation::isValidPet(AiAgent* pet) {
+	// If the pet doesn't even exist then just return false
+	// (SegFault protection), shouldn't ever happen but...ya know....
+	if (pet == nullptr) {
+		return false;
+	}
+
 	PetDeed* deed = pet->getPetDeed();
 
+	// Make sure the deed is actually there....
+	// (SegFault protection), shouldn't ever happen but...ya know....
 	if (deed != nullptr) {
-		// time to calculate!
+		// Time to calculate!
 		int calculatedLevel =  deed->calculatePetLevel();
 
-		if (pet->getTemplateLevel() >= (calculatedLevel * 0.85)) {
-			return true;
-		} else {
-			return false;
+		if (pet->getTemplateLevel() <= 75) {
+			if (pet->getTemplateLevel() >= (calculatedLevel * 0.85)) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if (pet->getTemplateLevel() > 75) { // Be more lenient on pets greater than 75 to facilitate Elite Bonuses!
+			if (pet->getTemplateLevel() >= (calculatedLevel * 0.75)) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 	}
 

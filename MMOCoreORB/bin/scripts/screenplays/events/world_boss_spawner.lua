@@ -139,8 +139,13 @@ function WorldBossSpawner:respawnBoss(pOldBoss)
 			elseif (bossTemplate == "wampa_boss" or bossTemplate == "kkorrwrot_boss") then
 				mechanicType = "coldFieldMechanic"
 			end
+			
+			-- Prevent the server from trying to start combat without an empty mechanic type
+			if (mechanicType ~= "") then
+				createObserver(STARTCOMBAT, mechanicType, "setupMech", pBoss, "")
+			end
 
-			createObserver(STARTCOMBAT, mechanicType, "setupMech", pBoss, "")
+			-- Setup our boss here
 			createEvent(30, "WorldBossSpawner", "setupBoss", pBoss, "")
 
 			-- -- Spawn BigGameHunterForBossHere

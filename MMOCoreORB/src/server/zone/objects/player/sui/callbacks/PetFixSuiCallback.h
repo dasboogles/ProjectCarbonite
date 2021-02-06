@@ -32,33 +32,25 @@ public:
 
 		ManagedReference<PetControlDevice*> device = controlDevice.get();
 
-		if (device == nullptr || cancelPressed)
+		if (device == nullptr || cancelPressed) {
 			return;
+		}
 
-		if (args->size() < 1)
+		if (args->size() < 1) {
 			return;
+		}
 
-		bool otherPressed = Bool::valueOf(args->get(0).toString());
-
+		// Heavily refactored to ONLY reforge their level, as stats reforge was broken/stupid
 		ManagedReference<TangibleObject*> controlledObject = device->getControlledObject();
-
-		if (controlledObject == nullptr || !controlledObject->isCreature())
+		if (controlledObject == nullptr || !controlledObject->isCreature()) {
 			return;
+		}
 
 		ManagedReference<Creature*> pet = cast<Creature*>(controlledObject.get());
 		ManagedReference<PetDeed*> deed = pet->getPetDeed();
 		Locker lock(pet, player);
 
-		if (otherPressed) {
-			deed->adjustPetLevel(player,pet);
-		}
-		else {
-			if(deed->adjustPetStats(player,pet)){
-                          	Locker locker(device);
-				device->growPet(player, true);
-			}
-		}
-
+		deed->adjustPetLevel(player,pet);
 		device->sendAttributeListTo(player);
 	}
 };

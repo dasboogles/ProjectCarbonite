@@ -200,7 +200,8 @@ String PetDeedImplementation::getTemplateName() const {
 }
 int PetDeedImplementation::calculatePetLevel() {
 	// Regenerate the LEvel
-	int effective = (int)(((fortitude - (armor * 500)) / 50) * 5);
+	// int effective = (int)(((fortitude - (armor * 500)) / 50) * 5);
+	int effective = (int)(((fortitude) / 50) * 5);
 	int dps = ((damageMax + damageMin) / 2.0f) / attackSpeed;
 	int avgHam = (health + action + mind) / 3;
 	if (regen == 0) {
@@ -290,13 +291,34 @@ void PetDeedImplementation::updateCraftingValues(CraftingValues* values, bool fi
 	CreatureTemplateManager* creatureTemplateManager = CreatureTemplateManager::instance();
 	Reference<CreatureTemplate*> petTemplate =  creatureTemplateManager->getTemplate( mobileTemplate.hashCode() );
 	if (petTemplate != nullptr) {
-		// get min CL from the template
+		// Get min CL from the template
 		int skinFactor = petTemplate->getLevel();
-		if (level > 75) {
-			level = 75;
+
+		// From 75 -> 120 for max CL level
+		if (level > 120) { 
+			level = 120;
 		}
+
 		if (level < skinFactor) {
 			level = skinFactor;
+		}
+
+		// Apply CL bonuses if above 75%
+		if (level > 75) {
+			float eliteBonusValue = ((level - 75) + 100) / 100.0f;
+
+			// Cap bonus at 25%, for now...
+			if (eliteBonusValue > 1.25f) {
+				eliteBonusValue = 1.25f;
+			}
+
+			// error("Pet's Elite bonus Value is: " + String::valueOf(eliteBonusValue));
+			health = (health * eliteBonusValue);
+			action = (health * eliteBonusValue);
+			mind = (health * eliteBonusValue);
+			chanceHit = (chanceHit * eliteBonusValue);
+			damageMin = (damageMin * eliteBonusValue);
+			damageMax = (damageMax * eliteBonusValue);
 		}
 	}
 	// setup attack map
@@ -423,7 +445,7 @@ int PetDeedImplementation::handleObjectMenuSelect(CreatureObject* player, byte s
 
 		bool isVicious = petTemplate->getPvpBitmask() & CreatureFlag::AGGRESSIVE;
 
-		if (level > 10 || isVicious) {
+		if (level > 25 || isVicious) { // Allow non-CH to use above CL10 pets -> CL25
 			if (!player->hasSkill("outdoors_creaturehandler_novice") || (level > maxLevelofPets)) {
 				player->sendSystemMessage("@pet/pet_menu:sys_lack_skill"); // You lack the skill to be able to tame that creature.
 				return 1;
@@ -526,7 +548,7 @@ void PetDeedImplementation::setSpecialResist(int type) {
 void PetDeedImplementation::adjustPetLevel(CreatureObject* player, CreatureObject* pet) {
 	int newLevel = calculatePetLevel();
 
-	if (newLevel < 1 || newLevel > 75) {
+	if (newLevel < 1 || newLevel > 120) {
 		player->sendSystemMessage("@bio_engineer:pet_sui_fix_error");
 		return;
 	}
@@ -542,8 +564,8 @@ bool PetDeedImplementation::adjustPetStats(CreatureObject* player, CreatureObjec
 		return false;
 	}
 
-	if (oldLevel > 75) {
-		oldLevel = 75;
+	if (oldLevel > 120) {
+		oldLevel = 120;
 	}
 
 	int ham = DnaManager::instance()->valueForLevel(DnaManager::HAM_LEVEL,oldLevel);
@@ -559,8 +581,9 @@ bool PetDeedImplementation::adjustPetStats(CreatureObject* player, CreatureObjec
 
 	// Adjust Armor Now
 	fortitude = DnaManager::instance()->valueForLevel(DnaManager::ARM_LEVEL,oldLevel);
-	armor = fortitude/500;
-	float effectiveness = (int)(((fortitude - (armor * 500)) / 50) * 5);
+	// armor = fortitude/500;
+	// float effectiveness = (int)(((fortitude - (armor * 500)) / 50) * 5);
+	float effectiveness = (int)(((fortitude) / 50) * 5);
 	if (!isSpecialResist(SharedWeaponObjectTemplate::KINETIC) && kinResist > 0)
 		kinResist = effectiveness;
 	if(!isSpecialResist(SharedWeaponObjectTemplate::ACID) && acidResist > 0)
