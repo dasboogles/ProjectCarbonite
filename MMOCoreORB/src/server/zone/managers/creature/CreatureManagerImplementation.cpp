@@ -980,7 +980,20 @@ void CreatureManagerImplementation::tame(Creature* creature, CreatureObject* pla
 		return;
 
 	int templateLevel = creatureTemplate->getLevel();
+	int chBonusTame = 10; // Give Novice CH an additional +10 maxLevel behind-the-scenes
 	int maxLevelofPets = player->getSkillMod("tame_level");
+
+	// Is a CreatureHandler, then give them a +10 base/max bonus
+	if (player->hasSkill("outdoors_creaturehandler_novice")) {
+		maxLevelofPets = maxLevelofPets + chBonusTame;
+
+		// Make sure we're not going below 25 or above 130
+		if (maxLevelofPets < 25) {
+			maxLevelofPets = 25;
+		} else if (maxLevelofPets > 130) { // Cap MaxLevelOfPets to 130 for everyone
+			maxLevelofPets = 130;
+		}
+	}
 
 	if (!player->hasSkill("outdoors_creaturehandler_novice") || (templateLevel > maxLevelofPets)) {
 		player->sendSystemMessage("@pet/pet_menu:sys_lack_skill"); // You lack the skill to be able to tame that creature.

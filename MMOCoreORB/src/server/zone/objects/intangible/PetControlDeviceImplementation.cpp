@@ -166,9 +166,13 @@ void PetControlDeviceImplementation::callObject(CreatureObject* player) {
 
 		if (ch) {
 			maxPets = player->getSkillMod("keep_creature");
-			maxLevelofPets = player->getSkillMod("tame_level");
+			// Give Novice CH an additional +10 maxLevel behind-the-scenes
+			int chBonusTame = 10;
+			maxLevelofPets = player->getSkillMod("tame_level") + chBonusTame;
 			if (maxLevelofPets < 25) {
 				maxLevelofPets = 25;
+			} else if (maxLevelofPets > 130) { // Cap MaxLevelOfPets to 130 for everyone
+				maxLevelofPets = 130;
 			}
 		}
 
@@ -803,7 +807,14 @@ bool PetControlDeviceImplementation::canBeTradedTo(CreatureObject* player, Creat
 
 		if (ch) {
 			maxStoredPets += receiver->getSkillMod("stored_pets");
-			maxLevelofPets = receiver->getSkillMod("tame_level");
+			// Give Novice CH an additional +10 maxLevel behind-the-scenes
+			int chBonusTame = 10;
+			maxLevelofPets = receiver->getSkillMod("tame_level") + chBonusTame;
+			if (maxLevelofPets < 25) {
+				maxLevelofPets = 25;
+			} else if (maxLevelofPets > 130) { // Cap MaxLevelOfPets to 130 for everyone
+				maxLevelofPets = 130;
+			}
 		}
 
 		if (level > maxLevelofPets) {

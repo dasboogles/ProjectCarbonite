@@ -63,8 +63,9 @@ public:
 		ManagedReference<PlayerObject*> targetGhost = targetPlayer->getPlayerObject();
 		ManagedReference<PlayerObject*> ghost = player->getPlayerObject();
 
-		if (targetGhost == nullptr || ghost == nullptr)
+		if (targetGhost == nullptr || ghost == nullptr) {
 			return GENERALERROR;
+		}
 
 		int activePets = 0;
 		int petLevel = 0;
@@ -74,14 +75,17 @@ public:
 
 			ManagedReference<PetControlDevice*> device = targetPet->getControlDevice().get().castTo<PetControlDevice*>();
 
-			if (device == nullptr)
+			if (device == nullptr) {
 				continue;
+			}
 
 			if (device->getPetType() == PetManager::CREATUREPET) {
 				activePets++;
 				petLevel += targetPet->getLevel();
 			}
 		}
+
+		int targetPlayerMaxLevelPets = targetPlayer->getSkillMod("tame_level");
 
 		//none ch doesn't seem to have keep_creature, effectively returns 0/
 		if (activePets != 0 && activePets >= targetPlayer->getSkillMod("keep_creature")) {
@@ -90,8 +94,9 @@ public:
 			return GENERALERROR;
 		}
 
-		//None CH can only have 1 active pet.
-		if(targetPlayer->hasSkill("outdoors_creaturehandler_novice") && ((petLevel + pet->getLevel()) > targetPlayer->getSkillMod("tame_level")))
+		// If the player has novice CH (ie: not a non-CH), can they have this new pet transfered to them based on their currently
+		// activePet AND their maxLevelOfPets (if currently-out pet is 10, and maxLevelOfPets is 30, is this new pet < 20?)
+		if(targetPlayer->hasSkill("outdoors_creaturehandler_novice") && ((petLevel + pet->getLevel()) > targetPlayerMaxLevelPets))
 		{
 			player->sendSystemMessage("@pet/pet_menu:no_chance"); // That person has no chance of controlling this creature. Transfer failed.
 			return GENERALERROR;

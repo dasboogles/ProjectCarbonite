@@ -409,7 +409,14 @@ int PetDeedImplementation::handleObjectMenuSelect(CreatureObject* player, byte s
 		int spawnedLevel = 0;
 		int cLevel = level;
 		int maxPets = player->getSkillMod("keep_creature");
+		// Give Novice CH an additional +10 maxLevel behind-the-scenes
+		int chBonusTame = 10;
 		int maxLevelofPets = player->getSkillMod("tame_level");
+		if (maxLevelofPets < 25) {
+			maxLevelofPets = 25;
+		} else if (maxLevelofPets > 130) { // Cap MaxLevelOfPets to 130 for everyone
+			maxLevelofPets = 130;
+		}
 
 		for (int i = 0; i < ghost->getActivePetsSize(); ++i) {
 			ManagedReference<AiAgent*> object = ghost->getActivePet(i);
