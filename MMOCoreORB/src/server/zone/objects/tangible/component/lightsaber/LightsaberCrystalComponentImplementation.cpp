@@ -198,39 +198,64 @@ void LightsaberCrystalComponentImplementation::generateCrystalStats() {
 		minFloatStat = (qualityModifier * maxFloatStat);
 		attackSpeed = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
 	} else if (color != 31) { // Setting Color Crystal stats pre-tune
+
+		// Ancient Color Crystals always tune Yellow
+		if (color > 11 && rareMod < 1) { // Make sure we don't overwrite what was naturally set
+			int randomAncientRoll = System::random(100);
+
+			// 20% chance for a Legendary Roll
+			if (randomAncientRoll >= 80) {
+				setRareMod(3); // Legendary
+			} 
+			// 30% chance for a Legendary Roll
+			else if (randomAncientRoll >= 50) { 
+				setRareMod(2); // Exceptional
+			}
+			// 50% chance for a Rare Roll
+			else {
+				setRareMod(1); // Rare
+			}
+		}
+
 		// Color Crystal Damage
 		if (rareMod != 0){
 			int minStat = 0;
 			int maxStat = 0;
 			int minimumMod = 1;	
-			if (rareMod == 1) {
+			if (rareMod == 1) { // Rolls between 1 -> 5
 				int rngDmgMod = System::random(4) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
-			} else if (rareMod == 2) {
-				int rngDmgMod = System::random(14) + minimumMod;
+			} else if (rareMod == 2) { // rolls between 5 -> 15
+				minimumMod = 5;
+				int rngDmgMod = System::random(10) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
-			} else if (rareMod == 3) {
-				int rngDmgMod = System::random(24) + minimumMod;
+			} else if (rareMod == 3) { // rolls between 10 -> 25
+				minimumMod = 10;
+				int rngDmgMod = System::random(15) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
 			}
 			damage = getRandomizedStat(minStat, maxStat, itemLevel);
 
 			// WOUND of crystals
+			// Reset mods for new roll
 			minStat = 0;
 			maxStat = 0;
-			if (rareMod == 1) {
+			minimumMod = 1;
+			if (rareMod == 1) { // Rolls between 1 -> 3
 				int rngDmgMod = System::random(3) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
-			} else if (rareMod == 2) {
-				int rngDmgMod = System::random(5) + minimumMod;
+			} else if (rareMod == 2) { // Rolls between 2 -> 5
+				minimumMod = 2;
+				int rngDmgMod = System::random(3) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
-			} else if (rareMod == 3) {
-				int rngDmgMod = System::random(9) + minimumMod;
+			} else if (rareMod == 3) { // Rolls between 5 -> 9
+				minimumMod = 5;
+				int rngDmgMod = System::random(4) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
 			}
@@ -241,16 +266,18 @@ void LightsaberCrystalComponentImplementation::generateCrystalStats() {
 			float minFloatStat = 0.0;
 			float maxFloatStat = -1.5;
 			float minimumFloatMod = -0.1;
-			if (rareMod == 1) {
+			if (rareMod == 1) { // Rolls between -0.1 -> -0.5
 				float rngModVal = System::getMTRand()->rand(-0.4) + minimumFloatMod;
 				minFloatStat = rngModVal;
 				maxFloatStat = rngModVal;
-			} else if (rareMod == 2) {
-				float rngModVal = System::getMTRand()->rand(-0.9) + minimumFloatMod;
+			} else if (rareMod == 2) { // Rolls between -0.5 -> -0.9
+				minimumFloatMod = -0.5;
+				float rngModVal = System::getMTRand()->rand(-0.4) + minimumFloatMod;
 				minFloatStat = rngModVal;
 				maxFloatStat = rngModVal;
-			} else if (rareMod == 3) {
-				float rngModVal = System::getMTRand()->rand(-1.4) + minimumFloatMod;
+			} else if (rareMod == 3) { // Rolls between -0.9 -> -1.5
+				minimumFloatMod = -0.9;
+				float rngModVal = System::getMTRand()->rand(-0.6) + minimumFloatMod;
 				minFloatStat = rngModVal;
 				maxFloatStat = rngModVal;
 			}
@@ -411,21 +438,24 @@ void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 		if (attackSpeed > maxFloatStat || attackSpeed < minFloatStat)
 			attackSpeed = Math::getPrecision(getRandomizedStat(minFloatStat, maxFloatStat, itemLevel), 2);
 	} else if (color != 31) { // Setting Color Crystal stats post-tune
+
 		// Color Crystal Damage
 		if (rareMod != 0){
 			int minStat = 0;
 			int maxStat = 25;
 			int minimumMod = 1;	
-			if (rareMod == 1) {
+			if (rareMod == 1) { // Rolls between 1 -> 5
 				int rngDmgMod = System::random(4) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
-			} else if (rareMod == 2) {
-				int rngDmgMod = System::random(14) + minimumMod;
+			} else if (rareMod == 2) { // Rolls between 5 -> 15
+				minimumMod = 5;
+				int rngDmgMod = System::random(10) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
-			} else if (rareMod == 3) {
-				int rngDmgMod = System::random(24) + minimumMod;
+			} else if (rareMod == 3) { // Rolls between 10 -> 25
+				minimumMod = 10;
+				int rngDmgMod = System::random(15) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
 			}
@@ -436,16 +466,19 @@ void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 			// WOUND of crystals
 			minStat = 0;
 			maxStat = 6;
+			minimumMod = 1;
 			if (rareMod == 1) {
 				int rngDmgMod = System::random(3) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
 			} else if (rareMod == 2) {
-				int rngDmgMod = System::random(5) + minimumMod;
+				minimumMod = 2;
+				int rngDmgMod = System::random(3) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
 			} else if (rareMod == 3) {
-				int rngDmgMod = System::random(9) + minimumMod;
+				minimumMod = 5;
+				int rngDmgMod = System::random(4) + minimumMod;
 				minStat = rngDmgMod;
 				maxStat = rngDmgMod;
 			}
@@ -458,16 +491,18 @@ void LightsaberCrystalComponentImplementation::validateCrystalStats() {
 			float minFloatStat = 0.0;
 			float maxFloatStat = -1.5;
 			float minimumFloatMod = -0.1;
-			if (rareMod == 1) {
+			if (rareMod == 1) { // Rolls between -0.1 -> -0.5
 				float rngModVal = System::getMTRand()->rand(-0.4) + minimumFloatMod;
 				minFloatStat = rngModVal;
 				maxFloatStat = rngModVal;
-			} else if (rareMod == 2) {
-				float rngModVal = System::getMTRand()->rand(-0.9) + minimumFloatMod;
+			} else if (rareMod == 2) { // Rolls between -0.5 -> -0.9
+				minimumFloatMod = -0.5;
+				float rngModVal = System::getMTRand()->rand(-0.4) + minimumFloatMod;
 				minFloatStat = rngModVal;
 				maxFloatStat = rngModVal;
-			} else if (rareMod == 3) {
-				float rngModVal = System::getMTRand()->rand(-1.4) + minimumFloatMod;
+			} else if (rareMod == 3) { // Rolls between -0.9 -> -1.5
+				minimumFloatMod = -0.9;
+				float rngModVal = System::getMTRand()->rand(-0.6) + minimumFloatMod;
 				minFloatStat = rngModVal;
 				maxFloatStat = rngModVal;
 			}
@@ -762,13 +797,7 @@ void LightsaberCrystalComponentImplementation::tuneCrystal(CreatureObject* playe
 		ownerName = player->getDisplayedName();
 
 		// Color code is lime green.
-		String tuneName = StringIdManager::instance()->getStringId(objectName.getFullPath().hashCode()).toString();
-		if (getCustomObjectName().toString().contains("(Exceptional)"))
-			tuneName = "\\#00FF00" + tuneName + " (Exceptional) (tuned)\\#.";
-		else if (getCustomObjectName().toString().contains("(Legendary)"))
-			tuneName = "\\#00FF00" + tuneName + " (Legendary) (tuned)\\#.";
-		else
-			tuneName = "\\#00FF00" + tuneName + " (tuned)\\#.";
+		String tuneName = getCustomObjectName().toString() + " \\#00FF00(tuned)\\#.";
 
 		setCustomObjectName(tuneName, true);
 		player->notifyObservers(ObserverEventType::TUNEDCRYSTAL, _this.getReferenceUnsafeStaticCast(), 0);
@@ -786,7 +815,7 @@ void LightsaberCrystalComponentImplementation::updateCraftingValues(CraftingValu
 	int color = values->getCurrentValue("color");
 
 	if (colorMax != 31) {
-		int finalColor = Math::min(color, 11);
+		int finalColor = Math::min(color, 61);
 		setColor(finalColor);
 		updateCrystal(finalColor);
 	} else {

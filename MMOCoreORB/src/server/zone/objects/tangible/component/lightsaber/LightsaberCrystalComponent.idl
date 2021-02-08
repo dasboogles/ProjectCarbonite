@@ -167,6 +167,11 @@ class LightsaberCrystalComponent extends Component {
 		return color;
 	}
 
+	@read
+	public int getRareMod() {
+		return rareMod;
+	}
+
 	public void setColor(int value) {
 		color = value;
 	}

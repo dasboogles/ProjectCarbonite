@@ -4,7 +4,7 @@ exarkun = Creature:new {
 	socialGroup = "exarkun",
 	faction = "",
 	level = 350,
-	chanceHit = 100,
+	chanceHit = 50,
 	damageMin = 1500,
 	damageMax = 2800,
 	baseXp = 50000,
@@ -29,6 +29,24 @@ exarkun = Creature:new {
 	templates = {
 		"object/mobile/exar_kun.iff"},
 	lootGroups = {
+		{
+			groups = {
+				{group = "named_crystals", chance = 10000000},
+			},
+			lootChance = 5000000,
+		},
+		{
+			groups = {
+				{group = "named_crystals", chance = 10000000},
+			},
+			lootChance = 5000000,
+		},
+		{
+			groups = {
+				{group = "named_crystals", chance = 10000000},
+			},
+			lootChance = 5000000,
+		},
 		{
 			groups = {
 				{group = "jedi_clothing_attachments", chance = 10000000}

@@ -135,9 +135,9 @@ public:
 		StringIdChatParameter startStringId("skl_use", "sys_conceal_start"); // You are now concealed from view by complex camouflage.
 		StringIdChatParameter endStringId("skl_use", "sys_conceal_stop"); // You are no longer concealed from view.
 
-		int camoMod = creature->getSkillMod("camouflage");
-		int cdReduction = ((float)(camoMod / 100.0f)) * 45;
-		int duration = 60 + (((float)(camoMod / 100.0f)) * 1440);
+		int camoMod = creature->getSkillMod("camouflage") + 25;
+		int cdReduction = ((float)(camoMod / 100.0f)) * 45; // Doesn't do anything???
+		int duration = (60 + (((float)(camoMod / 100.0f)) * 1440)) * 2; // double the duration
 
 
 		ManagedReference<ConcealBuff*> buff = new ConcealBuff(targetPlayer, creature, crc, duration, zoneName);

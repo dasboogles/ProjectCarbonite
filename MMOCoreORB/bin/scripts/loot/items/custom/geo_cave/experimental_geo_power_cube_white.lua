@@ -6,7 +6,7 @@ experimental_geo_power_cube_white = {
 	customObjectName = "Experimental Geonosian Power Cube (White)",
 	directObjectTemplate = "object/tangible/component/weapon/geonosian_power_cube.iff",
 	craftingValues = {
-		{"useCount",5,20,0},
+		{"useCount",5,45,0},
 	},
 	customizationStringNames = {},
 	customizationValues = {}

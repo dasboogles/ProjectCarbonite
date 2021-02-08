@@ -50,19 +50,19 @@ krayt_dragon_queen = Creature:new {
 		},
 		{
 			groups = {
-				{group = "krayt_tissue_common", chance = 10000000}
+				{group = "krayt_tissue_rare", chance = 10000000}
 			},
-			lootChance = 7500000
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "krayt_tissue_uncommon", chance = 10000000}
+			},
+			lootChance = 4500000
 		},
 		{
 			groups = {
 				{group = "krayt_dragon_common", chance = 10000000}
-			},
-			lootChance = 7500000
-		},
-		{
-			groups = {
-				{group = "krayt_tissue_common", chance = 10000000}
 			},
 			lootChance = 7500000
 		},

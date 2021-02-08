@@ -2367,19 +2367,62 @@ bool AiAgentImplementation::isConcealed(CreatureObject* target) {
 	int camoSkill = effectiveTarget->getSkillMod("private_conceal");
 	int creatureLevel = getLevel();
 
+	// -------------------------------------------------------
+	// Custom Camo Rewrite below here
+	// -------------------------------------------------------
+	// Start at 100% chance
 	int mod = 100;
-	if (effectiveTarget->isKneeling() || effectiveTarget->isSitting())
+
+	// Are we kneeling or sitting?
+	if (effectiveTarget->isKneeling() || effectiveTarget->isSitting()) {
+		mod -= 5;
+	}
+
+	// -10 for standing
+	if (effectiveTarget->isStanding()) { 
 		mod -= 10;
-	if (effectiveTarget->isStanding())
-		mod -= 15;
-	if (effectiveTarget->isRunning() || effectiveTarget->isRidingMount() )
-		mod -= 35;
+	}
+
+	 // (-10) for standing + (-10) for running (-20 total)
+	if (effectiveTarget->isRunning() || effectiveTarget->isRidingMount() ) {
+		mod -= 10;
+	}
 
 	// Check if camo breaks
-	if (!isCreature())
-		creatureLevel *= 2;
+	if (!isCreature()) {
+		creatureLevel = creatureLevel * 1.25f; // from 2 -> 1.2
+	}
 
-	success = System::random(100) <= mod - (float)creatureLevel / ((float)camoSkill / 100.0f) / 20.f;
+	int modRoll = (mod + ((float)camoSkill / 10.0f)) - ((float)creatureLevel / 20.f); //[OLD]: mod - ((float)creatureLevel / ((float)camoSkill / 100.0f) / 20.f);
+	
+	// Cap modRoll at 95% chance, still a 5% chance to fail
+	if (modRoll > 95) {
+		modRoll = 95;
+	}
+
+	// Setup random chance roll
+	int randomRoll = System::random(100);
+
+	// Do roll
+	success = randomRoll <= modRoll;// mod - ((float)creatureLevel / ((float)camoSkill / 100.0f) / 20.f);
+	
+	// Try to cast our in-context creature as an object
+	CreatureObject* creature = asCreatureObject();
+	UnicodeString creoname = "";
+
+	// Make sure our creature exists to avoid SegFaults or Deadlocks
+	if (creature != nullptr) {
+		creoname = creature->getCreatureName();
+	}
+
+	// If we still couldn't get the name of our hostile then just use a generic message
+	if (creoname == "") {
+		creoname = "A hostile entity";
+	}
+	effectiveTarget->sendSystemMessage(creoname + " rolled a \\#FF4200" +  String::valueOf(randomRoll) + "\\#FFFFFF against your camo roll of " + "\\#00FFEA" + String::valueOf(modRoll) + "!");
+	// -------------------------------------------------------
+	// Custom Camo Rewrite above here
+	// -------------------------------------------------------
 
 	if (success) {
 		camouflagedObjects.put(effectiveTargetID); // add to award

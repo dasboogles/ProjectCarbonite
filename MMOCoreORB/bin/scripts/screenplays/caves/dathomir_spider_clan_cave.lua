@@ -382,7 +382,8 @@ function SpiderClanCaveScreenPlay:respawnKiinDray()
 end
 
 function SpiderClanCaveScreenPlay:kiinDrayKilled(pKiinDray)
-	createEvent(30 * 1000, "SpiderClanCaveScreenPlay", "respawnKiinDray", nil, "")
+	-- 30minutes Respawn
+	createEvent(30 * 60 * 1000, "SpiderClanCaveScreenPlay", "respawnKiinDray", nil, "")
 
 	return 1
 end

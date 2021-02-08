@@ -57,9 +57,9 @@ ForceThrow1Command = {
 			{},
 			{},
 			{ "jedi_state_defense" },
-			65,
+			55,
 			0,
-			10
+			30
 		)
 	},
 

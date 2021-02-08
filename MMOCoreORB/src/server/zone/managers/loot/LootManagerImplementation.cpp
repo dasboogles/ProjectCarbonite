@@ -379,14 +379,6 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 
 		if (crystal != nullptr) {
 			crystal->setItemLevel(uncappedLevel);
-			// yellowChance = lua->getGlobalFloat("yellowChance");
-			// yellowModifier = lua->getGlobalFloat("yellowModifier");
-			// exceptionalChance = lua->getGlobalFloat("exceptionalChance");
-			// exceptionalModifier = lua->getGlobalFloat("exceptionalModifier");
-			// legendaryChance = lua->getGlobalFloat("legendaryChance");
-			// legendaryModifier = lua->getGlobalFloat("legendaryModifier");
-			// if ()
-			// crystal->setRareMod()
 		}
 	}
 
@@ -576,14 +568,14 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 		addConditionDamage(prototype, craftingValues);
 	}
 
-	if(!prototype->isAttachment()){
+	if(!prototype->isAttachment()) {
 		delete craftingValues;
 	}
 
 	// Boink
 	// --CREDIT--: TCW Source (Heavily modified by Boogles)
 	// Update object name with mod stat if is attachment
-	if(prototype->isAttachment()){
+	if(prototype->isAttachment()) {
 		Attachment* attachment = cast<Attachment*>( prototype.get());
 
 		// We want to override the UpdateCraftingValues here for Attachments to enable us
@@ -619,6 +611,32 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 			}
 		}
 		prototype->setCustomObjectName(attachmentCustomName,false);
+	}
+
+	// Do Named Color Crystal naming here
+	if (prototype->isLightsaberCrystalObject() && excMod <= 1.0) {
+		LightsaberCrystalComponent* crystal = cast<LightsaberCrystalComponent*> (prototype.get());
+
+		if (crystal != nullptr) {
+			int colorNum = crystal->getColor();
+			if (colorNum != 31 && colorNum > 11) {
+				if (crystal->getRareMod() == 1) {
+					UnicodeString newName = prototype->getDisplayedName() + " (Rare)";
+					prototype->setCustomObjectName(newName, false);
+					prototype->addMagicBit(false);
+				}
+				else if (crystal->getRareMod() == 2) {
+					UnicodeString newName = prototype->getDisplayedName() + " (Exceptional)";
+					prototype->setCustomObjectName(newName, false);
+					prototype->addMagicBit(false);
+				}
+				else if (crystal->getRareMod() == 3) {
+					UnicodeString newName = prototype->getDisplayedName() + " (Legendary)";
+					prototype->setCustomObjectName(newName, false);
+					prototype->addMagicBit(false);
+				}
+			}
+		}
 	}
 
 	return prototype;

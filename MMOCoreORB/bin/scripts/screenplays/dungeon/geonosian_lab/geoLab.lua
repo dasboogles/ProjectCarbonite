@@ -984,8 +984,8 @@ end
 ---------------------------Starting HiggJib Encounter Sections--------------------------------
 ----------------------------------------------------------------------------------------------
 function GeonosianLab:setupHiggJibbEncounter()
-	-- Anywhere between 4 hours to 6 hour respawn, random
-	local pHiggJibb = spawnMobile("yavin4", "higg_jibb", getRandomNumber(14400, 21600), 5.04706, -34, -347.329, 270, 1627822)
+	-- Anywhere between 1 hour to 2 hours
+	local pHiggJibb = spawnMobile("yavin4", "higg_jibb", getRandomNumber(3600, 7200), 5.04706, -34, -347.329, 270, 1627822)
 	writeData("GeonosianLab:hjDamageTaken", 0) -- default spawned state, no interactions yet from anyone!
 
 	ObjectManager.withCreatureObject(pHiggJibb, function(oBoss)

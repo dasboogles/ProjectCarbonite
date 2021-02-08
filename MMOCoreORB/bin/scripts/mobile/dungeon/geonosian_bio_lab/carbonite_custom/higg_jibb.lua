@@ -5,8 +5,8 @@ higg_jibb = Creature:new {
 	faction = "",
 	level = 500,
 	chanceHit = 50,
-	damageMin = 800,
-	damageMax = 1500,
+	damageMin = 1000,
+	damageMax = 1800,
 	baseXp = 9296845,
 	baseHAM = 2306000,
 	baseHAMmax = 2652000,
@@ -32,6 +32,24 @@ higg_jibb = Creature:new {
         -- TODO:
         -- Eventually replace these generic 'CA' with 'force_clothing_attachments'
 		------------------------
+		{
+			groups = {
+				{group = "named_crystals", chance = 10000000},
+			},
+			lootChance = 5000000,
+		},
+		{
+			groups = {
+				{group = "named_crystals", chance = 10000000},
+			},
+			lootChance = 5000000,
+		},
+		{
+			groups = {
+				{group = "named_crystals", chance = 10000000},
+			},
+			lootChance = 5000000,
+		},
 		{
 			groups = {
 				{group = "jedi_clothing_attachments", chance = 10000000},

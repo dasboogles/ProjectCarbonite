@@ -102,6 +102,10 @@ public:
 
 	FactionMap* getFactionMap();
 
+	// CUSTOM GCW SAVES
+	void saveGCWKill(PlayerObject* victim, PlayerObject* killer);
+	void saveGCWAssist(PlayerObject* victim, PlayerObject* killer);
+
 	String getFactionHex(CreatureObject* creature);
 	String getFactionColorName(CreatureObject* creature);
 	String getRankName(int idx);

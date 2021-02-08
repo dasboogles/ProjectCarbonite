@@ -373,6 +373,33 @@ includeFile("groups/wearables/wearables_rare.lua")
 includeFile("groups/wearables/wearables_scarce.lua")
 includeFile("groups/wearables/wearables_uncommon.lua")
 
+-- Rare Named ColorCrystals
+includeFile("groups/crystal_mauls_vengence.lua")
+includeFile("groups/crystal_qui_gons_devotion.lua")
+includeFile("groups/crystal_baass_wisdom.lua")
+includeFile("groups/crystal_banes_heart.lua")
+includeFile("groups/crystal_bnars_sacrifice.lua")
+includeFile("groups/crystal_bondaras_folly.lua")
+includeFile("groups/crystal_dawn_of_dagobah.lua")
+includeFile("groups/crystal_gallias_intuition.lua")
+includeFile("groups/crystal_horns_future.lua")
+includeFile("groups/crystal_kenobis_legacy.lua")
+includeFile("groups/crystal_kits_ferocity.lua")
+includeFile("groups/crystal_kuns_blood.lua")
+includeFile("groups/crystal_mundis_response.lua")
+includeFile("groups/crystal_prowess_of_plo_koon.lua")
+includeFile("groups/crystal_quintessence_of_the_force.lua")
+includeFile("groups/crystal_strength_of_luminaria.lua")
+includeFile("groups/crystal_sunriders_destiny.lua")
+includeFile("groups/crystal_ulics_redemption.lua")
+includeFile("groups/crystal_windus_guile.lua")
+includeFile("groups/crystal_orange.lua")
+includeFile("groups/crystal_henriettes_might.lua")
+includeFile("groups/crystal_wickeds_burn.lua")
+
+-- Named Crystals Group
+includeFile("groups/named_crystals.lua")
+
 ------------ Custom For Carbonite
 -- BH Stuff
 includeFile("groups/custom/bh_trophy.lua")

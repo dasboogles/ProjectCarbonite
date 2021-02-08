@@ -31,6 +31,12 @@ dark_adept = Creature:new {
 	lootGroups = {
 		{
 			groups = {
+				{group = "named_crystals", chance = 10000000},
+			},
+			lootChance = 500000,
+		},
+		{
+			groups = {
 				{group = "jedi_clothing_attachments", chance = 10000000}
 			},
 			lootChance = 3500000

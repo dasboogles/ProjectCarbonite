@@ -44,8 +44,8 @@
 MindBlast2Command = {
 	name = "mindblast2",
 
-	minDamage = 250,
-	maxDamage = 500,
+	minDamage = 312,
+	maxDamage = 625,
 	speed = 4.0,
 	forceCost = 90, -- 160 -> 90
 	visMod = 25,
@@ -59,9 +59,9 @@ MindBlast2Command = {
 			{},
 			{},
 			{ "jedi_state_defense" },
-			55,
+			75,
 			0,
-			10
+			30
 		),
 
 		StateEffect(
@@ -69,9 +69,9 @@ MindBlast2Command = {
 			{},
 			{},
 			{ "jedi_state_defense" },
-			55,
+			75,
 			0,
-			10
+			30
 		),
 
 		StateEffect(
@@ -79,9 +79,9 @@ MindBlast2Command = {
 			{},
 			{},
 			{ "jedi_state_defense" },
-			55,
+			75,
 			0,
-			10
+			30
 		)
 	},
 

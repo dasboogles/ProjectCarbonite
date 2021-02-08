@@ -19,6 +19,7 @@
 #include "server/zone/objects/group/GroupObject.h"
 #include "server/zone/managers/player/PlayerManager.h"
 #include "server/zone/objects/player/FactionStatus.h"
+#include "templates/faction/Factions.h"
 
 
 
@@ -207,20 +208,24 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 		String playerName = getFactionHex(destructedObject) + destructedObject->getFirstName();
 		
 		String killerNames = getFactionHex(killerCreature) + killerCreature->getFirstName();
-	
+		bool isFightClubbing = false;
+
 		if (Zone* zone = ghost->getZone()) {
 			// Fight Clubbing
 			const String fightClubMessage = " \\#f0f497[GCW] \\#ff982bFight Clubbing \\#ffffffis not tolerated. You will be penalized.";
-			const bool isFightClubbing = ghost->getAccountID() == killedGhost->getAccountID();
+			
+			// Check for FightClubbing
+			isFightClubbing = ghost->getAccountID() == killedGhost->getAccountID();
+
+			// Check for solo FightClubbing
 			if (isFightClubbing) {
 				killerCreature->sendSystemMessage(fightClubMessage);
-				//ghost->addExperience("gcw_skill_xp", -20000,true);//remove target xp
-				//ghost->addExperience("force_rank_xp", -20000,true);//remove target xp
 
-				UnicodeString message = " " + killerNames + " \\#ffffffhas been penalized for \\#ff982bFight Clubbing\\#ffffff.";
+				UnicodeString message = " " + killerNames + " \\#ffffffwas detected trying to \\#ff982bFight Club\\#ffffff.";
 				BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
 				pvpNotificationChat->broadcastMessage(msg);
 			}
+
 			//Grouped Fight clubbing
 			// only check members in Xp range of 128m		
 			const float Range = 128.0f;		
@@ -258,12 +263,9 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 							// increment group counter
 							groupMembersInRange++;
 							ManagedReference<PlayerObject*> groupMemberGhost = groupMemberCreature->getPlayerObject();
-							const bool isFightClubbing = groupMemberGhost->getAccountID() == killedGhost->getAccountID();
+							isFightClubbing = groupMemberGhost->getAccountID() == killedGhost->getAccountID();
 							if (isFightClubbing) {
 								killerCreature->sendSystemMessage(fightClubMessage);
-							
-								//killedGhost->addExperience("gcw_skill_xp", -20000,true);//remove target xp
-								//killedGhost->addExperience("force_rank_xp", -20000,true);//remove target xp
 
 								UnicodeString message = " " + getFactionHex(groupMemberCreature) + groupMemberCreature->getFirstName() + "\\#ffffff penalized for \\#ff982bFight Clubbing\\#ffffff.";
 								BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
@@ -274,98 +276,313 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 				}
 			}
 
-			// all kills
-			killer->playEffect("clienteffect/holoemote_rebel.cef", "head");
-			PlayMusicMessage* pmm = new PlayMusicMessage("sound/music_themequest_victory_imperial.snd");
- 			killer->sendMessage(pmm);
-			
-			// killedGhost->addExperience("gcw_skill_xp", -2000, true); // remove target xp
+			// So long as we were not fight-clubbing then...
+			if (!isFightClubbing) {
+				// All kills
+				killer->playEffect("clienteffect/holoemote_rebel.cef", "head");
+				PlayMusicMessage* pmm = new PlayMusicMessage("sound/music_themequest_victory_imperial.snd");
+				killer->sendMessage(pmm);
 
-			UnicodeString message;
-			
-			if (killerCreature->hasSkill("force_rank_light_novice") && (destructedObject->hasSkill("force_rank_dark_novice") || destructedObject->hasSkill("force_rank_light_novice"))) {		
-				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
-				BaseMessage* msg = new ChatRoomMessage(" \\#9b97f4[FRS] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-				pvpNotificationChat->broadcastMessage(msg);
-			} else if (killerCreature->hasSkill("force_rank_dark_novice") && (destructedObject->hasSkill("force_rank_light_novice") || destructedObject->hasSkill("force_rank_dark_novice"))) {
-				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
-				BaseMessage* msg = new ChatRoomMessage(" \\#9b97f4[FRS] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-				pvpNotificationChat->broadcastMessage(msg);
-			} else if (killerCreature->hasSkill("force_rank_light_novice") && destructedObject->hasSkill("force_title_jedi_rank_02")) {
-				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
-				BaseMessage* msg = new ChatRoomMessage(" \\#9b97f4[FRS] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-				pvpNotificationChat->broadcastMessage(msg);
-			} else if (killerCreature->hasSkill("force_rank_dark_novice") && destructedObject->hasSkill("force_title_jedi_rank_02")) {
-				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
-				BaseMessage* msg = new ChatRoomMessage(" \\#9b97f4[FRS] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-				pvpNotificationChat->broadcastMessage(msg);
-			} else if ((killerCreature->hasSkill("force_rank_dark_novice") || killerCreature->hasSkill("force_rank_light_novice")) && destructedObject->isPlayerCreature()) {
-				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
-				BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-				pvpNotificationChat->broadcastMessage(msg);
-			} else if (killer->isPlayerCreature() && destructedObject->isPlayerCreature()) {
-				message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
-				BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
-				pvpNotificationChat->broadcastMessage(msg);
-			}
-		
-			// Group kill split GCW	
-			group = killerCreature->getGroup();
-			Vector<ManagedReference<CreatureObject*> > players;
-			int playerCount = 1;
-
-			int killerRating = ghost->getPvpRating();
-			int playerRating = killedGhost->getPvpRating();
-			if (group != nullptr){
-				playerCount = group->getNumberOfPlayerMembers();
-				for (int x=0; x< group->getGroupSize(); x++){
-					Reference<CreatureObject*> groupMember = group->getGroupMember(x);
-
-					if (groupMember->isPlayerCreature() && groupMember->isInRange(killerCreature, 128.0f) && (groupMember->getPlayerObject()->hasPvpTef() || groupMember->getFactionStatus() == FactionStatus::OVERT))
-						players.add(groupMember);
+				UnicodeString message;
+				// GCW player versus player messages, FRS will now cost GCW instead of FRS as well
+				if (killer->isPlayerCreature() && destructedObject->isPlayerCreature()) {
+					message = " " + playerName + " \\#ffffffhas been killed by " + killerNames;
+					BaseMessage* msg = new ChatRoomMessage(" \\#f0f497[GCW] ", ServerCore::getInstance()->getZoneServer()->getGalaxyName(), message, pvpNotificationChat->getRoomID());
+					pvpNotificationChat->broadcastMessage(msg);
 				}
-			} else {
-				players.add(killerCreature);
+			
+				// Group kill split GCW	
+				group = killerCreature->getGroup();
+				Vector<ManagedReference<CreatureObject*> > players;
+				int playerCount = 1;
+
+				int killerRating = ghost->getPvpRating();
+				int playerRating = killedGhost->getPvpRating();
+				if (group != nullptr){
+					playerCount = group->getNumberOfPlayerMembers();
+					for (int x=0; x< group->getGroupSize(); x++){
+						Reference<CreatureObject*> groupMember = group->getGroupMember(x);
+						if (groupMember->isPlayerCreature() && groupMember->isInRange(killerCreature, 128.0f) && (groupMember->getPlayerObject()->hasPvpTef() || groupMember->getFactionStatus() == FactionStatus::OVERT)) {
+							players.add(groupMember);
+						}
+					}
+				} else {
+					// If our group doesn't exist then at LEAST add the killer
+					players.add(killerCreature);
+				}
+
+				// Paranoid Check, Making sure that at LEAST the killer is credited
+				if (players.size() == 0) {
+					players.add(killerCreature);
+				}
+
+				// If missing some of the killers then warn but do nothing about it.... ;)
+				if (playerCount > players.size()) {
+					killerCreature->sendSystemMessage(" \\#f0f497[GCW] \\#ffffffSome players were too far away from the kill!"); // Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.
+				}
+
+				// Total solo-kill value is 600
+				// Server Global Multiplier affects this! (150 x 4 == 600)
+				int dividedKill = 150 / players.size();// Award gcw xp for group 
+				
+				if (players.size() == 1) {
+					dividedKill = 150;// Award gcw xp for solo kill
+				}
+
+				// Don't grant less than 4x20 (80) per person
+				if (dividedKill < 20) {
+					dividedKill = 20;
+				}
+
+				// Loop through Player array so we can apply rewards
+				for (int i = 0; i < players.size(); i++) {
+					bool victimKilledRecently = false;
+					int valToAward = dividedKill;
+					ManagedReference<CreatureObject*> player = players.get(i);
+					if (player != nullptr) {
+
+						// Grab our playerObject so we can do victimList checks
+						ManagedReference<PlayerObject*> playerGhost = player->getPlayerObject();
+
+						if (playerGhost != nullptr) {
+							ManagedReference<PlayerManager*> groupPlayerManager = player->getZoneServer()->getPlayerManager();
+							if (groupPlayerManager != nullptr) {	
+
+								// If Killer recently killed Victim then only provide 10% of overall exp
+								if (playerGhost->hasOnVictimList(destructedObject->getObjectID())) {
+									// Apply modifier if has been recently killed
+									valToAward = valToAward * 0.1f;
+									victimKilledRecently = true;
+									player->sendSystemMessage("You've had a hand in killing your target recently and is not worth much experience.");
+								}
+
+								// Apply experience
+								groupPlayerManager->awardExperience(player, "gcw_skill_xp", valToAward);
+
+								// Notify of GCW to the killer/assister
+								StringBuffer sysMessage;
+								sysMessage << " \\#f0f497[GCW] \\#ffffffYou have received \\#41f4d9" << valToAward << " GCW XP\\#ffffff for your kill participation!";
+								
+								// If Assisting a kill
+								if (playerGhost->getObjectID() != ghost->getObjectID()) {
+									// Do Database Saves here for Assists
+									saveGCWAssist(killedGhost, playerGhost);		
+								}
+								// If is the Killer landing the DeathBlow 
+								else if (playerGhost->getObjectID() == ghost->getObjectID()) {
+									// Do Database Saves here for Player that Deathblowed
+									saveGCWKill(killedGhost, playerGhost);
+								}
+
+								// Add to victims list if not already there
+								if (!victimKilledRecently) {
+									playerGhost->addToVictimList(destructedObject->getObjectID());
+								}
+							}
+						}
+					}
+				}
 			}
-
-			if (players.size() == 0) {
-				players.add(killerCreature);
-			}
-
-			if (playerCount > players.size())
-				killerCreature->sendSystemMessage(" \\#f0f497[GCW] \\#ffffffSome players were too far away from the kill!"); // Mission Alert! Some group members are too far away from the group to receive their reward and and are not eligible for reward.
-
-			int dividedKill = 5000 / players.size();//award gcw xp for group 
-
-			if (players.size() == 1) {
-				dividedKill = 5000;//award gcw xp for solo
-			}
-
-			if (dividedKill < 1000) {
-				dividedKill = 1000;
-			}
-
-			// Disable for now until GCW iteration
-			// for (int i = 0; i < players.size(); i++) {
-			// 	ManagedReference<CreatureObject*> player = players.get(i);
-			// 	ManagedReference<PlayerManager*> groupPlayerManager = player->getZoneServer()->getPlayerManager();
-			// 	groupPlayerManager->awardExperience(player, "gcw_skill_xp", dividedKill);
-			// 	StringBuffer sysMessage;
-			// 	sysMessage << " \\#f0f497[GCW] \\#ffffffYou have received \\#41f4d9" << dividedKill << " GCW XP \\#fffffffor your kill participation!";
-			// }
 		}
-		// Faction gain
-		if (killer->isRebel() && destructedObject->isImperial()) {
-			ghost->increaseFactionStanding("rebel", 30);
-			ghost->decreaseFactionStanding("imperial", 45);
 
-			killedGhost->decreaseFactionStanding("imperial", 45);
-		} else if (killer->isImperial() && destructedObject->isRebel()) {
-			ghost->increaseFactionStanding("imperial", 30);
-			ghost->decreaseFactionStanding("rebel", 45);
+		// So long as we were not fight-clubbing then...
+		if (!isFightClubbing) {
 
-			killedGhost->decreaseFactionStanding("rebel", 45);
+			
+
+			// Faction gain
+			if (killer->isRebel() && destructedObject->isImperial()) {
+				ghost->increaseFactionStanding("rebel", 130);
+				ghost->decreaseFactionStanding("imperial", 145);
+			} else if (killer->isImperial() && destructedObject->isRebel()) {
+				ghost->increaseFactionStanding("imperial", 130);
+				ghost->decreaseFactionStanding("rebel", 145);
+			}
 		}
+	}
+}
+
+// Save any Kills to the DB (Killer + Victim)
+void FactionManager::saveGCWKill(PlayerObject* victim, PlayerObject* killer) {
+	// Make sure our PlayerObjects aren't null coming in!
+	if (victim == nullptr) {
+		error("[GCW-ERR]: Victim was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	if (killer == nullptr) {
+		error("[GCW-ERR]: Killer was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	// Get Victim and Killer CreatureObjects
+	ManagedReference<CreatureObject*> victimCreo = dynamic_cast<CreatureObject*>(victim->getParent().get().get());
+	ManagedReference<CreatureObject*> killerCreo = dynamic_cast<CreatureObject*>(killer->getParent().get().get());
+
+	// Make sure Creos are not null!
+	if (victimCreo == nullptr) {
+		error("[GCW-ERR]: VictimCreo was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	if (killerCreo == nullptr) {
+		error("[GCW-ERR]: KillerCreo was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	// Get Clients for Victim and Killer
+	auto victimClient = victimCreo->getClient();
+	auto killerClient = killerCreo->getClient();
+	if (victimClient == nullptr) {
+		error("[GCW-ERR]: VictimClient was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	if (killerClient == nullptr) {
+		error("[GCW-ERR]: KillerClient was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	// Make sure the current SchemaVersion is correct
+	if (ServerCore::getSchemaVersion() >= 1004) {
+		StringBuffer query;
+		String victimFactionString = "Unknown";
+		String killerFactionString = "Unknown";
+
+		// Set Faction to a String instead of giant unknown ints
+		if (victimCreo->getFaction() == Factions::FACTIONIMPERIAL) {
+			victimFactionString = "Imperial";
+		} else if (victimCreo->getFaction() == Factions::FACTIONREBEL) {
+			victimFactionString = "Rebel";
+		} else {
+			victimFactionString = "Neutral";
+		}
+
+		// Set Faction to a String instead of giant unknown ints
+		if (killerCreo->getFaction() == Factions::FACTIONIMPERIAL) {
+			killerFactionString = "Imperial";
+		} else if (killerCreo->getFaction() == Factions::FACTIONREBEL) {
+			killerFactionString = "Rebel";
+		} else {
+			killerFactionString = "Neutral";
+		}
+
+		query << "INSERT INTO `gcw_kill_records` ("
+			<< "`victim_account_id`, `killer_account_id`, `victim_firstname`, `killer_firstname`, `victim_pvp_rating`, `killer_pvp_rating`"
+			<< ", `victim_faction`, `killer_faction`, `victim_ip`, `killer_ip`"
+			<< ") VALUES"
+			<< " (" << victim->getAccountID()
+			<< ", " << killer->getAccountID()
+			<< ", '" << victimCreo->getFirstName() << "'"
+			<< ", '" << killerCreo->getFirstName() << "'"
+			<< ", " << victim->getPvpRating()
+			<< ", " << killer->getPvpRating()
+			<< ", '" << victimFactionString << "'"
+			<< ", '" << killerFactionString << "'"
+			<< ", '" << victimClient->getIPAddress() << "'"
+			<< ", '" << killerClient->getIPAddress() << "'"
+			<< ");"
+			;
+
+		Core::getTaskManager()->executeTask([=] () {
+			try {
+				ServerDatabase::instance()->executeStatement(query);
+			} catch(DatabaseException& e) {
+				error(e.getMessage());
+			}
+		}, "logGCWKill");
+	}
+}
+
+// Save any Assists to the DB (Assister + Victim)
+void FactionManager::saveGCWAssist(PlayerObject* victim, PlayerObject* killer) {
+	// Make sure our PlayerObjects aren't null coming in!
+	if (victim == nullptr) {
+		error("[GCW-ERR]: Victim was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	if (killer == nullptr) {
+		error("[GCW-ERR]: Assister was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	// Get Victim and Assister CreatureObjects
+	ManagedReference<CreatureObject*> victimCreo = dynamic_cast<CreatureObject*>(victim->getParent().get().get());
+	ManagedReference<CreatureObject*> killerCreo = dynamic_cast<CreatureObject*>(killer->getParent().get().get());
+
+	// Make sure Creos are not null!
+	if (victimCreo == nullptr) {
+		error("[GCW-ERR]: VictimCreo was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	if (killerCreo == nullptr) {
+		error("[GCW-ERR]: AssisterCreo was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	// Get Clients for Victim and Killer
+	auto victimClient = victimCreo->getClient();
+	auto killerClient = killerCreo->getClient();
+	if (victimClient == nullptr) {
+		error("[GCW-ERR]: VictimClient was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	if (killerClient == nullptr) {
+		error("[GCW-ERR]: AssisterClient was NULL and could not save a GCW kill!");
+		return;
+	}
+
+	// Make sure the current SchemaVersion is correct
+	if (ServerCore::getSchemaVersion() >= 1004) {
+		StringBuffer query;
+		String victimFactionString = "Unknown";
+		String killerFactionString = "Unknown";
+
+		// Set Faction to a String instead of giant unknown ints
+		if (victimCreo->getFaction() == Factions::FACTIONIMPERIAL) {
+			victimFactionString = "Imperial";
+		} else if (victimCreo->getFaction() == Factions::FACTIONREBEL) {
+			victimFactionString = "Rebel";
+		} else {
+			victimFactionString = "Neutral";
+		}
+
+		// Set Faction to a String instead of giant unknown ints
+		if (killerCreo->getFaction() == Factions::FACTIONIMPERIAL) {
+			killerFactionString = "Imperial";
+		} else if (killerCreo->getFaction() == Factions::FACTIONREBEL) {
+			killerFactionString = "Rebel";
+		} else {
+			killerFactionString = "Neutral";
+		}
+
+		query << "INSERT INTO `gcw_assist_records` ("
+			<< "`victim_account_id`, `assister_account_id`, `victim_firstname`, `assister_firstname`, `victim_pvp_rating`, `assister_pvp_rating`"
+			<< ", `victim_faction`, `assister_faction`, `victim_ip`, `assister_ip`"
+			<< ") VALUES"
+			<< " (" << victim->getAccountID()
+			<< ", " << killer->getAccountID()
+			<< ", '" << victimCreo->getFirstName() << "'"
+			<< ", '" << killerCreo->getFirstName() << "'"
+			<< ", " << victim->getPvpRating()
+			<< ", " << killer->getPvpRating()
+			<< ", '" << victimFactionString << "'"
+			<< ", '" << killerFactionString << "'"
+			<< ", '" << victimClient->getIPAddress() << "'"
+			<< ", '" << killerClient->getIPAddress() << "'"
+			<< ");"
+			;
+
+		Core::getTaskManager()->executeTask([=] () {
+			try {
+				ServerDatabase::instance()->executeStatement(query);
+			} catch(DatabaseException& e) {
+				error(e.getMessage());
+			}
+		}, "logGCWKill");
 	}
 }
 

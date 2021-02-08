@@ -1203,6 +1203,30 @@ includeFile("items/wearables/wookiee/wke_skirt_s04.lua")
 --------------------------------------------------
 -------------- Custom for Carbonite
 ----------------------------------------------------------------------------
+-- Custom Color Crystals
+includeFile("items/force_crystal_mauls_vengence.lua")
+includeFile("items/force_crystal_qui_gons_devotion.lua")
+includeFile("items/force_crystal_baass_wisdom.lua")
+includeFile("items/force_crystal_banes_heart.lua")
+includeFile("items/force_crystal_bnars_sacrifice.lua")
+includeFile("items/force_crystal_bondaras_folly.lua")
+includeFile("items/force_crystal_dawn_of_dagobah.lua")
+includeFile("items/force_crystal_gallias_intuition.lua")
+includeFile("items/force_crystal_horns_future.lua")
+includeFile("items/force_crystal_kenobis_legacy.lua")
+includeFile("items/force_crystal_kits_ferocity.lua")
+includeFile("items/force_crystal_kuns_blood.lua")
+includeFile("items/force_crystal_mundis_response.lua")
+includeFile("items/force_crystal_prowess_of_plo_koon.lua")
+includeFile("items/force_crystal_quintessence_of_the_force.lua")
+includeFile("items/force_crystal_strength_of_luminaria.lua")
+includeFile("items/force_crystal_sunriders_destiny.lua")
+includeFile("items/force_crystal_ulics_redemption.lua")
+includeFile("items/force_crystal_windus_guile.lua")
+includeFile("items/force_crystal_henriettes_might.lua")
+includeFile("items/force_crystal_wickeds_burn.lua")
+includeFile("items/force_crystal_orange.lua")
+
 -- Yes, I'm aware these names are ass-backwards, fight me
 includeFile("items/custom/bh_skull.lua") -- reward for a BH killing a jedi
 includeFile("items/custom/jedi_defense_holo.lua") -- reward for a Jedi killing a BH

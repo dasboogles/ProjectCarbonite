@@ -17,14 +17,17 @@ public:
 	}
 
 	int doQueueCommand(CreatureObject* creature, const uint64& target, const UnicodeString& arguments) const {
-		if (!checkStateMask(creature))
+		if (!checkStateMask(creature)) {
 			return INVALIDSTATE;
+		}
 
-		if (!checkInvalidLocomotions(creature))
+		if (!checkInvalidLocomotions(creature)) {
 			return INVALIDLOCOMOTION;
+		}
 
-		if (JediManager::instance()->getJediProgressionType() != JediManager::VILLAGEJEDIPROGRESSION)
+		if (JediManager::instance()->getJediProgressionType() != JediManager::VILLAGEJEDIPROGRESSION) {
 			return GENERALERROR;
+		}
 
 		Lua* lua = DirectorManager::instance()->getLuaInstance();
 

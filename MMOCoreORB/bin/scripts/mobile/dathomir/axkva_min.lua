@@ -4,8 +4,8 @@ axkva_min = Creature:new {
 	faction = "nightsister",
 	level = 375,
 	chanceHit = 30,
-	damageMin = 1845,
-	damageMax = 3250,
+	damageMin = 2845,
+	damageMax = 4250,
 	specialDamageMult = 7.5,
 	baseXp = 285496,
 	baseHAM = 585000,
@@ -29,6 +29,18 @@ axkva_min = Creature:new {
 	templates = {"object/mobile/dressed_dathomir_nightsister_axkva.iff"},
 
 	lootGroups = {
+		{
+			groups = {
+				{group = "named_crystals", chance = 10000000},
+			},
+			lootChance = 5500000,
+		},
+		{
+			groups = {
+				{group = "named_crystals", chance = 10000000},
+			},
+			lootChance = 5500000,
+		},
 		{
 			groups = {
 				{group = "nightsister_common", chance = 10000000}
@@ -111,7 +123,13 @@ axkva_min = Creature:new {
 			groups = {
 				{group = "axkva_min", chance = 10000000}
 			},
-			lootChance = 4500000
+			lootChance = 6500000
+		},
+		{
+			groups = {
+				{group = "axkva_min", chance = 10000000}
+			},
+			lootChance = 5500000
 		},
 		{
 			groups = {
@@ -123,7 +141,19 @@ axkva_min = Creature:new {
 			groups = {
 				{group = "axkva_min", chance = 10000000}
 			},
-			lootChance = 4500000
+			lootChance = 3500000
+		},
+		{
+			groups = {
+				{group = "axkva_min", chance = 10000000}
+			},
+			lootChance = 2500000
+		},
+		{
+			groups = {
+				{group = "axkva_min", chance = 10000000}
+			},
+			lootChance = 2500000
 		}
 	},
 	weapons = {"mixed_force_weapons"},
