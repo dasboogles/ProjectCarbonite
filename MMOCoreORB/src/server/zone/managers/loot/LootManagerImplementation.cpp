@@ -618,20 +618,22 @@ TangibleObject* LootManagerImplementation::createLootObject(const LootItemTempla
 		LightsaberCrystalComponent* crystal = cast<LightsaberCrystalComponent*> (prototype.get());
 
 		if (crystal != nullptr) {
+			UnicodeString newName = prototype->getDisplayedName();
+
 			int colorNum = crystal->getColor();
 			if (colorNum != 31 && colorNum > 11) {
 				if (crystal->getRareMod() == 1) {
-					UnicodeString newName = prototype->getDisplayedName() + " (Rare)";
+					newName = newName + " (Rare)";
 					prototype->setCustomObjectName(newName, false);
 					prototype->addMagicBit(false);
 				}
 				else if (crystal->getRareMod() == 2) {
-					UnicodeString newName = prototype->getDisplayedName() + " (Exceptional)";
+					newName = newName + " (Exceptional)";
 					prototype->setCustomObjectName(newName, false);
 					prototype->addMagicBit(false);
 				}
 				else if (crystal->getRareMod() == 3) {
-					UnicodeString newName = prototype->getDisplayedName() + " (Legendary)";
+					newName = newName + " (Legendary)";
 					prototype->setCustomObjectName(newName, false);
 					prototype->addMagicBit(false);
 				}

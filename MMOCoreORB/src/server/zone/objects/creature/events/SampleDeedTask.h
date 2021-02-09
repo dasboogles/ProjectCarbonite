@@ -79,7 +79,7 @@ public:
 				// int maxSamples = (int) ceil((float)skillMod/25.f)/2.f;
 				int maxSamples = 4; // From 2-3 up to 4, no more complicated math for deed re-sampling!
 				deed->incrementSampleCount();
-				if ((30 + rollMod) < sampleRoll || cl > 75) {
+				if ((30 + rollMod) < sampleRoll || cl > 130) { // from 75 -> 130 for pet deed sampling
 					// failure but we increment the count
 					player->sendSystemMessage("@bio_engineer:harvest_dna_failed");
 				} else {

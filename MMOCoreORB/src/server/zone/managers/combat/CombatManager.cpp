@@ -1792,6 +1792,10 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 	if (attacker->isPlayerCreature() && defender->isPlayerCreature() && !data.isForceAttack()) {
 		damage *= 0.25;
 	}
+	// Reduce PVP dmg done by pets, their damage type and entity type are weird! 
+	else if (attacker->isPet() && defender->isPlayerCreature()) { 
+		damage *= 0.33; // Pets only do 33% of their normal damage in PVP
+	}
 
 	// Global Pet Mitigation Buff
 	if (defender->isPet()){

@@ -797,7 +797,24 @@ void LightsaberCrystalComponentImplementation::tuneCrystal(CreatureObject* playe
 		ownerName = player->getDisplayedName();
 
 		// Color code is lime green.
-		String tuneName = getCustomObjectName().toString() + " \\#00FF00(tuned)\\#.";
+
+		String tuneName = getCustomObjectName().toString(); 
+
+		// Check to see if said Crystal has a CustomObjectName, if not default to old code
+		if (tuneName != "") {
+			tuneName = tuneName + " \\#00FF00(tuned)\\#.";
+		} else {
+			tuneName = StringIdManager::instance()->getStringId(objectName.getFullPath().hashCode()).toString();
+			if (getCustomObjectName().toString().contains("(Exceptional)")) {
+				tuneName = "\\#00FF00" + tuneName + " (Exceptional) (tuned)\\#.";
+			}
+			else if (getCustomObjectName().toString().contains("(Legendary)")) {
+				tuneName = "\\#00FF00" + tuneName + " (Legendary) (tuned)\\#.";
+			}
+			else {
+				tuneName = "\\#00FF00" + tuneName + " (tuned)\\#.";
+			}
+		}
 
 		setCustomObjectName(tuneName, true);
 		player->notifyObservers(ObserverEventType::TUNEDCRYSTAL, _this.getReferenceUnsafeStaticCast(), 0);

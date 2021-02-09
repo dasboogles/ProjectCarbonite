@@ -2329,7 +2329,15 @@ bool AiAgentImplementation::isScentMasked(CreatureObject* target) {
 }
 
 bool AiAgentImplementation::isConcealed(CreatureObject* target) {
+	
+	// Another sanity check
+	if (target == nullptr) {
+		return false;
+	}
+
 	Locker locker(&targetMutex);
+
+	// Grab CreoObject
 	CreatureObject* effectiveTarget = target;
 
 	// Check masked scent
@@ -2337,8 +2345,9 @@ bool AiAgentImplementation::isConcealed(CreatureObject* target) {
 		effectiveTarget = target->getSlottedObject("rider").castTo<CreatureObject*>();
 	}
 
-	if (effectiveTarget == nullptr)
+	if (effectiveTarget == nullptr) {
 		return false;
+	}
 
 	uint64 effectiveTargetID = effectiveTarget->getObjectID();
 	uint32 concealCRC = STRING_HASHCODE("skill_buff_mask_scent");
@@ -2350,8 +2359,10 @@ bool AiAgentImplementation::isConcealed(CreatureObject* target) {
 		return false;
 	}
 
-	if (isDroidObject())
+	// Camo doesn't work against droids
+	if (isDroidObject()) {
 		return false;
+	}
 
 	// Don't check if it's already been checked
 	if (camouflagedObjects.contains(effectiveTargetID)) {
@@ -2360,8 +2371,9 @@ bool AiAgentImplementation::isConcealed(CreatureObject* target) {
 
 	ConcealBuff* buff = cast<ConcealBuff*>(effectiveTarget->getBuff(concealCRC));
 
-	if (buff == nullptr || buff->getPlanetName() != getZoneUnsafe()->getZoneName())
+	if (buff == nullptr || buff->getPlanetName() != getZoneUnsafe()->getZoneName()) {
 		return false;
+	}
 
 	bool success = false;
 	int camoSkill = effectiveTarget->getSkillMod("private_conceal");
@@ -2398,6 +2410,8 @@ bool AiAgentImplementation::isConcealed(CreatureObject* target) {
 	// Cap modRoll at 95% chance, still a 5% chance to fail
 	if (modRoll > 95) {
 		modRoll = 95;
+	} else if (modRoll < 1) { // more sanity checks, this should never happen tho
+		modRoll = 1;
 	}
 
 	// Setup random chance roll
@@ -2419,6 +2433,7 @@ bool AiAgentImplementation::isConcealed(CreatureObject* target) {
 	if (creoname == "") {
 		creoname = "A hostile entity";
 	}
+
 	effectiveTarget->sendSystemMessage(creoname + " rolled a \\#FF4200" +  String::valueOf(randomRoll) + "\\#FFFFFF against your camo roll of " + "\\#00FFEA" + String::valueOf(modRoll) + "!");
 	// -------------------------------------------------------
 	// Custom Camo Rewrite above here

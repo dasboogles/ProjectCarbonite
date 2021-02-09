@@ -215,7 +215,10 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 			const String fightClubMessage = " \\#f0f497[GCW] \\#ff982bFight Clubbing \\#ffffffis not tolerated. You will be penalized.";
 			
 			// Check for FightClubbing
-			isFightClubbing = ghost->getAccountID() == killedGhost->getAccountID();
+			if (ghost->getAccountID() == killedGhost->getAccountID()) {
+				isFightClubbing = true;
+			}
+			
 
 			// Check for solo FightClubbing
 			if (isFightClubbing) {
@@ -263,7 +266,12 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 							// increment group counter
 							groupMembersInRange++;
 							ManagedReference<PlayerObject*> groupMemberGhost = groupMemberCreature->getPlayerObject();
-							isFightClubbing = groupMemberGhost->getAccountID() == killedGhost->getAccountID();
+
+							// Check for fightclubbing
+							if (groupMemberGhost->getAccountID() == killedGhost->getAccountID()) {
+								isFightClubbing = true;
+							}
+							
 							if (isFightClubbing) {
 								killerCreature->sendSystemMessage(fightClubMessage);
 
