@@ -3,7 +3,7 @@ krayt_dragon_queen = Creature:new {
 	customName = "Krayt Dragon Queen",
 	socialGroup = "krayt",
 	faction = "",
-	level = 350,
+	level = 450,
 	chanceHit = 30.0,
 	damageMin = 8500, -- MUCH HARDER
 	damageMax = 10500,
@@ -34,7 +34,7 @@ krayt_dragon_queen = Creature:new {
 			groups = {
 				{group = "rare_boss_loot_tier1", chance = 10000000}
 			},
-			lootChance = 2500000
+			lootChance = 4500000
 		},
 		{
 			groups = {

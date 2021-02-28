@@ -363,8 +363,18 @@ void FrsManagerImplementation::verifyRoomAccess(CreatureObject* player, int play
 }
 
 void FrsManagerImplementation::playerLoggedIn(CreatureObject* player) {
-	if (!frsEnabled || player == nullptr)
+
+	// error("////////////////_____/////////////////");
+	// error("Player: " + player->getFirstName() + " has logged in, trying to validate now.");
+	// error("////////////////_____/////////////////");
+
+	if (!frsEnabled || player == nullptr) {
 		return;
+	}
+
+	// error("////////////////_____/////////////////");
+	// error("Player: " + player->getFirstName() + " line 376.");
+	// error("////////////////_____/////////////////");
 
 	Locker lock(player);
 
@@ -408,13 +418,15 @@ bool FrsManagerImplementation::isBanned(CreatureObject* player) {
 }
 
 void FrsManagerImplementation::validatePlayerData(CreatureObject* player, bool verifyBan) {
-	if (player == nullptr)
+	if (player == nullptr) {
 		return;
+	}
 
 	PlayerObject* ghost = player->getPlayerObject();
 
-	if (ghost == nullptr)
+	if (ghost == nullptr) {
 		return;
+	}
 
 	Reference<Account*> account = ghost->getAccount();
 
@@ -429,13 +441,23 @@ void FrsManagerImplementation::validatePlayerData(CreatureObject* player, bool v
 	int councilType = playerData->getCouncilType();
 	int curPlayerRank = playerData->getRank();
 
-	if (curPlayerRank == -1)
+	// error("////////////////_____/////////////////");
+	// error("Player: " + player->getFirstName() + " has CouncilType of: " + String::valueOf(councilType));
+	// error("Player: " + player->getFirstName() + " has CurPlayerRank of: " + String::valueOf(curPlayerRank));
+	// error("////////////////_____/////////////////");
+
+	if (curPlayerRank == -1) {
 		return;
+	}
 
 	int realPlayerRank = 0;
-
-	if (curPlayerRank == 0 && !player->hasSkill("force_rank_light_novice") && !player->hasSkill("force_rank_dark_novice"))
+	if (curPlayerRank == 0 && !player->hasSkill("force_rank_light_novice") && !player->hasSkill("force_rank_dark_novice")) {
 		realPlayerRank = -1;
+	}
+
+	// error("////////////////__++___/////////////////");
+	// error("Player: " + player->getFirstName() + " has RealPlayerRank of: " + String::valueOf(realPlayerRank));
+	// error("////////////////__++___/////////////////");
 
 	uint64 playerID = player->getObjectID();
 
@@ -477,16 +499,26 @@ void FrsManagerImplementation::validatePlayerData(CreatureObject* player, bool v
 
 		if (realPlayerRank >= 4 && !player->hasSkill("force_title_jedi_rank_04"))
 			player->addSkill("force_title_jedi_rank_04", true);
-		if (realPlayerRank >= 8 && !player->hasSkill("force_title_jedi_master"))
+		if (realPlayerRank >= 8 && !player->hasSkill("force_title_jedi_master")) {
 			player->addSkill("force_title_jedi_master", true);
+		}
+
+		// error("/////////////////////////////////");
+		// error("RealPlayerRank: " + String::valueOf(realPlayerRank));
+		// error("/////////////////////////////////");
 
 		if (realPlayerRank == 0) {
 			auto zoneServer = this->zoneServer.get();
 
 			SkillManager* skillManager = zoneServer->getSkillManager();
 
-			if (skillManager == nullptr)
+			if (skillManager == nullptr) {
 				return;
+			}
+
+			// error("///////////////++++++//////////////////");
+			// error("Trying to run line 498 and below!");
+			// error("///////////////++++++//////////////////");
 
 			if (councilType == COUNCIL_LIGHT && player->getSkillMod("force_control_light") == 0) {
 				player->removeSkill("force_rank_light_novice", true);
@@ -495,6 +527,11 @@ void FrsManagerImplementation::validatePlayerData(CreatureObject* player, bool v
 				player->removeSkill("force_rank_dark_novice", true);
 				skillManager->awardSkill("force_rank_dark_novice", player, true, false, true);
 			}
+
+			// error("///////////////+++---+++//////////////////");
+			// error("Got to Line 510");
+			// error("///////////////+++---+++//////////////////");
+
 		} else {
 			String groupName = "";
 

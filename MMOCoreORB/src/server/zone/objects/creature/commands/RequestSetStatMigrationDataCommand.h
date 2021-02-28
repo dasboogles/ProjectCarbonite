@@ -92,8 +92,10 @@ public:
 		// Code below can be changed either to add specific planets, I just completely removed the restriction.
 		// if (zone != NULL && (zone->getZoneName() == "tutorial" or "tatooine" or "corellia" or "dantooine" or "dathomir" or "endor" or "lok" or "naboo" or "rori" or "talus" or "yavin4"))
 
-		if (zone != nullptr)
+		// Players can no longer migrate stats while in combat, but can still migrate from location/zone/cell
+		if (zone != nullptr && !player->isInCombat()) {
 			session->migrateStats();
+		}
 
 		return SUCCESS;
 	}

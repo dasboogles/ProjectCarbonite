@@ -432,8 +432,8 @@ function GeonosianLab:spawnMobiles()
 	spawnMobile("yavin4", "biogenic_scientist_geonosian", 1, 7.4, -22, -333, 180, 1627822)
 
 	-- largeendcave (1627823)
-	-- Anywhere between 20 -> 45 minutes respawn
-	spawnMobile("yavin4", "acklay", getRandomNumber(1800, 2700),101.1,-34.3,-321.6,-136,1627823)
+	-- Anywhere between 20 -> 45 minutes respawn || changed to 40 <-> 76 minute respawn
+	spawnMobile("yavin4", "acklay", getRandomNumber(2400, 4600), 101.1, -34.3, -321.6, -136, 1627823)
 	spawnMobile("yavin4", "enhanced_kwi",500,48.0,-34.0,-334.4,0,1627823)
 	spawnMobile("yavin4", "geo_cavern_spider",500,91.2,-33.9,-347.9,5,1627823)
 	spawnMobile("yavin4", "enhanced_kliknik",500,98.0,-34.1,-334.4,-53,1627823)

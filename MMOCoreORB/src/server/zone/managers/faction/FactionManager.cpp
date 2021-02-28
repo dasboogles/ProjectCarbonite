@@ -308,7 +308,7 @@ void FactionManager::awardPvpFactionPoints(TangibleObject* killer, CreatureObjec
 				int playerRating = killedGhost->getPvpRating();
 				if (group != nullptr){
 					playerCount = group->getNumberOfPlayerMembers();
-					for (int x=0; x< group->getGroupSize(); x++){
+					for (int x=0; x < group->getGroupSize(); x++){
 						Reference<CreatureObject*> groupMember = group->getGroupMember(x);
 						if (groupMember->isPlayerCreature() && groupMember->isInRange(killerCreature, 128.0f) && (groupMember->getPlayerObject()->hasPvpTef() || groupMember->getFactionStatus() == FactionStatus::OVERT)) {
 							players.add(groupMember);

@@ -611,8 +611,10 @@ function NightSisterStrongholdScreenPlay:respawnAxkvaMin()
 	end
 end
 
+-- 24 hour respawn changed to 40<->76 min respawn
 function NightSisterStrongholdScreenPlay:axkvaKilled(pAxkvaMin)
-	createEvent(86400 * 1000, "NightSisterStrongholdScreenPlay", "respawnAxkvaMin", nil, "")
+	local rngRespawnTimer = getRandomNumber(2400, 4600)
+	createEvent(getRandomNumber(2400, 4600) * 1000, "NightSisterStrongholdScreenPlay", "respawnAxkvaMin", nil, "")
 
 	return 1
 end

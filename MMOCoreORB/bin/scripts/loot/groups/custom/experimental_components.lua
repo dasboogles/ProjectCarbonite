@@ -3,8 +3,8 @@ experimental_components = {
 	minimumLevel = 0,
 	maximumLevel = 0,
 	lootItems = {
-        {itemTemplate = "overclocked_sword_core", weight = 7500000},
-        {itemTemplate = "experimental_nightsister_vibro_unit", weight = 2500000},
+        {itemTemplate = "overclocked_sword_core", weight = 5000000},
+        {itemTemplate = "experimental_nightsister_vibro_unit", weight = 5000000},
 	}
 }
 

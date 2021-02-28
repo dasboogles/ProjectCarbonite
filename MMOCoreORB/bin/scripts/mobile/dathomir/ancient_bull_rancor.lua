@@ -2,21 +2,21 @@ ancient_bull_rancor = Creature:new {
 	objectName = "@mob/creature_names:ancient_bull_rancor",
 	socialGroup = "rancor",
 	faction = "",
-	level = 98,
+	level = 250,
 	chanceHit = 0.95,
 	damageMin = 620,
 	damageMax = 950,
 	baseXp = 9336,
-	baseHAM = 20000,
-	baseHAMmax = 25000,
+	baseHAM = 75000,
+	baseHAMmax = 225000,
 	armor = 2,
 	resists = {55,65,20,80,80,80,10,10,-1},
 	meatType = "meat_carnivore",
-	meatAmount = 1000,
+	meatAmount = 10521,
 	hideType = "hide_leathery",
-	hideAmount = 1000,
+	hideAmount = 10521,
 	boneType = "bone_mammal",
-	boneAmount = 950,
+	boneAmount = 10521,
 	milk = 0,
 	tamingChance = 0,
 	ferocity = 20,
@@ -31,13 +31,28 @@ ancient_bull_rancor = Creature:new {
 	lootGroups = {
 		{
 			groups = {
-				{group = "rancor_common", chance = 4000000},
-				{group = "armor_all", chance = 2000000},
-				{group = "high_end_weapons_all", chance = 2500000},
-				{group = "wearables_all", chance = 1500000}
+				{group = "rancor_common", chance = 10000000},
 			},
-			lootChance = 2960000
-		}
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000},
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000},
+			},
+			lootChance = 7500000
+		},
+		{
+			groups = {
+				{group = "rancor_common", chance = 10000000},
+			},
+			lootChance = 7500000
+		},
 	},
 	weapons = {},
 	conversationTemplate = "",

@@ -114,7 +114,7 @@ object_weapon_ranged_rifle_rifle_bowcaster = object_weapon_ranged_rifle_shared_r
 	damageType = ENERGY,
 
 	-- NONE, LIGHT, MEDIUM, HEAVY
-	armorPiercing = NONE,
+	armorPiercing = HEAVY,
 
 	-- combat_rangedspecialize_bactarifle, combat_rangedspecialize_rifle, combat_rangedspecialize_pistol, combat_rangedspecialize_heavy, combat_rangedspecialize_carbine
 	-- combat_meleespecialize_unarmed, combat_meleespecialize_twohand, combat_meleespecialize_polearm, combat_meleespecialize_onehand, combat_general,
@@ -148,28 +148,29 @@ object_weapon_ranged_rifle_rifle_bowcaster = object_weapon_ranged_rifle_shared_r
 	forceCost = 0,
 
 	pointBlankRange = 0,
-	pointBlankAccuracy = -30,
+	pointBlankAccuracy = -10,
 
-	idealRange = 45,
-	idealAccuracy = 0,
+	idealRange = 60,
+	idealAccuracy = -15,
 
 	maxRange = 64,
-	maxRangeAccuracy = -80,
+	maxRangeAccuracy = -5,
 
-	minDamage = 110,
-	maxDamage = 180,
+	minDamage = 125,
+	maxDamage = 400,
 
-	attackSpeed = 6.3,
+	attackSpeed = 6.5,
 
-	woundsRatio = 13,
+	woundsRatio = 30,
 
 	numberExperimentalProperties = {1, 1, 2, 2, 2, 2, 2, 2, 1, 1, 1, 2, 2, 2, 2},
 	experimentalProperties = {"XX", "XX", "CD", "OQ", "CD", "OQ", "CD", "OQ", "CD", "OQ", "CD", "OQ", "CD", "OQ", "XX", "XX", "XX", "CD", "OQ", "CD", "OQ", "CD", "OQ", "CD", "OQ"},
 	experimentalWeights = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 	experimentalGroupTitles = {"null", "null", "expDamage", "expDamage", "expDamage", "expDamage", "expEffeciency", "exp_durability", "null", "null", "null", "expRange", "expEffeciency", "expEffeciency", "expEffeciency"},
 	experimentalSubGroupTitles = {"null", "null", "mindamage", "maxdamage", "attackspeed", "woundchance", "roundsused", "hitpoints", "zerorangemod", "maxrangemod", "midrange", "midrangemod", "attackhealthcost", "attackactioncost", "attackmindcost"},
-	experimentalMin = {0, 0, 77, 131, 8, 9, 30, 750, -30, -80, 45, -5, 34, 34, 48},
-	experimentalMax = {0, 0, 130, 234, 5, 17, 65, 1500, -30, -80, 45, 5, 18, 18, 26},
+	-- {"null", "null", "mindamage", "maxdamage", "attackspeed", "woundchance", "roundsused", "hitpoints", "zerorangemod", "maxrangemod", "midrange", "midrangemod", "attackhealthcost", "attackactioncost", "attackmindcost"},
+	experimentalMin = {0, 0, 70, 175, 8, 20, 30, 750, -25, -15, 45, -5, 45, 45, 45},
+	experimentalMax = {0, 0, 100, 345, 5, 50, 65, 1500, -10, -5, 45, 15, 25, 25, 25},
 	experimentalPrecision = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
 	experimentalCombineType = {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
 }

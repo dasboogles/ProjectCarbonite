@@ -41,40 +41,10 @@ ForceCrystalCaveScreenPlay = ScreenPlay:new {
 				{group = "color_crystals", chance = 10000000}
 			},
 			lootChance = 8000000
-		},
-		{
-			groups = {
-				{group = "color_crystals", chance = 10000000}
-			},
-			lootChance = 8000000
-		},
-		{
-			groups = {
-				{group = "color_crystals", chance = 10000000}
-			},
-			lootChance = 8000000
-		},
-		{
-			groups = {
-				{group = "color_crystals", chance = 10000000}
-			},
-			lootChance = 8000000
-		},
-		{
-			groups = {
-				{group = "color_crystals", chance = 10000000}
-			},
-			lootChance = 8000000
-		},
-		{
-			groups = {
-				{group = "color_crystals", chance = 10000000}
-			},
-			lootChance = 8000000
-		},					
+		}				
 	},
 	
-	lootContainerRespawn = 600 -- 30 minutes -> 10 minutes
+	lootContainerRespawn = 900 -- 30 minutes -> 15 minutes
 }
 
 registerScreenPlay("ForceCrystalCaveScreenPlay", true)

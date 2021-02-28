@@ -548,19 +548,24 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 		const Vector<String>& defenseMods = effect.getDefenderStateDefenseModifers();
 		int resist = 0;
 
-		for (int j = 0; j < defenseMods.size(); j++)
+		// Getting Resist mods?
+		for (int j = 0; j < defenseMods.size(); j++) {
 			resist += defender->getSkillMod(defenseMods.get(j));
+		}
 
 		int damageToApply = appliedDamage;
 		uint32 dotType = effect.getDotType();
 
-		if (effect.isDotDamageofHit()) {
+		// Only do unmitigated damage for Disease & Poison dots IF the applyer is NOT an NPC
+		if (!attacker->isAiAgent() && effect.isDotDamageofHit()) {
 			// determine if we should use unmitigated damage
-			if (dotType != CreatureState::BLEEDING)
+			if (dotType != CreatureState::BLEEDING) {
 				damageToApply = unmitDamage;
+			}
 		}
 
 		int potency = effect.getDotPotency();
+
 		// defender->sendSystemMessage("///////////////////////////////////////");
 		// defender->sendSystemMessage("DotPotency-Pre: " + String::valueOf(potency));
 
@@ -581,18 +586,70 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 		int primaryDotStrength = 0;
 		int secondaryDotStrength = 0;
 
-		// If an attack is being used that contains 'creature' AND the attacker is an NPC then we
-		// respect the dotStrength value being given.
-		if (String::valueOf(data.getCommand()->getQueueCommandName()).contains("creature") && attacker->isAiAgent()){
-			damageToApply = damageToApply * (effect.getDotStrength() / 100.0f);
-		}
+		// If the attacker is an NPC then we respect the dotStrength value being given.
+		// Respect DotStrength from Script definitions
+		if (attacker->isAiAgent() && effect.isDotDamageofHit()) {
+			// Since this is an AI applying a Dot, we want to check buffpacks
+			if (dotType == CreatureState::DISEASED) {
+				// Apply Disease Resists
+				resist += defender->getSkillMod("resistance_disease");
 
-		if (effect.isDotDamageofHit()) {
+				// defender->sendSystemMessage("DOT is of type <DISEASE>!!");
+				// defender->sendSystemMessage("Disease Res: " + String::valueOf(defender->getSkillMod("resistance_disease")));
+				// defender->sendSystemMessage("Disease Diss: " + String::valueOf(defender->getSkillMod("dissipation_disease")));
+				// defender->sendSystemMessage("Disease Abs: " + String::valueOf(defender->getSkillMod("absorption_disease")));
+
+			} else if (dotType == CreatureState::POISONED) {
+				// Apply Poison Resists
+				resist += defender->getSkillMod("resistance_poison");
+
+				// defender->sendSystemMessage("DOT is of type <POISON>!!");
+				// defender->sendSystemMessage("Poison Res: " + String::valueOf(defender->getSkillMod("resistance_poison")));
+				// defender->sendSystemMessage("Poison Diss: " + String::valueOf(defender->getSkillMod("dissipation_poison")));
+				// defender->sendSystemMessage("Poison Abs: " + String::valueOf(defender->getSkillMod("absorption_poison")));
+			}
+
+			// defender->sendSystemMessage("DmgToApply-PRE: " + String::valueOf(damageToApply));
+			// defender->sendSystemMessage("GotDotStrengthOf: " + String::valueOf(effect.getDotStrength()));
+
+			damageToApply = damageToApply * (effect.getDotStrength() / 100.0f);
+
+			// defender->sendSystemMessage("DmgToApply-POST: " + String::valueOf(damageToApply));
+
 			primaryDotStrength = damageToApply * effect.getPrimaryPercent() / 100.0f;
 			secondaryDotStrength = damageToApply * effect.getSecondaryPercent() / 100.0f;
 		} else {
 			primaryDotStrength = effect.getDotStrength() * damMod;
 			secondaryDotStrength = effect.getDotStrength() * damMod;
+		}
+
+		// defender->sendSystemMessage("Defender Resist: " + String::valueOf(resist));
+		
+		int dotDuration = 0;
+		if (effect.getDotDuration() > 0 ) {
+			dotDuration = effect.getDotDuration();
+			// defender->sendSystemMessage("Duration-PRE: " + String::valueOf(dotDuration));
+
+			// Reduce the duration based on resist value
+			float appliedResistVal = resist / 10.f;
+			// defender->sendSystemMessage("Applied ResistVal: " + String::valueOf(appliedResistVal));
+
+			// Hard cap resist packs at 75%
+			if (appliedResistVal > 75) {
+				appliedResistVal = 75;
+			}
+
+			if (appliedResistVal > 1) {
+				appliedResistVal = 100 - appliedResistVal;
+				appliedResistVal = appliedResistVal / 100.f;
+
+				// defender->sendSystemMessage("Applying ResistVal of: " + String::valueOf(appliedResistVal));
+				dotDuration = dotDuration * appliedResistVal;
+			}
+		}
+
+		if (dotDuration < 1) {
+			dotDuration = 1;
 		}
 
 		defender->addDotState(
@@ -601,26 +658,23 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 			data.getCommand()->getNameCRC(),
 			primaryDotStrength,
 			pool, 
-			effect.getDotDuration(), 
+			dotDuration, 
 			potency, 
 			resist,
 			secondaryDotStrength
 		);
 
-		// if (String::valueOf(data.getCommand()->getQueueCommandName()).contains("creature")){
-		// 	defender->sendSystemMessage("Command contains Creature!");
-		// }
 		// defender->sendSystemMessage("You're being diseased from this method!");
 		// defender->sendSystemMessage("Type: " + String::valueOf(data.getCommand()->getQueueCommandName()));
+		// defender->sendSystemMessage("AppliedDamage: " + String::valueOf(appliedDamage));
 		// defender->sendSystemMessage("DmgOfHit: " + String::valueOf(effect.isDotDamageofHit()));
-		// defender->sendSystemMessage("DmgToApply: " + String::valueOf(damageToApply));
 		// defender->sendSystemMessage("Primary%: " + String::valueOf(effect.getPrimaryPercent()));
 		// defender->sendSystemMessage("Secondary%: " + String::valueOf(effect.getSecondaryPercent()));
 		// defender->sendSystemMessage("DamMod: " + String::valueOf(damMod));
 		// defender->sendSystemMessage("DotPotency-Post: " + String::valueOf(potency));
 		// defender->sendSystemMessage("DotStrength: " + String::valueOf(effect.getDotStrength()));
 		// defender->sendSystemMessage("Chance: " + String::valueOf(effect.getDotChance()));
-		// defender->sendSystemMessage("Duration: " + String::valueOf(effect.getDotDuration()));
+		// defender->sendSystemMessage("Duration-POST: " + String::valueOf(dotDuration));
 		// defender->sendSystemMessage("DotDamageFromHit: " + String::valueOf(effect.isDotDamageofHit()));
 		// defender->sendSystemMessage("///////////////////////////////////////");
 	}
@@ -1794,19 +1848,23 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 	}
 	// Reduce PVP dmg done by pets, their damage type and entity type are weird! 
 	else if (attacker->isPet() && defender->isPlayerCreature()) { 
-		damage *= 0.33; // Pets only do 33% of their normal damage in PVP
+		damage *= 0.45; // Pets only do 45% of their normal damage in PVP
 	}
 
 	// Global Pet Mitigation Buff
-	if (defender->isPet()){
+	if (defender->isPet()) {
 		ManagedReference<CreatureObject*> petOwner = defender->getLinkedCreature();
 		if (petOwner != nullptr && petOwner->isPlayerCreature()) {
 			// If in PVP we want pets to gain their parent's dmg reduction
 			if (attacker->isPlayerCreature()){
-				damage *= 0.35;
-			} else {
-				damage *= 0.85; // If a player's pet is taking damage in PVE then just reduce incoming dmg by 25%
-			}
+				// [25% reduced dmg to pets]
+				damage *= 0.75; // From 35 -> 75 (reduced benefit due to armor working now) 
+			} 
+			// Disabled entirely as it isn't needed in PVE anymore since pets can actually have usable armor now
+			// else {
+			// 	// TODO: Remove this as armor is actually working now for Pets
+			// 	damage *= 0.85; // If a player's pet is taking damage in PVE then just reduce incoming dmg by 15%
+			// }
 		}
 	}
 

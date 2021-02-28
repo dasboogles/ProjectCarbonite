@@ -1239,9 +1239,14 @@ includeFile("items/custom/geo_cave/experimental_geo_power_cube_green.lua")
 includeFile("items/custom/geo_cave/experimental_geo_power_cube_red.lua")
 includeFile("items/custom/geo_cave/experimental_geo_power_cube_white.lua")
 includeFile("items/custom/geo_cave/experimental_geo_power_cube_yellow.lua")
+
 -- Dantooine
 includeFile("items/custom/dantooine/pygmy_grual_tooth.lua")
 includeFile("items/custom/dantooine/pygmy_graul_blood.lua")
+
+-- Dathomir
+includeFile("items/custom/dathomir/force_corrupted_blood.lua")
+includeFile("items/custom/dathomir/force_corrupted_pearl.lua")
 
 -- Carbonite Custom
 includeFile("items/custom/attachment_jedi_clothing.lua")

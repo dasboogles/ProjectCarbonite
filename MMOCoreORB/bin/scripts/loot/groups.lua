@@ -421,10 +421,14 @@ includeFile("groups/custom/world_boss.lua")
 
 -- Generic Carbonite Loot Groups
 includeFile("groups/custom/rare_boss_loot_tier1.lua")
--- Dantooine Carbonite
 
+-- Dantooine Carbonite
 includeFile("groups/custom/dantooine/kunga_pygmy_graul_common.lua")
 includeFile("groups/custom/dantooine/kunga_pygmy_graul_uncommon.lua")
+
+-- Dathomir Carbonite
+includeFile("groups/custom/dathomir/force_corrupted_rancor_common.lua")
+includeFile("groups/custom/dathomir/force_corrupted_rancor_uncommon.lua")
 
 -- Generic Stuff
 includeFile("groups/containers.lua")

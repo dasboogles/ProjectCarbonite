@@ -485,12 +485,23 @@ void ConsumableImplementation::fillAttributeList(AttributeListMessage* alm, Crea
 				VectorMapEntry<String, float>* entry = &modifiers.elementAt(i);
 				StringBuffer nutritionstring;
 
-				if (!isForagedFood())
+				if (!isForagedFood()) {
 					nutritionstring << ((nutrition > 0) ? "+" : "") << nutrition << " for " << durationstring.toString();
-				else
+				}
+				else {
 					nutritionstring << ((entry->getValue() > 0) ? "+" : "") << entry->getValue() << ", " << durationstring.toString();
+				}
 
-				alm->insertAttribute("attr_" + entry->getKey(), nutritionstring.toString());
+				// Segfault protection, a Segault occured here when something being concatinated was a len=95312384
+				if (entry->getKey().length() <= 255 && nutritionstring.toString().length() <= 255) {
+					alm->insertAttribute("attr_" + entry->getKey(), nutritionstring.toString());
+				} else if (nutritionstring.toString().length() <= 255) {
+					alm->insertAttribute("bad_key_attribute", nutritionstring.toString());
+				} else {
+					alm->insertAttribute("really_broken_attribute", "Contact Boogles");
+				}
+
+				// alm->insertAttribute("attr_" + entry->getKey(), nutritionstring.toString());
 			}
 		}
 		break;

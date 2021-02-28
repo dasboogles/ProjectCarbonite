@@ -553,6 +553,18 @@ void PetDeedImplementation::setSpecialResist(int type) {
 	specialResists |= type;
 }
 void PetDeedImplementation::adjustPetLevel(CreatureObject* player, CreatureObject* pet) {
+	// make sure player is NOT null
+	if (player == nullptr) {
+		player->sendSystemMessage("@bio_engineer:pet_sui_fix_error");
+		return;
+	}
+
+	// Make sure pet is NOT null
+	if (pet == nullptr) {
+		player->sendSystemMessage("@bio_engineer:pet_sui_fix_error");
+		return;
+	}
+
 	int newLevel = calculatePetLevel();
 
 	if (newLevel < 1 || newLevel > 120) {

@@ -68,7 +68,43 @@ kunga_pygmy_graul_alpha = Creature:new {
 				{group = "kunga_pygmy_graul_common", chance = 10000000}
 			},
 			lootChance = 2500000
-        },
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "high_end_weapons_all", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
+		{
+			groups = {
+				{group = "armor_all", chance = 10000000}
+			},
+			lootChance = 4500000
+		},
     },
 	weapons = {},
 	conversationTemplate = "",

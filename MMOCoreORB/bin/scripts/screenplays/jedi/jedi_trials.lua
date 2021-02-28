@@ -45,6 +45,35 @@ function JediTrials:isEligibleForKnightTrials(pPlayer)
 		return false
 	end
 
+	-- FRS Jedi Limbo Checks
+	if (tonumber(readScreenPlayData(pPlayer, "KnightTrials", "completedTrials")) == 1) then
+		-- This Knight does not have either of their needed Novice Boxes
+		if (not CreatureObject(pPlayer):hasSkill("force_rank_light_novice") and not CreatureObject(pPlayer):hasSkill("force_rank_dark_novice")) then
+			print(CreatureObject(pPlayer):getFirstName() .. " player HAS completed the trials!")
+			print(CreatureObject(pPlayer):getFirstName() .. " should have their FRS Novice box granted to them!")
+			
+			-- We've determined this Knight is missing their needed boxes, let's continue...
+			local councilType = self:getJediCouncil(pPlayer)
+
+			if (councilType ~= nil) then 
+				-- If the Knight is a Light Jedi, we give them the correct box...
+				if (councilType == self.COUNCIL_LIGHT) then
+					print(CreatureObject(pPlayer):getFirstName() .. " player should be a Light Jedi Knight!")
+					-- awardSkill(pPlayer, "force_rank_light_novice")
+					self:unlockJediKnight(pPlayer)
+					print(CreatureObject(pPlayer):getFirstName() .. " has had their Light Novice FRS box granted to them!")
+
+				-- If the Knight is a Dark Jedi, we give them the correct box...
+				elseif (councilType == self.COUNCIL_DARK) then
+					print(CreatureObject(pPlayer):getFirstName() .. " player should be a Dark Jedi Knight!")
+					-- awardSkill(pPlayer, "force_rank_dark_novice")
+					self:unlockJediKnight(pPlayer)
+					print(CreatureObject(pPlayer):getFirstName() .. " has had their Dark Novice FRS box granted to them!")
+				end
+			end
+		end
+	end
+
 	if (CreatureObject(pPlayer):hasSkill("force_rank_light_novice") or CreatureObject(pPlayer):hasSkill("force_rank_dark_novice")) or tonumber(readScreenPlayData(pPlayer, "KnightTrials", "completedTrials")) == 1 then
 		return false
 	end

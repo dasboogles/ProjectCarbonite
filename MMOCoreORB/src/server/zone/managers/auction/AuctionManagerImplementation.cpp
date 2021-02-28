@@ -927,9 +927,22 @@ void AuctionManagerImplementation::doInstantBuy(CreatureObject* player, AuctionI
 
 	city = vendor->getCityRegion().get();
 
-	if( city != nullptr) {
+	if (city != nullptr && item != nullptr) {
 		tax = item->getPrice() - ( item->getPrice() / ( 1.0f + (city->getSalesTax() / 100.f)));
+
 		vendorRegionName = city->getRegionName();
+	} else if (city == nullptr) {
+		error("???????????????????????");
+		error("City was NULL during an Auction Transaction in a city!!!");
+		error("???????????????????????");
+	} else if (item == nullptr) {
+		error("???????????????????????");
+		error("Item was NULL during an Auction Transaction in a city!!!");
+		error("???????????????????????");
+	} else {
+		error("???????????????????????");
+		error("Something went terribly wrong during an Auction Transaction in a city!!!");
+		error("???????????????????????");
 	}
 
 	String playername = player->getFirstName().toLowerCase();
@@ -1091,7 +1104,11 @@ void AuctionManagerImplementation::doInstantBuy(CreatureObject* player, AuctionI
 		// doInstantBuy(CreatureObject* player, AuctionItem* item)
 		trx.errorMessage() << "Null Seller: " + item->getOwnerName();
 		trx.commit();
+
+		error("|||||||||||||||||||");
+		error("Seller WAS null during an auction transaction!!!");
 		error("seller null for name " + item->getOwnerName());
+		error("|||||||||||||||||||");
 
 		error() << "doInstantBuy(player=" << player->getObjectID() << ", item=" << item->getObjectID() << "): Seller not found [" << item->getOwnerName() << "], auctionItem: " << *item;
 		return;
@@ -1103,18 +1120,19 @@ void AuctionManagerImplementation::doInstantBuy(CreatureObject* player, AuctionI
 	seller->addBankCredits(item->getPrice());
 	trx.commit();
 
-	if (tax > 0) {
+	if (city != nullptr && tax > 0) {
 		TransactionLog trxFee(seller, TrxCode::CITYSALESTAX, tax, false);
 		trxFee.groupWith(trx);
-		seller->subtractBankCredits(item->getPrice());
+		trxFee.addState("cityRegionID", city->getObjectID());
+		seller->subtractBankCredits(tax);
 	}
+
 	slocker.release();
 
 	if(city != nullptr && !city->isClientRegion() && tax){
 		Locker clock(city);
 		city->addToCityTreasury(tax);
 	}
-
 }
 
 void AuctionManagerImplementation::doAuctionBid(CreatureObject* player, AuctionItem* item, int price1, int proxyBid) {
