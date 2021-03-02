@@ -1712,8 +1712,9 @@ int DirectorManager::forcePeace(lua_State* L) {
 
 		ThreatMap* threatMap = creatureObject->getThreatMap();
 
-		if (threatMap != nullptr)
+		if (threatMap != nullptr) {
 			threatMap->removeAll();
+		}
 
 		CombatManager::instance()->forcePeace(creatureObject);
 	}

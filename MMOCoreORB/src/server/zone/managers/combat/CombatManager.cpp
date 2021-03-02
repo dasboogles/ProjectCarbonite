@@ -27,6 +27,8 @@
 #include "server/zone/objects/installation/InstallationObject.h"
 #include "server/zone/packets/object/ShowFlyText.h"
 #include "server/zone/managers/frs/FrsManager.h"
+#include "server/zone/objects/tangible/threat/ThreatMap.h"
+#include "server/zone/objects/tangible/threat/ThreatStates.h"
 
 #define COMBAT_SPAM_RANGE 85
 
@@ -558,9 +560,13 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 
 		// Only do unmitigated damage for Disease & Poison dots IF the applyer is NOT an NPC
 		if (!attacker->isAiAgent() && effect.isDotDamageofHit()) {
+
 			// determine if we should use unmitigated damage
 			if (dotType != CreatureState::BLEEDING) {
 				damageToApply = unmitDamage;
+				// attacker->sendSystemMessage("=========================================");
+				// attacker->sendSystemMessage("Using unmitigated damage for your Dots!");
+				// attacker->sendSystemMessage("Unmitigated damage of: " + String::valueOf(unmitDamage));
 			}
 		}
 
@@ -613,9 +619,10 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 			// defender->sendSystemMessage("GotDotStrengthOf: " + String::valueOf(effect.getDotStrength()));
 
 			damageToApply = damageToApply * (effect.getDotStrength() / 100.0f);
+		}
 
-			// defender->sendSystemMessage("DmgToApply-POST: " + String::valueOf(damageToApply));
-
+		// Respect Modifiers
+		if (effect.isDotDamageofHit()) {
 			primaryDotStrength = damageToApply * effect.getPrimaryPercent() / 100.0f;
 			secondaryDotStrength = damageToApply * effect.getSecondaryPercent() / 100.0f;
 		} else {
@@ -664,6 +671,7 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 			secondaryDotStrength
 		);
 
+		// DEFENDER Debugging
 		// defender->sendSystemMessage("You're being diseased from this method!");
 		// defender->sendSystemMessage("Type: " + String::valueOf(data.getCommand()->getQueueCommandName()));
 		// defender->sendSystemMessage("AppliedDamage: " + String::valueOf(appliedDamage));
@@ -677,6 +685,22 @@ void CombatManager::applyDots(CreatureObject* attacker, CreatureObject* defender
 		// defender->sendSystemMessage("Duration-POST: " + String::valueOf(dotDuration));
 		// defender->sendSystemMessage("DotDamageFromHit: " + String::valueOf(effect.isDotDamageofHit()));
 		// defender->sendSystemMessage("///////////////////////////////////////");
+
+		// ATTACKER Debugging
+		// attacker->sendSystemMessage("Your target is being dotted from this method!");
+		// attacker->sendSystemMessage("DamageToApply: " + String::valueOf(damageToApply));
+		// attacker->sendSystemMessage("Type: " + String::valueOf(data.getCommand()->getQueueCommandName()));
+		// attacker->sendSystemMessage("AppliedDamage: " + String::valueOf(appliedDamage));
+		// attacker->sendSystemMessage("DmgOfHit: " + String::valueOf(effect.isDotDamageofHit()));
+		// attacker->sendSystemMessage("Primary%: " + String::valueOf(effect.getPrimaryPercent()));
+		// attacker->sendSystemMessage("Secondary%: " + String::valueOf(effect.getSecondaryPercent()));
+		// attacker->sendSystemMessage("DamMod: " + String::valueOf(damMod));
+		// attacker->sendSystemMessage("DotPotency-Post: " + String::valueOf(potency));
+		// attacker->sendSystemMessage("DotStrength: " + String::valueOf(effect.getDotStrength()));
+		// attacker->sendSystemMessage("Chance: " + String::valueOf(effect.getDotChance()));
+		// attacker->sendSystemMessage("Duration-POST: " + String::valueOf(dotDuration));
+		// attacker->sendSystemMessage("DotDamageFromHit: " + String::valueOf(effect.isDotDamageofHit()));
+		// attacker->sendSystemMessage("///////////////////////////////////////");
 	}
 }
 
@@ -1317,10 +1341,46 @@ int CombatManager::getArmorReduction(TangibleObject* attacker, WeaponObject* wea
 	if (defender->isAiAgent()) {
 		float armorReduction = getArmorNpcReduction(cast<AiAgent*>(defender), damageType);
 
-		if (armorReduction >= 0)
-			damage *= getArmorPiercing(cast<AiAgent*>(defender), armorPiercing);
+		// Check CL level of pet to apply some sort of armorPiercing if any
+		if (attacker->isPet()) {
+			CreatureObject* attackerCreo = static_cast<CreatureObject*>(attacker);
+			if (attackerCreo != nullptr) {
+				ManagedReference<CreatureObject*> attackerPetOwner = attackerCreo->getLinkedCreature();
+				if (attackerPetOwner != nullptr && attackerPetOwner->isPlayerCreature()) {
+					int petLevel = attacker->getLevel();
+					int resistPen = 0;
+					
+					// Figure out pet level
+					if (armorReduction > 0) {
+						// Scale resist penetration based on level of the Pet
+						if (petLevel >= 85) {
+							resistPen = 25;
+						} else if (petLevel >= 50) {
+							resistPen = 15;
+						} else if (petLevel >= 1) { 
+							resistPen = 5;
+						}
 
-		if (armorReduction > 0) damage *= (1.f - (armorReduction / 100.f));
+						if (resistPen > 0) {
+							armorReduction = armorReduction - resistPen;
+						}
+						
+						// Make sure we can't force a vulnerable resistance
+						if (armorReduction < 0) {
+							armorReduction = 0;
+						}
+					}
+				}
+			}
+		}
+
+		if (armorReduction >= 0) {
+			damage *= getArmorPiercing(cast<AiAgent*>(defender), armorPiercing);
+		}
+
+		if (armorReduction > 0) {
+			damage *= (1.f - (armorReduction / 100.f));
+		}
 
 		return damage;
 	} else if (defender->isVehicleObject()) {
@@ -1790,30 +1850,6 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 		}
 	}
 
-	// // ---------------------------------------------------------------------------
-	// // Do Custom Jedi Buffs here
-	// if (attacker != nullptr && defender != nullptr) {
-	// 	// Defender gets struck by another creature with Force Soresu
-	// 	int jediCounterIntim = defender->getSkillMod("force_soresu");
-
-	// 	// Make sure we're not bypassing the droid immunity to being intimidated
-	// 	if (jediCounterIntim > 0 && !attacker->isDroidSpecies()) {
-	// 		if (!attacker->isIntimidated()) {
-	// 			attacker->setIntimidatedState(10); // Intimidate for 10 seconds
-	// 		}
-	// 	}
-
-	// 	// Attacker strikes another creature with Force Makashi
-	// 	int jediStrikeIntim = attacker->getSkillMod("force_makashi");
-	// 	// Make sure we're not bypassing the droid immunity to being intimidated
-	// 	if (jediStrikeIntim > 0 && !defender->isDroidSpecies()) {
-	// 		if (!defender->isIntimidated()) {
-	// 			defender->setIntimidatedState(10); // Intimidate for 10 seconds
-	// 		}
-	// 	}
-	// }
-	// // ---------------------------------------------------------------------------
-
 	if (!data.isForceAttack() && weapon->getAttackType() == SharedWeaponObjectTemplate::MELEEATTACK)
 		damage *= 1.25;
 
@@ -1846,10 +1882,46 @@ float CombatManager::calculateDamage(CreatureObject* attacker, WeaponObject* wea
 	if (attacker->isPlayerCreature() && defender->isPlayerCreature() && !data.isForceAttack()) {
 		damage *= 0.25;
 	}
+
 	// Reduce PVP dmg done by pets, their damage type and entity type are weird! 
 	else if (attacker->isPet() && defender->isPlayerCreature()) { 
 		damage *= 0.45; // Pets only do 45% of their normal damage in PVP
 	}
+
+	// Custom Carbonite pet taunt code starting here....
+	// Pet attacking an NPC, but not another Pet!
+	if (attacker->isPet() && defender->isAiAgent() && !defender->isPet()) {
+
+		// Since our attacker is already known to be a pet (aka: AiAgent), 
+		// cast this to an AiAgent so we can check their armor!
+		AiAgent* pet = cast<AiAgent*>(attacker);
+		int petArmorRating = 0;
+		if (pet != nullptr) {
+			petArmorRating = pet->getArmor();
+		}
+
+		// We only want our pets to be able to taunt if they're of the class "HEAVY"
+		if (petArmorRating == 3) {
+			ManagedReference<CreatureObject*> attackerPetOwner = attacker->getLinkedCreature();
+			if (attackerPetOwner != nullptr && attackerPetOwner->isPlayerCreature()) {
+
+				// Taunt success rolls per swing from pet
+				int tauntRoll = System::random(100);
+				if (tauntRoll > 75) {
+					attackerPetOwner->sendSystemMessage("\\#33ccffYour pet has successfully taunted: \\#ffcc00" + defender->getDisplayedName());
+					Locker clocker(defender, attacker);
+
+					// Add 1000 threat on successful taunt
+					defender->getThreatMap()->addAggro(attacker, 1000, 0);
+
+					// Duration of 15, cooldown of 1
+					defender->getThreatMap()->setThreatState(attacker, ThreatStates::TAUNTED, 15, 1);
+				}
+			}
+		}
+	}
+
+	
 
 	// Global Pet Mitigation Buff
 	if (defender->isPet()) {
@@ -2402,15 +2474,6 @@ int CombatManager::applyDamage(TangibleObject* attacker, WeaponObject* weapon, C
 	if (defender->isInvulnerable()) {
 		return 0;
 	}
-
-	// // TEST-DEBUG
-	// defender->sendSystemMessage("Beginning Incoming Damage: " + String::valueOf(damage));
-
-	// // Check to see if a normie is trying to use jedi boxes as a "hybrid"
-	// if (defender->isWearingArmor()) {
-	// 	// TEST-DEBUG
-	// 	defender->sendSystemMessage("You're wearing armor! You will take double damage!");
-	// }
 
 	String xpType;
 	if (data.isForceAttack())

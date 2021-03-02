@@ -41,18 +41,24 @@ public:
 		if (res == SUCCESS) {
 			Locker clocker(targetCreature, creature);
 
-			targetCreature->getThreatMap()->addAggro(creature, creature->getSkillMod("taunt") * 10, 0);
-			targetCreature->getThreatMap()->setThreatState(creature, ThreatStates::TAUNTED,(uint64)creature->getSkillMod("taunt") / 10, (uint64)creature->getSkillMod("taunt") / 10);
+			// Multiplier changed from 10 -> 100
+			targetCreature->getThreatMap()->addAggro(creature, creature->getSkillMod("taunt") * 100, 0);
+
+			// Changed from divisor of 10, and hard-set cooldown to 1
+			targetCreature->getThreatMap()->setThreatState(creature, ThreatStates::TAUNTED, (uint64)creature->getSkillMod("taunt") / 1, 1);
+ 
 			//creature->doCombatAnimation(creature,STRING_HASHCODE("taunt"),0,0xFF);
 			creature->doAnimation("taunt");
 
-			if (creature->isPlayerCreature())
+			if (creature->isPlayerCreature()) {
 				creature->sendSystemMessage("@cbt_spam:taunt_success_single");
+			}
 
 		} else {
 
-			if (creature->isPlayerCreature())
+			if (creature->isPlayerCreature()) {
 				creature->sendSystemMessage("@cbt_spam:taunt_fail_single");
+			}
 		}
 
 		return res;
